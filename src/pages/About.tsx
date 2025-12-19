@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
+import { CaptureEye } from "@/components/CaptureEye";
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -18,11 +18,11 @@ const About = () => {
               </h1>
             </div>
 
-            <div className="aspect-[16/9] rounded-xl overflow-hidden bg-secondary">
-              <img 
-                src="https://sofiayan0523.github.io/sofia/assets/sofia.png" 
-                alt="Sofia Yan"
-                className="w-full h-full object-cover"
+            <div className="w-64 md:w-80 rounded-xl overflow-hidden">
+              <CaptureEye
+                nid="bafybeigro6ao7gyxcjzfyvgicmmdl56iyuj2vbfdswbu4aicytv4efreo4"
+                src="https://sofiayan0523.github.io/sofia/assets/sofia.png"
+                className="aspect-square [&_media-viewer]:object-cover [&_media-viewer]:object-left-top"
               />
             </div>
 
