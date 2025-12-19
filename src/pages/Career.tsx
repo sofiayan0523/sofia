@@ -178,11 +178,11 @@ const Career = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative aspect-square rounded-xl bg-card border border-border overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
+                  className="group relative rounded-xl bg-card border border-border overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {/* Content */}
-                  <div className="relative h-full p-5 flex flex-col">
+                  <div className="relative p-5 flex flex-col">
                     {/* Logo */}
                     <div className="h-12 mb-4 flex items-center">
                       <img 
@@ -192,7 +192,7 @@ const Career = () => {
                       />
                     </div>
                     
-                    <div className="flex-1">
+                    <div>
                       <h3 className="font-display text-base font-medium mb-2 group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
