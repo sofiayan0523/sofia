@@ -1,7 +1,8 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import sofiaSpeakImg from "@/assets/sofia-speak.jpg";
+import { useEffect } from "react";
+import sofiaImg from "@/assets/sofia.png";
 
 declare global {
   namespace JSX {
@@ -16,6 +17,17 @@ declare global {
 
 const About = () => {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    const scriptId = "capture-eye-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "module";
+      script.src = "https://cdn.jsdelivr.net/npm/@numbersprotocol/capture-eye@latest/dist/capture-eye.bundled.js";
+      document.head.appendChild(script);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,11 +46,13 @@ const About = () => {
             </div>
 
             <div className="w-64 md:w-80 rounded-xl overflow-hidden">
-              <img 
-                src={sofiaSpeakImg}
-                alt="Sofia Yan"
-                className="w-full h-auto aspect-square object-cover object-top"
-              />
+              <capture-eye nid="bafybeigro6ao7gyxcjzfyvgicmmdl56iyuj2vbfdswbu4aicytv4efreo4">
+                <img 
+                  src={sofiaImg}
+                  alt="Sofia Yan"
+                  className="w-full h-auto aspect-square object-cover object-top"
+                />
+              </capture-eye>
             </div>
 
             <div className="prose prose-neutral max-w-none space-y-6 text-foreground/80 leading-relaxed">
