@@ -121,12 +121,12 @@ const Index = () => {
               <p className="text-muted-foreground max-w-md mx-auto mb-6">
                 Whether you want to discuss ethical tech, share travel stories, or explore collaboration opportunities.
               </p>
-              <Link to="/contact">
+              <a href="mailto:sag305320@gmail.com">
                 <Button size="lg">
                   Get in Touch
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </section>
