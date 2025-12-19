@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import { Bold, Italic, Heading1, Heading2, List, Image, Link } from "lucide-react";
+import { Bold, Italic, Heading1, Heading2, List, Image, Link, Eye, LinkIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { InsertCaptureImageDialog } from "./InsertCaptureImageDialog";
 
 interface RichTextEditorProps {
   value: string;
@@ -13,8 +14,10 @@ interface RichTextEditorProps {
 export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { uploadImage, uploading } = useImageUpload();
+  const captureFileInputRef = useRef<HTMLInputElement>(null);
+  const { uploadImage, uploadWithCapture, uploading } = useImageUpload();
   const { toast } = useToast();
+  const [insertDialogOpen, setInsertDialogOpen] = useState(false);
 
   const insertText = (before: string, after: string = "") => {
     const textarea = textareaRef.current;
@@ -52,6 +55,31 @@ export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
     }
   };
 
+  const handleCaptureImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    toast({ title: "正在上傳並註冊到 Numbers Protocol..." });
+
+    const result = await uploadWithCapture(file);
+    if (result) {
+      insertText(`\n!capture[${file.name}](${result.url})(${result.nid})\n`);
+      toast({ title: "圖片已上傳並註冊到 Capture" });
+    } else {
+      toast({ title: "上傳或註冊失敗", variant: "destructive" });
+    }
+
+    // Reset input
+    if (captureFileInputRef.current) {
+      captureFileInputRef.current.value = "";
+    }
+  };
+
+  const handleInsertExistingCapture = (url: string, nid: string, alt: string) => {
+    insertText(`\n!capture[${alt}](${url})(${nid})\n`);
+    toast({ title: "已插入 Capture 圖片" });
+  };
+
   const tools = [
     { icon: Bold, action: () => insertText("**", "**"), title: "粗體" },
     { icon: Italic, action: () => insertText("*", "*"), title: "斜體" },
@@ -76,6 +104,8 @@ export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
             <Icon className="w-4 h-4" />
           </Button>
         ))}
+        
+        {/* Regular image upload */}
         <Button
           type="button"
           variant="ghost"
@@ -93,6 +123,43 @@ export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
           onChange={handleImageUpload}
           className="hidden"
         />
+
+        <div className="w-px bg-border mx-1" />
+
+        {/* Upload and register to Capture */}
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => captureFileInputRef.current?.click()}
+          disabled={uploading}
+          title="上傳 Capture 圖片 (自動註冊到 Numbers Protocol)"
+          className="gap-1"
+        >
+          <Image className="w-4 h-4" />
+          <Eye className="w-3 h-3" />
+        </Button>
+        <input
+          ref={captureFileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleCaptureImageUpload}
+          className="hidden"
+        />
+
+        {/* Insert existing Capture image */}
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => setInsertDialogOpen(true)}
+          disabled={uploading}
+          title="插入已註冊的 Capture 圖片"
+          className="gap-1"
+        >
+          <LinkIcon className="w-4 h-4" />
+          <Eye className="w-3 h-3" />
+        </Button>
       </div>
       
       <Textarea
@@ -104,8 +171,14 @@ export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
       />
       
       <p className="text-xs text-muted-foreground">
-        支援 Markdown 語法：# 標題、**粗體**、*斜體*、- 列表、![圖片](url)、[連結](url)
+        支援 Markdown 語法：# 標題、**粗體**、*斜體*、- 列表、![圖片](url)、[連結](url)、!capture[圖片](url)(nid)
       </p>
+
+      <InsertCaptureImageDialog
+        open={insertDialogOpen}
+        onOpenChange={setInsertDialogOpen}
+        onInsert={handleInsertExistingCapture}
+      />
     </div>
   );
 };
