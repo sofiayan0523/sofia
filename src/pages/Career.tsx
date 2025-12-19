@@ -143,13 +143,22 @@ const Career = () => {
       <Header />
       <main className="pt-24 pb-16">
         <div className="container max-w-5xl mx-auto px-6">
-          <div className="mb-12 animate-fade-up">
-            <h1 className="font-display text-4xl md:text-5xl font-medium mb-4">
-              {t("career.title")}
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              {t("career.description")}
-            </p>
+          <div className="mb-12 animate-fade-up flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h1 className="font-display text-4xl md:text-5xl font-medium mb-4">
+                {t("career.title")}
+              </h1>
+              <p className="text-muted-foreground text-lg">
+                {t("career.description")}
+              </p>
+            </div>
+            <div className="w-40 h-40 md:w-48 md:h-48 rounded-xl overflow-hidden flex-shrink-0">
+              <img 
+                src={sofiaSpeakImg} 
+                alt="Sofia speaking"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Work Section - Square Cards with Logos */}
@@ -214,14 +223,6 @@ const Career = () => {
                 </h2>
               </div>
               <div className="rounded-xl bg-card border border-border overflow-hidden">
-                {/* Speaking Image */}
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={sofiaSpeakImg} 
-                    alt="Sofia speaking at an event"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 {/* Speaking List */}
                 <ul className="p-5 space-y-3">
                   {speakingItems.map((item, index) => (
