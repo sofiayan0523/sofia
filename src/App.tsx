@@ -10,10 +10,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Contact from "./pages/Contact";
-import Work from "./pages/Work";
-import Speaking from "./pages/Speaking";
-import Media from "./pages/Media";
+import Career from "./pages/Career";
 import Playground from "./pages/Playground";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -36,10 +33,7 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/work" element={<Work />} />
-                <Route path="/speaking" element={<Speaking />} />
-                <Route path="/media" element={<Media />} />
+                <Route path="/career" element={<Career />} />
                 <Route path="/playground" element={<Playground />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
