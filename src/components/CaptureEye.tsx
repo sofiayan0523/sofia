@@ -5,6 +5,7 @@ interface CaptureEyeProps {
   src: string;
   width?: string;
   className?: string;
+  imgClassName?: string;
 }
 
 declare global {
@@ -14,15 +15,11 @@ declare global {
         React.HTMLAttributes<HTMLElement> & { nid: string },
         HTMLElement
       >;
-      "media-viewer": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { src: string; width?: string },
-        HTMLElement
-      >;
     }
   }
 }
 
-export const CaptureEye = ({ nid, src, width = "100%", className }: CaptureEyeProps) => {
+export const CaptureEye = ({ nid, src, width = "100%", className, imgClassName }: CaptureEyeProps) => {
   useEffect(() => {
     // Load Capture Eye script if not already loaded
     const scriptId = "capture-eye-script";
@@ -38,7 +35,12 @@ export const CaptureEye = ({ nid, src, width = "100%", className }: CaptureEyePr
   return (
     <div className={className}>
       <capture-eye nid={nid}>
-        <media-viewer width={width} src={src} />
+        <img 
+          src={src} 
+          alt="" 
+          style={{ width }} 
+          className={imgClassName}
+        />
       </capture-eye>
     </div>
   );
