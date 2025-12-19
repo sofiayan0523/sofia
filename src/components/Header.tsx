@@ -23,11 +23,8 @@ export const Header = () => {
     { path: "/", label: t("nav.home") },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
-    { path: "/work", label: t("nav.work") },
-    { path: "/speaking", label: t("nav.speaking") },
-    { path: "/media", label: t("nav.media") },
+    { path: "/career", label: t("nav.career") },
     { path: "/playground", label: t("nav.playground") },
-    { path: "/contact", label: t("nav.contact") },
   ];
 
   return (

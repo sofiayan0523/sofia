@@ -1,56 +1,53 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ExternalLink, Music, Book, Camera, Gamepad2, Palette, Film } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
-const categories = [
+const items = [
   {
-    title: { zh: "音樂", en: "Music" },
-    icon: Music,
-    links: [
-      { name: "Spotify", url: "https://spotify.com" },
-      { name: "SoundCloud", url: "https://soundcloud.com" },
-    ],
+    emoji: "🐾",
+    title: { zh: "Cat Reviews", en: "Cat Reviews" },
+    description: {
+      zh: "從鮪魚到 Twitter 討論串——來自這對貓咪的聲音。",
+      en: "From tuna to Twitter threads — hear it from the duo.",
+    },
+    link: "https://x.com/sofia_numbers",
   },
   {
-    title: { zh: "閱讀", en: "Reading" },
-    icon: Book,
-    links: [
-      { name: "Goodreads", url: "https://goodreads.com" },
-      { name: "Medium", url: "https://medium.com" },
-    ],
+    emoji: "🎵",
+    title: { zh: "Coding Playlist", en: "Coding Playlist" },
+    description: {
+      zh: "我工作時聽的音樂",
+      en: "Music I build to",
+    },
+    link: "https://open.spotify.com/playlist/37i9dQZF1DWVidGk00tysG?si=b6b00b9e03b24a59",
   },
   {
-    title: { zh: "攝影", en: "Photography" },
-    icon: Camera,
-    links: [
-      { name: "Unsplash", url: "https://unsplash.com" },
-      { name: "500px", url: "https://500px.com" },
-    ],
+    emoji: "📚",
+    title: { zh: "Book Stack", en: "Book Stack" },
+    description: {
+      zh: "從 AI 倫理到 zine 設計",
+      en: "From AI ethics to zine design",
+    },
+    link: "https://wecollect.fun/home/pP5lSFvUzlHHo1oBkbF9",
   },
   {
-    title: { zh: "遊戲", en: "Gaming" },
-    icon: Gamepad2,
-    links: [
-      { name: "Steam", url: "https://store.steampowered.com" },
-      { name: "Nintendo", url: "https://nintendo.com" },
-    ],
+    emoji: "🧗",
+    title: { zh: "Climbing Log", en: "Climbing Log" },
+    description: {
+      zh: "台北岩館 + 我最新的路線",
+      en: "Taipei gyms + my latest sends",
+    },
+    link: "https://www.instagram.com/shiji_zapie/reels/",
   },
   {
-    title: { zh: "藝術", en: "Art" },
-    icon: Palette,
-    links: [
-      { name: "Behance", url: "https://behance.net" },
-      { name: "Dribbble", url: "https://dribbble.com" },
-    ],
-  },
-  {
-    title: { zh: "電影", en: "Film" },
-    icon: Film,
-    links: [
-      { name: "Letterboxd", url: "https://letterboxd.com" },
-      { name: "IMDb", url: "https://imdb.com" },
-    ],
+    emoji: "🌍",
+    title: { zh: "City List", en: "City List" },
+    description: {
+      zh: "我獨自探索過的 70+ 個城市——還在增加中",
+      en: "70+ cities I've solo-explored — and counting",
+    },
+    link: "https://www.tripadvisor.com.tw/TravelMap-a_uid.62D80D5A0D26371C51F8738A6E080B84",
   },
 ];
 
@@ -72,38 +69,26 @@ const Playground = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => {
-              const Icon = category.icon;
-              return (
-                <div
-                  key={index}
-                  className="p-6 rounded-xl bg-card border border-border"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                    <h2 className="font-display text-lg font-medium">
-                      {category.title[language]}
-                    </h2>
-                  </div>
-                  <div className="space-y-2">
-                    {category.links.map((link, linkIndex) => (
-                      <a
-                        key={linkIndex}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary transition-colors text-sm"
-                      >
-                        <span>{link.name}</span>
-                        <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                      </a>
-                    ))}
-                  </div>
+            {items.map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-3xl">{item.emoji}</span>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              );
-            })}
+                <h2 className="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
+                  {item.title[language]}
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  {item.description[language]}
+                </p>
+              </a>
+            ))}
           </div>
         </div>
       </main>
