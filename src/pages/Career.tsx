@@ -152,12 +152,12 @@ const Career = () => {
                 {t("career.description")}
               </p>
             </div>
-            <div className="w-40 h-40 md:w-48 md:h-48 rounded-xl overflow-hidden flex-shrink-0">
+            <div className="w-48 md:w-56 rounded-xl overflow-hidden flex-shrink-0">
               <capture-eye nid="bafkreia5ubvraec2kzmsgjon2kklua5fstlxs6ztbyf7i3exdy75hghgxy">
                 <img 
                   src={sofiaSpeakImg} 
                   alt="Sofia speaking"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto"
                 />
               </capture-eye>
             </div>
