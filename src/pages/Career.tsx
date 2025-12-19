@@ -222,9 +222,9 @@ const Career = () => {
                   {t("career.speaking")}
                 </h2>
               </div>
-              <div className="rounded-xl bg-card border border-border overflow-hidden">
+              <div className="rounded-xl bg-card border border-border overflow-hidden h-full flex flex-col">
                 {/* Speaking List */}
-                <ul className="p-5 space-y-3">
+                <ul className="p-5 space-y-3 flex-1">
                   {speakingItems.map((item, index) => (
                     <li key={index}>
                       <a
@@ -253,7 +253,7 @@ const Career = () => {
                   {t("career.media")}
                 </h2>
               </div>
-              <div className="rounded-xl bg-card border border-border p-5">
+              <div className="rounded-xl bg-card border border-border p-5 h-full">
                 <ul className="space-y-4">
                   {mediaItems.map((item, index) => (
                     <li key={index}>
