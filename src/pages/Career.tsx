@@ -211,9 +211,9 @@ const Career = () => {
           </section>
 
           {/* Speaking & Media - Two Column Grid */}
-          <div className="grid md:grid-cols-2 gap-6 items-start">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Speaking Section - Single Card */}
-            <section>
+            <section className="h-full flex flex-col">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
                   <Mic className="w-5 h-5 text-muted-foreground" />
@@ -222,7 +222,7 @@ const Career = () => {
                   {t("career.speaking")}
                 </h2>
               </div>
-              <div className="rounded-xl bg-card border border-border overflow-hidden">
+              <div className="rounded-xl bg-card border border-border overflow-hidden flex-1">
                 {/* Speaking List */}
                 <ul className="p-5 space-y-3">
                   {speakingItems.map((item, index) => (
@@ -244,7 +244,7 @@ const Career = () => {
             </section>
 
             {/* Media Section - Single Card */}
-            <section>
+            <section className="h-full flex flex-col">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
                   <Newspaper className="w-5 h-5 text-muted-foreground" />
@@ -253,7 +253,7 @@ const Career = () => {
                   {t("career.media")}
                 </h2>
               </div>
-              <div className="rounded-xl bg-card border border-border p-5">
+              <div className="rounded-xl bg-card border border-border p-5 flex-1">
                 <ul className="space-y-4">
                   {mediaItems.map((item, index) => (
                     <li key={index}>
