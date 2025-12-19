@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useBlogPost } from "@/hooks/useBlogPosts";
 import { ArrowLeft, Calendar, Clock, Loader2 } from "lucide-react";
-
+import { CaptureEye } from "@/components/CaptureEye";
 const categoryLabels: Record<string, string> = {
   'travel': '旅行',
   'ai-tools': 'AI 工具',
@@ -73,28 +73,80 @@ const BlogPost = () => {
       }
     };
 
-    // Simple markdown to HTML for images
-    const parseInlineContent = (text: string) => {
-      const parts = [];
+    // Simple markdown to HTML for images including Capture Eye support
+    const parseInlineContent = (text: string, keyPrefix: string = "") => {
+      const parts: (string | JSX.Element)[] = [];
       let lastIndex = 0;
       
-      // Match ![alt](url) pattern
+      // Match !capture[alt](url)(nid) pattern first, then ![alt](url) pattern
+      const captureRegex = /!capture\[([^\]]*)\]\(([^)]+)\)\(([^)]+)\)/g;
       const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
-      let match;
       
-      while ((match = imageRegex.exec(text)) !== null) {
+      // First pass: find all capture images
+      let captureMatch;
+      const captureMatches: Array<{ index: number; length: number; alt: string; url: string; nid: string }> = [];
+      
+      while ((captureMatch = captureRegex.exec(text)) !== null) {
+        captureMatches.push({
+          index: captureMatch.index,
+          length: captureMatch[0].length,
+          alt: captureMatch[1],
+          url: captureMatch[2],
+          nid: captureMatch[3]
+        });
+      }
+      
+      // Second pass: find all regular images (that don't overlap with capture images)
+      let imageMatch;
+      const imageMatches: Array<{ index: number; length: number; alt: string; url: string }> = [];
+      
+      while ((imageMatch = imageRegex.exec(text)) !== null) {
+        // Check if this match overlaps with any capture match
+        const overlaps = captureMatches.some(cm => 
+          imageMatch!.index >= cm.index && imageMatch!.index < cm.index + cm.length
+        );
+        if (!overlaps) {
+          imageMatches.push({
+            index: imageMatch.index,
+            length: imageMatch[0].length,
+            alt: imageMatch[1],
+            url: imageMatch[2]
+          });
+        }
+      }
+      
+      // Combine and sort all matches
+      const allMatches = [
+        ...captureMatches.map(m => ({ ...m, type: 'capture' as const })),
+        ...imageMatches.map(m => ({ ...m, type: 'image' as const }))
+      ].sort((a, b) => a.index - b.index);
+      
+      // Build parts array
+      for (const match of allMatches) {
         if (match.index > lastIndex) {
           parts.push(text.substring(lastIndex, match.index));
         }
-        parts.push(
-          <img 
-            key={match.index} 
-            src={match[2]} 
-            alt={match[1]} 
-            className="my-4 rounded-lg max-w-full"
-          />
-        );
-        lastIndex = match.index + match[0].length;
+        
+        if (match.type === 'capture') {
+          parts.push(
+            <CaptureEye
+              key={`${keyPrefix}-capture-${match.index}`}
+              nid={match.nid}
+              src={match.url}
+              className="my-4"
+            />
+          );
+        } else {
+          parts.push(
+            <img 
+              key={`${keyPrefix}-img-${match.index}`}
+              src={match.url} 
+              alt={match.alt} 
+              className="my-4 rounded-lg max-w-full"
+            />
+          );
+        }
+        lastIndex = match.index + match.length;
       }
       
       if (lastIndex < text.length) {
@@ -132,10 +184,10 @@ const BlogPost = () => {
         listItems.push(trimmed.slice(2));
       } else if (trimmed.match(/^\d+\. /)) {
         listItems.push(trimmed.replace(/^\d+\. /, ''));
-      } else if (trimmed.startsWith('![')) {
+      } else if (trimmed.startsWith('!capture[') || trimmed.startsWith('![')) {
         flushList();
         elements.push(
-          <div key={i}>{parseInlineContent(trimmed)}</div>
+          <div key={i}>{parseInlineContent(trimmed, `line-${i}`)}</div>
         );
       } else if (trimmed === '') {
         flushList();
@@ -143,7 +195,7 @@ const BlogPost = () => {
         flushList();
         elements.push(
           <p key={i} className="text-foreground/80 leading-relaxed">
-            {parseInlineContent(trimmed)}
+            {parseInlineContent(trimmed, `line-${i}`)}
           </p>
         );
       }
