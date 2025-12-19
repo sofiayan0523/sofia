@@ -2,13 +2,33 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { blogPosts } from "@/lib/blogData";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { useBlogPost } from "@/hooks/useBlogPosts";
+import { ArrowLeft, Calendar, Clock, Loader2 } from "lucide-react";
+
+const categoryLabels: Record<string, string> = {
+  'travel': '旅行',
+  'ai-tools': 'AI 工具',
+  'thoughts': '隨想'
+};
 
 const BlogPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const post = blogPosts.find(p => p.id === id);
+  const { data: post, isLoading } = useBlogPost(id || "");
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-32 pb-20 px-6">
+          <div className="container max-w-3xl mx-auto flex justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -28,10 +48,12 @@ const BlogPost = () => {
     );
   }
 
-  const categoryLabels = {
-    'travel': '旅行',
-    'ai-tools': 'AI 工具',
-    'thoughts': '隨想'
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString('zh-TW', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   // Simple markdown-like rendering
@@ -49,6 +71,37 @@ const BlogPost = () => {
         );
         listItems = [];
       }
+    };
+
+    // Simple markdown to HTML for images
+    const parseInlineContent = (text: string) => {
+      const parts = [];
+      let lastIndex = 0;
+      
+      // Match ![alt](url) pattern
+      const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+      let match;
+      
+      while ((match = imageRegex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(text.substring(lastIndex, match.index));
+        }
+        parts.push(
+          <img 
+            key={match.index} 
+            src={match[2]} 
+            alt={match[1]} 
+            className="my-4 rounded-lg max-w-full"
+          />
+        );
+        lastIndex = match.index + match[0].length;
+      }
+      
+      if (lastIndex < text.length) {
+        parts.push(text.substring(lastIndex));
+      }
+      
+      return parts.length > 0 ? parts : text;
     };
 
     lines.forEach((line, i) => {
@@ -79,13 +132,18 @@ const BlogPost = () => {
         listItems.push(trimmed.slice(2));
       } else if (trimmed.match(/^\d+\. /)) {
         listItems.push(trimmed.replace(/^\d+\. /, ''));
+      } else if (trimmed.startsWith('![')) {
+        flushList();
+        elements.push(
+          <div key={i}>{parseInlineContent(trimmed)}</div>
+        );
       } else if (trimmed === '') {
         flushList();
       } else {
         flushList();
         elements.push(
           <p key={i} className="text-foreground/80 leading-relaxed">
-            {trimmed}
+            {parseInlineContent(trimmed)}
           </p>
         );
       }
@@ -116,35 +174,41 @@ const BlogPost = () => {
             <header className="space-y-4 mb-8">
               <div className="flex items-center gap-4 text-sm">
                 <span className="px-3 py-1 bg-secondary rounded-full text-secondary-foreground font-medium">
-                  {categoryLabels[post.category]}
+                  {categoryLabels[post.category] || post.category}
                 </span>
                 <span className="flex items-center gap-1 text-muted-foreground">
                   <Calendar className="w-4 h-4" />
-                  {new Date(post.date).toLocaleDateString('zh-TW')}
+                  {formatDate(post.created_at)}
                 </span>
-                <span className="flex items-center gap-1 text-muted-foreground">
-                  <Clock className="w-4 h-4" />
-                  {post.readTime}
-                </span>
+                {post.read_time && (
+                  <span className="flex items-center gap-1 text-muted-foreground">
+                    <Clock className="w-4 h-4" />
+                    {post.read_time}
+                  </span>
+                )}
               </div>
 
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight">
                 {post.title}
               </h1>
 
-              <p className="text-lg text-muted-foreground">
-                {post.excerpt}
-              </p>
+              {post.excerpt && (
+                <p className="text-lg text-muted-foreground">
+                  {post.excerpt}
+                </p>
+              )}
             </header>
 
             {/* Cover Image */}
-            <div className="aspect-[16/9] rounded-xl overflow-hidden mb-12">
-              <img 
-                src={post.coverImage} 
-                alt={post.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {post.cover_image && (
+              <div className="aspect-[16/9] rounded-xl overflow-hidden mb-12">
+                <img 
+                  src={post.cover_image} 
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
             {/* Content */}
             <div className="prose-container space-y-4">
@@ -152,16 +216,18 @@ const BlogPost = () => {
             </div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-border">
-              {post.tags.map((tag) => (
-                <span 
-                  key={tag} 
-                  className="px-3 py-1 bg-secondary rounded-full text-sm text-secondary-foreground"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-border">
+                {post.tags.map((tag) => (
+                  <span 
+                    key={tag} 
+                    className="px-3 py-1 bg-secondary rounded-full text-sm text-secondary-foreground"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </article>
       </main>
