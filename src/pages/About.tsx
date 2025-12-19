@@ -26,7 +26,7 @@ const About = () => {
               <CaptureEye
                 nid="bafybeigro6ao7gyxcjzfyvgicmmdl56iyuj2vbfdswbu4aicytv4efreo4"
                 src="https://sofiayan0523.github.io/sofia/assets/sofia.png"
-                className="aspect-square [&_media-viewer]:object-cover [&_media-viewer]:object-left-top"
+                imgClassName="w-full h-auto aspect-square object-cover object-left-top"
               />
             </div>
 

@@ -11,6 +11,7 @@ const workItems = [
       en: "Capture lets anyone create and share verifiable digital media. It's powering provenance in elections, journalism, and AI-generated content.",
     },
     link: "https://captureapp.xyz/",
+    color: "from-violet-500/20 to-fuchsia-500/20",
   },
   {
     title: "Numbers Protocol",
@@ -19,6 +20,7 @@ const workItems = [
       en: "A blockchain solution that makes digital content traceable, trustworthy, and ready for ethical AI ecosystems. I lead its global growth and community.",
     },
     link: "https://numbersprotocol.io/",
+    color: "from-blue-500/20 to-cyan-500/20",
   },
   {
     title: "Creative Origin Alliance",
@@ -27,6 +29,7 @@ const workItems = [
       en: "A network of creators, technologists, and platforms building responsible AI from the ground up. I'm a founding member and proud troublemaker.",
     },
     link: "https://creativeorigin.ai/",
+    color: "from-emerald-500/20 to-teal-500/20",
   },
   {
     title: "DT42",
@@ -35,6 +38,7 @@ const workItems = [
       en: "An AI startup building smart edge solutions. I contributed to business development and strategic growth, helping shape its narrative in the AI hardware space.",
     },
     link: "https://dt42.io/",
+    color: "from-amber-500/20 to-orange-500/20",
   },
   {
     title: "AIKEA",
@@ -43,6 +47,7 @@ const workItems = [
       en: "A successful Kickstarter project bringing private AI-powered cameras into homes. I led the product launch and marketing campaign that helped it reach its funding goal.",
     },
     link: "https://www.kickstarter.com/projects/aikea5/aikea-your-private-camera-at-home/description",
+    color: "from-rose-500/20 to-pink-500/20",
   },
   {
     title: "Keke AI Shorts",
@@ -51,6 +56,7 @@ const workItems = [
       en: "Co-created a YouTube channel to share AI knowledge in short, easy-to-understand videos. Making AI accessible to everyone.",
     },
     link: "https://www.youtube.com/@kekeAIShorts",
+    color: "from-red-500/20 to-rose-500/20",
   },
 ];
 
@@ -134,7 +140,7 @@ const Career = () => {
       <Header />
       <main className="pt-24 pb-16">
         <div className="container max-w-5xl mx-auto px-6">
-          <div className="mb-12">
+          <div className="mb-12 animate-fade-up">
             <h1 className="font-display text-4xl md:text-5xl font-medium mb-4">
               {t("career.title")}
             </h1>
@@ -143,9 +149,9 @@ const Career = () => {
             </p>
           </div>
 
-          {/* Work Section */}
+          {/* Work Section - Square Cards */}
           <section className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
                 <Briefcase className="w-5 h-5 text-muted-foreground" />
               </div>
@@ -153,25 +159,36 @@ const Career = () => {
                 {t("career.work")}
               </h2>
             </div>
-            <div className="grid gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
               {workItems.map((item, index) => (
                 <a
                   key={index}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-5 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                  className="group relative aspect-square rounded-xl bg-card border border-border overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  {/* Gradient Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  
+                  {/* Content */}
+                  <div className="relative h-full p-5 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-medium mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground line-clamp-4 leading-relaxed">
                         {item.description[language]}
                       </p>
                     </div>
-                    <ExternalLink className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                        {language === "zh" ? "查看更多" : "View more"}
+                      </span>
+                      <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </div>
                 </a>
               ))}
@@ -195,12 +212,12 @@ const Career = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                  className="group flex items-center justify-between p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-secondary/30 transition-all duration-300"
                 >
-                  <span className="font-medium group-hover:text-primary transition-colors">
+                  <span className="font-medium text-sm group-hover:text-primary transition-colors">
                     {item.title[language]}
                   </span>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               ))}
             </div>
@@ -223,18 +240,18 @@ const Career = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-5 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                  className="group p-5 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-secondary/30 transition-all duration-300"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                      <p className="text-xs text-primary/70 uppercase tracking-wider mb-2 font-medium">
                         {item.source}
                       </p>
                       <p className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">
                         {item.title[language]}
                       </p>
                     </div>
-                    <ExternalLink className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                    <ExternalLink className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flex-shrink-0 mt-1" />
                   </div>
                 </a>
               ))}

@@ -27,10 +27,21 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Home
     "home.title": "數位策略家 & 創業者",
-    "home.subtitle": "專注於科技倫理與創意的交匯處",
-    "home.latestPosts": "最新文章",
+    "home.greeting": "嗨，我是 Sofia",
+    "home.description": "我在 Numbers Protocol 建構區塊鏈驅動的真相工具。我寫關於旅行、科技和有意識生活的藝術。",
+    "home.aboutBtn": "關於我",
+    "home.blogBtn": "閱讀部落格",
+    "home.stat1": "城市探索",
+    "home.stat2": "科技年資",
+    "home.stat3": "演講活動",
+    "home.stat4": "無限好奇",
+    "home.latestWriting": "最新文章",
+    "home.fromBlog": "來自部落格",
     "home.viewAll": "查看全部",
-    "home.readMore": "閱讀更多",
+    "home.viewAllPosts": "查看所有文章",
+    "home.ctaTitle": "保持聯繫",
+    "home.ctaDescription": "無論您想討論科技倫理、分享旅行故事，或探索合作機會。",
+    "home.ctaBtn": "聯繫我",
     
     // About
     "about.label": "關於",
@@ -88,10 +99,21 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Home
     "home.title": "Digital Strategist & Startup Builder",
-    "home.subtitle": "Focused on ethical tech and creativity",
-    "home.latestPosts": "Latest Posts",
+    "home.greeting": "Hi, I'm Sofia",
+    "home.description": "I build blockchain-powered truth tools at Numbers Protocol. I write about travel, technology, and the art of living intentionally.",
+    "home.aboutBtn": "About Me",
+    "home.blogBtn": "Read Blog",
+    "home.stat1": "Cities Explored",
+    "home.stat2": "Years in Tech",
+    "home.stat3": "Speaking Events",
+    "home.stat4": "Curiosity",
+    "home.latestWriting": "Latest Writing",
+    "home.fromBlog": "From the Blog",
     "home.viewAll": "View All",
-    "home.readMore": "Read More",
+    "home.viewAllPosts": "View All Posts",
+    "home.ctaTitle": "Let's Connect",
+    "home.ctaDescription": "Whether you want to discuss ethical tech, share travel stories, or explore collaboration opportunities.",
+    "home.ctaBtn": "Get in Touch",
     
     // About
     "about.label": "About",
