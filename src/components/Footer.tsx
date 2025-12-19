@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Github, Send, Instagram } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -21,6 +22,8 @@ export const Footer = () => {
                 <Link to="/" className="text-foreground/80 hover:text-foreground transition-colors">Home</Link>
                 <Link to="/about" className="text-foreground/80 hover:text-foreground transition-colors">About</Link>
                 <Link to="/blog" className="text-foreground/80 hover:text-foreground transition-colors">Blog</Link>
+                <Link to="/work" className="text-foreground/80 hover:text-foreground transition-colors">Work</Link>
+                <Link to="/speaking" className="text-foreground/80 hover:text-foreground transition-colors">Speaking</Link>
               </div>
             </div>
             
@@ -29,6 +32,15 @@ export const Footer = () => {
               <div className="flex flex-col gap-2">
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">Twitter</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">LinkedIn</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1">
+                  <Github className="w-3 h-3" /> GitHub
+                </a>
+                <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1">
+                  <Send className="w-3 h-3" /> Telegram
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1">
+                  <Instagram className="w-3 h-3" /> Instagram
+                </a>
                 <a href="mailto:hello@example.com" className="text-foreground/80 hover:text-foreground transition-colors">Email</a>
               </div>
             </div>
@@ -36,7 +48,7 @@ export const Footer = () => {
         </div>
         
         <div className="mt-12 pt-6 border-t border-border/50 text-center text-muted-foreground text-xs">
-          © {new Date().getFullYear()} Sofia Yan. All rights reserved.
+          © 2025 Sofia Yan. Built with purpose, powered by trust. Watched over by Zaza🐈& Piepie🐈‍⬛.
         </div>
       </div>
     </footer>
