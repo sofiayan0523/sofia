@@ -2,6 +2,16 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ExternalLink, Briefcase, Mic, Newspaper } from "lucide-react";
+import { useEffect } from "react";
+
+// Import logos
+import captureLogo from "@/assets/capture-logo.png";
+import numbersLogo from "@/assets/numbers-logo.png";
+import coaLogo from "@/assets/coa-logo.png";
+import dt42Logo from "@/assets/dt42-logo.png";
+import aikeaLogo from "@/assets/aikea-logo.png";
+import kekeAiLogo from "@/assets/keke-ai-shorts.png";
+import sofiaSpeakImg from "@/assets/sofia-speak.jpg";
 
 const workItems = [
   {
@@ -11,7 +21,7 @@ const workItems = [
       en: "Capture lets anyone create and share verifiable digital media. It's powering provenance in elections, journalism, and AI-generated content.",
     },
     link: "https://captureapp.xyz/",
-    color: "from-violet-500/20 to-fuchsia-500/20",
+    logo: captureLogo,
   },
   {
     title: "Numbers Protocol",
@@ -20,7 +30,7 @@ const workItems = [
       en: "A blockchain solution that makes digital content traceable, trustworthy, and ready for ethical AI ecosystems. I lead its global growth and community.",
     },
     link: "https://numbersprotocol.io/",
-    color: "from-blue-500/20 to-cyan-500/20",
+    logo: numbersLogo,
   },
   {
     title: "Creative Origin Alliance",
@@ -29,7 +39,7 @@ const workItems = [
       en: "A network of creators, technologists, and platforms building responsible AI from the ground up. I'm a founding member and proud troublemaker.",
     },
     link: "https://creativeorigin.ai/",
-    color: "from-emerald-500/20 to-teal-500/20",
+    logo: coaLogo,
   },
   {
     title: "DT42",
@@ -38,7 +48,7 @@ const workItems = [
       en: "An AI startup building smart edge solutions. I contributed to business development and strategic growth, helping shape its narrative in the AI hardware space.",
     },
     link: "https://dt42.io/",
-    color: "from-amber-500/20 to-orange-500/20",
+    logo: dt42Logo,
   },
   {
     title: "AIKEA",
@@ -47,7 +57,7 @@ const workItems = [
       en: "A successful Kickstarter project bringing private AI-powered cameras into homes. I led the product launch and marketing campaign that helped it reach its funding goal.",
     },
     link: "https://www.kickstarter.com/projects/aikea5/aikea-your-private-camera-at-home/description",
-    color: "from-rose-500/20 to-pink-500/20",
+    logo: aikeaLogo,
   },
   {
     title: "Keke AI Shorts",
@@ -56,84 +66,77 @@ const workItems = [
       en: "Co-created a YouTube channel to share AI knowledge in short, easy-to-understand videos. Making AI accessible to everyone.",
     },
     link: "https://www.youtube.com/@kekeAIShorts",
-    color: "from-red-500/20 to-rose-500/20",
+    logo: kekeAiLogo,
   },
 ];
 
 const speakingItems = [
   {
-    title: {
-      zh: "Surviving the AI Flood: A Fireside Chat on Trust & Revenue",
-      en: "Surviving the AI Flood: A Fireside Chat on Trust & Revenue",
-    },
+    title: "Surviving the AI Flood: A Fireside Chat on Trust & Revenue",
     link: "https://numbersprotocol.github.io/numbers-ama/webinar/2025-12-06",
   },
   {
-    title: {
-      zh: "RightsCon 2025 (side event host + speaker)",
-      en: "RightsCon 2025 (side event host + speaker)",
-    },
+    title: "RightsCon 2025 (side event host + speaker)",
     link: "https://international.thenewslens.com/article/187416",
   },
   {
-    title: {
-      zh: "2024 Meet Taipei (panelist)",
-      en: "2024 Meet Taipei (panelist)",
-    },
+    title: "2024 Meet Taipei (panelist)",
     link: "https://www.youtube.com/watch?v=h-CNy_IPJP4",
   },
   {
-    title: {
-      zh: "2024 Trust Valley Official Opening (panelist)",
-      en: "2024 Trust Valley Official Opening (panelist)",
-    },
+    title: "2024 Trust Valley Official Opening (panelist)",
     link: "https://events.trustvalley.tech/e/trust-village-official-opening",
   },
   {
-    title: {
-      zh: "Protecting Creativity in the Age of AI (panelist & speaker)",
-      en: "Protecting Creativity in the Age of AI (panelist & speaker)",
-    },
+    title: "Protecting Creativity in the Age of AI (panelist & speaker)",
     link: "https://protectingcreativity.numbersprotocol.io/",
   },
   {
-    title: {
-      zh: "AI Meets Blockchain (moderator)",
-      en: "AI Meets Blockchain (moderator)",
-    },
+    title: "AI Meets Blockchain (moderator)",
     link: "https://www.youtube.com/watch?v=yN3nfFk2UJk",
   },
 ];
 
 const mediaItems = [
   {
-    title: {
-      zh: "POLITICO：討論中國針對台灣選舉的假訊息攻勢",
-      en: "Featured on POLITICO discussing China's disinformation campaign targeting Taiwan's election.",
-    },
     source: "POLITICO",
+    title: {
+      zh: "討論中國針對台灣選舉的假訊息攻勢",
+      en: "Discussing China's disinformation campaign targeting Taiwan's election",
+    },
     link: "https://www.politico.eu/article/china-bombards-taiwan-with-fake-news-ahead-of-election/",
   },
   {
-    title: {
-      zh: "AmCham：討論打擊選舉假訊息和數位驗證的重要性",
-      en: "Discussing the fight against election disinformation and the importance of digital verification.",
-    },
     source: "AmCham",
+    title: {
+      zh: "討論打擊選舉假訊息和數位驗證的重要性",
+      en: "The fight against election disinformation and digital verification",
+    },
     link: "https://topics.amcham.com.tw/2024/11/the-fight-against-election-disinformation/",
   },
   {
-    title: {
-      zh: "Meet Global：分享區塊鏈技術和數位媒體驗證的見解",
-      en: "Sharing insights on blockchain technology and digital media verification.",
-    },
     source: "Meet Global",
+    title: {
+      zh: "分享區塊鏈技術和數位媒體驗證的見解",
+      en: "Insights on blockchain and digital media verification",
+    },
     link: "https://meet-global.bnext.com.tw/articles/view/47895",
   },
 ];
 
 const Career = () => {
   const { language, t } = useLanguage();
+
+  useEffect(() => {
+    const scriptId = "capture-eye-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "module";
+      script.src = "https://cdn.jsdelivr.net/npm/@numbersprotocol/capture-eye@latest/dist/capture-eye.bundled.js";
+      document.head.appendChild(script);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -149,7 +152,7 @@ const Career = () => {
             </p>
           </div>
 
-          {/* Work Section - Square Cards */}
+          {/* Work Section - Square Cards with Logos */}
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
@@ -169,24 +172,27 @@ const Career = () => {
                   className="group relative aspect-square rounded-xl bg-card border border-border overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  
                   {/* Content */}
-                  <div className="relative h-full p-5 flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
+                  <div className="relative h-full p-5 flex flex-col">
+                    {/* Logo */}
+                    <div className="h-12 mb-4 flex items-center">
+                      <img 
+                        src={item.logo} 
+                        alt={item.title}
+                        className="max-h-10 max-w-full object-contain filter dark:brightness-0 dark:invert opacity-70 group-hover:opacity-100 transition-opacity"
+                      />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h3 className="font-display text-base font-medium mb-2 group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-4 leading-relaxed">
+                      <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
                         {item.description[language]}
                       </p>
                     </div>
                     
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                        {language === "zh" ? "查看更多" : "View more"}
-                      </span>
+                    <div className="flex items-center justify-end pt-2">
                       <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
                   </div>
@@ -195,68 +201,81 @@ const Career = () => {
             </div>
           </section>
 
-          {/* Speaking Section */}
-          <section className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
-                <Mic className="w-5 h-5 text-muted-foreground" />
+          {/* Speaking & Media - Two Column Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Speaking Section - Single Card */}
+            <section>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+                  <Mic className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <h2 className="font-display text-2xl font-medium">
+                  {t("career.speaking")}
+                </h2>
               </div>
-              <h2 className="font-display text-2xl font-medium">
-                {t("career.speaking")}
-              </h2>
-            </div>
-            <div className="grid gap-3">
-              {speakingItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-secondary/30 transition-all duration-300"
-                >
-                  <span className="font-medium text-sm group-hover:text-primary transition-colors">
-                    {item.title[language]}
-                  </span>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              ))}
-            </div>
-          </section>
+              <div className="rounded-xl bg-card border border-border overflow-hidden">
+                {/* Speaking Image */}
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={sofiaSpeakImg} 
+                    alt="Sofia speaking at an event"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Speaking List */}
+                <ul className="p-5 space-y-3">
+                  {speakingItems.map((item, index) => (
+                    <li key={index}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-start gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+                      >
+                        <span className="text-muted-foreground mt-1">•</span>
+                        <span className="flex-1">{item.title}</span>
+                        <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
 
-          {/* Media Section */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
-                <Newspaper className="w-5 h-5 text-muted-foreground" />
+            {/* Media Section - Single Card */}
+            <section>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+                  <Newspaper className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <h2 className="font-display text-2xl font-medium">
+                  {t("career.media")}
+                </h2>
               </div>
-              <h2 className="font-display text-2xl font-medium">
-                {t("career.media")}
-              </h2>
-            </div>
-            <div className="grid gap-4">
-              {mediaItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group p-5 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-secondary/30 transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs text-primary/70 uppercase tracking-wider mb-2 font-medium">
-                        {item.source}
-                      </p>
-                      <p className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">
-                        {item.title[language]}
-                      </p>
-                    </div>
-                    <ExternalLink className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flex-shrink-0 mt-1" />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
+              <div className="rounded-xl bg-card border border-border p-5">
+                <ul className="space-y-4">
+                  {mediaItems.map((item, index) => (
+                    <li key={index}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group block"
+                      >
+                        <p className="text-xs text-primary/70 uppercase tracking-wider mb-1 font-medium">
+                          {item.source}
+                        </p>
+                        <p className="text-sm text-foreground/80 group-hover:text-primary transition-colors flex items-start gap-2">
+                          <span className="flex-1">{item.title[language]}</span>
+                          <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                        </p>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
       <Footer />
