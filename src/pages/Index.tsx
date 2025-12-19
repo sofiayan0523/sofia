@@ -4,20 +4,11 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "@/components/BlogCard";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Loader2 } from "lucide-react";
 
 const Index = () => {
   const { data: posts, isLoading } = useBlogPosts();
-  const { t } = useLanguage();
   const featuredPosts = posts?.slice(0, 3) || [];
-
-  const stats = [
-    { value: "70+", labelKey: "home.stat1" },
-    { value: "10+", labelKey: "home.stat2" },
-    { value: "50+", labelKey: "home.stat3" },
-    { value: "∞", labelKey: "home.stat4" },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -29,27 +20,28 @@ const Index = () => {
           <div className="container max-w-5xl mx-auto">
             <div className="max-w-2xl space-y-6 animate-fade-up">
               <p className="text-muted-foreground uppercase tracking-widest text-xs font-medium">
-                {t("home.title")}
+                Digital Strategist & Builder
               </p>
               
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight">
-                {t("home.greeting")}
+                Hi, I'm Sofia
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
-                {t("home.description")}
+                I build blockchain-powered truth tools at Numbers Protocol. </p>
+                I write about travel, technology, and the art of living intentionally.
               </p>
               
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link to="/about">
                   <Button variant="default" size="lg">
-                    {t("home.aboutBtn")}
+                    About Me
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
                 </Link>
                 <Link to="/blog">
                   <Button variant="outline" size="lg">
-                    {t("home.blogBtn")}
+                    Read Blog
                   </Button>
                 </Link>
               </div>
@@ -61,14 +53,19 @@ const Index = () => {
         <section className="py-16 px-6 border-y border-border/50">
           <div className="container max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {stats.map((stat, i) => (
+              {[
+                { value: "70+", label: "Cities Explored" },
+                { value: "10+", label: "Years in Tech" },
+                { value: "50+", label: "Speaking Events" },
+                { value: "∞", label: "Curiosity" },
+              ].map((stat, i) => (
                 <div 
                   key={i} 
                   className="animate-fade-up opacity-0"
-                  style={{ animationDelay: `${i * 100 + 200}ms`, animationFillMode: 'forwards' }}
+                  style={{ animationDelay: `${i * 100 + 200}ms` }}
                 >
                   <p className="font-display text-3xl md:text-4xl font-medium">{stat.value}</p>
-                  <p className="text-muted-foreground text-sm mt-1">{t(stat.labelKey)}</p>
+                  <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -81,15 +78,15 @@ const Index = () => {
             <div className="flex items-end justify-between mb-12">
               <div>
                 <p className="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-2">
-                  {t("home.latestWriting")}
+                  Latest Writing
                 </p>
                 <h2 className="font-display text-3xl md:text-4xl font-medium">
-                  {t("home.fromBlog")}
+                  From the Blog
                 </h2>
               </div>
               <Link to="/blog">
                 <Button variant="minimal" className="hidden md:flex">
-                  {t("home.viewAll")}
+                  View All
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
@@ -107,14 +104,14 @@ const Index = () => {
               </div>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
-                <p>{t("blog.noPosts")}</p>
+                <p>尚未發布任何文章。</p>
               </div>
             )}
 
             <div className="mt-8 text-center md:hidden">
               <Link to="/blog">
                 <Button variant="outline">
-                  {t("home.viewAllPosts")}
+                  View All Posts
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
@@ -127,17 +124,18 @@ const Index = () => {
           <div className="container max-w-5xl mx-auto">
             <div className="bg-card rounded-2xl p-8 md:p-12 text-center shadow-soft">
               <h2 className="font-display text-2xl md:text-3xl font-medium mb-4">
-                {t("home.ctaTitle")}
+                Let's Connect
               </h2>
               <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                {t("home.ctaDescription")}
+                Whether you want to discuss ethical tech, share travel stories, 
+                or explore collaboration opportunities.
               </p>
-              <a href="mailto:sag305320@gmail.com">
+              <Link to="/contact">
                 <Button size="lg">
-                  {t("home.ctaBtn")}
+                  Get in Touch
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>
