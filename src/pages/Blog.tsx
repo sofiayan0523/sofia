@@ -2,15 +2,23 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BlogCard } from "@/components/BlogCard";
-import { blogPosts, categories } from "@/lib/blogData";
+import { SearchBar } from "@/components/SearchBar";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+
+const categories = [
+  { id: 'all', name: '全部文章' },
+  { id: 'travel', name: '旅行手記' },
+  { id: 'ai-tools', name: 'AI 工具' },
+  { id: 'thoughts', name: '隨想' },
+];
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredPosts = activeCategory === "all" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === activeCategory);
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const { data: posts, isLoading } = useBlogPosts(searchQuery, activeCategory);
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,8 +39,13 @@ const Blog = () => {
               </p>
             </div>
 
+            {/* Search Bar */}
+            <div className="max-w-md">
+              <SearchBar value={searchQuery} onChange={setSearchQuery} />
+            </div>
+
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2 pt-4">
+            <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <Button
                   key={cat.id}
@@ -47,15 +60,24 @@ const Blog = () => {
             </div>
 
             {/* Posts Grid */}
-            <div className="grid md:grid-cols-2 gap-6 pt-4">
-              {filteredPosts.map((post, i) => (
-                <BlogCard key={post.id} post={post} index={i} />
-              ))}
-            </div>
-
-            {filteredPosts.length === 0 && (
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : posts && posts.length > 0 ? (
+              <div className="grid md:grid-cols-2 gap-6 pt-4">
+                {posts.map((post, i) => (
+                  <BlogCard key={post.id} post={post} index={i} />
+                ))}
+              </div>
+            ) : (
               <div className="text-center py-20 text-muted-foreground">
-                <p>目前沒有這個分類的文章。</p>
+                <p>
+                  {searchQuery 
+                    ? `找不到包含「${searchQuery}」的文章。`
+                    : "目前沒有這個分類的文章。"
+                  }
+                </p>
               </div>
             )}
           </div>

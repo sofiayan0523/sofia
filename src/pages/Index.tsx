@@ -3,11 +3,12 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "@/components/BlogCard";
-import { blogPosts } from "@/lib/blogData";
-import { ArrowRight } from "lucide-react";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 const Index = () => {
-  const featuredPosts = blogPosts.slice(0, 3);
+  const { data: posts, isLoading } = useBlogPosts();
+  const featuredPosts = posts?.slice(0, 3) || [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -91,11 +92,21 @@ const Index = () => {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredPosts.map((post, i) => (
-                <BlogCard key={post.id} post={post} index={i} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : featuredPosts.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {featuredPosts.map((post, i) => (
+                  <BlogCard key={post.id} post={post} index={i} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-muted-foreground">
+                <p>尚未發布任何文章。</p>
+              </div>
+            )}
 
             <div className="mt-8 text-center md:hidden">
               <Link to="/blog">
