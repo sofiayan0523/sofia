@@ -109,16 +109,6 @@ const About = () => {
               <p>{t("about.background")}</p>
               <p>{t("about.hobbies")}</p>
 
-              <h2 className="font-display text-2xl font-medium text-foreground pt-8">
-                {t("about.speakAboutTitle")}
-              </h2>
-              
-              <ul className="space-y-2">
-                <li>{t("about.topic1")}</li>
-                <li>{t("about.topic2")}</li>
-                <li>{t("about.topic3")}</li>
-                <li>{t("about.topic4")}</li>
-              </ul>
 
               <h2 className="font-display text-2xl font-medium text-foreground pt-8">
                 {t("about.currentlyTitle")}
