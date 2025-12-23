@@ -51,8 +51,11 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="w-48 md:w-64 rounded-xl overflow-hidden animate-fade-up flex-shrink-0" style={{ animationDelay: '200ms' }}>
-                <CaptureEye 
+              <div
+                className="w-48 md:w-64 rounded-xl overflow-hidden animate-fade-up flex-shrink-0"
+                style={{ animationDelay: "200ms" }}
+              >
+                <CaptureEye
                   nid="bafybeigro6ao7gyxcjzfyvgicmmdl56iyuj2vbfdswbu4aicytv4efreo4"
                   src={sofiaImg}
                   imgClassName="w-full h-auto aspect-square object-cover object-top rounded-xl"
@@ -67,9 +70,9 @@ const Index = () => {
           <div className="container max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: "70+", label: "Cities Explored" },
+                { value: "50+", label: "Cities Explored" },
                 { value: "10+", label: "Years in Tech" },
-                { value: "50+", label: "Speaking Events" },
+                { value: "20+", label: "Speaking Events" },
                 { value: "∞", label: "Curiosity" },
               ].map((stat, i) => (
                 <div key={i} className="animate-fade-up opacity-0" style={{ animationDelay: `${i * 100 + 200}ms` }}>
