@@ -28,7 +28,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Home
     "home.title": "共同創辦人 · 策略長 · 寫作者 · 獨旅人",
     "home.greeting": "嗨，我是 Sofia",
-    "home.description": "純種文組人，誤打誤撞闖進科技新創。我打造數位信任與創作真實性的工具——讓好的技術可理解、以人為本，並且帶點叛逆精神。",
+    "home.description": "文組人誤闘科技圈，意外成了新創共同創辦人。\n打造數位信任工具，讓好技術更好懂、更有人味。",
     "home.aboutBtn": "關於我",
     "home.blogBtn": "閱讀部落格",
     "home.stat1": "城市探索",
