@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,10 +6,12 @@ import { BlogCard } from "@/components/BlogCard";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { CaptureEye } from "@/components/CaptureEye";
+import { useLanguage } from "@/contexts/LanguageContext";
 import sofiaImg from "@/assets/sofia.png";
 
 const Index = () => {
   const { data: posts, isLoading } = useBlogPosts();
+  const { t } = useLanguage();
   const featuredPosts = posts?.slice(0, 3) || [];
 
   return (
@@ -24,16 +25,15 @@ const Index = () => {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
               <div className="max-w-2xl space-y-6 animate-fade-up">
                 <p className="text-muted-foreground uppercase tracking-widest text-xs font-medium">
-                  Digital Strategist & Builder
+                  {t("home.title")}
                 </p>
 
                 <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight">
-                  Hi, I'm Sofia
+                  {t("home.greeting")}
                 </h1>
 
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
-                  I build blockchain-powered truth tools at Numbers Protocol. I write about travel, technology, and the
-                  art of living intentionally.
+                  {t("home.description")}
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-4">
