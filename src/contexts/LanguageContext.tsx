@@ -95,7 +95,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Home
     "home.title": "Co-founder · Strategist · Writer · Solo Traveler",
     "home.greeting": "Hi, I'm Sofia",
-    "home.description": "A humanities major who stumbled into tech startups — now a co-founder.\nBuilding tools for digital trust, making good tech understandable and human.",
+    "home.description": "Humanities major turned startup co-founder.\nBuilding digital trust tools — making good tech human.",
     "home.aboutBtn": "About Me",
     "home.blogBtn": "Read Blog",
     "home.stat1": "Cities Explored",
