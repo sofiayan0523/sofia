@@ -32,7 +32,7 @@ const Index = () => {
                   {t("home.greeting")}
                 </h1>
 
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl whitespace-pre-line">
                   {t("home.description")}
                 </p>
 
