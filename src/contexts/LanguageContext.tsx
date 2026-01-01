@@ -26,9 +26,9 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.copyright": "© 2025 Sofia Yan. Built with purpose, powered by trust. Watched over by Zaza🐈& Piepie🐈‍⬛.",
     
     // Home
-    "home.title": "數位策略家 & 創業者",
+    "home.title": "共同創辦人 · 策略長 · 寫作者 · 獨旅人",
     "home.greeting": "嗨，我是 Sofia",
-    "home.description": "我在 Numbers Protocol 建構區塊鏈驅動的真相工具。我寫關於旅行、科技和有意識生活的藝術。",
+    "home.description": "純種文組人，誤打誤撞闖進科技新創。我打造數位信任與創作真實性的工具——讓好的技術可理解、以人為本，並且帶點叛逆精神。",
     "home.aboutBtn": "關於我",
     "home.blogBtn": "閱讀部落格",
     "home.stat1": "城市探索",
@@ -93,9 +93,9 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.copyright": "© 2025 Sofia Yan. Built with purpose, powered by trust. Watched over by Zaza🐈& Piepie🐈‍⬛.",
     
     // Home
-    "home.title": "Digital Strategist & Startup Builder",
+    "home.title": "Co-founder · Strategist · Writer · Solo Traveler",
     "home.greeting": "Hi, I'm Sofia",
-    "home.description": "I build blockchain-powered truth tools at Numbers Protocol. I write about travel, technology, and the art of living intentionally.",
+    "home.description": "A humanities major who stumbled into tech startups. I build tools for digital trust and creative authenticity — making good tech understandable, human-centered, and a little rebellious.",
     "home.aboutBtn": "About Me",
     "home.blogBtn": "Read Blog",
     "home.stat1": "Cities Explored",
