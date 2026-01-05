@@ -133,13 +133,13 @@ const Index = () => {
         <section className="py-12 px-6">
           <div className="container max-w-3xl mx-auto">
             <div className="bg-card rounded-xl p-6 md:p-8 text-center shadow-soft">
-              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">Let's Connect</h2>
+              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{t("home.ctaTitle")}</h2>
               <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-4">
-                Discuss ethical tech, share stories, or explore collaboration.
+                {t("home.ctaDescription")}
               </p>
               <a href="mailto:sag305320@gmail.com">
                 <Button size="default">
-                  Get in Touch
+                  {t("home.ctaBtn")}
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </a>
