@@ -6,6 +6,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 
 const categories = [
   { id: 'all', name: '全部文章' },
@@ -22,6 +23,11 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Blog"
+        description="旅行手記、AI 工具探索，以及生活中的隨想。探索 Sofia 的科技觀察與旅行故事。"
+        url="/blog"
+      />
       <Header />
       
       <main className="pt-32 pb-20 px-6">
