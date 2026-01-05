@@ -67,6 +67,7 @@ const translations: Record<Language, Record<string, string>> = {
     "career.work": "專案作品",
     "career.speaking": "演講活動",
     "career.media": "媒體報導",
+    "career.podcast": "Podcast",
     
     // Playground
     "playground.title": "探索",
@@ -139,6 +140,7 @@ const translations: Record<Language, Record<string, string>> = {
     "career.work": "Work",
     "career.speaking": "Speaking",
     "career.media": "Media",
+    "career.podcast": "Podcast",
     
     // Playground
     "playground.title": "Playground",

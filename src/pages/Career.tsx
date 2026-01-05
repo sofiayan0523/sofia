@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ExternalLink, Briefcase, Mic, Newspaper } from "lucide-react";
+import { ExternalLink, Briefcase, Mic, Newspaper, Headphones } from "lucide-react";
 import { useEffect } from "react";
 
 // Import logos
@@ -72,6 +72,10 @@ const workItems = [
 
 const speakingItems = [
   {
+    title: "如何辨識有價值的資訊及重建新聞信任/Identifying Valuable Information & Rebuilding Trust in News",
+    link: "https://feja.org.tw/78920/",
+  },
+  {
     title: "Surviving the AI Flood: A Fireside Chat on Trust & Revenue",
     link: "https://numbersprotocol.github.io/numbers-ama/webinar/2025-12-06",
   },
@@ -121,6 +125,62 @@ const mediaItems = [
       en: "Insights on blockchain and digital media verification",
     },
     link: "https://meet-global.bnext.com.tw/articles/view/47895",
+  },
+  {
+    source: "天健財經研究院",
+    title: {
+      zh: "為何要保存資料檔案？",
+      en: "Why preserve data files?",
+    },
+    link: "https://tianjiancmp.substack.com/p/427",
+  },
+];
+
+const podcastItems = [
+  {
+    source: "TEC TALK 創業不歸路",
+    title: "敏捷開發思維落實遠距制度設計：專訪數據溯源新創「Numbers」共同創辦人 Sofia Yan",
+    link: "https://podcasts.apple.com/us/podcast/s2ep1-%E6%95%8F%E6%8D%B7%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD%E8%90%BD%E5%AF%A6%E9%81%A0%E8%B7%9D%E5%88%B6%E5%BA%A6%E8%A8%AD%E8%A8%88-%E5%B0%88%E8%A8%AA%E6%95%B8%E6%93%9A%E6%BA%AF%E6%BA%90%E6%96%B0%E5%89%B5-numbers-%E5%85%B1%E5%90%8C%E5%89%B5%E8%BE%A6%E4%BA%BA-sofia-yan/id1529231244?i=1000532239801",
+  },
+  {
+    source: "區塊勢",
+    title: "以代幣經濟為數位影像加上溯源履歷 ft. Numbers Protocol 共同創辦人 Sofia Yan",
+    link: "https://www.blocktrend.today/p/ep143",
+  },
+  {
+    source: "數位關鍵字",
+    title: "文組人也能上手的Vibe Coding！AI如何協助行銷人員解決重複性工作",
+    link: "https://youtu.be/5M5de1680Jk",
+  },
+  {
+    source: "數位關鍵字",
+    title: "圖、詐騙、假新聞越來越多！技術能重建你我對網路資訊的信任？",
+    link: "https://youtu.be/DOcN-4GUQz0",
+  },
+  {
+    source: "職場來一課",
+    title: "文組生也能創建自動化流程工具！AI如何融入工作流，提高做事效率",
+    link: "https://podcasts.apple.com/us/podcast/ep522-%E8%81%B7%E5%A0%B4%E4%BE%86%E4%B8%80%E8%AA%B2-%E6%96%87%E7%B5%84%E7%94%9F%E4%B9%9F%E8%83%BD%E5%89%B5%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E6%B5%81%E7%A8%8B%E5%B7%A5%E5%85%B7-ai%E5%A6%82%E4%BD%95%E8%9E%8D%E5%85%A5%E5%B7%A5%E4%BD%9C%E6%B5%81-%E6%8F%90%E9%AB%98%E5%81%9A%E4%BA%8B%E6%95%88%E7%8E%87/id1591157883?i=1000724642099",
+  },
+  {
+    source: "de lab cafe",
+    title: "de lab 輕鬆聊: 科技麻瓜在數據新創的生存指南",
+    link: "https://podcasts.apple.com/tw/podcast/s1-ep-5-de-lab-輕鬆聊-科技麻瓜在數據新創的生存指南/id1538395479?i=1000500334708",
+  },
+  {
+    source: "Numbers Network",
+    title: "新世代新聞驗證: 科技如何重塑我們對真實的認知",
+    link: "https://open.spotify.com/episode/1RJPvMew8eqiwjKBurVnQW",
+  },
+  {
+    source: "創業新聲帶",
+    title: "Numbers(上)│如何擊破假新聞？Numbers 推出「真相快門」以區塊鏈技術確保數據完整性",
+    link: "https://meet.bnext.com.tw/podcast/view/372",
+  },
+  {
+    source: "創業新聲帶",
+    title: "Numbers(下)│如何擊破假新聞？Numbers 推出「真相快門」以區塊鏈技術確保數據完整性",
+    link: "https://meet.bnext.com.tw/podcast/view/373",
   },
 ];
 
@@ -279,6 +339,40 @@ const Career = () => {
               </div>
             </section>
           </div>
+
+          {/* Podcast Section */}
+          <section className="mt-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+                <Headphones className="w-5 h-5 text-muted-foreground" />
+              </div>
+              <h2 className="font-display text-2xl font-medium">
+                {t("career.podcast")}
+              </h2>
+            </div>
+            <div className="rounded-xl bg-card border border-border p-5">
+              <ul className="grid md:grid-cols-2 gap-4">
+                {podcastItems.map((item, index) => (
+                  <li key={index}>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <p className="text-xs text-primary/70 uppercase tracking-wider mb-1 font-medium">
+                        {item.source}
+                      </p>
+                      <p className="text-sm text-foreground/80 group-hover:text-primary transition-colors flex items-start gap-2">
+                        <span className="flex-1">{item.title}</span>
+                        <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                      </p>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
         </div>
       </main>
       <Footer />
