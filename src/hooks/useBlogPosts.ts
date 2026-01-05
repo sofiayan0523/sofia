@@ -85,7 +85,7 @@ export const useCreateBlogPost = () => {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: async (post: Omit<BlogPost, "id" | "user_id" | "created_at" | "updated_at">) => {
+    mutationFn: async (post: Omit<BlogPost, "id" | "user_id" | "created_at" | "updated_at"> & { created_at?: string }) => {
       if (!user) throw new Error("Not authenticated");
 
       const { data, error } = await supabase
