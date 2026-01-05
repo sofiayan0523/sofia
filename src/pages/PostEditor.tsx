@@ -37,7 +37,7 @@ const PostEditor = () => {
   const createPost = useCreateBlogPost();
   const updatePost = useUpdateBlogPost();
 
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     title: "",
     excerpt: "",
     content: "",
@@ -46,6 +46,7 @@ const PostEditor = () => {
     read_time: "5 min",
     tags: [] as string[],
     published: false,
+    created_at: "",
   });
   const [tagsInput, setTagsInput] = useState("");
 
@@ -61,6 +62,7 @@ const PostEditor = () => {
         read_time: existingPost.read_time || "5 min",
         tags: existingPost.tags || [],
         published: existingPost.published || false,
+        created_at: existingPost.created_at ? existingPost.created_at.split("T")[0] : "",
       });
       setTagsInput((existingPost.tags || []).join(", "));
     }
@@ -92,13 +94,21 @@ const PostEditor = () => {
     }
 
     const tags = tagsInput.split(",").map(t => t.trim()).filter(Boolean);
-    const postData = { 
-      ...formData, 
+    const basePostData = { 
+      title: formData.title,
+      content: formData.content,
+      category: formData.category,
+      read_time: formData.read_time,
       tags, 
       published: publish,
       excerpt: formData.excerpt || null,
       cover_image: formData.cover_image || null,
     };
+    
+    // Only include created_at if user specified a date
+    const postData = formData.created_at 
+      ? { ...basePostData, created_at: new Date(formData.created_at).toISOString() }
+      : basePostData;
 
     try {
       if (isEditing && id) {
@@ -257,6 +267,17 @@ const PostEditor = () => {
                   onChange={(e) => setTagsInput(e.target.value)}
                   placeholder="旅行, 日本, 美食"
                 />
+              </div>
+
+              {/* Publish Date */}
+              <div>
+                <label className="block text-sm font-medium mb-2">發布日期（可自訂舊文章日期）</label>
+                <Input
+                  type="date"
+                  value={formData.created_at}
+                  onChange={(e) => setFormData({ ...formData, created_at: e.target.value })}
+                />
+                <p className="text-xs text-muted-foreground mt-1">留空則使用目前時間</p>
               </div>
 
               {/* Content */}
