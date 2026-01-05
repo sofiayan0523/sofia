@@ -12,7 +12,7 @@ import sofiaImg from "@/assets/sofia.png";
 const Index = () => {
   const { data: posts, isLoading } = useBlogPosts();
   const { t } = useLanguage();
-  const featuredPosts = posts?.slice(0, 3) || [];
+  const featuredPosts = posts?.slice(0, 6) || [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,15 +130,15 @@ const Index = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6">
-          <div className="container max-w-5xl mx-auto">
-            <div className="bg-card rounded-2xl p-8 md:p-12 text-center shadow-soft">
-              <h2 className="font-display text-2xl md:text-3xl font-medium mb-4">Let's Connect</h2>
-              <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                Whether you want to discuss ethical tech, share travel stories, or explore collaboration opportunities.
+        <section className="py-12 px-6">
+          <div className="container max-w-3xl mx-auto">
+            <div className="bg-card rounded-xl p-6 md:p-8 text-center shadow-soft">
+              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">Let's Connect</h2>
+              <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-4">
+                Discuss ethical tech, share stories, or explore collaboration.
               </p>
               <a href="mailto:sag305320@gmail.com">
-                <Button size="lg">
+                <Button size="default">
                   Get in Touch
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
