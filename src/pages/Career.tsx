@@ -127,7 +127,7 @@ const mediaItems = [
     link: "https://meet-global.bnext.com.tw/articles/view/47895",
   },
   {
-    source: "天健財經研究院",
+    source: "田間 Tian Jian",
     title: {
       zh: "為何要保存資料檔案？",
       en: "Why preserve data files?",
