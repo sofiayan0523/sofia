@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useBlogPost } from "@/hooks/useBlogPosts";
 import { ArrowLeft, Calendar, Clock, Loader2 } from "lucide-react";
 import { CaptureEye } from "@/components/CaptureEye";
+import { SEOHead } from "@/components/SEOHead";
 const categoryLabels: Record<string, string> = {
   'travel': '旅行',
   'ai-tools': 'AI 工具',
@@ -207,6 +208,19 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={post.title}
+        description={post.excerpt || `${post.content.substring(0, 150)}...`}
+        image={post.cover_image || undefined}
+        url={`/blog/${id}`}
+        type="article"
+        article={{
+          publishedTime: post.created_at,
+          modifiedTime: post.updated_at,
+          author: "Sofia Yan",
+          tags: post.tags || undefined,
+        }}
+      />
       <Header />
       
       <main className="pt-32 pb-20 px-6">

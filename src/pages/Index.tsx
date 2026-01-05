@@ -7,6 +7,7 @@ import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { CaptureEye } from "@/components/CaptureEye";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEOHead } from "@/components/SEOHead";
 import sofiaImg from "@/assets/sofia.png";
 
 const Index = () => {
@@ -16,6 +17,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead url="/" />
       <Header />
 
       <main>

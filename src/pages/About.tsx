@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 import { ExternalLink } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import sofiaImg from "@/assets/sofia.png";
 
 const playgroundItems = [
@@ -80,6 +81,11 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="關於 Sofia"
+        description="Numbers Protocol 共同創辦人，熱愛旅行、攀岩與科技。探索 AI、區塊鏈與數位內容驗證的故事。"
+        url="/about"
+      />
       <Header />
       
       <main className="pt-32 pb-20 px-6">

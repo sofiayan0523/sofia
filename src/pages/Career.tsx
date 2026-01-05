@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ExternalLink, Briefcase, Mic, Newspaper, Headphones } from "lucide-react";
 import { useEffect } from "react";
+import { SEOHead } from "@/components/SEOHead";
 
 // Import logos
 import captureLogo from "@/assets/capture-logo.png";
@@ -200,6 +201,11 @@ const Career = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Career"
+        description="演講、媒體報導、Podcast 訪談與工作經歷。了解 Sofia 在 AI、區塊鏈與數位內容驗證領域的專業歷程。"
+        url="/career"
+      />
       <Header />
       <main className="pt-24 pb-16">
         <div className="container max-w-5xl mx-auto px-6">
