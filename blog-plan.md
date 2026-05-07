@@ -1,0 +1,344 @@
+# Blog 重做計畫 (sofia-s-blog v2)
+
+> 將現有 React + Vite + Supabase 的個人網站，重做為以 Astro 為核心的純靜態部落格，部署在 GitHub Pages，內容以 Markdown 形式存於 repo。
+
+---
+
+## 架構決策摘要
+
+| 項目 | 決定 |
+|------|------|
+| 框架 | Astro 5+ |
+| 內容格式 | Markdown + MDX |
+| 內容管理 | Astro Content Collections（Zod schema 驗證 frontmatter） |
+| 部署平台 | GitHub Pages + GitHub Actions |
+| 圖片儲存 | Repo 內 `public/images/`（不使用外部 CDN/儲存） |
+| 樣式 | Tailwind CSS（沿用現有設計 token） |
+| 互動元件 | Astro Islands（僅必要處保留 React） |
+| 搜尋 | Pagefind（客戶端、純靜態） |
+| 留言（選配） | giscus（GitHub Discussions 為後端） |
+| 分析（選配） | Plausible 或 Umami |
+| 移除項目 | Supabase / Auth / Admin / PostEditor / 大部分 shadcn UI |
+
+---
+
+## 目標目錄結構
+
+```
+sofia-s-blog/
+├── public/
+│   ├── images/
+│   │   ├── og-image.jpg
+│   │   ├── profile/
+│   │   │   ├── sofia.png
+│   │   │   └── sofia-speak.jpg
+│   │   ├── logos/
+│   │   │   ├── capture-logo.png
+│   │   │   ├── numbers-logo.png
+│   │   │   └── ...
+│   │   └── posts/
+│   │       └── {slug}/
+│   │           ├── cover.jpg
+│   │           └── 01.jpg ...
+│   ├── favicon.svg
+│   └── CNAME                 # 若使用 custom domain
+├── src/
+│   ├── content/
+│   │   ├── config.ts         # Content Collection Zod schema
+│   │   └── posts/
+│   │       ├── 2024-04-06-venice.md
+│   │       ├── 2024-04-01-bologna.md
+│   │       └── ...
+│   ├── components/
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── BlogCard.astro
+│   │   ├── CaptureEye.astro
+│   │   ├── SEO.astro
+│   │   ├── ThemeToggle.tsx        # React Island
+│   │   └── LanguageSwitcher.tsx   # React Island
+│   ├── layouts/
+│   │   ├── BaseLayout.astro
+│   │   └── PostLayout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── about.astro
+│   │   ├── career.astro
+│   │   ├── blog/
+│   │   │   ├── index.astro
+│   │   │   └── [...slug].astro
+│   │   ├── rss.xml.ts
+│   │   └── 404.astro
+│   ├── styles/
+│   │   └── global.css
+│   ├── i18n/
+│   │   ├── zh.ts
+│   │   └── en.ts
+│   └── utils/
+│       └── format-date.ts
+├── scripts/
+│   └── migrate-fallback-posts.ts
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── tsconfig.json
+└── package.json
+```
+
+---
+
+## Phase 1：基礎建設（預估 0.5 天）
+
+- [ ] 1.1 備份現有 React 版：建立 `legacy-react` 分支或 git tag `v1-react`
+- [ ] 1.2 在新分支清空舊 React 程式碼，保留 `.git`、`.gitignore`、`README.md`、要重用的 `public/` 圖片
+- [ ] 1.3 執行 `npm create astro@latest .` 選 Empty 或 Blog 模板
+- [ ] 1.4 安裝必要 integrations：
+  - `@astrojs/mdx`
+  - `@astrojs/tailwind`
+  - `@astrojs/sitemap`
+  - `@astrojs/rss`
+  - `@astrojs/react`（讓 React Island 能跑）
+- [ ] 1.5 設定 `astro.config.mjs`：
+  - `site`、`base`（依 GitHub Pages URL 決定）
+  - `output: "static"`
+  - 啟用 mdx、tailwind、sitemap、react integrations
+- [ ] 1.6 設定 `tsconfig.json` 為 strict 模式
+- [ ] 1.7 確認 `npm run dev` 與 `npm run build` 都能跑通
+- [ ] 1.8 commit: `feat: scaffold Astro project`
+
+---
+
+## Phase 2：內容遷移（預估 1 天）
+
+- [ ] 2.1 定義 `src/content/config.ts` schema：
+  ```ts
+  import { defineCollection, z } from "astro:content";
+
+  const posts = defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      excerpt: z.string().optional(),
+      category: z.enum(["travel", "ai-tools", "thoughts"]),
+      tags: z.array(z.string()).default([]),
+      coverImage: z.string().optional(),
+      publishedAt: z.coerce.date(),
+      updatedAt: z.coerce.date().optional(),
+      readTime: z.string().default("5 min"),
+      draft: z.boolean().default(false),
+    }),
+  });
+
+  export const collections = { posts };
+  ```
+- [ ] 2.2 寫 `scripts/migrate-fallback-posts.ts`：
+  - 讀取舊 `src/data/fallbackBlogPosts.ts` 所有文章
+  - 產生 `.md` 或 `.mdx` 檔，檔名規則 `{yyyy-MM-dd}-{slug}.md`
+  - 將 `!capture[alt](url)(nid)` 轉為 MDX 元件 `<CaptureEye nid="..." src="..." alt="..." />`（含 capture-eye 的檔案需用 `.mdx`）
+  - 將 `![alt](url)` 保留 markdown 寫法
+- [ ] 2.3 撰寫 / 執行 image download script：
+  - 列出所有 .md 中引用的 `https://hbzabvlkkksdzofjpnnq.supabase.co/...` URL
+  - 下載到 `public/images/posts/{slug}/{filename}`
+  - 改寫 .md / .mdx 中圖片路徑為 `/images/posts/{slug}/{filename}`
+- [ ] 2.4 建立 `src/components/CaptureEye.astro` 封裝 capture-eye web component
+- [ ] 2.5 在 `BaseLayout.astro` 加入 capture-eye script（鎖定版本，不用 `@latest`）
+- [ ] 2.6 `npm run build` 通過、隨機抽查 5 篇文章渲染正常
+- [ ] 2.7 commit: `feat: migrate posts to content collections`
+
+---
+
+## Phase 3：頁面與設計重建（預估 1.5–2 天）
+
+### 3.1 設計系統移植
+- [ ] 將原 `tailwind.config.ts` 的 color tokens、font-display、animations 複製到新 `tailwind.config.mjs`
+- [ ] 將 `src/index.css` 的 CSS variables、prose 樣式移到 `src/styles/global.css`
+- [ ] 在 `BaseLayout.astro` import global.css
+
+### 3.2 共用元件
+- [ ] `Header.astro`（純靜態 `<a>` 連結，不用 react-router）
+- [ ] `Footer.astro`（移除 `/playground` 連結；年份改用 build-time 動態 `new Date().getFullYear()`）
+- [ ] `BlogCard.astro`
+- [ ] `SEO.astro`（meta tags 直接寫在 head，無需 react-helmet）
+- [ ] `ThemeToggle.tsx`（React Island，`client:load`，沿用 localStorage 邏輯）
+- [ ] `LanguageSwitcher.tsx`（React Island，`client:load`）
+
+### 3.3 i18n
+- [ ] 將舊 `LanguageContext` 翻譯表拆成 `src/i18n/zh.ts` 與 `src/i18n/en.ts`
+- [ ] 寫 helper `getTranslations(lang)` 讓 .astro 與 React Island 都能取用
+- [ ] 補齊原本硬編碼的字串（Index stats、Blog 標題、404 頁、Footer 描述等）
+- [ ] 第一版策略：URL 不分語言，僅切翻譯 + localStorage（之後可升級為 `/en/` 子路徑）
+
+### 3.4 頁面
+- [ ] `pages/index.astro`（Home）
+  - Hero + capture-eye 頭像
+  - Stats 區塊
+  - 最新 6 篇文章
+- [ ] `pages/about.astro`
+  - About 內容 + Playground 連結卡片
+  - 不再需要 `dangerouslySetInnerHTML`
+- [ ] `pages/blog/index.astro`
+  - 分類 filter（純前端切換或多頁路由）
+  - 文章列表
+- [ ] `pages/blog/[...slug].astro`
+  - `getStaticPaths` + `getCollection("posts")`
+  - 套 `PostLayout.astro`
+  - 透過 MDX 直接使用 `<CaptureEye />` 元件
+- [ ] `pages/career.astro`（內容陣列從原 React 檔搬過來、純靜態渲染）
+- [ ] `pages/404.astro`
+
+### 3.5 搜尋功能
+- [ ] 安裝 Pagefind：`npm i -D pagefind`
+- [ ] 在 build 後 hook 執行 `pagefind --site dist`
+- [ ] 在 `Blog` 頁加入 Pagefind 搜尋 UI（取代原 SearchBar 對 Supabase 即時 query 的做法）
+
+### 3.6 RSS Feed
+- [ ] `pages/rss.xml.ts` 用 `@astrojs/rss` 產生
+- [ ] 在 `BaseLayout` head 加入 `<link rel="alternate" type="application/rss+xml">`
+
+- [ ] 3.7 commit: `feat: rebuild pages with astro components`
+
+---
+
+## Phase 4：圖片管理（簡化版，全部放 repo）
+
+- [ ] 4.1 整理 `public/images/` 目錄結構：
+  - `og-image.jpg`
+  - `profile/`（個人照）
+  - `logos/`（career 頁 logos）
+  - `posts/{slug}/`（每篇文章圖片）
+- [ ] 4.2 執行 Phase 2.3 的 download script，把 Supabase 上的圖片全部撈下來
+- [ ] 4.3 .md / .mdx 中圖片路徑改為相對 root 的 `/images/...`
+- [ ] 4.4 大圖（> 500KB）批次壓縮：
+  - 用 `squoosh-cli` 或 `sharp` 壓縮為 WebP / 適當 JPEG 品質
+  - 目標：每張 < 300KB
+- [ ] 4.5 （選配）評估是否將部分圖片放 `src/assets/` 改用 Astro `<Image>` 元件做自動 srcset/WebP；首版可先省略
+- [ ] 4.6 設定 `.gitattributes`：`*.jpg binary`、`*.png binary`、`*.webp binary`
+
+**容量估算**：50 篇文章 × 平均 5 張圖 × 200KB ≈ 50MB，repo 可接受。
+
+---
+
+## Phase 5：部署（預估 1 小時）
+
+- [ ] 5.1 GitHub Repo Settings → Pages → Source 設為 "GitHub Actions"
+- [ ] 5.2 建立 `.github/workflows/deploy.yml`：
+  ```yaml
+  name: Deploy to GitHub Pages
+  on:
+    push:
+      branches: [main]
+    workflow_dispatch:
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+  concurrency:
+    group: pages
+    cancel-in-progress: false
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: withastro/action@v3
+    deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      steps:
+        - id: deployment
+          uses: actions/deploy-pages@v4
+  ```
+- [ ] 5.3 確認 `astro.config.mjs` 的 `site` 與 `base` 與 GitHub Pages URL 一致
+- [ ] 5.4 First push to main，觀察 Actions 跑完無錯
+- [ ] 5.5 驗證：所有頁面、文章、圖片、搜尋都正常
+- [ ] 5.6 （選配）Custom domain：
+  - 在 `public/CNAME` 寫入域名
+  - DNS 設 CNAME 指向 `<user>.github.io`
+  - Repo Settings → Pages → Custom domain 填入並啟用 HTTPS
+- [ ] 5.7 commit & push: `chore: configure github pages deployment`
+
+---
+
+## Phase 6：加值功能（選配）
+
+- [ ] 6.1 **giscus 留言系統**
+  - Repo 開啟 Discussions
+  - 至 https://giscus.app/ 取得設定
+  - 新增 `Comments.astro`，於 `PostLayout.astro` 末尾載入
+- [ ] 6.2 **Plausible 或 Umami 分析**
+  - 自架 Umami 或註冊 Plausible
+  - 在 `BaseLayout` head 加 script
+  - 對 GDPR 友善、無 cookie
+- [ ] 6.3 **OG image 自動產生**
+  - 用 `@vercel/og` 或 `satori` 在 build 時為每篇文章生成專屬 OG 圖
+- [ ] 6.4 **Newsletter / 訂閱**
+  - 之後可整合 Buttondown / ConvertKit（純前端 form embed）
+
+---
+
+## 移除清單（明確不再使用）
+
+- Supabase（auth, postgres, storage, edge functions）
+- `@supabase/supabase-js`、`@tanstack/react-query`、`react-hook-form`
+- `react-router-dom`（Astro 用 file-based routing）
+- `react-helmet-async`（Astro 內建 head 處理）
+- `next-themes`（自寫 ThemeToggle）
+- `recharts`（未使用）
+- 大量未使用的 shadcn UI 元件：calendar, carousel, chart, sidebar, resizable, input-otp, menubar 等
+- Pages：`Login.tsx`, `Admin.tsx`, `PostEditor.tsx`
+- Hooks：`useImageUpload.ts`、`useBlogPosts.ts`（後者改為 `getCollection`）
+- `src/integrations/supabase/`、`src/lib/authStorage.ts`、`src/contexts/AuthContext.tsx`、`auth.ts`
+
+---
+
+## 風險與注意事項
+
+1. **GitHub Pages 路徑**
+   若 repo 不是 `<user>.github.io`，網站會在 `https://<user>.github.io/<repo>/`，必須設 `base: "/<repo>"`，所有內部連結改用 Astro 的 `<a href={...}>` 或 `import.meta.env.BASE_URL` 處理。
+
+2. **MDX 中 capture-eye web component**
+   需在 BaseLayout 用 `<script src="..." type="module" is:inline>` 載一次。版本鎖定到具體版號，避免 `@latest` 在 prod 出意外。
+
+3. **圖片放 repo 的尺寸**
+   若文章量未來成長到 200+ 篇、或開始放高解析度圖，repo 體積可能變大。觀察到 100MB 以上時，再評估遷往 Cloudflare R2 或 GitHub LFS。
+
+4. **i18n 路由策略**
+   首版簡化為 localStorage 切翻譯字串，URL 不分語言。優點是工作量小、文章不需雙語版。後續若要做 SEO 友善的雙語站再升級為 `/zh/` 與 `/en/` 子路徑。
+
+5. **Pagefind 索引範圍**
+   預設只索引主內容區，要在 `PostLayout.astro` 主要文章區包 `<div data-pagefind-body>...</div>`。
+
+6. **舊網址相容性**
+   原本 `/blog/{uuid}` 結構會改成 `/blog/{slug}`。若已對外宣傳過舊連結，需在 `pages/blog/{old-id}.astro` 加 redirect 或在 404 頁提供搜尋。
+
+---
+
+## 里程碑與時間估算
+
+| 里程碑 | 內容 | 累計時間 |
+|--------|------|----------|
+| **M1** | 骨架完成、能 build（Phase 1） | 0.5 天 |
+| **M2** | 所有舊文章可在新站閱讀（Phase 1+2） | 1.5 天 |
+| **M3** | 首頁 / About / Career / Blog 完整（+ Phase 3） | 3.5 天 |
+| **M4** | 上線到 GitHub Pages（+ Phase 4+5） | 4 天 |
+| **M5** | 加值功能完成（+ Phase 6） | 5 天 |
+
+---
+
+## 開工前檢查清單
+
+- [ ] 確認 GitHub Repo Pages 是否已啟用（Settings → Pages）
+- [ ] 確認要保留的 custom domain（若有）
+- [ ] 建立 `legacy-react` 分支或 `v1-react` git tag 備份現版
+- [ ] 列出 Supabase Storage 中所有圖片清單（確保 migrate script 不漏抓）
+- [ ] 決定第一版 i18n 策略（建議：localStorage 切字串，URL 不分語言）
+- [ ] 決定 GitHub Pages 路徑：`<user>.github.io` 或 `<user>.github.io/sofia-s-blog`
+
+---
+
+_Last updated: 2026-05-07_
