@@ -101,8 +101,8 @@ sofia-s-blog/
   - `@astrojs/rss`
   - `@astrojs/react`（讓 React Island 能跑）
 - [ ] 1.5 設定 `astro.config.mjs`：
-  - `site: "https://sofiayan0523.github.io"`（已確認）
-  - `base` 不設（user page 從 root 起算）
+  - `site: "https://sofiayan0523.github.io"`
+  - `base: "/sofia"`（project page，repo 名稱必須為 `sofia`）
   - `output: "static"`
   - 啟用 mdx、tailwind、sitemap、react integrations
 - [ ] 1.6 設定 `tsconfig.json` 為 strict 模式
@@ -254,7 +254,7 @@ sofia-s-blog/
         - id: deployment
           uses: actions/deploy-pages@v4
   ```
-- [ ] 5.3 確認 `astro.config.mjs` 的 `site` 與 `base` 與 GitHub Pages URL 一致
+- [ ] 5.3 確認 `astro.config.mjs` 的 `site: "https://sofiayan0523.github.io"` 與 `base: "/sofia"` 與 repo 名稱一致
 - [ ] 5.4 First push to main，觀察 Actions 跑完無錯
 - [ ] 5.5 驗證：所有頁面、文章、圖片、搜尋都正常
 - [ ] 5.6 （選配）Custom domain：
@@ -299,22 +299,25 @@ sofia-s-blog/
 
 ## 風險與注意事項
 
-1. **Repo 必須改名為 `sofiayan0523.github.io`**
-   已確認用 user page 路徑，repo 名稱必須符合此格式。建議直接 rename 現有 repo（保留歷史與 issues），GitHub 自動 redirect 舊 URL。
+1. **Repo 必須改名為 `sofia`**
+   已確認用 project page 子路徑 `/sofia`，repo 名稱必須等於子路徑。建議直接 rename 現有 repo（保留歷史與 issues），GitHub 會自動 redirect 舊 URL。改名後要更新本地 git remote。
 
-2. **MDX 中 capture-eye web component**
+2. **內部連結與資源路徑必須處理 base prefix**
+   `base: "/sofia"` 設定後，所有 `<a href="/blog">` 在 build 時應變成 `/sofia/blog`。Astro 對相對路徑會自動加 prefix，但若有手寫絕對路徑（如 `<img src="/images/...">`）需改用 `import.meta.env.BASE_URL` 或在 `astro:assets` 元件中傳遞。
+
+3. **MDX 中 capture-eye web component**
    需在 BaseLayout 用 `<script src="..." type="module" is:inline>` 載一次。版本鎖定到具體版號，避免 `@latest` 在 prod 出意外。
 
-3. **圖片放 repo 的尺寸**
+4. **圖片放 repo 的尺寸**
    若文章量未來成長到 200+ 篇、或開始放高解析度圖，repo 體積可能變大。觀察到 100MB 以上時，再評估遷往 Cloudflare R2 或 GitHub LFS。
 
-4. **i18n 路由策略**
+5. **i18n 路由策略**
    首版簡化為 localStorage 切翻譯字串，URL 不分語言。優點是工作量小、文章不需雙語版。後續若要做 SEO 友善的雙語站再升級為 `/zh/` 與 `/en/` 子路徑。
 
-5. **Pagefind 索引範圍**
+6. **Pagefind 索引範圍**
    預設只索引主內容區，要在 `PostLayout.astro` 主要文章區包 `<div data-pagefind-body>...</div>`。
 
-6. **舊網址相容性**
+7. **舊網址相容性**
    原本 `/blog/{uuid}` 結構會改成 `/blog/{slug}`。若已對外宣傳過舊連結，需在 `pages/blog/{old-id}.astro` 加 redirect 或在 404 頁提供搜尋。
 
 ---
@@ -338,28 +341,30 @@ sofia-s-blog/
 - [x] 將建立 `legacy-react` 分支備份現版（由 user 處理）
 - [x] Supabase 圖片清單已列出（見下方）
 - [x] i18n 策略：localStorage 切字串，URL 不分語言
-- [x] GitHub Pages 路徑：`<user>.github.io`（user page，不使用子路徑）
+- [x] GitHub Pages 路徑：`<user>.github.io/sofia`（project page，子路徑為 `/sofia`）
 
 ---
 
-## 重要架構影響：使用 `<user>.github.io` 的 repo 命名
+## 重要架構影響：使用 `<user>.github.io/sofia` 的 repo 命名
 
-GitHub Pages 規則：每個帳號只有 **一個** repo 可作為 user page，且 repo 名稱必須是 `<username>.github.io`。目前 repo 名為 `sofia-s-blog`，要部署到 `sofiayan0523.github.io` 必須二選一：
+GitHub Pages 規則：project page 的 URL 為 `https://<user>.github.io/<repo>/`，子路徑會等於 repo 名稱。要把網址做到 `https://sofiayan0523.github.io/sofia/`，repo 名稱**必須為 `sofia`**：
 
-1. **將現有 repo 改名為 `sofiayan0523.github.io`** ⭐ 推薦
+1. **將現有 repo 改名為 `sofia`** ⭐ 推薦
    - 保留 git 歷史與 issues
-   - GitHub 會自動為舊 repo URL 建立 redirect
-   - 操作：Repo Settings → Repository name → 改為 `sofiayan0523.github.io`
-2. **新建 `sofiayan0523.github.io` repo，搬遷 Astro 程式碼過去**
+   - GitHub 自動為舊 repo URL 建立 redirect（包括 git remote、issue 連結）
+   - 操作：Repo Settings → Repository name → 改為 `sofia`
+   - 改名後務必同步更新本地 `git remote set-url origin git@github.com:sofiayan0523/sofia.git`
+2. **新建 `sofia` repo，搬遷 Astro 程式碼過去**
    - `sofia-s-blog` 保留為 legacy / archive
    - 適合想完全分開新舊的情境
 
-> 若 `sofiayan0523.github.io` 已被佔用做其他用途，則必須改用子路徑方案，這時要重新調整 Phase 5 的 `astro.config.mjs` 加上 `base: "/sofia-s-blog"`。
+> 若 `sofia` 已被佔用做其他用途，則需考慮其他名稱（例如 `blog`、`site`），網址會跟著變成對應子路徑。
 
-**Astro 設定影響**（user page 路徑下）：
+**Astro 設定影響**（project page 路徑下）：
 - `site: "https://sofiayan0523.github.io"`
-- `base` 不設（預設 `/`）
-- 所有資產路徑都從 root 起算
+- `base: "/sofia"`
+- 所有內部連結用 Astro 的 `<a href={...}>` 或 `import.meta.env.BASE_URL` 處理（Astro 會自動加上 base 前綴給相對連結）
+- `public/` 中靜態資源引用需用 `${import.meta.env.BASE_URL}images/...` 或讓 Astro 元件自動處理
 
 ---
 
