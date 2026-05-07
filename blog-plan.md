@@ -101,7 +101,8 @@ sofia-s-blog/
   - `@astrojs/rss`
   - `@astrojs/react`（讓 React Island 能跑）
 - [ ] 1.5 設定 `astro.config.mjs`：
-  - `site`、`base`（依 GitHub Pages URL 決定）
+  - `site: "https://sofiayan0523.github.io"`（已確認）
+  - `base` 不設（user page 從 root 起算）
   - `output: "static"`
   - 啟用 mdx、tailwind、sitemap、react integrations
 - [ ] 1.6 設定 `tsconfig.json` 為 strict 模式
@@ -298,8 +299,8 @@ sofia-s-blog/
 
 ## 風險與注意事項
 
-1. **GitHub Pages 路徑**
-   若 repo 不是 `<user>.github.io`，網站會在 `https://<user>.github.io/<repo>/`，必須設 `base: "/<repo>"`，所有內部連結改用 Astro 的 `<a href={...}>` 或 `import.meta.env.BASE_URL` 處理。
+1. **Repo 必須改名為 `sofiayan0523.github.io`**
+   已確認用 user page 路徑，repo 名稱必須符合此格式。建議直接 rename 現有 repo（保留歷史與 issues），GitHub 自動 redirect 舊 URL。
 
 2. **MDX 中 capture-eye web component**
    需在 BaseLayout 用 `<script src="..." type="module" is:inline>` 載一次。版本鎖定到具體版號，避免 `@latest` 在 prod 出意外。
@@ -330,14 +331,101 @@ sofia-s-blog/
 
 ---
 
-## 開工前檢查清單
+## 開工前檢查清單（已確認）
 
-- [ ] 確認 GitHub Repo Pages 是否已啟用（Settings → Pages）
-- [ ] 確認要保留的 custom domain（若有）
-- [ ] 建立 `legacy-react` 分支或 `v1-react` git tag 備份現版
-- [ ] 列出 Supabase Storage 中所有圖片清單（確保 migrate script 不漏抓）
-- [ ] 決定第一版 i18n 策略（建議：localStorage 切字串，URL 不分語言）
-- [ ] 決定 GitHub Pages 路徑：`<user>.github.io` 或 `<user>.github.io/sofia-s-blog`
+- [x] GitHub Repo Pages 已啟用
+- [x] 不使用 custom domain
+- [x] 將建立 `legacy-react` 分支備份現版（由 user 處理）
+- [x] Supabase 圖片清單已列出（見下方）
+- [x] i18n 策略：localStorage 切字串，URL 不分語言
+- [x] GitHub Pages 路徑：`<user>.github.io`（user page，不使用子路徑）
+
+---
+
+## 重要架構影響：使用 `<user>.github.io` 的 repo 命名
+
+GitHub Pages 規則：每個帳號只有 **一個** repo 可作為 user page，且 repo 名稱必須是 `<username>.github.io`。目前 repo 名為 `sofia-s-blog`，要部署到 `sofiayan0523.github.io` 必須二選一：
+
+1. **將現有 repo 改名為 `sofiayan0523.github.io`** ⭐ 推薦
+   - 保留 git 歷史與 issues
+   - GitHub 會自動為舊 repo URL 建立 redirect
+   - 操作：Repo Settings → Repository name → 改為 `sofiayan0523.github.io`
+2. **新建 `sofiayan0523.github.io` repo，搬遷 Astro 程式碼過去**
+   - `sofia-s-blog` 保留為 legacy / archive
+   - 適合想完全分開新舊的情境
+
+> 若 `sofiayan0523.github.io` 已被佔用做其他用途，則必須改用子路徑方案，這時要重新調整 Phase 5 的 `astro.config.mjs` 加上 `base: "/sofia-s-blog"`。
+
+**Astro 設定影響**（user page 路徑下）：
+- `site: "https://sofiayan0523.github.io"`
+- `base` 不設（預設 `/`）
+- 所有資產路徑都從 root 起算
+
+---
+
+## Supabase 圖片清單與遷移對應表
+
+### 統計
+- 總計 **45 張圖片** 要遷移至 repo
+- 已生成完整 manifest：`sofia-s-blog/scripts/supabase-images.json`
+- Storage bucket 中還有 2 張未被任何已發布文章引用的孤兒圖（無需遷移）
+- 原 `og-image.jpg` 不存在於 Storage（需重新製作或在新版用 build-time 動態 OG）
+
+### 文章與圖片對應
+
+| 文章標題 | Slug（建議） | 發布日期 | 封面 | Capture 圖片 |
+|---------|-------------|---------|------|--------------|
+| 2022, Life in Oslo. | `2022-life-in-oslo` | 2022-06-01 | 1 | 20 |
+| 2024, 羅馬見聞. | `2024-rome` | 2024-03-26 | 1 | 4 |
+| 2024, 佛羅倫斯散策. | `2024-florence` | 2024-03-31 | 1 | 6 |
+| 2024, 快閃波隆納. | `2024-bologna` | 2024-04-01 | 1 | 2 |
+| 2024, 威尼斯印象. | `2024-venice` | 2024-04-06 | 1 | 8 |
+| **總計** | | | **5** | **40** |
+
+> 注意：所有 40 張內文圖片都是 `!capture[]()()` 語法（含 NID），不是純 `![]()`。遷移時需保留 NID 資訊以便 MDX 中渲染 `<CaptureEye>` 元件。
+
+### 圖片目標路徑規則
+
+每個 post 的圖片放在 `public/images/posts/{slug}/`：
+- 封面 → `cover.jpg`
+- 內文圖片依出現順序 → `01.jpg`、`02.jpg` … 補零至兩位
+
+範例（取自 manifest）：
+```json
+{
+  "slug": "2022-life-in-oslo",
+  "cover": {
+    "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/.../1767435420205.jpg",
+    "targetPath": "public/images/posts/2022-life-in-oslo/cover.jpg"
+  },
+  "captures": [
+    {
+      "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/.../1767435524551-...n.jpg",
+      "nid": "bafkreicf3wlu7x7whs7o7hxsm4ggtxryquzlttvsi4tv5enyrmsjyj3eda",
+      "targetPath": "public/images/posts/2022-life-in-oslo/01.jpg"
+    }
+  ]
+}
+```
+
+### Phase 2.3 download script 任務（細化）
+
+腳本需依 manifest 執行：
+1. 讀取 `scripts/supabase-images.json`
+2. 對每筆 image record 執行 `fetch(sourceUrl)` 並寫入 `targetPath`
+3. 並行限制（如 5 個同時）避免被 Supabase 限流
+4. 失敗時 retry 3 次
+5. 完成後印出統計（成功 / 失敗）
+
+### Phase 2.2 migrate-fallback-posts 任務（細化）
+
+對每篇 post：
+1. 取出 frontmatter（title、excerpt、category、tags、publishedAt、coverImage、readTime）
+2. content 中：
+   - `!capture[alt](url)(nid)` → `<CaptureEye nid="${nid}" src="/images/posts/${slug}/${seq}.jpg" alt="${alt}" />`
+   - cover_image URL → frontmatter 中 `coverImage: /images/posts/${slug}/cover.jpg`
+3. 由於含 `<CaptureEye>` JSX，所有檔案副檔名為 `.mdx`
+4. 輸出至 `src/content/posts/{slug}.mdx`
 
 ---
 

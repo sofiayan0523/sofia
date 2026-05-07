@@ -44,4 +44,4 @@
 - **`.env` not in `.gitignore`**: Supabase anon key committed to repo history
 
 ---
-_Last system refresh: 2026-05-07 06:12 UTC_
+_Last system refresh: 2026-05-07 07:04 UTC_
