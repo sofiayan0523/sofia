@@ -19,19 +19,39 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    // Listen for auth changes (set up first to catch TOKEN_REFRESHED / SIGNED_OUT)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+
+      if (event === "TOKEN_REFRESHED" && !session) {
+        // Refresh failed — clear any stale tokens
+        supabase.auth.signOut().catch(() => {});
+      }
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    // Get initial session; if it fails (e.g. stale refresh token), clear it
+    supabase.auth.getSession()
+      .then(({ data: { session }, error }) => {
+        if (error) {
+          console.warn("getSession failed, clearing stale auth:", error);
+          supabase.auth.signOut().catch(() => {});
+          setSession(null);
+          setUser(null);
+        } else {
+          setSession(session);
+          setUser(session?.user ?? null);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.warn("getSession threw, clearing stale auth:", err);
+        supabase.auth.signOut().catch(() => {});
+        setSession(null);
+        setUser(null);
+        setLoading(false);
+      });
 
     return () => subscription.unsubscribe();
   }, []);
