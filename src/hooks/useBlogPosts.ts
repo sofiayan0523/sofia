@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth";
+import { fallbackBlogPosts } from "@/data/fallbackBlogPosts";
 
 export interface BlogPost {
   id: string;
@@ -21,24 +22,36 @@ export const useBlogPosts = (searchQuery?: string, category?: string) => {
   return useQuery({
     queryKey: ["blog-posts", searchQuery, category],
     queryFn: async () => {
-      let query = supabase
-        .from("blog_posts")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false });
+      const fallbackPosts = filterBlogPosts(fallbackBlogPosts, searchQuery, category);
 
-      if (category && category !== "all") {
-        query = query.eq("category", category);
+      try {
+        let query = supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("published", true)
+          .order("created_at", { ascending: false });
+
+        if (category && category !== "all") {
+          query = query.eq("category", category);
+        }
+
+        if (searchQuery) {
+          const safeSearchQuery = searchQuery.replace(/[,%]/g, "").trim();
+          if (safeSearchQuery) {
+            query = query.or(`title.ilike.%${safeSearchQuery}%,content.ilike.%${safeSearchQuery}%,excerpt.ilike.%${safeSearchQuery}%`);
+          }
+        }
+
+        const { data, error } = await query;
+        if (error) throw error;
+        return (data?.length ? data : fallbackPosts) as BlogPost[];
+      } catch (error) {
+        console.warn("Live blog posts failed to load; using bundled public posts.", error);
+        return fallbackPosts;
       }
-
-      if (searchQuery) {
-        query = query.or(`title.ilike.%${searchQuery}%,content.ilike.%${searchQuery}%,excerpt.ilike.%${searchQuery}%`);
-      }
-
-      const { data, error } = await query;
-      if (error) throw error;
-      return data as BlogPost[];
     },
+    placeholderData: () => filterBlogPosts(fallbackBlogPosts, searchQuery, category),
+    retry: false,
   });
 };
 
