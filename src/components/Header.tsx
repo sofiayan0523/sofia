@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Moon, Sun, Menu, X, LogOut, Settings, Globe } from "lucide-react";
 import {
