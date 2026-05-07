@@ -18,24 +18,24 @@ export interface BlogPost {
   updated_at: string;
 }
 
-const filterBlogPosts = (posts: BlogPost[], searchQuery?: string, category?: string) => {
-  const normalizedSearch = searchQuery?.trim().toLowerCase();
-
-  return posts.filter((post) => {
-    const matchesCategory = !category || category === "all" || post.category === category;
-    const matchesSearch = !normalizedSearch || [post.title, post.excerpt, post.content]
-      .filter(Boolean)
-      .some((value) => value!.toLowerCase().includes(normalizedSearch));
-
-    return matchesCategory && matchesSearch;
-  });
-};
-
 export const useBlogPosts = (searchQuery?: string, category?: string) => {
+  const getFallbackPosts = () => {
+    const normalizedSearch = searchQuery?.trim().toLowerCase();
+
+    return fallbackBlogPosts.filter((post) => {
+      const matchesCategory = !category || category === "all" || post.category === category;
+      const matchesSearch = !normalizedSearch || [post.title, post.excerpt, post.content]
+        .filter(Boolean)
+        .some((value) => value!.toLowerCase().includes(normalizedSearch));
+
+      return matchesCategory && matchesSearch;
+    });
+  };
+
   return useQuery({
     queryKey: ["blog-posts", searchQuery, category],
     queryFn: async () => {
-      const fallbackPosts = filterBlogPosts(fallbackBlogPosts, searchQuery, category);
+      const fallbackPosts = getFallbackPosts();
 
       try {
         let query = supabase
@@ -63,7 +63,7 @@ export const useBlogPosts = (searchQuery?: string, category?: string) => {
         return fallbackPosts;
       }
     },
-    placeholderData: () => filterBlogPosts(fallbackBlogPosts, searchQuery, category),
+    placeholderData: getFallbackPosts,
     retry: false,
   });
 };
