@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { clearSupabaseAuthStorage } from "@/lib/authStorage";
 
 interface AuthContextType {
   user: User | null;
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (event === "TOKEN_REFRESHED" && !session) {
         // Refresh failed — clear any stale tokens
+        clearSupabaseAuthStorage();
         supabase.auth.signOut().catch(() => {});
       }
     });
@@ -36,6 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       .then(({ data: { session }, error }) => {
         if (error) {
           console.warn("getSession failed, clearing stale auth:", error);
+          clearSupabaseAuthStorage();
           supabase.auth.signOut().catch(() => {});
           setSession(null);
           setUser(null);
@@ -47,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch((err) => {
         console.warn("getSession threw, clearing stale auth:", err);
+        clearSupabaseAuthStorage();
         supabase.auth.signOut().catch(() => {});
         setSession(null);
         setUser(null);
