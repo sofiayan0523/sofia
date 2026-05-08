@@ -5,9 +5,9 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import BlogCard from "@/components/BlogCard.astro";
 import CaptureEye from "@/components/CaptureEye.astro";
-import { getTranslations, DEFAULT_LANG } from "@/i18n";
+import T from "@/components/T.astro";
+import type { TranslationKey } from "@/i18n";
 
-const t = getTranslations(DEFAULT_LANG);
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const allPosts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
@@ -15,12 +15,12 @@ const allPosts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
 );
 const featured = allPosts.slice(0, 6);
 
-const stats = [
+const stats: { value: string; labelKey: TranslationKey }[] = [
   { value: "50+", labelKey: "home.stat.cities" },
   { value: "10+", labelKey: "home.stat.tech" },
   { value: "20+", labelKey: "home.stat.speaking" },
   { value: "∞", labelKey: "home.stat.curiosity" },
-] as const;
+];
 ---
 
 <BaseLayout>
@@ -32,26 +32,26 @@ const stats = [
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
           <div class="max-w-2xl space-y-6 animate-fade-up">
             <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
-              {t("home.eyebrow")}
+              <T k="home.eyebrow" />
             </p>
             <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight">
-              {t("home.greeting")}
+              <T k="home.greeting" />
             </h1>
             <p class="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl whitespace-pre-line">
-              {t("home.description")}
+              <T k="home.description" />
             </p>
             <div class="flex flex-wrap gap-4 pt-4">
               <a
                 href={`${baseUrl}about`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
               >
-                {t("home.aboutBtn")} <span aria-hidden="true">→</span>
+                <T k="home.aboutBtn" /> <span aria-hidden="true">→</span>
               </a>
               <a
                 href={`${baseUrl}blog`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
               >
-                {t("home.blogBtn")}
+                <T k="home.blogBtn" />
               </a>
             </div>
           </div>
@@ -82,7 +82,9 @@ const stats = [
                 style={`animation-delay: ${i * 100 + 200}ms`}
               >
                 <p class="font-display text-3xl md:text-4xl font-medium">{stat.value}</p>
-                <p class="text-muted-foreground text-sm mt-1">{t(stat.labelKey)}</p>
+                <p class="text-muted-foreground text-sm mt-1">
+                  <T k={stat.labelKey} />
+                </p>
               </div>
             ))
           }
@@ -96,17 +98,17 @@ const stats = [
         <div class="flex items-end justify-between mb-12">
           <div>
             <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-2">
-              {t("home.latestEyebrow")}
+              <T k="home.latestEyebrow" />
             </p>
             <h2 class="font-display text-3xl md:text-4xl font-medium">
-              {t("home.latestTitle")}
+              <T k="home.latestTitle" />
             </h2>
           </div>
           <a
             href={`${baseUrl}blog`}
             class="hidden md:inline-flex items-center gap-1 text-sm hover:text-muted-foreground transition-colors"
           >
-            {t("home.viewAll")} <span aria-hidden="true">→</span>
+            <T k="home.viewAll" /> <span aria-hidden="true">→</span>
           </a>
         </div>
 
@@ -118,7 +120,9 @@ const stats = [
               ))}
             </div>
           ) : (
-            <p class="text-center py-12 text-muted-foreground">{t("home.empty")}</p>
+            <p class="text-center py-12 text-muted-foreground">
+              <T k="home.empty" />
+            </p>
           )
         }
 
@@ -127,7 +131,7 @@ const stats = [
             href={`${baseUrl}blog`}
             class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
           >
-            {t("home.viewAllPosts")} <span aria-hidden="true">→</span>
+            <T k="home.viewAllPosts" /> <span aria-hidden="true">→</span>
           </a>
         </div>
       </div>

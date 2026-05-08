@@ -3,40 +3,49 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import CaptureEye from "@/components/CaptureEye.astro";
-import { getTranslations, DEFAULT_LANG } from "@/i18n";
+import T from "@/components/T.astro";
 
-const t = getTranslations(DEFAULT_LANG);
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const playgroundItems = [
   {
     emoji: "🐾",
-    title: "Cat Reviews",
-    description: "從鮪魚到 Twitter 討論串——來自這對貓咪的聲音。",
+    titleZh: "Cat Reviews",
+    titleEn: "Cat Reviews",
+    descZh: "從鮪魚到 Twitter 討論串——來自這對貓咪的聲音。",
+    descEn: "From tuna to Twitter threads — hear it from the duo.",
     link: "https://x.com/sofia_numbers",
   },
   {
     emoji: "🎵",
-    title: "Coding Playlist",
-    description: "我工作時聽的音樂",
+    titleZh: "Coding Playlist",
+    titleEn: "Coding Playlist",
+    descZh: "我工作時聽的音樂",
+    descEn: "Music I build to",
     link: "https://open.spotify.com/playlist/37i9dQZF1DWVidGk00tysG?si=b6b00b9e03b24a59",
   },
   {
     emoji: "📚",
-    title: "Book Stack",
-    description: "從 AI 倫理到 zine 設計",
+    titleZh: "Book Stack",
+    titleEn: "Book Stack",
+    descZh: "從 AI 倫理到 zine 設計",
+    descEn: "From AI ethics to zine design",
     link: "https://wecollect.fun/home/pP5lSFvUzlHHo1oBkbF9",
   },
   {
     emoji: "🧗",
-    title: "Climbing Log",
-    description: "台北岩館 + 我最新的路線",
+    titleZh: "Climbing Log",
+    titleEn: "Climbing Log",
+    descZh: "台北岩館 + 我最新的路線",
+    descEn: "Taipei gyms + my latest sends",
     link: "https://www.instagram.com/shiji_zapie/reels/",
   },
   {
     emoji: "🌍",
-    title: "City List",
-    description: "我獨自探索過的 70+ 個城市——還在增加中",
+    titleZh: "City List",
+    titleEn: "City List",
+    descZh: "我獨自探索過的 70+ 個城市——還在增加中",
+    descEn: "70+ cities I've solo-explored — and counting",
     link: "https://www.tripadvisor.com.tw/TravelMap-a_uid.62D80D5A0D26371C51F8738A6E080B84",
   },
 ];
@@ -52,10 +61,10 @@ const playgroundItems = [
       <div class="animate-fade-up space-y-8">
         <div>
           <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-4">
-            {t("about.eyebrow")}
+            <T k="about.eyebrow" />
           </p>
           <h1 class="font-display text-4xl md:text-5xl font-medium leading-tight">
-            {t("about.headline")}
+            <T k="about.headline" />
           </h1>
         </div>
 
@@ -69,25 +78,25 @@ const playgroundItems = [
         </div>
 
         <div class="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-foreground/80 leading-relaxed">
-          <p class="text-lg">{t("about.intro")}</p>
-          <p>{t("about.background")}</p>
-          <p>{t("about.hobbies")}</p>
+          <p class="text-lg"><T k="about.intro" /></p>
+          <p><T k="about.background" /></p>
+          <p><T k="about.hobbies" /></p>
 
           <h2 class="font-display text-2xl font-medium text-foreground pt-8">
-            {t("about.currentlyTitle")}
+            <T k="about.currentlyTitle" />
           </h2>
 
           <ul class="space-y-2">
-            <li>🏠 {t("about.current1")}</li>
-            <li>🎤 {t("about.current2")}</li>
-            <li>✍️ {t("about.current3")}</li>
-            <li>🧗‍♀️ {t("about.current4")}</li>
+            <li>🏠 <T k="about.current1" /></li>
+            <li>🎤 <T k="about.current2" /></li>
+            <li>✍️ <T k="about.current3" /></li>
+            <li>🧗‍♀️ <T k="about.current4" /></li>
           </ul>
 
           <h2 class="font-display text-2xl font-medium text-foreground pt-8">
-            {t("about.playgroundTitle")}
+            <T k="about.playgroundTitle" />
           </h2>
-          <p class="text-muted-foreground">{t("about.playgroundDescription")}</p>
+          <p class="text-muted-foreground"><T k="about.playgroundDescription" /></p>
         </div>
       </div>
 
@@ -110,9 +119,11 @@ const playgroundItems = [
                 </span>
               </div>
               <h3 class="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
-                {item.title}
+                <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
               </h3>
-              <p class="text-sm text-muted-foreground">{item.description}</p>
+              <p class="text-sm text-muted-foreground">
+                <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
+              </p>
             </a>
           ))
         }

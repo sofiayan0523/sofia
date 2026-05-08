@@ -1,18 +1,20 @@
 ---
-import { getTranslations, DEFAULT_LANG } from "@/i18n";
+import T from "@/components/T.astro";
 import ThemeToggle from "@/components/ThemeToggle.tsx";
-const t = getTranslations(DEFAULT_LANG);
+import LanguageSwitcher from "@/components/LanguageSwitcher.tsx";
+import type { TranslationKey } from "@/i18n";
+
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const currentPath = Astro.url.pathname;
 const stripBase = (p: string) => p.replace(/^\/sofia/, "") || "/";
 const here = stripBase(currentPath);
 
-const navItems = [
-  { path: "/", label: t("nav.home") },
-  { path: "/about", label: t("nav.about") },
-  { path: "/blog", label: t("nav.blog") },
-  { path: "/career", label: t("nav.career") },
+const navItems: { path: string; key: TranslationKey }[] = [
+  { path: "/", key: "nav.home" },
+  { path: "/about", key: "nav.about" },
+  { path: "/blog", key: "nav.blog" },
+  { path: "/career", key: "nav.career" },
 ];
 
 const isActive = (path: string) =>
@@ -44,12 +46,13 @@ const isActive = (path: string) =>
                   active ? "text-foreground font-medium" : "text-muted-foreground",
                 ]}
               >
-                {item.label}
+                <T k={item.key} />
               </a>
             );
           })
         }
       </nav>
+      <LanguageSwitcher client:load />
       <ThemeToggle client:load />
     </div>
   </div>
