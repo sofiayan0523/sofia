@@ -57,4 +57,4 @@
 - **Pagefind**: Configured as `postbuild` script; will require `data-pagefind-body` markup in PostLayout for proper indexing
 
 ---
-_Last system refresh: 2026-05-08 03:41 UTC_
+_Last system refresh: 2026-05-08 04:01 UTC_
