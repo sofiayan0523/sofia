@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Comments from "@/components/Comments.astro";
+import T from "@/components/T.astro";
 import { getTranslations, DEFAULT_LANG, type TranslationKey } from "@/i18n";
 
 export async function getStaticPaths() {
@@ -44,13 +45,13 @@ const categoryKey = (`category.${post.data.category}` as unknown) as Translation
         href={`${baseUrl}blog`}
         class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
       >
-        <span aria-hidden="true">←</span> {t("blog.back")}
+        <span aria-hidden="true">←</span> <T k="blog.back" />
       </a>
 
       <header class="space-y-4 mb-8">
         <div class="flex items-center gap-4 text-sm flex-wrap">
           <span class="px-3 py-1 bg-secondary rounded-full text-secondary-foreground font-medium">
-            {t(categoryKey)}
+            <T k={categoryKey} />
           </span>
           <span class="text-muted-foreground">{formatDate(post.data.publishedAt)}</span>
           {post.data.readTime && (

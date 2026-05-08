@@ -1,0 +1,29 @@
+---
+// Bilingual text emitter. Renders BOTH zh and en spans into the static HTML;
+// CSS in global.css hides the inactive one based on `<html data-lang>`.
+//
+// Usage:
+//   <T k="nav.home" />
+//   <T k="footer.copyright" vars={{ year: 2026 }} />
+import { zh, en, type TranslationKey } from "@/i18n";
+
+interface Props {
+  k: TranslationKey;
+  vars?: Record<string, string | number>;
+}
+
+const { k, vars } = Astro.props;
+
+const interpolate = (s: string) => {
+  if (!vars) return s;
+  let out = s;
+  for (const [key, val] of Object.entries(vars)) {
+    out = out.split(`{${key}}`).join(String(val));
+  }
+  return out;
+};
+
+const zhVal = interpolate(zh[k] ?? k);
+const enVal = interpolate(en[k] ?? k);
+---
+<span data-l="zh">{zhVal}</span><span data-l="en">{enVal}</span>

@@ -44,4 +44,15 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* i18n dual-render: hide inactive language (default = zh) */
+  [data-l="en"] {
+    display: none;
+  }
+  :root[data-lang="en"] [data-l="zh"] {
+    display: none;
+  }
+  :root[data-lang="en"] [data-l="en"] {
+    display: inline;
+  }
 }

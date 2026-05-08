@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import BlogCard from "@/components/BlogCard.astro";
+import T from "@/components/T.astro";
 import { getTranslations, DEFAULT_LANG } from "@/i18n";
 
 const t = getTranslations(DEFAULT_LANG);
@@ -26,12 +27,12 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
       <div class="space-y-8 animate-fade-up">
         <div class="max-w-2xl">
           <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-4">
-            {t("blog.eyebrow")}
+            <T k="blog.eyebrow" />
           </p>
           <h1 class="font-display text-4xl md:text-5xl font-medium leading-tight">
-            {t("blog.headline")}
+            <T k="blog.headline" />
           </h1>
-          <p class="text-muted-foreground mt-4 text-lg">{t("blog.description")}</p>
+          <p class="text-muted-foreground mt-4 text-lg"><T k="blog.description" /></p>
         </div>
 
         <!-- Search (Pagefind UI mounts here) -->
@@ -53,7 +54,7 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
                     : "border-border hover:bg-secondary",
                 ]}
               >
-                {t((`category.${cat}` as const))}
+                <T k={`category.${cat}` as const} />
               </button>
             ))
           }
@@ -71,7 +72,7 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
           id="no-results"
           class="hidden text-center py-20 text-muted-foreground"
         >
-          {t("blog.empty")}
+          <T k="blog.empty" />
         </p>
       </div>
     </div>
@@ -86,27 +87,30 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
 />
 <script src={`${baseUrl}pagefind/pagefind-ui.js`} is:inline></script>
 <script is:inline define:vars={{ baseUrl }}>
-  // Wait for DOM to be ready
   document.addEventListener("DOMContentLoaded", () => {
     if (window.PagefindUI) {
+      const lang = document.documentElement.getAttribute("data-lang") || "zh";
+      const isEn = lang === "en";
       new window.PagefindUI({
         element: "#search",
         showSubResults: true,
         showImages: false,
         bundlePath: `${baseUrl}pagefind/`,
-        translations: {
-          placeholder: "搜尋文章...",
-          clear_search: "清除",
-          load_more: "顯示更多",
-          search_label: "搜尋",
-          filters_label: "篩選",
-          zero_results: "找不到 [SEARCH_TERM] 相關的文章",
-          many_results: "找到 [COUNT] 篇與 [SEARCH_TERM] 相關的文章",
-          one_result: "找到 [COUNT] 篇與 [SEARCH_TERM] 相關的文章",
-          alt_search: "找不到 [SEARCH_TERM] 相關的文章。改顯示 [DIFFERENT_TERM] 的搜尋結果",
-          search_suggestion: "找不到 [SEARCH_TERM] 相關的文章。試試這些關鍵字：",
-          searching: "搜尋中：[SEARCH_TERM]...",
-        },
+        translations: isEn
+          ? undefined
+          : {
+              placeholder: "搜尋文章...",
+              clear_search: "清除",
+              load_more: "顯示更多",
+              search_label: "搜尋",
+              filters_label: "篩選",
+              zero_results: "找不到 [SEARCH_TERM] 相關的文章",
+              many_results: "找到 [COUNT] 篇與 [SEARCH_TERM] 相關的文章",
+              one_result: "找到 [COUNT] 篇與 [SEARCH_TERM] 相關的文章",
+              alt_search: "找不到 [SEARCH_TERM] 相關的文章。改顯示 [DIFFERENT_TERM] 的搜尋結果",
+              search_suggestion: "找不到 [SEARCH_TERM] 相關的文章。試試這些關鍵字：",
+              searching: "搜尋中：[SEARCH_TERM]...",
+            },
       });
     }
   });
@@ -122,7 +126,6 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const target = btn.dataset.cat;
-        // toggle button styles
         buttons.forEach((b) => {
           const isActive = b === btn;
           b.classList.toggle("bg-primary", isActive);
@@ -131,7 +134,6 @@ const categories = ["all", "travel", "ai-tools", "thoughts"] as const;
           b.classList.toggle("border-border", !isActive);
           b.classList.toggle("hover:bg-secondary", !isActive);
         });
-        // filter posts
         let visible = 0;
         posts.forEach((p) => {
           const cat = p.dataset.cat;
