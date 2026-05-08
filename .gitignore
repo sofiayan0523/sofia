@@ -1,4 +1,11 @@
-# Logs
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
 logs
 *.log
 npm-debug.log*
@@ -7,18 +14,23 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# environment variables
+.env
+.env.production
+.env.local
 
-# Editor directories and files
+# macOS
+.DS_Store
+
+# editor
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# misc
+*.local

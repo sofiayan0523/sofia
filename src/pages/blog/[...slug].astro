@@ -1,0 +1,106 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Comments from "@/components/Comments.astro";
+import { getTranslations, DEFAULT_LANG, type TranslationKey } from "@/i18n";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx?$/, "") },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const t = getTranslations(DEFAULT_LANG);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("zh-TW", { year: "numeric", month: "long", day: "numeric" });
+
+const categoryKey = (`category.${post.data.category}` as unknown) as TranslationKey;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.excerpt}
+  image={post.data.coverImage}
+  type="article"
+  article={{
+    publishedTime: post.data.publishedAt.toISOString(),
+    modifiedTime: post.data.updatedAt?.toISOString(),
+    author: "Sofia Yan",
+    tags: post.data.tags,
+  }}
+>
+  <Header />
+  <main class="pt-32 pb-20 px-6">
+    <article class="container max-w-3xl mx-auto" data-pagefind-body>
+      <a
+        href={`${baseUrl}blog`}
+        class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+      >
+        <span aria-hidden="true">←</span> {t("blog.back")}
+      </a>
+
+      <header class="space-y-4 mb-8">
+        <div class="flex items-center gap-4 text-sm flex-wrap">
+          <span class="px-3 py-1 bg-secondary rounded-full text-secondary-foreground font-medium">
+            {t(categoryKey)}
+          </span>
+          <span class="text-muted-foreground">{formatDate(post.data.publishedAt)}</span>
+          {post.data.readTime && (
+            <span class="text-muted-foreground">· {post.data.readTime}</span>
+          )}
+        </div>
+
+        <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight">
+          {post.data.title}
+        </h1>
+
+        {
+          post.data.excerpt && (
+            <p class="text-lg text-muted-foreground">{post.data.excerpt}</p>
+          )
+        }
+      </header>
+
+      {
+        post.data.coverImage && (
+          <div class="aspect-[16/9] rounded-xl overflow-hidden mb-12">
+            <img
+              src={post.data.coverImage}
+              alt={post.data.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )
+      }
+
+      <div
+        class="prose prose-neutral dark:prose-invert max-w-none prose-img:rounded-lg prose-headings:font-display"
+      >
+        <Content />
+      </div>
+
+      {
+        post.data.tags && post.data.tags.length > 0 && (
+          <footer class="flex flex-wrap gap-2 mt-12 pt-8 border-t border-border">
+            {post.data.tags.map((tag) => (
+              <span class="px-3 py-1 bg-secondary rounded-full text-sm text-secondary-foreground">
+                #{tag}
+              </span>
+            ))}
+          </footer>
+        )
+      }
+
+      <Comments />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

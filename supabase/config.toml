@@ -1,4 +1,0 @@
-project_id = "hbzabvlkkksdzofjpnnq"
-
-[functions.register-capture-image]
-verify_jwt = false

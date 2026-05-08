@@ -89,29 +89,52 @@ sofia-s-blog/
 
 ---
 
-## Phase 1：基礎建設（預估 0.5 天）
+## Phase 1：基礎建設 ✅ 已完成（2026-05-07，Astro v5.18.1）
 
-- [ ] 1.1 備份現有 React 版：建立 `legacy-react` 分支或 git tag `v1-react`
-- [ ] 1.2 在新分支清空舊 React 程式碼，保留 `.git`、`.gitignore`、`README.md`、要重用的 `public/` 圖片
-- [ ] 1.3 執行 `npm create astro@latest .` 選 Empty 或 Blog 模板
-- [ ] 1.4 安裝必要 integrations：
-  - `@astrojs/mdx`
-  - `@astrojs/tailwind`
-  - `@astrojs/sitemap`
-  - `@astrojs/rss`
-  - `@astrojs/react`（讓 React Island 能跑）
-- [ ] 1.5 設定 `astro.config.mjs`：
-  - `site: "https://sofiayan0523.github.io"`
-  - `base: "/sofia"`（project page，repo 名稱必須為 `sofia`）
-  - `output: "static"`
-  - 啟用 mdx、tailwind、sitemap、react integrations
-- [ ] 1.6 設定 `tsconfig.json` 為 strict 模式
-- [ ] 1.7 確認 `npm run dev` 與 `npm run build` 都能跑通
-- [ ] 1.8 commit: `feat: scaffold Astro project`
+- [x] 1.1 已備份 React 版至 `legacy-react` 分支（remote SHA `1e579c0`）
+- [x] 1.2 清空舊 React 程式碼；`src/assets/` 圖片已搬到 `public/images/profile/` 與 `public/images/logos/`
+- [x] 1.3 手動建立 Astro 骨架（取代 `npm create astro@latest`，避免互動式 prompt）
+- [x] 1.4 已安裝 integrations：
+  - `@astrojs/mdx@^4`、`@astrojs/react@^4`、`@astrojs/sitemap@^3`、`@astrojs/tailwind@^5`、`@astrojs/rss@^4`
+  - `tailwindcss@^3`、`@tailwindcss/typography@^0.5`
+  - `pagefind@^1`（搜尋）
+- [x] 1.5 `astro.config.mjs` 已設定：
+  - `site: "https://sofiayan0523.github.io"`、`base: "/sofia"`
+  - `output: "static"`、`trailingSlash: "ignore"`
+  - integrations: mdx, react, sitemap, tailwind
+- [x] 1.6 `tsconfig.json` extends `astro/tsconfigs/strict`，含 `@/*` path alias
+- [x] 1.7 `npm run build` 已通過，產生 `dist/index.html`、`_assets/*.css`、`sitemap-*.xml`、`pagefind/`
+- [x] 1.8 已修復 BASE_URL 結尾斜線 bug（`/sofiafavicon.ico` → `/sofia/favicon.ico`）
+
+### Phase 1 產生的檔案結構
+
+```
+sofia-s-blog/
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── tsconfig.json
+├── package.json + package-lock.json
+├── .gitignore                # 新增 .env、dist/、.astro/
+├── .env                      # 保留供 Phase 2 圖片下載使用，已 gitignored
+├── blog-plan.md
+├── README.md
+├── public/
+│   ├── favicon.ico、robots.txt
+│   └── images/
+│       ├── profile/          # sofia.png、sofia-speak.jpg
+│       └── logos/            # 6 個品牌 logo
+├── scripts/supabase-images.json
+└── src/
+    ├── content/config.ts     # Zod schema for posts collection
+    ├── layouts/BaseLayout.astro
+    ├── pages/index.astro     # 暫時的 scaffold 頁
+    ├── styles/global.css     # CSS variables + Tailwind layers
+    └── env.d.ts
+```
 
 ---
 
-## Phase 2：內容遷移（預估 1 天）
+## Phase 2：內容遷移 ✅ 已完成（2026-05-07）
 
 - [ ] 2.1 定義 `src/content/config.ts` schema：
   ```ts
@@ -134,97 +157,139 @@ sofia-s-blog/
 
   export const collections = { posts };
   ```
-- [ ] 2.2 寫 `scripts/migrate-fallback-posts.ts`：
-  - 讀取舊 `src/data/fallbackBlogPosts.ts` 所有文章
-  - 產生 `.md` 或 `.mdx` 檔，檔名規則 `{yyyy-MM-dd}-{slug}.md`
-  - 將 `!capture[alt](url)(nid)` 轉為 MDX 元件 `<CaptureEye nid="..." src="..." alt="..." />`（含 capture-eye 的檔案需用 `.mdx`）
-  - 將 `![alt](url)` 保留 markdown 寫法
-- [ ] 2.3 撰寫 / 執行 image download script：
-  - 列出所有 .md 中引用的 `https://hbzabvlkkksdzofjpnnq.supabase.co/...` URL
-  - 下載到 `public/images/posts/{slug}/{filename}`
-  - 改寫 .md / .mdx 中圖片路徑為 `/images/posts/{slug}/{filename}`
-- [ ] 2.4 建立 `src/components/CaptureEye.astro` 封裝 capture-eye web component
-- [ ] 2.5 在 `BaseLayout.astro` 加入 capture-eye script（鎖定版本，不用 `@latest`）
-- [ ] 2.6 `npm run build` 通過、隨機抽查 5 篇文章渲染正常
-- [ ] 2.7 commit: `feat: migrate posts to content collections`
+- [x] 2.2 `scripts/migrate-posts.mjs` 寫好並執行：直接從 Supabase REST 抓 published 文章（取代讀 fallback 檔），產生 `src/content/posts/{slug}.mdx`。已對 MDX-special chars (`<`、`>`、`{`、`}`、`\`) 做 escaping，避免 `<-`/`->` 等被解析為 JSX。
+- [x] 2.3 `scripts/download-images.mjs` 寫好並執行：成功下載全部 45 張圖（5.01 MB，19.7s 完成，0 失敗）。所有檔案落在 `public/images/posts/{slug}/{cover|NN}.jpg`。
+- [x] 2.4 `src/components/CaptureEye.astro` 已建立：`<div class="capture-eye-wrapper"><capture-eye nid="..."><img src=".." loading="lazy" .. /></capture-eye></div>`
+- [x] 2.5 `BaseLayout.astro` 加入 `<script type="module" src=".../@numbersprotocol/capture-eye@1.4.0/dist/capture-eye.bundled.js" is:inline>`（版本鎖定為 1.4.0）
+- [x] 2.6 `npm run build` 通過，產生 6 個 HTML（1 home + 5 posts）；Pagefind 索引 5 篇、2385 字、`data-pagefind-body` 標記運作正常
+- [ ] 2.7 commit: `feat: migrate posts to content collections`（auto-commit 將觸發）
+
+### Phase 2 驗證證據
+
+```text
+$ node scripts/download-images.mjs
+OK:     45
+Skipped: 0
+Failed: 0
+Total:  5.01 MB downloaded
+
+$ node scripts/migrate-posts.mjs
+Wrote 2022-life-in-oslo.mdx (20 captures, 15.7 KB)
+Wrote 2024-rome.mdx (4 captures, 4.0 KB)
+Wrote 2024-florence.mdx (6 captures, 2.7 KB)
+Wrote 2024-bologna.mdx (2 captures, 1.3 KB)
+Wrote 2024-venice.mdx (8 captures, 4.8 KB)
+
+$ npm run build
+generating static routes
+  └─ /index.html
+  ├─ /blog/2022-life-in-oslo/index.html
+  ├─ /blog/2024-bologna/index.html
+  ├─ /blog/2024-florence/index.html
+  ├─ /blog/2024-rome/index.html
+  └─ /blog/2024-venice/index.html
+[Pagefind] Indexed 5 pages, 2385 words
+```
+
+### Phase 2 補充：暫時的 blog post route
+
+為了驗證 MDX 能渲染，已建立 `src/pages/blog/[...slug].astro`：
+- `getStaticPaths` 用 `getCollection("posts", filter draft=false)`
+- 修正 Astro 5 `post.id` 含 `.mdx` 副檔名問題：`post.id.replace(/\.mdx?$/, "")`
+- 套 `BaseLayout`、`prose-neutral` 樣式
+- 主文章區包 `<article data-pagefind-body>` 讓 Pagefind 正確索引
+- Phase 3.4 會再優化（加 Header/Footer、樣式精修、回上頁按鈕等）
 
 ---
 
-## Phase 3：頁面與設計重建（預估 1.5–2 天）
+## Phase 3：頁面與設計重建 ✅ 已完成（2026-05-07）
 
-### 3.1 設計系統移植
-- [ ] 將原 `tailwind.config.ts` 的 color tokens、font-display、animations 複製到新 `tailwind.config.mjs`
-- [ ] 將 `src/index.css` 的 CSS variables、prose 樣式移到 `src/styles/global.css`
-- [ ] 在 `BaseLayout.astro` import global.css
+### 3.1 設計系統移植 ✅
+- [x] Tailwind config 已包含所有需要的 tokens、字體、動畫（Phase 1 完成）
+- [x] CSS variables、prose 樣式已在 `src/styles/global.css`
+- [x] `BaseLayout.astro` import global.css
 
-### 3.2 共用元件
-- [ ] `Header.astro`（純靜態 `<a>` 連結，不用 react-router）
-- [ ] `Footer.astro`（移除 `/playground` 連結；年份改用 build-time 動態 `new Date().getFullYear()`）
-- [ ] `BlogCard.astro`
-- [ ] `SEO.astro`（meta tags 直接寫在 head，無需 react-helmet）
-- [ ] `ThemeToggle.tsx`（React Island，`client:load`，沿用 localStorage 邏輯）
-- [ ] `LanguageSwitcher.tsx`（React Island，`client:load`）
+### 3.2 共用元件 ✅（部分；toggles 延後）
+- [x] `Header.astro`：純靜態，含 active link 高亮；自動處理 `/sofia` base prefix
+- [x] `Footer.astro`：年份用 `new Date().getFullYear()`；外部連結 (Twitter/LinkedIn/GitHub/Email)；無 `/playground` 連結
+- [x] `BlogCard.astro`：cover image lazy-load、category label 用 i18n、tags、發布日期
+- [x] `SEO.astro`：title、description、OG、Twitter Card、article 專屬 meta、RSS alternate link
+- [ ] `ThemeToggle.tsx` (React Island) — 延後到 Phase 6
+- [ ] `LanguageSwitcher.tsx` (React Island) — 延後到 Phase 6（首版固定 zh-TW）
 
-### 3.3 i18n
-- [ ] 將舊 `LanguageContext` 翻譯表拆成 `src/i18n/zh.ts` 與 `src/i18n/en.ts`
-- [ ] 寫 helper `getTranslations(lang)` 讓 .astro 與 React Island 都能取用
-- [ ] 補齊原本硬編碼的字串（Index stats、Blog 標題、404 頁、Footer 描述等）
-- [ ] 第一版策略：URL 不分語言，僅切翻譯 + localStorage（之後可升級為 `/en/` 子路徑）
+### 3.3 i18n ✅
+- [x] `src/i18n/zh.ts` + `src/i18n/en.ts` 完整翻譯表（含 nav、home、about、blog、category、career、footer、404、common 等）
+- [x] `src/i18n/index.ts` 提供 `getTranslations(lang)` helper，含 `{var}` 變數替換
+- [x] 所有 .astro 元件統一用 `t("key")` 取字串
 
-### 3.4 頁面
-- [ ] `pages/index.astro`（Home）
-  - Hero + capture-eye 頭像
-  - Stats 區塊
-  - 最新 6 篇文章
-- [ ] `pages/about.astro`
-  - About 內容 + Playground 連結卡片
-  - 不再需要 `dangerouslySetInnerHTML`
-- [ ] `pages/blog/index.astro`
-  - 分類 filter（純前端切換或多頁路由）
-  - 文章列表
-- [ ] `pages/blog/[...slug].astro`
-  - `getStaticPaths` + `getCollection("posts")`
-  - 套 `PostLayout.astro`
-  - 透過 MDX 直接使用 `<CaptureEye />` 元件
-- [ ] `pages/career.astro`（內容陣列從原 React 檔搬過來、純靜態渲染）
-- [ ] `pages/404.astro`
+### 3.4 頁面 ✅
+- [x] `pages/index.astro`：Hero（含 capture-eye 頭像）+ Stats（4 項）+ 最新 6 篇文章
+- [x] `pages/about.astro`：About 內容 + Playground 5 張連結卡片（emoji + 中文描述）
+- [x] `pages/blog/index.astro`：search box + 4 個分類 filter（純客戶端 JS 切換）+ 文章 grid
+- [x] `pages/blog/[...slug].astro`：完整套 Header/Footer/SEO；back button；tags footer；prose 樣式
+- [x] `pages/career.astro`：Work（6 項，含 logos）、Speaking（7 項）、Media（4 項）、Podcast（9 項）—— 從 `src/data/career.ts` 讀取
+- [x] `pages/404.astro`：含 Header/Footer 與返回首頁按鈕
 
-### 3.5 搜尋功能
-- [ ] 安裝 Pagefind：`npm i -D pagefind`
-- [ ] 在 build 後 hook 執行 `pagefind --site dist`
-- [ ] 在 `Blog` 頁加入 Pagefind 搜尋 UI（取代原 SearchBar 對 Supabase 即時 query 的做法）
+### 3.5 搜尋功能 ✅
+- [x] Pagefind 已安裝且設為 `postbuild` hook
+- [x] `data-pagefind-body` 包裹文章主體，索引 5 篇、2387 字
+- [x] Blog 頁面載入 `pagefind-ui.css` + `pagefind-ui.js` 並掛載到 `#search`
+- [x] 中文 UI 翻譯（搜尋中、找不到、清除…）
 
-### 3.6 RSS Feed
-- [ ] `pages/rss.xml.ts` 用 `@astrojs/rss` 產生
-- [ ] 在 `BaseLayout` head 加入 `<link rel="alternate" type="application/rss+xml">`
+### 3.6 RSS Feed ✅
+- [x] `pages/rss.xml.ts` 用 `@astrojs/rss` 產生
+- [x] 修正 base path bug：URL 從 `https://sofiayan0523.github.io/blog/...` 修正為 `https://sofiayan0523.github.io/sofia/blog/...`
+- [x] BaseLayout 經由 SEO 元件加入 `<link rel="alternate" type="application/rss+xml">`
 
-- [ ] 3.7 commit: `feat: rebuild pages with astro components`
+### Phase 3 build 結果
 
----
+```text
+$ npm run build
+[build] 10 page(s) built in 6.84s
+generating static routes
+  └─ /index.html
+  ├─ /404.html
+  ├─ /about/index.html
+  ├─ /blog/index.html
+  ├─ /blog/2022-life-in-oslo/index.html
+  ├─ /blog/2024-bologna/index.html
+  ├─ /blog/2024-florence/index.html
+  ├─ /blog/2024-rome/index.html
+  ├─ /blog/2024-venice/index.html
+  ├─ /career/index.html
+  └─ /rss.xml
+[Pagefind] Indexed 5 pages, 2387 words
+```
 
-## Phase 4：圖片管理（簡化版，全部放 repo）
-
-- [ ] 4.1 整理 `public/images/` 目錄結構：
-  - `og-image.jpg`
-  - `profile/`（個人照）
-  - `logos/`（career 頁 logos）
-  - `posts/{slug}/`（每篇文章圖片）
-- [ ] 4.2 執行 Phase 2.3 的 download script，把 Supabase 上的圖片全部撈下來
-- [ ] 4.3 .md / .mdx 中圖片路徑改為相對 root 的 `/images/...`
-- [ ] 4.4 大圖（> 500KB）批次壓縮：
-  - 用 `squoosh-cli` 或 `sharp` 壓縮為 WebP / 適當 JPEG 品質
-  - 目標：每張 < 300KB
-- [ ] 4.5 （選配）評估是否將部分圖片放 `src/assets/` 改用 Astro `<Image>` 元件做自動 srcset/WebP；首版可先省略
-- [ ] 4.6 設定 `.gitattributes`：`*.jpg binary`、`*.png binary`、`*.webp binary`
-
-**容量估算**：50 篇文章 × 平均 5 張圖 × 200KB ≈ 50MB，repo 可接受。
+### 3.7 commit
+- [ ] auto-commit 將觸發提交
 
 ---
 
-## Phase 5：部署（預估 1 小時）
+## Phase 4：圖片管理 ✅ 已完成（2026-05-07）
 
-- [ ] 5.1 GitHub Repo Settings → Pages → Source 設為 "GitHub Actions"
-- [ ] 5.2 建立 `.github/workflows/deploy.yml`：
+- [x] 4.1 `public/images/` 目錄結構整理完成：`profile/`、`logos/`、`posts/{slug}/`（Phase 1+2 已建立）
+- [x] 4.2 Phase 2 已下載所有 45 張 Supabase 圖片
+- [x] 4.3 .mdx 中圖片路徑統一為 `/sofia/images/...`（含 base prefix）
+- [x] 4.4 大圖批次壓縮 (`scripts/compress-images.mjs`)：
+  - 工具：sharp + mozjpeg quality=78、resize max width 1600
+  - 壓縮 4 張 >400KB 的圖片，省下 979 KB
+  - `2024-bologna/01.jpg`：551 → 318 KB (-42%)
+  - `2024-florence/03.jpg`：720 → 366 KB (-49%)
+  - `2024-florence/04.jpg`：809 → 421 KB (-48%)
+  - `2022-life-in-oslo/09.jpg`：413 → 408 KB (-1.2%)
+  - 最終 `public/images/posts/` 總大小：4.2 MB（從 5.2 MB 降下）
+- [x] 4.5 沿用 `public/` + 一般 `<img>`，未啟用 Astro `<Image>`（首版維持簡單）
+- [x] 4.6 `.gitattributes` 已建立，標記 `*.jpg`、`*.png`、`*.webp` 等為 binary
+
+**實際容量**：45 張圖共 4.2 MB（壓縮後）；每篇文章資料夾平均 < 1 MB。
+
+---
+
+## Phase 5：部署 ✅ 已完成程式碼面（2026-05-07）
+
+- [ ] 5.1 GitHub Repo Settings → Pages → Source 設為 "GitHub Actions"（**user 需手動操作一次**）
+- [x] 5.2 已建立 `.github/workflows/deploy.yml`：
   ```yaml
   name: Deploy to GitHub Pages
   on:
@@ -254,29 +319,75 @@ sofia-s-blog/
         - id: deployment
           uses: actions/deploy-pages@v4
   ```
-- [ ] 5.3 確認 `astro.config.mjs` 的 `site: "https://sofiayan0523.github.io"` 與 `base: "/sofia"` 與 repo 名稱一致
-- [ ] 5.4 First push to main，觀察 Actions 跑完無錯
-- [ ] 5.5 驗證：所有頁面、文章、圖片、搜尋都正常
-- [ ] 5.6 （選配）Custom domain：
-  - 在 `public/CNAME` 寫入域名
-  - DNS 設 CNAME 指向 `<user>.github.io`
-  - Repo Settings → Pages → Custom domain 填入並啟用 HTTPS
-- [ ] 5.7 commit & push: `chore: configure github pages deployment`
+- [x] 5.3 `astro.config.mjs` 的 `site: "https://sofiayan0523.github.io"` 與 `base: "/sofia"` 已驗證對齊
+- [ ] 5.4 First push to main，觀察 Actions 跑完無錯（**push 後驗證**）
+- [ ] 5.5 驗證：所有頁面、文章、圖片、搜尋都正常（**push 後驗證**）
+- [ ] 5.6 （選配）Custom domain — 不適用（已決定不用）
+- [ ] 5.7 commit & push: auto-commit 將觸發
+
+### 實際 workflow 內容（採 setup-node + npm ci 取代 withastro/action 以更明確控制版本）
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: ./dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.deployment.outputs.page_url }}' }
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 上線前最後一步（手動）
+
+User 須執行以下一次性設定：
+1. GitHub Repo `sofiayan0523/sofia` → Settings → Pages → Source 改為 **GitHub Actions**
+2. 推送 main → 觀察 Actions 跑完
+3. 訪問 `https://sofiayan0523.github.io/sofia/` 驗證
 
 ---
 
-## Phase 6：加值功能（選配）
+## Phase 6：加值功能（部分完成）
 
-- [ ] 6.1 **giscus 留言系統**
-  - Repo 開啟 Discussions
-  - 至 https://giscus.app/ 取得設定
-  - 新增 `Comments.astro`，於 `PostLayout.astro` 末尾載入
+### Theme toggle ✅ 已完成
+- [x] `src/components/ThemeToggle.tsx`：React Island，`client:load`，含 sun/moon SVG 圖示
+- [x] `BaseLayout.astro` 加入 inline FOUC 防止腳本（在 paint 前套用 theme）
+- [x] `Header.astro` 將 ThemeToggle 整合至右上角
+
+### 6.1 giscus 留言系統 ✅ 已 scaffold（disabled by default）
+- [x] `src/components/Comments.astro` 已建立，預設 `ENABLED = false`
+- [x] 已在 `pages/blog/[...slug].astro` 文章底部掛載 `<Comments />`
+- [ ] User 啟用步驟：
+  1. Repo Settings → Features → 開啟 Discussions
+  2. 至 https://giscus.app/ 產生 `data-repo-id` 和 `data-category-id`
+  3. 編輯 `Comments.astro` 中 `GISCUS_CONFIG` 並將 `ENABLED = true`
+
+### 其他選配功能（暫未實作）
 - [ ] 6.2 **Plausible 或 Umami 分析**
   - 自架 Umami 或註冊 Plausible
   - 在 `BaseLayout` head 加 script
-  - 對 GDPR 友善、無 cookie
 - [ ] 6.3 **OG image 自動產生**
   - 用 `@vercel/og` 或 `satori` 在 build 時為每篇文章生成專屬 OG 圖
+- [ ] 6.4 **LanguageSwitcher React Island**
+  - 首版固定 zh-TW，已預留 i18n 基礎設施
+  - 啟用後 `import.meta.env.BASE_URL` + localStorage 雙語切換
 - [ ] 6.4 **Newsletter / 訂閱**
   - 之後可整合 Buttondown / ConvertKit（純前端 form embed）
 

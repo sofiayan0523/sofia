@@ -1,0 +1,30 @@
+// @ts-check
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
+
+// https://astro.build/config
+export default defineConfig({
+  site: "https://sofiayan0523.github.io",
+  base: "/sofia",
+  trailingSlash: "ignore",
+  output: "static",
+  integrations: [
+    mdx(),
+    react(),
+    sitemap(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+  ],
+  build: {
+    assets: "_assets",
+  },
+  vite: {
+    build: {
+      sourcemap: false,
+    },
+  },
+});

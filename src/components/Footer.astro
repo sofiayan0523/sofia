@@ -1,0 +1,82 @@
+---
+import { getTranslations, DEFAULT_LANG } from "@/i18n";
+const t = getTranslations(DEFAULT_LANG);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { path: "/", label: t("nav.home") },
+  { path: "/about", label: t("nav.about") },
+  { path: "/blog", label: t("nav.blog") },
+  { path: "/career", label: t("nav.career") },
+];
+
+const externalLinks = [
+  { url: "https://x.com/sofia_numbers", label: "Twitter" },
+  { url: "https://www.linkedin.com/in/sofia-yan-b6318a31/", label: "LinkedIn" },
+  { url: "https://github.com/sofiayan0523", label: "GitHub" },
+  { url: "mailto:sag305320@gmail.com", label: "Email" },
+];
+
+const href = (path: string) =>
+  path === "/" ? baseUrl : `${baseUrl.replace(/\/$/, "")}${path}`;
+---
+
+<footer class="border-t border-border py-12 mt-24">
+  <div class="container max-w-5xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+      <div>
+        <a href={baseUrl} class="font-display text-lg font-medium">Sofia Yan</a>
+        <p class="text-muted-foreground text-sm mt-2 max-w-xs">
+          {t("footer.tagline")}
+        </p>
+      </div>
+
+      <div class="flex gap-12 text-sm">
+        <div class="space-y-3">
+          <p class="text-muted-foreground uppercase tracking-wider text-xs">
+            {t("footer.navigate")}
+          </p>
+          <div class="flex flex-col gap-2">
+            {
+              navLinks.map((item) => (
+                <a
+                  href={href(item.path)}
+                  class="text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <p class="text-muted-foreground uppercase tracking-wider text-xs">
+            {t("footer.connect")}
+          </p>
+          <div class="flex flex-col gap-2">
+            {
+              externalLinks.map((item) => (
+                <a
+                  href={item.url}
+                  target={item.url.startsWith("mailto:") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  class="text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 pt-6 border-t border-border/50 text-center text-muted-foreground text-xs"
+    >
+      {t("footer.copyright", { year })}
+    </div>
+  </div>
+</footer>
