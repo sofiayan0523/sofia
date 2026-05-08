@@ -118,7 +118,7 @@ export const podcastItems = [
   {
     source: "職場來一課",
     title: "文組生也能創建自動化流程工具！AI 如何融入工作流，提高做事效率",
-    link: "https://podcasts.apple.com/us/podcast/ep522/id1591157883?i=1000724642099",
+    link: "https://open.spotify.com/episode/6hqxuFpmGLKAecJUuzfeqW",
   },
   {
     source: "de lab cafe",
