@@ -1,0 +1,17 @@
+# Treat image binaries as binary so git doesn't try to diff them
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+
+# Shell scripts and Node scripts use LF
+*.sh text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# Lockfiles are diffable but should be linear
+package-lock.json -diff
+bun.lockb binary

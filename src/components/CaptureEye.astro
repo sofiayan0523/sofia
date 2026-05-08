@@ -1,0 +1,29 @@
+---
+// CaptureEye — wrapper around Numbers Protocol's <capture-eye> web component.
+// The web component script is loaded once in BaseLayout.astro.
+// This wrapper renders a <capture-eye> custom element with a child <img>.
+
+interface Props {
+  nid: string;
+  src: string;
+  alt?: string;
+  width?: string;
+  imgClass?: string;
+  class?: string;
+}
+
+const {
+  nid,
+  src,
+  alt = "",
+  width = "100%",
+  imgClass = "w-full h-auto",
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={["capture-eye-wrapper", className]}>
+  <capture-eye nid={nid}>
+    <img src={src} alt={alt} style={`width: ${width}`} class={imgClass} loading="lazy" />
+  </capture-eye>
+</div>

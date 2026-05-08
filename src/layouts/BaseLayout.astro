@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+import SEO from "@/components/SEO.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    tags?: string[];
+  };
+}
+
+const { title, description, image, type, article } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Apply theme before paint to avoid FOUC -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored === "dark" || stored === "light"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.classList.add(theme);
+        } catch (e) {
+          document.documentElement.classList.add("light");
+        }
+      })();
+    </script>
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      article={article}
+    />
+    <!-- Numbers Protocol Capture Eye web component (pinned version) -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@numbersprotocol/capture-eye@1.4.0/dist/capture-eye.bundled.js"
+      is:inline></script>
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,56 @@
+---
+import { getTranslations, DEFAULT_LANG } from "@/i18n";
+import ThemeToggle from "@/components/ThemeToggle.tsx";
+const t = getTranslations(DEFAULT_LANG);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+
+const currentPath = Astro.url.pathname;
+const stripBase = (p: string) => p.replace(/^\/sofia/, "") || "/";
+const here = stripBase(currentPath);
+
+const navItems = [
+  { path: "/", label: t("nav.home") },
+  { path: "/about", label: t("nav.about") },
+  { path: "/blog", label: t("nav.blog") },
+  { path: "/career", label: t("nav.career") },
+];
+
+const isActive = (path: string) =>
+  path === "/" ? here === "/" : here === path || here.startsWith(`${path}/`);
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50"
+>
+  <div class="container max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a
+      href={baseUrl}
+      class="font-display text-xl font-medium tracking-tight hover:opacity-70 transition-opacity"
+    >
+      Sofia Yan
+    </a>
+
+    <div class="flex items-center gap-1 md:gap-3 text-sm">
+      <nav class="flex items-center gap-1 md:gap-2">
+        {
+          navItems.map((item) => {
+            const active = isActive(item.path);
+            const href = item.path === "/" ? baseUrl : `${baseUrl.replace(/\/$/, "")}${item.path}`;
+            return (
+              <a
+                href={href}
+                class:list={[
+                  "px-3 py-1.5 rounded-md transition-colors hover:text-foreground",
+                  active ? "text-foreground font-medium" : "text-muted-foreground",
+                ]}
+              >
+                {item.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>
