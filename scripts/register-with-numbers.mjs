@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Register an image with Numbers Protocol Mainnet via the Capture asset API.
-// Reads CAPTURE_TOKEN from .env (or process.env). Prints the resulting NID
+// Reads CAPTURE_TOKEN from .env.local, .env, or process.env. Prints the resulting NID
 // (asset id) on success. Designed to be called once per image during a
 // blog-import workflow.
 //
@@ -28,7 +28,7 @@ import { dirname } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const ENV_PATH = resolve(ROOT, ".env");
+const ENV_PATHS = [resolve(ROOT, ".env.local"), resolve(ROOT, ".env")];
 const NUMBERS_API = "https://api.numbersprotocol.io/api/v3/assets/";
 
 // ---------- env loader (no extra dep) ----------
@@ -88,7 +88,9 @@ function parseArgs(argv) {
 }
 
 async function main() {
-  await loadEnvFile(ENV_PATH);
+  for (const envPath of ENV_PATHS) {
+    await loadEnvFile(envPath);
+  }
 
   const args = parseArgs(process.argv.slice(2));
   const filePath = args.positional[0];
@@ -103,7 +105,7 @@ async function main() {
   const TOKEN = process.env.CAPTURE_TOKEN;
   if (!TOKEN) {
     console.error(
-      "ERROR: CAPTURE_TOKEN missing. Add it to .env:\n  CAPTURE_TOKEN=your_numbers_api_key",
+      "ERROR: CAPTURE_TOKEN missing. Add it to .env.local:\n  CAPTURE_TOKEN=your_numbers_api_key",
     );
     process.exit(1);
   }

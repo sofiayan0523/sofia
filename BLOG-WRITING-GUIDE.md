@@ -86,16 +86,16 @@ Drive: <Google Drive 資料夾連結>"
 
 ## 一次性設定（給 Sofia）
 
-### 把 Numbers API token 放本機 .env
+### 把 Numbers API token 放本機 .env.local
 
 到 https://nit.numbersprotocol.io/ 取 API key，然後：
 
 ```bash
 cd sofia-s-blog
-echo "CAPTURE_TOKEN=你的_token" >> .env
+echo "CAPTURE_TOKEN=你的_token" >> .env.local
 ```
 
-`.env` 已在 `.gitignore`，不會被 commit。
+`.env.local` 已在 `.gitignore`，不會被 commit。
 
 驗證：
 ```bash
