@@ -8,6 +8,7 @@ const posts = defineCollection({
     category: z.enum(["travel", "ai-tools", "thoughts"]),
     tags: z.array(z.string()).default([]),
     coverImage: z.string().optional(),
+    coverNid: z.string().optional(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
     readTime: z.string().default("5 min"),

@@ -6,7 +6,8 @@
     "publishedAt": "2022-06-01",
     "cover": {
       "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/storage/v1/object/public/blog-images/b621bb21-60e3-4dbb-8208-dd061e18c30c/1767435420205.jpg",
-      "targetPath": "public/images/posts/2022-life-in-oslo/cover.jpg"
+      "targetPath": "public/images/posts/2022-life-in-oslo/cover.jpg",
+      "nid": "bafkreidyqpomt6j3gm5xlzau3qb4aqggttwjbwpvdvfbrhex63pdgum5ke"
     },
     "captures": [
       {
@@ -138,7 +139,8 @@
     "publishedAt": "2024-03-26",
     "cover": {
       "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/storage/v1/object/public/blog-images/b621bb21-60e3-4dbb-8208-dd061e18c30c/1767437985103.jpg",
-      "targetPath": "public/images/posts/2024-rome/cover.jpg"
+      "targetPath": "public/images/posts/2024-rome/cover.jpg",
+      "nid": "bafkreibo7vbbqz76nx2ys5nij2nh2mbq7lmstlugy6njrfke4hqsg32vkq"
     },
     "captures": [
       {
@@ -174,7 +176,8 @@
     "publishedAt": "2024-03-31",
     "cover": {
       "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/storage/v1/object/public/blog-images/b621bb21-60e3-4dbb-8208-dd061e18c30c/1767438713806.jpg",
-      "targetPath": "public/images/posts/2024-florence/cover.jpg"
+      "targetPath": "public/images/posts/2024-florence/cover.jpg",
+      "nid": "bafkreiaetcdjhn4kaifj2oapmqpzihgskeh3uagfoik6vkmkriwnnpo3ji"
     },
     "captures": [
       {
@@ -222,7 +225,8 @@
     "publishedAt": "2024-04-01",
     "cover": {
       "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/storage/v1/object/public/blog-images/b621bb21-60e3-4dbb-8208-dd061e18c30c/1767579868113.jpg",
-      "targetPath": "public/images/posts/2024-bologna/cover.jpg"
+      "targetPath": "public/images/posts/2024-bologna/cover.jpg",
+      "nid": "bafkreiecfn3ekzx4vwjqljowqk7sp2koayrzg7in7zvtxdkkrhushksv5i"
     },
     "captures": [
       {
@@ -246,7 +250,8 @@
     "publishedAt": "2024-04-06",
     "cover": {
       "sourceUrl": "https://hbzabvlkkksdzofjpnnq.supabase.co/storage/v1/object/public/blog-images/b621bb21-60e3-4dbb-8208-dd061e18c30c/1767580619854.jpg",
-      "targetPath": "public/images/posts/2024-venice/cover.jpg"
+      "targetPath": "public/images/posts/2024-venice/cover.jpg",
+      "nid": "bafkreieh4cfbagltnicvpmyjupelcl4fhawbxn2fanh5uo6s4wanzmvkye"
     },
     "captures": [
       {
