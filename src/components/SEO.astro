@@ -10,18 +10,20 @@ interface Props {
     author?: string;
     tags?: string[];
   };
+  faq?: Array<{ question: string; answer: string }>;
 }
 
 const SITE_NAME = "Sofia Yan";
-const DEFAULT_TITLE = "Sofia Yan | Tech & Travel";
+const DEFAULT_TITLE = "Sofia Yan | 文組 AI 專家 — Numbers Protocol Co-Founder";
 const DEFAULT_DESCRIPTION =
-  "探索 AI、區塊鏈與數位內容驗證的交會點。旅行手記、科技觀察，以及對生活的隨想。";
+  "Sofia Yan (嚴世紀) — 文組 AI 專家、Numbers Protocol 共同創辦人。專注於企業 AI 導入、內容溯源 (C2PA)、AI 治理 (TAEA)，以及為非技術背景的工作者拆解 AI 的真實樣貌。Humanities-trained AI implementation expert.";
 const TWITTER_HANDLE = "@sofia_numbers";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "https://sofiayan0523.github.io";
 const canonicalPath = Astro.url.pathname;
 const canonicalUrl = `${siteOrigin}${canonicalPath}`;
+const homeUrl = `${siteOrigin}${baseUrl}`;
 
 const {
   title,
@@ -29,9 +31,152 @@ const {
   image = `${siteOrigin}${baseUrl}og-image.jpg`,
   type = "website",
   article,
+  faq,
 } = Astro.props;
 
 const fullTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
+
+// ===== Schema.org JSON-LD =====
+// Person schema — Sofia Yan (site-wide; helps Google Knowledge Graph + LLMs)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Sofia Yan",
+  alternateName: "嚴世紀",
+  jobTitle: "Co-Founder & Chief Growth Officer",
+  description:
+    "Humanities-trained AI implementation expert. Co-Founder & CGO at Numbers Protocol. Specializes in enterprise AI adoption, content provenance (C2PA), and AI governance (TAEA framework).",
+  worksFor: {
+    "@type": "Organization",
+    name: "Numbers Protocol",
+    alternateName: "主張數據股份有限公司",
+    url: "https://www.numbersprotocol.io",
+  },
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "National Chengchi University",
+      alternateName: "國立政治大學",
+      url: "https://www.nccu.edu.tw",
+      description: "Master's in Teaching Chinese as a Second Language (華語文教學)",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "National Taipei University of Education",
+      alternateName: "國立臺北教育大學",
+      url: "https://www.ntue.edu.tw",
+    },
+  ],
+  knowsAbout: [
+    "Enterprise AI adoption",
+    "Content provenance",
+    "C2PA",
+    "ERC-7053",
+    "ERC-7517",
+    "AI governance",
+    "TAEA framework",
+    "Vibe coding",
+    "Agentic workflows",
+    "Numbers Protocol",
+    "Capture Suite",
+    "Omni AI DevOps",
+    "Humanities-led AI implementation",
+    "Journalism × AI",
+  ],
+  knowsLanguage: ["zh-Hant", "en"],
+  nationality: { "@type": "Country", name: "Taiwan" },
+  url: homeUrl,
+  image: `${siteOrigin}${baseUrl}images/profile/sofia.png`,
+  sameAs: [
+    "https://tw.linkedin.com/in/sofia-yan-b6318a31",
+    "https://x.com/sofia_numbers",
+    "https://www.youtube.com/@kekeAIShorts",
+    "https://www.crunchbase.com/person/sofia-yan",
+    "https://theorg.com/org/numbers-protocol/org-chart/sofia-yan",
+  ],
+};
+
+// Organization schema — Numbers Protocol (mentioned alongside)
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Numbers Protocol",
+  alternateName: "主張數據股份有限公司",
+  url: "https://www.numbersprotocol.io",
+  logo: "https://www.numbersprotocol.io/og-image.png",
+  description:
+    "Numbers Protocol builds provenance infrastructure for the AI agentic economy. Tagline: Human Truth, Machine Proof. C2PA member; cited by NIST AI Risk Management Framework; co-designed ERC-7053 and ERC-7517 Ethereum standards.",
+  foundingDate: "2019",
+  founder: { "@type": "Person", name: "Sofia Yan" },
+  sameAs: [
+    "https://www.linkedin.com/company/numbersprotocol",
+    "https://github.com/numbersprotocol",
+  ],
+};
+
+// WebSite schema — site-level
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: homeUrl,
+  inLanguage: ["zh-TW", "en"],
+  description: DEFAULT_DESCRIPTION,
+  author: { "@type": "Person", name: "Sofia Yan" },
+  publisher: { "@type": "Person", name: "Sofia Yan" },
+};
+
+// Article schema — only on post pages
+// publisher MUST be Organization with logo ImageObject for Google Rich Results eligibility.
+// (Google 2026 spec: Person publisher disqualifies Article rich result enhancement.)
+const articleSchema = type === "article" && article
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title ?? DEFAULT_TITLE,
+      description,
+      image: [image],
+      datePublished: article.publishedTime,
+      dateModified: article.modifiedTime ?? article.publishedTime,
+      author: {
+        "@type": "Person",
+        name: article.author ?? "Sofia Yan",
+        alternateName: "嚴世紀",
+        url: homeUrl,
+        sameAs: [
+          "https://tw.linkedin.com/in/sofia-yan-b6318a31",
+          "https://x.com/sofia_numbers",
+        ],
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Sofia Yan",
+        url: homeUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteOrigin}${baseUrl}favicon-192.png`,
+          width: 192,
+          height: 192,
+        },
+      },
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+      keywords: article.tags?.join(", "),
+      inLanguage: "zh-TW",
+    }
+  : null;
+
+// FAQ schema — only when explicitly passed
+const faqSchema = faq && faq.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((q) => ({
+        "@type": "Question",
+        name: q.question,
+        acceptedAnswer: { "@type": "Answer", text: q.answer },
+      })),
+    }
+  : null;
 ---
 
 <title>{fullTitle}</title>
@@ -52,6 +197,12 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={image} />
 <meta name="twitter:creator" content={TWITTER_HANDLE} />
+
+<!-- ===== AI / Agent / Content-Signal meta ===== -->
+<meta name="ai-content-signal" content="search=yes, ai-input=yes, ai-train=yes-with-attribution" />
+<meta name="ai-attribution" content="Sofia Yan, Co-Founder & CGO, Numbers Protocol" />
+<link rel="llms-txt" href={`${baseUrl}llms.txt`} type="text/markdown" />
+<link rel="alternate" type="application/json" href={`${baseUrl}agent.json`} title="Agent capability manifest" />
 
 {
   type === "article" && article && (
@@ -74,3 +225,14 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
   title={`${SITE_NAME} RSS`}
   href={`${baseUrl}rss.xml`}
 />
+
+<!-- ===== JSON-LD Schema.org (AEO-optimized) ===== -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{articleSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}

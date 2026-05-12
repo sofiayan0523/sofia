@@ -1,0 +1,55 @@
+# Workspace Context
+
+<!-- This file is auto-maintained. The Repositories section is refreshed -->
+<!-- by the system. The AI should maintain Environment & Key Discoveries. -->
+
+**Workspace root (absolute path):** `/home/workspaces/conversations/dde81e9e-f3b7-488e-9b43-6d1beaef34ef`
+
+## Repositories
+
+- **`personal-auto/`** — Branch: `omni/dde81e9e/personal-auto`, Remote: `sofiayan0523/personal-auto`
+
+- **`sofia-s-blog/`** — Branch: `omni/dde81e9e/sofia-s-blog`, Remote: `sofiayan0523/sofia-s-blog`
+  - **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+
+## Environment & Tools
+
+_Not yet documented. The AI will populate this as it discovers the environment._
+
+## Installed Skills
+
+- **`aeo-assessment`** (system)
+- **`agent-readiness-generator`** (system)
+- **`ai-bot-traffic`** (system)
+- **`google-ads`** (system)
+- **`google-workspace`** (system)
+- **`meta-ads`** (system)
+- **`morning-brief`** (space)
+- **`ms-office-suite`** (system)
+- **`omni-help`** (system)
+- **`skill-creator`** (system)
+- **`z-sync`** (system)
+- **`z-ticket-check`** (system)
+
+## Key Discoveries
+
+- **`sofia-persona.md`** (workspace root) — Definitive persona spec for Sofia Yan content generation. Use as system prompt whenever drafting LinkedIn / FB / Medium / talks / scripts in her voice. Built from her own AI Twin brief + 2024–25 FB posts + 2020 Medium long-form + verified public credentials. Contains: identity & self-labels, career & education (NTUE → NCCU 華語教學 MS → DT42 → Numbers), Numbers Protocol context, 5 content pillars, three-register writing system (FB 雜記 / Medium 論述 / how-to), 12 signature rhetorical moves, bilingual rules (English terms裸用、never translate), permanent analogy library (16 entries), hook patterns, NEVER-do list, calibration examples.
+- **Important correction recorded in persona**: SXSW 2023 Pitch was delivered by **Tammy Yang** (CEO), not Sofia — always frame as team win, not personal stage moment.
+- Original source material for persona lives in `.omni/uploads/Sofia Yan AI Twin.txt` and `.omni/uploads/sofia.txt`. Update `sofia-persona.md` directly when adding new voice samples; do not maintain parallel briefs.
+- **`Sofia Content Queue` Google Sheet** (created Iter 3, 2026-05-12) — id `1LcOHbqs3frVoCZglYD9NbMLPmQQ6UueLQgjjQS5s2cE` ([open](https://docs.google.com/spreadsheets/d/1LcOHbqs3frVoCZglYD9NbMLPmQQ6UueLQgjjQS5s2cE/edit)). The single workspace for all Sofia's content (per plan.md §3). 5 tabs: Queue (12 cols), Published (14 cols), Trend Research (8 cols), Brand Knowledge (40 rows frozen v1.0 from sofia-persona.md), KPI (15 cols). Shared writer with sofia@numbersprotocol.io. When updating `sofia-persona.md`, also resync Brand Knowledge tab (TKT-010 reminder).
+- **P1 progress as of Iter 3 / 2026-05-12**: AEO foundation deployed (`llms.txt`, `agent.json` + `.well-known/agent.json` mirror, robots.txt updated, Schema.org 5 JSON-LD types in `SEO.astro`, Schema publisher upgraded to Organization with logo ImageObject), `/speaker` landing v0.1 with Sofia signature moves, `/about` enhanced with credentials section, `docs/utm-convention.md` documented, `scripts/validate-aeo-files.mjs` 12 checks all green, Content Queue Sheet established. plan.md §5.1.A 8/8 complete; §5.1.B 4/7 complete (Sheet built, Brand Knowledge frozen, headers set, demo row; remaining: 4 daily crons + first trend research run + retro HTML template — all targeted for Iter 4-5).
+- **Sofia nudge email** drafted as gws gmail draft `r8559790675076050322` — 3 yes/no questions unblocking TKT-001/002/003. Sofia just needs to open Gmail Drafts and Send.
+- **Iter 5 finalization (2026-05-12)**: 5 cron prompts archived at `docs/schedules/01-05*.md` (Trend Research 06:00, Content Generation 06:30, Daily Reminder 08:00, Engagement Tracker 09:00, Weekly Retro Fri 18:00 Asia/Taipei) — all paused due to TKT-011 (`mcp__numbers__schedule_create` backend ScheduleStore bug). Once fixed, re-invoke `schedule_create` with these 5 prompts. Weekly retro HTML template at `reports/week-template.html` (self-contained Tailwind CDN + Chart.js v4 CDN, 6 charts incl. AEO heatmap and Sofia time gauge, fully placeholder-driven for string templating).
+- **P1 D1 final completion status**: §5.1.A 8/8 ✅ · §5.1.B 5/7 (Sheet built ✅, Brand Knowledge frozen ✅, schedule prompts archived ✅ but cron creation BLOCKED, retro template ✅ but not wired to schedule yet). Conditional on TKT-011 fix to fully activate automation.
+- **Sofia answered TKT nudge (2026-05-12 15:36+0800)**: Q1=A (use `sofia.numbersprotocol.io` Numbers DNS subdomain), Q2=A (`@sofia_numbers` is Sofia's personal X account), Q3=在 (CAPTURE_TOKEN exists). TKT-003 & TKT-004 closed. TKT-002 partial-closed pending DNS step (new TKT-012).
+- **Custom domain switchover staging (Loop2 Iter1)**: `sofia-s-blog/public/CNAME.pending` contains `sofia.numbersprotocol.io` (not yet active to avoid breaking github.io while DNS pending). `sofia-s-blog/scripts/switchover-domain.mjs` will activate CNAME + patch astro.config (site/base) + replace all hard-coded URLs in llms.txt / agent.json / .well-known/agent.json / robots.txt in one shot. Dry-run verified all transforms hit (CNAME rename + 2 astro.config + 1 llms + 1 agent + 1 well-known + 2 robots). Trigger condition: Sofia/DevOps adds DNS CNAME `sofia.numbersprotocol.io → sofiayan0523.github.io`, then says "DNS done", then Omni runs `node scripts/switchover-domain.mjs`.
+- **Pillar long-form complete (Loop2 Iter2)**: `sofia-s-blog/src/content/posts/humanities-ai-expert.mdx` (~7613 chars). 7 H2 / 6 H3 / 5-Q FAQPage JSON-LD. Sofia voice elements: 8%/92% framework × 16, AI coworker names × 6, A vs B vs C trichotomy, parenthetical snark, From-to shift. Numbers entity graph: TAEA ×1, Omni ×2, C2PA ×1, ERC-7053 ×1. Speaker proof: SXSW (team), UNICRI, GNI, APJF 2025, NTU TEC. Evaluator caught 3 TAE-AI red lines — all fixed (no fake "30+ companies" stat, no "wrote 30 blogs" temporal lie, no Tammy personality invention). CTA strengthened.
+- **Pillar repurpose pipeline first run (Loop2 Iter3)**: Pillar generated 2 derivatives in Sofia Content Queue Sheet — `Q-2026-05-13-LI-001` (LinkedIn-LF EN, ~245 words, status Ready) and `Q-2026-05-13-FB-001` (FB-Seed, 3 hooks + writing instructions, status Seed). Both backed up to workspace `drafts/linkedin/` and `drafts/fb/`. Daily reminder draft `r-1337036652316495559` sent to Sofia (manual stand-in until TKT-011 cron unblocked).
+- **Trend Research + Content Generation manual pipeline run (Loop2 Iter4)**: WebSearch covered 5 query patterns (AI agent / Anthropic-Claude / Content Provenance / EU AI Act / AI journalism), surfaced 4 strongest topics for 2026-05-12 24-48h window — EU AI Act Article 50 (Aug 2026 enforce), ServiceNow Action Fabric+MCP, Claude Opus 4.7 Dreaming memory, Publishers v Meta + NYT/OpenAI lawsuits. Each generated LinkedIn-Commentary (~250-290 words, bold unicode hook, Sofia signature moves) + X tweet (<280 chars). 8 rows appended to Queue tab (`A2:L9`), distributed 5/14-5/16 with morning/afternoon slots. 7 rows Ready, 1 row (Q-2026-05-16-LI-005 Publishers vs Meta) flagged in sofia_note for Microsoft-partner messaging review. Trend Research tab now has 4 rows with full source provenance and Sofia angle proposals for trace-back audit. 3-day batch reminder email draft `r4557918966016171481`.
+- **AEO Baseline 28-Cell established (Loop2 Iter5)**: `docs/aeo-baseline.md` records pre-Pillar-propagation baseline measured 2026-05-12. WebSearch column complete: 1/7 hits = 14% (only Q5 brand-name "Numbers Protocol founder Sofia Yan" rings strong via Crunchbase/TheOrg/SafetyDetectives/LinkedIn). Other 6 queries return zero Sofia/Numbers mentions; competitors include 中國 OSS project `同事.skill` (Q4), Japanese vibe coding tutorials (Q6), big-4 consultancies (Q2). Perplexity / ChatGPT / Claude / Gemini columns pending (21 cells) — Sofia to manually probe Fridays. KPI tab row added for 5/12 baseline. New TKT-013 surfaces "AI 同事" brand term loss to `同事.skill` — proposes Sofia AI Coworker Methodology dedicated landing page. P3 target: 50% hit rate (14/28 cells).
+- **Cluster A2 long-form complete (Loop2 Iter6)**: `sofia-s-blog/src/content/posts/ai-anxiety-survival-guide.mdx` (5631 chars). Continues Pillar's 8%/92% framework with practical "Find Your 8%" 3-question diagnostic. 7 H2 / 7 H3 / 5-Q FAQPage JSON-LD. Higher snark density than Pillar (4 markers vs 3 at similar length). Single TAE-AI edit pre-publish (30+ repos → 幾十個 repo). Slugged `ai-anxiety-survival-guide`. Internal link back to Pillar. Two derivatives in Queue: Q-2026-05-17-LI-006 (LinkedIn-LF EN, ~280 words "right alarm wrong target") + Q-2026-05-17-FB-002 (FB-Seed). Schedule 5/17 09:00 with 4-day gap from Pillar to let initial traffic stabilize.
+- **AI Coworker Methodology landing page launched (Loop2 Iter7)**: `sofia-s-blog/src/pages/ai-coworker-methodology.astro` (20156 chars, 9 sections, dual-lang inline zh-TW + en). Resolves TKT-013 (Sofia losing "AI 同事" brand term to OSS project 同事.skill). Contains: 6 AI coworkers full spec (Amy/Jordan/Clara/小鳳/阿張/老科 each with role + scope + not-allowed), 5-step adoption playbook, 3 common failure modes, TAEA framework injection (×9 mentions), FAQPage JSON-LD via faq prop (5 Q&As), CTAs to /speaker + Pillar + A2 + Omni. llms.txt promoted methodology page to top Authoritative topic. agent.json added new `methodology_reference` capability endpoint. .well-known mirror byte-identical. validate-aeo-files.mjs still 12/12 green. Slug `/ai-coworker-methodology` directly competes for "AI 同事 方法論" + "AI Coworker Methodology" Google + LLM citation queries.
+- **TKT-001 resolved + Speaker page receipts upgrade (Loop2 Iter7+)**: Sofia provided Drive folder `1IeAN8f8Eva_MIKAx_OXYJZbQHoRFddnE` containing 10 speaker assets (6 talk decks/courses + 3 docs: AI 顧問學經歷, AAJA webinar script, Gen AI 小聚 講稿 + 1 inspirational deck). Mining the 3 Google Docs surfaced ★ HIGH-VALUE VERIFIED RECEIPTS Sofia previously hadn't given: (1) Sofia 帶領 Numbers community 1K → 130K (+12,900% growth), (2) Numbers platform spans 190 countries with 6B monthly traffic, (3) 2025 Q1 全面 AI 導入結果: product validation cycle → 24h, annual SaaS spend -60%, full-time human staff 4 + 15 online AI coworkers + 8 intern AI, (4) international speaking history: PL Summit 23 (Istanbul) / London 2023 / Geneva 2024 / AAJA webinar host "Surviving the AI Flood", (5) international media: Politico, Tech Company News, Meet Global, Asian News International, (6) 6 verifiable recent talk titles (e.g. "重建 AI 時代的信任", "Protecting Creativity in the Age of AI", "AI 賦能顧問業 v3", 經理人課程, Gen AI 小聚). Speaker page got 3 major upgrades: stronger micro-receipts strip, expanded past-speaking list (7 → 15+ items split across 2 columns), new "真實的 receipts" section showing operational results. Brand Knowledge Sheet appended 8 rows including NEVER_claim_v2 warning (don't attribute 12,900% to Sofia individually — it's her leadership of community growth at Numbers).
+
+---
+_Last system refresh: 2026-05-12 09:45 UTC_

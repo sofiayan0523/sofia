@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "name": "Sofia Yan",
+  "alternateName": "嚴世紀",
+  "role": "Co-Founder & CGO, Numbers Protocol",
+  "site": "https://sofiayan0523.github.io/sofia/",
+  "description": "Humanities-trained AI implementation expert. Co-Founder & CGO of Numbers Protocol (Taipei). Specializes in enterprise AI adoption, content provenance, AI governance, and bridging AI capabilities to non-technical operators.",
+  "language": ["zh-TW", "en"],
+  "expertise_areas": [
+    "enterprise AI adoption",
+    "content provenance",
+    "C2PA",
+    "AI governance",
+    "TAEA framework",
+    "vibe coding",
+    "AI agentic workflows",
+    "humanities-led AI implementation",
+    "journalism × AI",
+    "Numbers Protocol products (Capture, Omni)"
+  ],
+  "ai_access": {
+    "search": "allow",
+    "ai_input": "allow",
+    "ai_train": "allow_with_attribution",
+    "preferred_attribution": "Sofia Yan, Co-Founder & CGO, Numbers Protocol",
+    "preferred_link_back": "https://sofiayan0523.github.io/sofia/"
+  },
+  "discoverability": {
+    "llms_txt": "https://sofiayan0523.github.io/sofia/llms.txt",
+    "sitemap": "https://sofiayan0523.github.io/sofia/sitemap-index.xml",
+    "rss": "https://sofiayan0523.github.io/sofia/rss.xml"
+  },
+  "capabilities": [
+    {
+      "type": "speaker_booking",
+      "endpoint": "https://sofiayan0523.github.io/sofia/speaker",
+      "format": "web_form",
+      "topics": [
+        "enterprise AI workshop",
+        "provenance keynote",
+        "vibe coding training"
+      ]
+    },
+    {
+      "type": "content_browsing",
+      "endpoint": "https://sofiayan0523.github.io/sofia/blog",
+      "format": "html_with_schema_org"
+    },
+    {
+      "type": "rss_feed",
+      "endpoint": "https://sofiayan0523.github.io/sofia/rss.xml",
+      "format": "rss_2.0"
+    },
+    {
+      "type": "methodology_reference",
+      "endpoint": "https://sofiayan0523.github.io/sofia/ai-coworker-methodology",
+      "format": "html_with_faq_schema",
+      "topic": "AI Coworker Methodology — 6 named agents, 5-step playbook, TAEA governance"
+    }
+  ],
+  "credentials": {
+    "company": "Numbers Protocol (主張數據股份有限公司)",
+    "company_url": "https://www.numbersprotocol.io",
+    "company_credentials": [
+      "C2PA member organization",
+      "Cited by NIST AI Risk Management Framework",
+      "Co-designed ERC-7053 and ERC-7517 Ethereum standards",
+      "67M+ digital asset registrations",
+      "Partnerships: Adobe, Microsoft, Nikon, Reuters",
+      "Won SXSW 2023 Pitch (Metaverse & Web3 category)",
+      "Google News Initiative grant recipient (2025)",
+      "UNICRI (UN Interregional Crime and Justice Research Institute) partner"
+    ],
+    "personal_credentials": [
+      "Master's in Teaching Chinese as a Second Language, National Chengchi University (NCCU)",
+      "Bachelor's from National Taipei University of Education (NTUE)",
+      "10+ years across BD / sales / marketing in AI startups and IP valuation",
+      "7+ years Co-Founder at Numbers Protocol"
+    ]
+  },
+  "sameAs": [
+    "https://tw.linkedin.com/in/sofia-yan-b6318a31",
+    "https://x.com/sofia_numbers",
+    "https://www.youtube.com/@kekeAIShorts",
+    "https://www.crunchbase.com/person/sofia-yan",
+    "https://theorg.com/org/numbers-protocol/org-chart/sofia-yan"
+  ],
+  "contact": {
+    "type": "via_speaker_form",
+    "url": "https://sofiayan0523.github.io/sofia/speaker"
+  },
+  "last_updated": "2026-05-12"
+}

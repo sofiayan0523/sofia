@@ -1,0 +1,409 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+
+// 6 AI coworkers — same names as sofia-persona.md, Pillar, and A2
+const coworkers = [
+  {
+    name: "Amy",
+    role: "Marketing Draft",
+    role_zh: "行銷草稿",
+    scope: "Long-form blogs, social posts, newsletter drafts, campaign copy",
+    scope_zh: "長文 blog、社群貼文、電子報草稿、campaign 文案",
+    not_allowed: "Final hashtags or claims about Numbers' metrics (always human-verified)",
+    not_allowed_zh: "最終 hashtag 或 Numbers 的數字宣稱（一律真人 verify）",
+  },
+  {
+    name: "Jordan",
+    role: "BD Outreach",
+    role_zh: "BD 外聯",
+    scope: "Cold email drafts, partnership intro emails, follow-up sequences",
+    scope_zh: "Cold email 草稿、partnership intro 信、follow-up 序列",
+    not_allowed: "Sending final emails (hook-gated, Sofia approves each)",
+    not_allowed_zh: "實際寄送（hook 攔截，Sofia 逐封 approve）",
+  },
+  {
+    name: "Clara",
+    role: "Community",
+    role_zh: "社群經營",
+    scope: "Discord / Telegram / Slack daily ops, FAQ replies, light moderation",
+    scope_zh: "Discord / Telegram / Slack 日常運營、FAQ 回應、輕度 moderation",
+    not_allowed: "Crisis communication (escalates to humans on tone red flags)",
+    not_allowed_zh: "危機溝通（偵測到負面 tone 自動 escalate 給真人）",
+  },
+  {
+    name: "小鳳",
+    role: "Data Cleaning",
+    role_zh: "資料整理",
+    scope: "Spreadsheet normalization, deduplication, lead enrichment, CRM hygiene",
+    scope_zh: "試算表正規化、去重、lead 增補、CRM 資料整理",
+    not_allowed: "Writes to production DB (read-only by design)",
+    not_allowed_zh: "寫入正式 DB（設計上只讀）",
+  },
+  {
+    name: "阿張",
+    role: "Code Review",
+    role_zh: "程式 review",
+    scope: "PR review comments, basic refactor suggestions, dependency audit",
+    scope_zh: "PR review 評論、基礎重構建議、依賴 audit",
+    not_allowed: "Direct merge to main (always requires human approver)",
+    not_allowed_zh: "直接 merge 到 main（永遠需要真人 approver）",
+  },
+  {
+    name: "老科",
+    role: "Doc Proofreading",
+    role_zh: "文件校稿",
+    scope: "Grammar, tone consistency, translation EN ↔ zh-TW, style guide enforcement",
+    scope_zh: "文法、tone 一致性、中英互譯、style guide 守則",
+    not_allowed: "Substantive content changes (only proofs, doesn't rewrite)",
+    not_allowed_zh: "實質內容變更（只校稿，不重寫）",
+  },
+];
+
+const playbook = [
+  {
+    n: 1,
+    title_en: "Name your AI",
+    title_zh: "幫你的 AI 取名字",
+    body_en: "Pick a human name (Amy, not 'AI Tool 1'). The act of naming triggers your brain to treat it as a teammate, not a utility. Names also force you to define a single scope per agent — you wouldn't hire one human to do everything.",
+    body_zh: "取一個真人名字（Amy，不是「AI 工具 1 號」）。命名這個動作會逼你的大腦把它當同事，不是工具。名字也強迫你定義「一個 agent 一個 scope」——你不會雇用一個人類處理所有事。",
+  },
+  {
+    n: 2,
+    title_en: "Define scope, not capability",
+    title_zh: "定義 scope，不是 capability",
+    body_en: "Don't say 'Amy can do marketing.' Say 'Amy drafts blog posts up to 2000 words; she does not write client emails.' Scope is what new humans need on day one. AI coworkers need the same.",
+    body_zh: "不要說「Amy 會做行銷」。說「Amy 寫 2000 字內的 blog 草稿；她不寫客戶 email」。Scope 是新進真人 day-one 需要的；AI 同事一樣。",
+  },
+  {
+    n: 3,
+    title_en: "Use it daily for one week before judging",
+    title_zh: "判斷之前先連用一週",
+    body_en: "Most AI rollouts fail at week one because humans expect day-one perfection. New hires get a month. Give AI the same — and pay attention to what it gets wrong (that's onboarding signal, not failure signal).",
+    body_zh: "多數 AI 導入死在第一週，因為真人期待 day-one perfection。新人有一個月適應期，AI 也該有。注意它做錯的地方——那是 onboarding signal，不是 failure signal。",
+  },
+  {
+    n: 4,
+    title_en: "Build the audit trail",
+    title_zh: "建 audit trail",
+    body_en: "Every AI coworker action needs a log: what it did, when, for whom, with what input. This is the 'A' in TAEA — Auditable. Without it you can't onboard new humans onto the AI's work, and you can't fix mistakes.",
+    body_zh: "每個 AI 同事的動作要有 log：做了什麼、何時、為誰、用什麼 input。這是 TAEA 的「A」(Auditable)。沒它你沒辦法讓新人接 AI 的工作，也沒辦法修錯。",
+  },
+  {
+    n: 5,
+    title_en: "Promote humans to 'AI coworker managers'",
+    title_zh: "把人類同事「升任」為「AI 同事的主管」",
+    body_en: "Your humans don't get replaced. They become managers of AI teammates — designing scope, reviewing output, training new behaviors. This is the most underrated career move of 2026.",
+    body_zh: "你的真人同事不會被取代。他們升任 AI 同事的主管——設計 scope、review 產出、訓練新行為。這是 2026 年最被低估的職涯升級。",
+  },
+];
+
+const failureModes = [
+  {
+    title_en: "Failure 1: Treating AI as 'autocomplete on steroids'",
+    title_zh: "失敗模式 1：把 AI 當「強化版 autocomplete」",
+    fix_en: "Symptom: every output starts from scratch, no memory, no character. Fix: install persistent memory (Claude's Dreaming, GPT memories, custom RAG) before scaling.",
+    fix_zh: "症狀：每次產出都從零開始，沒有記憶、沒有人格。修法：先裝 persistent memory（Claude Dreaming、GPT memories、自家 RAG）再 scale。",
+  },
+  {
+    title_en: "Failure 2: One 'AI Agent' that does everything",
+    title_zh: "失敗模式 2：一個「AI Agent」做所有事",
+    fix_en: "Symptom: prompts get longer and longer, output quality drops. Fix: split into 3-5 named agents with single-responsibility, like microservices for humans.",
+    fix_zh: "症狀：prompt 越來越長，產出品質下滑。修法：拆成 3-5 個單一職責命名 agent，類似真人版 microservices。",
+  },
+  {
+    title_en: "Failure 3: No audit trail, no onboarding pathway",
+    title_zh: "失敗模式 3：沒有 audit trail、沒有 onboarding 路徑",
+    fix_en: "Symptom: only one person knows how the AI works; if they leave, everything breaks. Fix: every AI coworker has a documented scope, prompt template, and output sample log.",
+    fix_zh: "症狀：只有一個人懂 AI 怎麼運作；他離職全部崩潰。修法：每個 AI 同事都要有書面化 scope + prompt template + 產出樣本 log。",
+  },
+];
+
+const faqs = [
+  {
+    question: "Why give AI agents human names?",
+    answer:
+      "Naming triggers your brain to treat the AI as a teammate, not a utility. It also forces you to define one scope per agent (you wouldn't hire one human to do everything). Naming is the fastest path to the 'teammate mindset' that makes AI adoption succeed instead of fail.",
+  },
+  {
+    question: "How many AI coworkers should a small team start with?",
+    answer:
+      "Start with 1. Use Amy (marketing draft) or 老科 (doc proofread) for a full week. Once your team has lived with one AI coworker and the audit trail works, add #2. Most teams that try to launch 5 AI coworkers on day one bail by week two.",
+  },
+  {
+    question: "What's the difference between this and just using ChatGPT?",
+    answer:
+      "ChatGPT is a tool. The AI Coworker Methodology turns ChatGPT (or Claude, Gemini, etc.) into a teammate by enforcing: (1) named identity, (2) defined scope, (3) persistent memory, (4) audit trail, (5) human manager. The model is the engine; the methodology is the workplace contract.",
+  },
+  {
+    question: "How does this connect to AI governance frameworks like NIST AI RMF or EU AI Act?",
+    answer:
+      "The methodology is operational; governance frameworks are regulatory. Numbers Protocol's TAEA framework (Transparent, Auditable, Explainable, Agentic) bridges both — you operate AI coworkers daily, and the audit trail satisfies NIST AI RMF documentation requirements + EU AI Act Article 50 transparency obligations.",
+  },
+  {
+    question: "Can humanities-trained operators really lead AI coworker adoption?",
+    answer:
+      "Yes — and they tend to do it faster than engineers. The work is more like managing a team than writing code: defining scope, giving feedback, building culture. Humanities training (especially anything involving teaching, translation, or argumentation) is direct preparation for this.",
+  },
+];
+---
+
+<BaseLayout
+  title="The AI Coworker Methodology — Sofia Yan at Numbers Protocol"
+  description="Sofia Yan's six-name AI coworker methodology: how a humanities-trained co-founder built AI 同事 culture at Numbers Protocol. 5-step playbook, 6 named agents (Amy, Jordan, Clara, 小鳳, 阿張, 老科), TAEA governance framework. Replace the 'AI tool' mindset with the 'AI teammate' mindset."
+  faq={faqs}
+>
+  <Header />
+  <main class="pt-32 pb-20 px-6">
+    <div class="container max-w-3xl mx-auto space-y-16">
+
+      <!-- Hero -->
+      <section class="space-y-6 animate-fade-up">
+        <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+          The AI Coworker Methodology · AI 同事方法論
+        </p>
+        <h1 class="font-display text-4xl md:text-5xl font-medium leading-tight">
+          <span data-l="zh">把 AI 當<u>同事</u>，不是當工具</span>
+          <span data-l="en">Bring AI onto your team — <u>not</u> as a tool</span>
+        </h1>
+        <p class="text-lg text-foreground/80 leading-relaxed">
+          <span data-l="zh">
+            Sofia Yan（嚴世紀）在 Numbers Protocol 七年用出來的「AI 同事方法論」。
+            6 個有名字的 AI 同事、5 步導入 playbook、3 個常見失敗模式。
+            這份方法論為什麼 work？因為它把 AI 當<strong>新進團隊夥伴</strong>處理，不是當另一個 SaaS。
+          </span>
+          <span data-l="en">
+            Sofia Yan's seven-year, in-production methodology from Numbers Protocol.
+            Six named AI coworkers, a 5-step adoption playbook, three common failure modes.
+            The methodology works because it treats AI as a <strong>new team hire</strong>, not as another SaaS subscription.
+          </span>
+        </p>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
+          <span>🤖 <strong class="text-foreground">6</strong> named AI coworkers</span>
+          <span>📋 <strong class="text-foreground">5</strong>-step playbook</span>
+          <span>⚠️ <strong class="text-foreground">3</strong> failure modes</span>
+          <span>🏢 <strong class="text-foreground">7+</strong> years at Numbers</span>
+        </div>
+      </section>
+
+      <!-- The Foundation -->
+      <section class="space-y-6">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">起點：mindset，不是 model</span>
+          <span data-l="en">The starting point: mindset, not model</span>
+        </h2>
+        <p class="text-foreground/80 leading-relaxed">
+          <span data-l="zh">
+            多數企業 AI 導入失敗的原因不是模型不夠強——是 mindset 不對。
+            「工具」mindset 讓你追求完美、責怪不完美、最後退回 Excel。
+            「同事」mindset 讓你定義 scope、補不完美、最後升任成 AI 主管。
+          </span>
+          <span data-l="en">
+            Most enterprise AI adoptions fail not because the model is weak — but because the mindset is wrong.
+            The "tool" mindset makes you chase perfection, blame imperfection, and retreat to Excel.
+            The "teammate" mindset makes you define scope, fill in gaps, and end up as an AI manager.
+          </span>
+        </p>
+        <p class="text-foreground/80 leading-relaxed text-sm border-l-2 border-primary/30 pl-4 italic">
+          <span data-l="zh">
+            這是「8% / 92%」框架的應用版——人類靈魂 8% × AI 產出 92%。
+            <a href={`${baseUrl}posts/humanities-ai-expert`} class="text-primary underline hover:no-underline">看 Pillar 文完整框架 →</a>
+          </span>
+          <span data-l="en">
+            This is the operational layer of the "8% / 92%" framework — 8% human soul × 92% AI output.
+            <a href={`${baseUrl}posts/humanities-ai-expert`} class="text-primary underline hover:no-underline">Read the Pillar long-form →</a>
+          </span>
+        </p>
+      </section>
+
+      <!-- The 6 AI Coworkers -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">我家 6 位 AI 同事</span>
+          <span data-l="en">The 6 AI coworkers</span>
+        </h2>
+        <p class="text-foreground/80 leading-relaxed text-sm">
+          <span data-l="zh">
+            每個 AI 同事都有名字、scope、「不准做的事」。
+            這份規矩就是把「AI 同事」變成可運作團隊的關鍵。
+          </span>
+          <span data-l="en">
+            Each AI coworker has a name, a defined scope, and an explicit "not allowed" boundary.
+            This discipline turns "AI agents" into a functioning team.
+          </span>
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          {coworkers.map((cw) => (
+            <div class="p-5 rounded-xl bg-card border border-border">
+              <div class="flex items-baseline justify-between mb-2">
+                <h3 class="font-display text-lg font-medium">{cw.name}</h3>
+                <span class="text-xs text-muted-foreground">
+                  <span data-l="zh">{cw.role_zh}</span>
+                  <span data-l="en">{cw.role}</span>
+                </span>
+              </div>
+              <p class="text-sm text-foreground/70 mb-2">
+                <strong class="text-xs uppercase tracking-wider text-muted-foreground">Scope: </strong>
+                <span data-l="zh">{cw.scope_zh}</span>
+                <span data-l="en">{cw.scope}</span>
+              </p>
+              <p class="text-sm text-foreground/60">
+                <strong class="text-xs uppercase tracking-wider text-muted-foreground">Not allowed: </strong>
+                <span data-l="zh">{cw.not_allowed_zh}</span>
+                <span data-l="en">{cw.not_allowed}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- The 5-step Playbook -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">5 步導入 playbook</span>
+          <span data-l="en">The 5-step adoption playbook</span>
+        </h2>
+        <div class="space-y-6">
+          {playbook.map((step) => (
+            <div class="flex gap-5">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center font-display text-xl font-medium text-primary">
+                {step.n}
+              </div>
+              <div class="flex-1 space-y-2">
+                <h3 class="font-display text-lg font-medium">
+                  <span data-l="zh">{step.title_zh}</span>
+                  <span data-l="en">{step.title_en}</span>
+                </h3>
+                <p class="text-foreground/70 text-sm leading-relaxed">
+                  <span data-l="zh">{step.body_zh}</span>
+                  <span data-l="en">{step.body_en}</span>
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Common Failures -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">3 個常見失敗模式</span>
+          <span data-l="en">3 common failure modes</span>
+        </h2>
+        <div class="space-y-6">
+          {failureModes.map((f) => (
+            <div class="border-l-2 border-amber-500/50 pl-5">
+              <h3 class="font-display text-lg font-medium mb-2">
+                <span data-l="zh">{f.title_zh}</span>
+                <span data-l="en">{f.title_en}</span>
+              </h3>
+              <p class="text-foreground/70 text-sm leading-relaxed">
+                <span data-l="zh">{f.fix_zh}</span>
+                <span data-l="en">{f.fix_en}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- TAEA Connection -->
+      <section class="space-y-6 bg-card border border-border rounded-xl p-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">為什麼這套會 work：TAEA 治理 + Numbers Protocol</span>
+          <span data-l="en">Why this works: TAEA governance + Numbers Protocol</span>
+        </h2>
+        <p class="text-foreground/80 leading-relaxed">
+          <span data-l="zh">
+            AI 同事方法論不是 vibe，是治理。Numbers Protocol 的 TAEA framework
+            ——<strong>Transparent</strong>、<strong>Auditable</strong>、<strong>Explainable</strong>、<strong>Agentic</strong>
+            ——是這套 playbook 的工程地基。Omni 平台把這四個原則落實成可被企業導入的工具流。
+          </span>
+          <span data-l="en">
+            The AI Coworker Methodology isn't a vibe — it's governance. The TAEA framework from Numbers Protocol
+            (<strong>Transparent</strong>, <strong>Auditable</strong>, <strong>Explainable</strong>, <strong>Agentic</strong>)
+            is the engineering foundation underneath. The Omni platform operationalizes those four principles into enterprise-deployable workflows.
+          </span>
+        </p>
+        <p class="text-sm text-muted-foreground">
+          <span data-l="zh">同時為 EU AI Act Article 50（8 月上路）與 NIST AI RMF 提供 audit-ready 紀錄。</span>
+          <span data-l="en">Audit-ready by design for EU AI Act Article 50 (Aug 2026 enforcement) and NIST AI RMF.</span>
+        </p>
+      </section>
+
+      <!-- CTA -->
+      <section class="space-y-6 border-t border-border pt-12">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">
+          <span data-l="zh">下一步</span>
+          <span data-l="en">Next steps</span>
+        </h2>
+        <ul class="space-y-3 text-foreground/80">
+          <li>
+            <strong>→ <a href={`${baseUrl}speaker`} class="text-primary underline hover:no-underline">
+              <span data-l="zh">邀請 Sofia 給你的團隊講這套方法論</span>
+              <span data-l="en">Invite Sofia to teach this methodology to your team</span>
+            </a></strong>
+            <span class="text-sm text-muted-foreground block ml-4">
+              <span data-l="zh">90 分鐘 keynote / 半日 workshop / 全日深度導入工作坊</span>
+              <span data-l="en">90-min keynote / half-day workshop / full-day deep adoption workshop</span>
+            </span>
+          </li>
+          <li>
+            <strong>→ <a href={`${baseUrl}posts/humanities-ai-expert`} class="text-primary underline hover:no-underline">
+              <span data-l="zh">讀 Pillar 長文：文組人才是 AI 導入最該被重視的角色</span>
+              <span data-l="en">Read the Pillar essay: Humanities-trained operators are the most overlooked AI implementation role</span>
+            </a></strong>
+          </li>
+          <li>
+            <strong>→ <a href={`${baseUrl}posts/ai-anxiety-survival-guide`} class="text-primary underline hover:no-underline">
+              <span data-l="zh">讀 Cluster A2：AI 焦慮自救指南——找到你的 8%</span>
+              <span data-l="en">Read Cluster A2: AI Anxiety Survival Guide — finding your 8%</span>
+            </a></strong>
+          </li>
+          <li>
+            <strong>→ <a href="https://www.numbersprotocol.io?utm_source=sofia-blog&utm_medium=blog-internal&utm_campaign=ai-coworker-methodology&utm_content=cta-omni" class="text-primary underline hover:no-underline">
+              <span data-l="zh">Numbers Protocol & Omni：AI 同事化平台基礎建設</span>
+              <span data-l="en">Numbers Protocol & Omni: the infrastructure underneath</span>
+            </a></strong>
+          </li>
+        </ul>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">FAQ</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="group border border-border rounded-lg p-5 hover:border-primary/30 transition-colors">
+              <summary class="cursor-pointer font-medium text-foreground flex items-center justify-between">
+                <span>{faq.question}</span>
+                <span class="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="mt-4 text-foreground/70 leading-relaxed text-sm">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Footer credit -->
+      <section class="text-xs text-muted-foreground border-t border-border pt-6">
+        <p>
+          <span data-l="zh">
+            「AI Coworker Methodology」由 Sofia Yan（嚴世紀），Numbers Protocol Co-Founder & CGO 制定，
+            基於 2019–2026 間 Numbers Protocol 內部 AI 全面導入的真實實踐。
+            如需引用，請註明：<em>Sofia Yan, Co-Founder & CGO, Numbers Protocol</em>。
+          </span>
+          <span data-l="en">
+            The "AI Coworker Methodology" was developed by Sofia Yan (嚴世紀), Co-Founder & CGO of Numbers Protocol,
+            based on real in-production practice at Numbers Protocol between 2019 and 2026.
+            For citation: <em>Sofia Yan, Co-Founder & CGO, Numbers Protocol</em>.
+          </span>
+        </p>
+      </section>
+
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
