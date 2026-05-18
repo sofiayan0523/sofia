@@ -2,8 +2,8 @@
 // One-shot custom domain switchover. RUN ONLY AFTER DNS IS LIVE.
 //
 // Preconditions:
-//   1. DNS record CNAME sofia.numbersprotocol.io -> sofiayan0523.github.io is propagating
-//   2. dig +short sofia.numbersprotocol.io returns sofiayan0523.github.io
+//   1. DNS records for sofiayan.cc point to GitHub Pages IPs (see docs/dns-setup-sofiayan-cc.md)
+//   2. dig +short sofiayan.cc returns 185.199.108.153 (and 3 other GitHub Pages IPs)
 //
 // What this does:
 //   1. Renames public/CNAME.pending -> public/CNAME (activates GH Pages custom domain)
@@ -30,8 +30,8 @@ const dryRun = process.argv.includes("--dry-run");
 
 const OLD_BASE = "https://sofiayan0523.github.io/sofia/";
 const OLD_HOST = "sofiayan0523.github.io/sofia";  // without protocol, used in some places
-const NEW_BASE = "https://sofia.numbersprotocol.io/";
-const NEW_HOST = "sofia.numbersprotocol.io";
+const NEW_BASE = "https://sofiayan.cc/";
+const NEW_HOST = "sofiayan.cc";
 
 const log = (m) => console.error(`[switchover${dryRun ? " DRY-RUN" : ""}] ${m}`);
 
@@ -70,7 +70,7 @@ if (existsSync(pendingCname)) {
 
 // ---- 2. Patch astro.config.mjs ----
 patchFile("astro.config.mjs", [
-  { from: 'site: "https://sofiayan0523.github.io"', to: 'site: "https://sofia.numbersprotocol.io"' },
+  { from: 'site: "https://sofiayan0523.github.io"', to: 'site: "https://sofiayan.cc"' },
   { from: 'base: "/sofia"', to: 'base: "/"' },
 ]);
 
@@ -97,15 +97,18 @@ patchFile("public/robots.txt", [
 const marker = `# Custom Domain Switchover — completed
 
 - Date: ${new Date().toISOString()}
-- New site: https://sofia.numbersprotocol.io/
+- New site: https://sofiayan.cc/
 - Old: https://sofiayan0523.github.io/sofia/  (GH Pages will redirect to new)
 
 ## Post-switchover checklist
-- [ ] Confirm https://sofia.numbersprotocol.io/llms.txt resolves
-- [ ] Confirm https://sofia.numbersprotocol.io/agent.json resolves
+- [ ] Confirm https://sofiayan.cc/llms.txt resolves
+- [ ] Confirm https://sofiayan.cc/agent.json resolves
+- [ ] Confirm https://sofiayan.cc/.well-known/agent.json resolves
 - [ ] Re-submit sitemap to Google Search Console at new domain
 - [ ] Re-run AEO baseline 28-cell to compare hit rate
-- [ ] Update LinkedIn / X / FB / email-sig bio links to new URL
+- [ ] Update LinkedIn / X / Numbers Protocol page bio links to sofiayan.cc
+- [ ] Update Gmail signature
+- [ ] In Cloudflare: optionally enable Proxy (orange cloud) ONLY after HTTPS works on direct DNS
 `;
 const markerPath = resolve(ROOT, "../docs/switchover-completed.md");
 if (!dryRun) {

@@ -1,0 +1,247 @@
+---
+title: "為什麼 95% 企業 AI 導入會失敗？——MIT 2025 報告之外，文組視角的 5 個死亡螺旋"
+excerpt: "MIT 2025 NANDA 報告抓到一個刺耳的數字：95% 企業 AI pilot 看不出 ROI。MIT 把原因歸給「systems don't adapt」——技術正確但只說了一半。真正的根因更簡單：他們把 AI 當工具，不是當同事。這篇拆給你 5 個死亡螺旋，順便回答『那 5% 活下來的怎麼做？』"
+category: "ai-tools"
+tags:
+  - "ai-adoption"
+  - "enterprise-ai"
+  - "mit-study"
+  - "ai-coworkers"
+  - "failure-modes"
+  - "ai-mindset"
+coverImage: "/sofia/og-image.jpg"
+publishedAt: "2026-05-14T09:00:00+08:00"
+readTime: "11 min"
+draft: false
+---
+
+上個月跟一家上市櫃高科技公司的 CTO 喝咖啡。他開場第一句話：
+
+> 「Sofia，我們去年砸了預算導 AI，三個月後沒人在用。為什麼？」
+
+我問他：「導了什麼？」
+
+他說：「ChatGPT Enterprise、Copilot、一個內部 RAG，加總三個 tool。」
+
+我又問：「給誰用的？」
+
+他想了五秒：「⋯⋯就，給所有同事用啊。」
+
+我笑了（內心其實有點心疼 XD）。**他的問題本身就是答案**。
+
+---
+
+## MIT 2025 報告：95% 的企業 AI pilot 沒有 measurable ROI
+
+7 月 MIT NANDA 出了一份報告，叫 [《The GenAI Divide: State of AI in Business 2025》](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/)。樣本不小——52 個高階主管深訪、153 份問卷、300 個公開 AI 部署案例。
+
+報告開門見山一個結論：
+
+> **95% 的企業 AI pilot 看不到任何可衡量的 P&L 影響。**
+
+MIT 把原因歸給「systems don't adapt, don't retain feedback, don't integrate into workflows」——技術性的、政治正確的、誰看完都不會被冒犯的說法（這是 MIT consultant 體版本，可以理解 XD）。
+
+但我必須說一句不那麼禮貌的話：
+
+**MIT 抓到了正確的數字，給了半個錯的答案。**
+
+「Systems don't adapt」是症狀，不是根因。真正的根因更簡單，也更尷尬：
+
+**他們從一開始就把 AI 當工具，不是當同事。**
+
+如果你不信，往下讀 5 個我每週都在企業內訓現場看到的死亡螺旋。對號入座就知道你卡在哪。
+
+---
+
+## 死亡螺旋 #1：把 AI 當「外包顧問」買進來
+
+**症狀**：你公司買了 ChatGPT Enterprise / Claude for Work / Copilot 訂閱，發給所有員工。三個月後使用率 < 10%，主管問「為什麼大家不用 AI？」（然後決定再加買一個 SaaS 訂閱，期待這次會不一樣——不會的 XD）
+
+**為什麼失敗**：
+你買的不是 AI，是「Excel 那種 SaaS」。員工的潛意識訊號是「老闆又買了一個工具叫我用」——他們會用嗎？跟過去 10 年所有公司強推的工具一樣，**用三天就回到舊流程**。
+
+**修法**：
+別買 seat。**指派**。
+
+選一個團隊（≤ 5 人）、一個具體痛點（例如：客服回信佔走 40% 時間），然後**只給這個團隊一個 AI 工具 + 三週測試期**。三週後讓他們報告：哪裡省了時間、哪裡需要 fix、要不要繼續。
+
+成功了再 expand。失敗了直接砍——**因為你只投了 5 人 × 3 週，不是全公司 × 半年**。
+
+---
+
+## 死亡螺旋 #2：一個「AI Agent」做所有事
+
+**症狀**：你的 prompt 越寫越長（800 字 system prompt 起跳），輸出品質卻越來越不穩。同一個 prompt 早上跑得很棒，下午就脫線。
+
+**為什麼失敗**：
+你把 AI 當成「萬能助理」——「幫我寫信、整理會議紀錄、做圖、查資料、做 PPT⋯⋯」這違背 AI 同事的單一職責原則。等於你雇一個人類同事，叫他同時當 marketing + BD + RD + HR + 行政。誰扛得住？
+
+**修法**：
+拆。
+
+把那個「萬能 prompt」拆成 3-5 個[**named agents**](/sofia/ai-coworker-methodology)——Amy 只寫 marketing 草稿、Jordan 只做 BD outreach、老科只校稿。每個 agent 一個 scope，一個 system prompt。
+
+當你的 prompt 變短、職責變窄、輸出反而會變穩。**這是 microservices 思維，套用到團隊組成**。
+
+---
+
+## 死亡螺旋 #3：沒有 audit trail，沒有 onboarding 路徑
+
+**症狀**：你公司有一個「AI 達人」——他自己摸出了一套很 work 的 prompt + 工作流。但其他人不會用。他離職那天，整套 system 跟著消失。
+
+**為什麼失敗**：
+AI 工作流如果沒有書面化（prompt template、scope 定義、輸出 sample、edge case 處理），就跟一個沒寫文件的 codebase 一樣——**只有作者懂，遠看像魔法，近看像地雷**。
+
+**修法**：
+強制 documentation。每個 AI 同事的 onboarding doc 至少含：
+1. 它負責什麼（scope）
+2. 它**不**負責什麼（not-allowed）
+3. 標準 prompt template
+4. 5 個歷史輸出 sample（含好的、邊緣的、壞的）
+5. 上次更新時間 + 誰更新的
+
+這就是 [TAEA framework](/sofia/ai-coworker-methodology) 裡的 A——Auditable。沒有它，連 EU AI Act Article 50 的合規要求都過不了。
+
+---
+
+## 死亡螺旋 #4：SaaS 思維（買訂閱當解法）
+
+**症狀**：你預算的 70% 花在「AI 工具的年度 SaaS 費用」，剩下 30% 花在「整合費 / 員工培訓」。
+
+**為什麼失敗**：
+這個比例是反的。
+
+工具本身在 2026 年已經是 commodity（誰都能買到 Claude / GPT / Gemini API）。**真正的 leverage 在「你怎麼把工具串進你公司的真實工作流」**。把預算砸在 SaaS subscription = 你買到的是 generic 能力，不是公司專屬的 leverage。
+
+**修法**：
+反轉預算比例。70% 花在「整合 + 教育 + audit trail 建立」，30% 花在 SaaS。
+
+我們公司 2025 Q1 全面 AI 導入後，**年度 SaaS / Infra 支出 -60%**——因為我們把 Slack / Airtable / Asana 通通停掉，遷到 Google Chat + GitHub + 自家 vibe coding 工具。原本的 SaaS 費用變成「整合 + 教育」費用，產出反而往上跳。
+
+---
+
+## 死亡螺旋 #5：期待真人態度對工具（或反過來）
+
+**症狀**：員工抱怨「AI 太笨還不如自己做」或「我問了 AI 但它答非所問」。每個對話他們都期待 AI 像 Google 一樣——一次給對答案。
+
+**為什麼失敗**：
+新進真人同事第一個月，誰會對他「一次給對答案」？你會教、會 review、會說「這次哪裡不對下次怎麼做」。
+
+AI 同事一樣。**只是它的 onboarding cycle 是「一週」不是「一個月」**——每次互動都是一次 micro-onboarding。期待錯誤就會挫敗。期待對了，三週後就會變 leverage。
+
+**修法**：
+明文寫進公司 AI 政策：「**對 AI 同事的合理期待**——它不會一次給對答案，但會在你教它 3-5 次後接近你想要的標準。每次它做錯，就是它的 onboarding 進度。」
+
+把這條印出來貼茶水間，認真（不貼茶水間貼會議室也行 XD，重點是讓所有人看到）。
+
+---
+
+## 那 5% 活下來的怎麼做？
+
+MIT 報告同時觀察了那 5% 真的拿到 ROI 的企業。他們的共同點不是「用了更新的 model」，而是：
+
+- **整合進工作流，不是替代工作流**：AI 在現有 process 旁邊運作，不是要員工放棄熟悉的流程
+- **單一痛點切入**：一個團隊、一個具體問題、一個 KPI——不是「全公司 AI 化」
+- **持續迭代而非一次部署**：把 AI 當「會學的同事」而非「會用的工具」
+
+換句話說——**他們把 AI 當同事在帶**。
+
+這就是我們在 Numbers Protocol 自己做的事。2025 Q1 全面 AI 導入後：
+
+- 全職人類同事剩 4 位 + 線上 AI 同事 15 位 + 實習階段 8 位
+- 每位人類同事平均同時跟 3 位 AI 同事協作
+- 內部 MVP 從需求到完成 ≤ 24 小時
+- 年度 SaaS / Infra 支出 -60%
+
+我們不在那 95%。**不是因為我們的工具比較好，是因為我們的 mindset 從一開始就是「招新進同事」，不是「買新工具」**。
+
+---
+
+## 如果你的公司現在卡在某個死亡螺旋⋯⋯
+
+對號入座完了嗎？最常見的不是單一個——多數企業同時卡在 #1（買訂閱）+ #5（期待錯誤）兩條。少數會卡到 #2（萬能 agent）。剩下兩條（#3 audit trail / #4 SaaS 思維）是進階版，通常是已經跑了 6+ 個月才浮現。
+
+如果你看到這裡心裡有「對啊我們就是這樣」的瞬間——歡迎來信。我這幾年在 Numbers Protocol 把全公司 AI 同事化的方法、踩雷地圖、以及給文組主管的 AI 導入 playbook，可以毫不藏私地分享給你的團隊。
+
+→ [**邀請 Sofia 演講**](/sofia/speaker)：90 分鐘 keynote / 半日 workshop / 全日深度導入工作坊。過去合作 SXSW、UNICRI、AAJA、APJF 2025、Google News Initiative。
+
+→ [**讀 AI Coworker Methodology**](/sofia/ai-coworker-methodology)：6 個 AI 同事的真實設定 + 5 步導入 playbook + 3 個常見失敗模式。
+
+→ [**讀 Pillar 長文**](/sofia/posts/humanities-ai-expert)：〈文組人才是 AI 導入最該被重視的角色〉——如果你還沒看 Pillar，建議從那篇開始。
+
+→ [**Numbers Protocol & Omni**](https://www.numbersprotocol.io?utm_source=sofia-blog&utm_medium=blog-internal&utm_campaign=cluster-a1-95-percent-fail&utm_content=cta-omni)：把 TAEA 治理框架落實成 enterprise AI DevOps 平台。
+
+---
+
+## FAQ
+
+**Q: MIT 那個 95% 是真的還是 hype？**
+
+A: 樣本是 52 深訪 + 153 問卷 + 300 公開部署，方法論在 [Fortune](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/) 和 AI Magazine 都有 review。值得補充的是，MIT 定義「成功」為「pilot 結束後 6 個月有可衡量 P&L impact」——這個定義偏嚴格，所以實際「有用但沒大幅 P&L」的案例可能也被算進 95%。但 trend 沒錯——多數企業的 AI 投資**沒能轉成 measurable 商業價值**。
+
+**Q: 我們公司還沒開始導入，從哪一步開始？**
+
+A: 跳過所有「AI 策略 deck」階段。直接：(1) 選一個團隊 ≤ 5 人，(2) 找一個具體痛點（例：客服回信、合約初稿、會議紀錄整理），(3) 給三週測試一個工具，(4) 三週後 review。不要 boil the ocean。
+
+**Q: 我們的工程部跟業務部對 AI 認知差很多怎麼辦？**
+
+A: 這正是「文組人是 AI 導入關鍵」的場景。工程部會想「能不能做」，業務部會想「值不值得做」。需要的是**中間翻譯者**——通常那個人是 HR / Ops / 行銷裡某個跨域 operator。把他/她變成 AI champion，比再買一套工具有效 10 倍。
+
+**Q: 我們已經卡了半年都沒進展⋯⋯重啟還來得及嗎？**
+
+A: 來得及，但要先做「死亡螺旋診斷」。對照本文 5 個 pattern，找出你卡在哪 1-2 條。停掉那條，從一個新團隊重新跑「3 週 pilot」。**不要試圖救活原本卡死的 pilot**——sunk cost 是真的，但繼續餵它預算只會更慘。
+
+**Q: 那 5% 成功的真有那麼神奇？**
+
+A: 沒有。MIT 自己訪談的描述也很樸實——成功者不是「用了最潮 model」，是「找到一個小 win、堅持迭代、accept 不完美」。換成文組人聽得懂的話：**他們把 AI 當新同事在帶，不是當新工具在換**。
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "MIT 95% 失敗率是真的還是 hype？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MIT NANDA 2025 報告 The GenAI Divide 樣本含 52 高階深訪、153 問卷、300 公開部署，定義成功為 pilot 後 6 個月有可衡量 P&L impact。定義偏嚴格但 trend 沒錯——多數企業 AI 投資沒轉成 measurable 商業價值。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我們公司還沒開始導入 AI，從哪一步開始？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "選一個團隊 ≤ 5 人，找一個具體痛點（客服回信、合約初稿、會議紀錄），給三週測試一個工具，三週後 review。不要 boil the ocean，不要從全公司 AI 策略開始。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "工程部跟業務部對 AI 認知差很多怎麼辦？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "這正是文組人作為 AI 導入關鍵的場景。工程部想能不能做，業務部想值不值得做。需要的是中間翻譯者——通常是 HR、Ops、行銷裡的跨域 operator。把他/她變成 AI champion，比再買一套工具有效 10 倍。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "已經卡了半年，重啟還來得及嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "來得及。先做死亡螺旋診斷，找出卡在哪 1-2 條，停掉，從一個新團隊重新跑 3 週 pilot。不要試圖救活原本卡死的 pilot——sunk cost 是真的，但繼續餵它預算只會更慘。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "5% 成功的真有那麼神奇？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "沒有。成功者不是用了最新 model，是找到一個小 win、堅持迭代、accept 不完美。換句話說：把 AI 當新同事在帶，不是當新工具在換。"
+      }
+    }
+  ]
+})} />
+
+---
+
+#企業AI導入 #文組AI專家 #MIT2025報告 #AI同事方法論 #TAEA
