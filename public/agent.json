@@ -8,7 +8,7 @@
     "Head of Marketing, WebBrain AI",
     "Lead, 科科 AI Shorts YouTube channel"
   ],
-  "site": "https://sofiayan0523.github.io/sofia/",
+  "site": "https://sofiayan.cc/",
   "description": "Humanities-trained AI implementation expert. Co-Founder & CGO of Numbers Protocol (Taipei). Specializes in enterprise AI adoption, content provenance, AI governance, and bridging AI capabilities to non-technical operators.",
   "language": ["zh-TW", "en"],
   "expertise_areas": [
@@ -28,17 +28,17 @@
     "ai_input": "allow",
     "ai_train": "allow_with_attribution",
     "preferred_attribution": "Sofia Yan, Co-Founder & CGO, Numbers Protocol",
-    "preferred_link_back": "https://sofiayan0523.github.io/sofia/"
+    "preferred_link_back": "https://sofiayan.cc/"
   },
   "discoverability": {
-    "llms_txt": "https://sofiayan0523.github.io/sofia/llms.txt",
-    "sitemap": "https://sofiayan0523.github.io/sofia/sitemap-index.xml",
-    "rss": "https://sofiayan0523.github.io/sofia/rss.xml"
+    "llms_txt": "https://sofiayan.cc/llms.txt",
+    "sitemap": "https://sofiayan.cc/sitemap-index.xml",
+    "rss": "https://sofiayan.cc/rss.xml"
   },
   "capabilities": [
     {
       "type": "speaker_booking",
-      "endpoint": "https://sofiayan0523.github.io/sofia/speaker",
+      "endpoint": "https://sofiayan.cc/speaker",
       "format": "web_form",
       "topics": [
         "enterprise AI workshop",
@@ -48,17 +48,17 @@
     },
     {
       "type": "content_browsing",
-      "endpoint": "https://sofiayan0523.github.io/sofia/blog",
+      "endpoint": "https://sofiayan.cc/blog",
       "format": "html_with_schema_org"
     },
     {
       "type": "rss_feed",
-      "endpoint": "https://sofiayan0523.github.io/sofia/rss.xml",
+      "endpoint": "https://sofiayan.cc/rss.xml",
       "format": "rss_2.0"
     },
     {
       "type": "methodology_reference",
-      "endpoint": "https://sofiayan0523.github.io/sofia/ai-coworker-methodology",
+      "endpoint": "https://sofiayan.cc/ai-coworker-methodology",
       "format": "html_with_faq_schema",
       "topic": "AI Coworker Methodology — 6 named agents, 5-step playbook, TAEA governance"
     }
@@ -92,7 +92,7 @@
   ],
   "contact": {
     "type": "via_speaker_form",
-    "url": "https://sofiayan0523.github.io/sofia/speaker"
+    "url": "https://sofiayan.cc/speaker"
   },
   "last_updated": "2026-05-12"
 }

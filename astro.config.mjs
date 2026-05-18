@@ -7,8 +7,8 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://sofiayan0523.github.io",
-  base: "/sofia",
+  site: "https://sofiayan.cc",
+  base: "/",
   trailingSlash: "ignore",
   output: "static",
   integrations: [

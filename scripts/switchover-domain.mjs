@@ -89,7 +89,8 @@ patchFile("public/.well-known/agent.json", agentTransforms);
 
 // ---- 5. Patch robots.txt ----
 patchFile("public/robots.txt", [
-  { from: "sofiayan0523.github.io/sofia/sitemap-index.xml", to: "sofia.numbersprotocol.io/sitemap-index.xml" },
+  { from: "sofiayan0523.github.io/sofia/sitemap-index.xml", to: `${NEW_HOST}/sitemap-index.xml` },
+  { from: "sofia.numbersprotocol.io/sitemap-index.xml", to: `${NEW_HOST}/sitemap-index.xml` }, // recover from earlier staging if any
   { from: OLD_HOST, to: NEW_HOST },
 ]);
 

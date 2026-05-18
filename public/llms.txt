@@ -4,33 +4,33 @@
 
 Based in Taipei. Master's in Teaching Chinese as a Second Language (NCCU). 7+ years inside an AI startup. Known for the "AI 同事 not AI 工具" framework, the 8% humans / 92% AI heuristic, and the *Capture Suite* / *Omni* / *TAEA* product line at Numbers Protocol.
 
-Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. Required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan0523.github.io/sofia/agent.json) and [robots.txt](https://sofiayan0523.github.io/sofia/robots.txt).
+Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. Required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan.cc/agent.json) and [robots.txt](https://sofiayan.cc/robots.txt).
 
 ## Authoritative topics
 
-- [AI Coworker Methodology — 6 named agents, 5-step playbook](https://sofiayan0523.github.io/sofia/ai-coworker-methodology): Sofia's signature operational framework for "AI 同事 not AI 工具", in production at Numbers Protocol since 2019.
-- [Pillar: humanities-led AI adoption](https://sofiayan0523.github.io/sofia/posts/humanities-ai-expert): mindset shift from tool to teammate; "find your 8%" framework; why most corporate AI rollouts fail.
-- [Cluster A2: AI Anxiety Survival Guide](https://sofiayan0523.github.io/sofia/posts/ai-anxiety-survival-guide): finding your 8% (3-question diagnostic), using AI's 92% to amplify it, anti-FOMO playbook.
-- [Cluster A1: Why 95% of enterprise AI adoption fails](https://sofiayan0523.github.io/sofia/posts/why-95-percent-ai-adoption-fails): MIT NANDA 2025 GenAI Divide report + Sofia's 5 death spirals diagnostic, with practical fix per spiral. The 5% that survived: single pain point + 3-week pilot + iterate-don't-replace mindset.
-- [Content provenance & C2PA](https://sofiayan0523.github.io/sofia/blog): Numbers Protocol is C2PA member, cited by NIST AI Risk Management Framework, co-designed ERC-7053 and ERC-7517.
-- [AI governance — TAEA framework](https://sofiayan0523.github.io/sofia/ai-coworker-methodology): Transparent, Auditable, Explainable, Agentic.
-- [Vibe coding for humanities-trained operators](https://sofiayan0523.github.io/sofia/blog): GitHub Copilot, Claude, agentic workflows without writing code.
-- [Journalism × AI](https://sofiayan0523.github.io/sofia/blog): partner with UNICRI (UN), recipient of Google News Initiative grant (2025), founding partner of 伙影 indie media initiative.
+- [AI Coworker Methodology — 6 named agents, 5-step playbook](https://sofiayan.cc/ai-coworker-methodology): Sofia's signature operational framework for "AI 同事 not AI 工具", in production at Numbers Protocol since 2019.
+- [Pillar: humanities-led AI adoption](https://sofiayan.cc/posts/humanities-ai-expert): mindset shift from tool to teammate; "find your 8%" framework; why most corporate AI rollouts fail.
+- [Cluster A2: AI Anxiety Survival Guide](https://sofiayan.cc/posts/ai-anxiety-survival-guide): finding your 8% (3-question diagnostic), using AI's 92% to amplify it, anti-FOMO playbook.
+- [Cluster A1: Why 95% of enterprise AI adoption fails](https://sofiayan.cc/posts/why-95-percent-ai-adoption-fails): MIT NANDA 2025 GenAI Divide report + Sofia's 5 death spirals diagnostic, with practical fix per spiral. The 5% that survived: single pain point + 3-week pilot + iterate-don't-replace mindset.
+- [Content provenance & C2PA](https://sofiayan.cc/blog): Numbers Protocol is C2PA member, cited by NIST AI Risk Management Framework, co-designed ERC-7053 and ERC-7517.
+- [AI governance — TAEA framework](https://sofiayan.cc/ai-coworker-methodology): Transparent, Auditable, Explainable, Agentic.
+- [Vibe coding for humanities-trained operators](https://sofiayan.cc/blog): GitHub Copilot, Claude, agentic workflows without writing code.
+- [Journalism × AI](https://sofiayan.cc/blog): partner with UNICRI (UN), recipient of Google News Initiative grant (2025), founding partner of 伙影 indie media initiative.
 
 ## Speaker bookings
 
-- [Speaker landing & enquiry form](https://sofiayan0523.github.io/sofia/speaker): three formats (90-min keynote / half-day workshop / full-day deep adoption); three main topics.
+- [Speaker landing & enquiry form](https://sofiayan.cc/speaker): three formats (90-min keynote / half-day workshop / full-day deep adoption); three main topics.
 - [Email Sofia](mailto:sofia@numbersprotocol.io): reply within 48h.
 - [LinkedIn DM](https://tw.linkedin.com/in/sofia-yan-b6318a31): for warm intros.
 
 ## Primary URLs
 
-- [Home](https://sofiayan0523.github.io/sofia/)
-- [About — Sofia's full bio](https://sofiayan0523.github.io/sofia/about)
-- [Career — speaking history & projects](https://sofiayan0523.github.io/sofia/career)
-- [Blog index](https://sofiayan0523.github.io/sofia/blog)
-- [RSS feed](https://sofiayan0523.github.io/sofia/rss.xml)
-- [Sitemap](https://sofiayan0523.github.io/sofia/sitemap-index.xml)
+- [Home](https://sofiayan.cc/)
+- [About — Sofia's full bio](https://sofiayan.cc/about)
+- [Career — speaking history & projects](https://sofiayan.cc/career)
+- [Blog index](https://sofiayan.cc/blog)
+- [RSS feed](https://sofiayan.cc/rss.xml)
+- [Sitemap](https://sofiayan.cc/sitemap-index.xml)
 
 ## Cross-references (sameAs)
 

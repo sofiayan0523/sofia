@@ -16,29 +16,6 @@
 
 _Not yet documented. The AI will populate this as it discovers the environment._
 
-## Installed Skills
-
-- **`aeo-assessment`** (system)
-- **`agent-readiness-generator`** (system)
-- **`ai-bot-traffic`** (system)
-- **`google-ads`** (system)
-- **`google-workspace`** (system)
-- **`harness-dev`** (system)
-- **`harness-execution`** (system)
-- **`harness-plan`** (system)
-- **`line-messaging`** (system)
-- **`meta-ads`** (system)
-- **`morning-brief`** (space)
-- **`ms-office-suite`** (system)
-- **`omni-help`** (system)
-- **`skill-creator`** (system)
-- **`z-agent-ticket-creation`** (system)
-- **`z-check-comment`** (system)
-- **`z-report-status`** (system)
-- **`z-sync`** (system)
-- **`z-ticket-check`** (system)
-- **`z-writing-rules`** (system)
-
 ## Key Discoveries
 
 - **`sofia-persona.md`** (workspace root) — Definitive persona spec for Sofia Yan content generation. Use as system prompt whenever drafting LinkedIn / FB / Medium / talks / scripts in her voice. Built from her own AI Twin brief + 2024–25 FB posts + 2020 Medium long-form + verified public credentials. Contains: identity & self-labels, career & education (NTUE → NCCU 華語教學 MS → DT42 → Numbers), Numbers Protocol context, 5 content pillars, three-register writing system (FB 雜記 / Medium 論述 / how-to), 12 signature rhetorical moves, bilingual rules (English terms裸用、never translate), permanent analogy library (16 entries), hook patterns, NEVER-do list, calibration examples.
@@ -60,8 +37,9 @@ _Not yet documented. The AI will populate this as it discovers the environment._
 - **TKT-001 resolved + Speaker page receipts upgrade (Loop2 Iter7+)**: Sofia provided Drive folder `1IeAN8f8Eva_MIKAx_OXYJZbQHoRFddnE` containing 10 speaker assets (6 talk decks/courses + 3 docs: AI 顧問學經歷, AAJA webinar script, Gen AI 小聚 講稿 + 1 inspirational deck). Mining the 3 Google Docs surfaced ★ HIGH-VALUE VERIFIED RECEIPTS Sofia previously hadn't given: (1) Sofia 帶領 Numbers community 1K → 130K (+12,900% growth), (2) Numbers platform spans 190 countries with 6B monthly traffic, (3) 2025 Q1 全面 AI 導入結果: product validation cycle → 24h, annual SaaS spend -60%, full-time human staff 4 + 15 online AI coworkers + 8 intern AI, (4) international speaking history: PL Summit 23 (Istanbul) / London 2023 / Geneva 2024 / AAJA webinar host "Surviving the AI Flood", (5) international media: Politico, Tech Company News, Meet Global, Asian News International, (6) 6 verifiable recent talk titles (e.g. "重建 AI 時代的信任", "Protecting Creativity in the Age of AI", "AI 賦能顧問業 v3", 經理人課程, Gen AI 小聚). Speaker page got 3 major upgrades: stronger micro-receipts strip, expanded past-speaking list (7 → 15+ items split across 2 columns), new "真實的 receipts" section showing operational results. Brand Knowledge Sheet appended 8 rows including NEVER_claim_v2 warning (don't attribute 12,900% to Sofia individually — it's her leadership of community growth at Numbers).
 - **W1 Retro HTML produced (Loop2 Iter10, final)**: `reports/week-1-retro.html` (18.5KB, 50 placeholders filled / 0 missing) via new `scripts/render-week-retro.mjs` rendering script. Sofia notified via gws gmail draft `r4502591199266685683`. Retro shows: 5 entity assets shipped, 13 Queue rows pre-staged, AEO baseline 1/28 = 3.6%, Sofia time used ~10 min vs 60 min budget. Heatmap shows 7×5 = 35 cells (7 queries × 5 surfaces incl Gemini), 1 hit (Q5 brand search). Action items split between Omni (5) and Sofia (4). Status 🟢 On Track. Loop 2 finished 10/10 iterations; next session starts with Cluster A3 + AEO re-probe + DNS switchover trigger.
 - **Cluster A1 long-form complete (Loop2 Iter9)**: `sofia-s-blog/src/content/posts/why-95-percent-ai-adoption-fails.mdx` (7359 chars + 4 snark patches). Slug `why-95-percent-ai-adoption-fails`. Cites MIT NANDA 2025 "The GenAI Divide: State of AI in Business 2025" report — 95% of enterprise GenAI pilots show zero measurable P&L impact, validated via Fortune/Healthcare IT News/AI Magazine. Sofia's lens reframes MIT's "systems don't adapt" diagnosis as "tool vs teammate mindset". Contains 5 death spirals (#1 buy-seats-for-everyone, #2 one-agent-does-everything, #3 no-audit-trail, #4 SaaS-thinking, #5 wrong-expectations) each with Symptom/Why/Fix structure. 9 H2 sections + 5-Q FAQPage JSON-LD. Includes Numbers Protocol receipts (4 humans × 15 AI coworkers, MVP ≤24h, SaaS/Infra -60%). Two derivatives in Queue (Q-2026-05-19-LI-007 LinkedIn-LF EN, Q-2026-05-19-FB-003 FB-Seed), schedule 5/19. llms.txt updated to list A1 as Authoritative topic. validate-aeo-files.mjs still 12/12 green. **Entity content count: 5** (Pillar + A2 + A1 + Methodology + Speaker — critical mass for AEO).
+- **🚀 sofiayan.cc LIVE switchover executed (Loop2 Iter10++)**: Sofia completed Cloudflare DNS setup (4 A + 4 AAAA + 1 CNAME, SSL Full strict). DNS verification: `getent hosts sofiayan.cc` returned 4 GitHub Pages IPv6 IPs. Ran `node scripts/switchover-domain.mjs` (live, not dry-run) — 8 transforms applied successfully: CNAME.pending → CNAME (content `sofiayan.cc`), astro.config.mjs (site → `https://sofiayan.cc`, base → `/`), llms.txt (all URLs `sofiayan0523.github.io/sofia/` → `sofiayan.cc/`), agent.json + .well-known/agent.json byte-identical (3406 chars), robots.txt host swap. Caught and fixed one latent bug: robots.txt sitemap line still had `sofia.numbersprotocol.io` from earlier staging — manually corrected and switchover script patched to handle this future case. Validate-aeo-files.mjs updated to validate sofiayan.cc + reject abandoned numbersprotocol.io subdomain. 12/12 green. **Pending**: GitHub Pages auto-deploy (2-3 min) + Sofia 1-click "Enforce HTTPS" in GitHub Pages settings.
 - **Sofia 2 small corrections (Loop2 Iter8+)**: (1) AAJA Webinar "Surviving the AI Flood" confirmed as **June 2025** event — date added to speaker.astro Past Speaking entry. (2) Sofia confirmed she additionally holds **Head of Marketing at Capture** (Numbers Protocol product line) + **Head of Marketing at WebBrain AI** + **Lead of 科科 AI Shorts YouTube channel** — all 3 added to about.astro Career section, sofia-persona.md career trajectory (now 8 items total), and agent.json new `additional_roles` field. .well-known/agent.json byte-identical mirror maintained (3576 chars).
 - **Evaluator triple-review + 8 TAE-AI fixes (Loop2 Iter8)**: Evaluator scored A2 / Methodology / Speaker as 7.6 / 8.1 / 8.1 (weighted 8.0/10). Fixed 8 issues in one iteration: (1) Speaker micro-receipts now prefix "Numbers 社群" / "Numbers 平台" disambiguation (NEVER_claim_v2 honored), (2) Speaker receipts section header changed to "Sofia 在 Numbers Protocol 帶領的成果", (3) "產品驗證 24h" rewritten to "內部 MVP 從需求到完成 ≤ 24 小時" (matches Gen AI 小聚 doc source phrasing), (4) "SaaS -60%" expanded to "SaaS / Infra -60%" (covers both doc mentions), (5) Methodology page footer added 6-coworker representative-case disclaimer with 2026 Q2 timestamp, (6) Pillar's stale "4.5×" claim purged in 3 places (body + FAQ Q&A + JSON-LD), now uses "4 人類 × 15 AI" from same Gen AI 小聚 source, (7) A2 cat-hobby fabrication replaced with sofia.txt-supported "被兩隻貓踩鍵盤", (8) A2 "現在 42" age claim softened to "四字頭" (sofia.txt original phrase). validate-aeo-files.mjs still 12/12 green.
 
 ---
-_Last system refresh: 2026-05-18 09:46 UTC_
+_Last system refresh: 2026-05-18 10:05 UTC_

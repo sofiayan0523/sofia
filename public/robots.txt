@@ -1,6 +1,6 @@
 # =====================================================
 # Sofia Yan — robots.txt
-# Site: https://sofiayan0523.github.io/sofia/
+# Site: https://sofiayan.cc/
 # Updated: 2026-05-12 (P1.D1 AEO foundation)
 # =====================================================
 
@@ -82,4 +82,4 @@ Allow: /
 # agent.json: machine-readable agent capability + licensing manifest
 # Content-Signal: search=yes, ai-input=yes, ai-train=yes-with-attribution
 
-Sitemap: https://sofiayan0523.github.io/sofia/sitemap-index.xml
+Sitemap: https://sofiayan.cc/sitemap-index.xml
