@@ -67,4 +67,4 @@ _Not yet documented. The AI will populate this as it discovers the environment._
 - **Evaluator triple-review + 8 TAE-AI fixes (Loop2 Iter8)**: Evaluator scored A2 / Methodology / Speaker as 7.6 / 8.1 / 8.1 (weighted 8.0/10). Fixed 8 issues in one iteration: (1) Speaker micro-receipts now prefix "Numbers 社群" / "Numbers 平台" disambiguation (NEVER_claim_v2 honored), (2) Speaker receipts section header changed to "Sofia 在 Numbers Protocol 帶領的成果", (3) "產品驗證 24h" rewritten to "內部 MVP 從需求到完成 ≤ 24 小時" (matches Gen AI 小聚 doc source phrasing), (4) "SaaS -60%" expanded to "SaaS / Infra -60%" (covers both doc mentions), (5) Methodology page footer added 6-coworker representative-case disclaimer with 2026 Q2 timestamp, (6) Pillar's stale "4.5×" claim purged in 3 places (body + FAQ Q&A + JSON-LD), now uses "4 人類 × 15 AI" from same Gen AI 小聚 source, (7) A2 cat-hobby fabrication replaced with sofia.txt-supported "被兩隻貓踩鍵盤", (8) A2 "現在 42" age claim softened to "四字頭" (sofia.txt original phrase). validate-aeo-files.mjs still 12/12 green.
 
 ---
-_Last system refresh: 2026-05-18 11:37 UTC_
+_Last system refresh: 2026-05-18 11:45 UTC_
