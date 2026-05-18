@@ -1,0 +1,259 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+
+// FAQ data (also injected as Schema.org FAQPage via SEO component)
+const faqs = [
+  {
+    question: "Sofia 通常用什麼語言演講？",
+    answer:
+      "中英文皆可。台灣企業內訓多以中文進行；國際場合（國外總部、跨國團隊）用英文。雙語場合也常見，視聽眾組成決定。",
+  },
+  {
+    question: "演講主題有哪些？可以客製嗎？",
+    answer:
+      "三大主軸：(1) 文組人也能領導的 AI 導入，(2) AI 同事方法論（Numbers 案例拆解），(3) 內容溯源與 AI 時代的信任戰役。可依貴公司產業、團隊規模、AI 成熟度客製。",
+  },
+  {
+    question: "Sofia 接受怎樣的演講邀約？",
+    answer:
+      "企業內訓 (in-house corporate training)、產業論壇 keynote、公開研討會、podcast / 媒體訪談。不接 KOL 業配、不開公開線上課。",
+  },
+  {
+    question: "費用怎麼算？",
+    answer:
+      "依場次形式、地點、規模、客製深度而定。請透過下方表單聯絡，我們在 48 小時內回覆報價區間。",
+  },
+  {
+    question: "海外活動可以嗎？",
+    answer:
+      "可以。Sofia 過去曾在 SXSW (Austin)、AAJA-Asia、UNICRI 等國際場合演講，能處理跨國時差與旅程。",
+  },
+  {
+    question: "為什麼是 Sofia？",
+    answer:
+      "她是少數同時具備「政大華語教學碩士背景」與「7+ 年 AI 新創 Co-Founder 實戰」的講者。能用文組人聽得懂的語言講透 C2PA / agentic workflow / AI 治理，而不是把工程師概念照搬。",
+  },
+];
+
+const SITE_ORIGIN = "https://sofiayan0523.github.io";
+const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
+---
+
+<BaseLayout
+  title="邀請 Sofia 演講 | Speaker Booking"
+  description="邀請 Sofia Yan 為您的團隊 / 企業 / 論壇分享 AI 導入、內容溯源、AI 治理實戰經驗。Co-Founder & CGO of Numbers Protocol。文組人也能領導的 AI 導入專家。"
+  faq={faqs}
+>
+  <Header />
+  <main class="pt-32 pb-20 px-6">
+    <div class="container max-w-3xl mx-auto space-y-16">
+
+      <!-- Hero -->
+      <section class="space-y-6 animate-fade-up">
+        <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+          Speaker Booking · 演講邀約
+        </p>
+        <h1 class="font-display text-4xl md:text-5xl font-medium leading-tight">
+          邀請一個真的活在企業 AI 現場<br class="hidden md:block" />
+          <span class="text-muted-foreground">（也就是還在踩雷）的人</span><br />
+          講給你的團隊聽。
+        </h1>
+        <p class="text-lg text-foreground/80 leading-relaxed max-w-2xl">
+          不是 AI 顧問，也不是 AI 工程師，<br />
+          而是「被 AI 同事 carry、又得負責教 AI 怎麼當同事」的那一個。
+        </p>
+        <p class="text-base text-foreground/70 leading-relaxed max-w-2xl">
+          Sofia Yan (嚴世紀) — Numbers Protocol 共同創辦人 & CGO、文組 AI 專家。
+          政大華語教學碩士、7+ 年 AI 新創 Co-Founder。
+          專長把企業 AI 導入、內容溯源、AI 治理講給文組人也聽得懂
+          <span class="text-muted-foreground">（主辦方說我可以講人話，這點我可以保證 XD）</span>。
+        </p>
+        <!-- Micro-receipts strip — every number traced to source docs -->
+        <div class="flex flex-wrap gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
+          <span>📈 Numbers 社群 <strong class="text-foreground">1K → 13萬</strong> (+12,900%, Sofia 帶領)</span>
+          <span>🌏 Numbers 平台 <strong class="text-foreground">190</strong> 國 · 月流量 <strong class="text-foreground">60億</strong></span>
+          <span>🏢 <strong class="text-foreground">7+</strong> 年新創 Co-Founder</span>
+          <span>🎤 SXSW · UNICRI · GNI · AAJA · APJF · 經理人</span>
+        </div>
+      </section>
+
+      <!-- Three formats -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">三種演講規格</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-xl bg-card border border-border">
+            <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format A</p>
+            <h3 class="font-display text-xl font-medium mb-3">90 分鐘 Keynote</h3>
+            <p class="text-sm text-foreground/70 leading-relaxed">
+              產業論壇、公司全員大會、研討會主題演講。聚焦一個議題深講。Q&A 30 分鐘。
+            </p>
+          </div>
+          <div class="p-6 rounded-xl bg-card border border-border">
+            <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format B</p>
+            <h3 class="font-display text-xl font-medium mb-3">半天 Workshop</h3>
+            <p class="text-sm text-foreground/70 leading-relaxed">
+              4 小時、20-50 人。Keynote + 案例拆解 + 小組工作坊。適合主管團隊 AI 認知對齊。
+            </p>
+          </div>
+          <div class="p-6 rounded-xl bg-card border border-border">
+            <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format C</p>
+            <h3 class="font-display text-xl font-medium mb-3">全天深度導入</h3>
+            <p class="text-sm text-foreground/70 leading-relaxed">
+              7 小時、10-30 人。從現況診斷到 90 天 roadmap。團隊帶實際工作流來，當場改造。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topics -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">主打主題</h2>
+        <div class="space-y-6">
+          <div class="border-l-2 border-primary/30 pl-6">
+            <h3 class="font-display text-xl font-medium mb-2">
+              文組人也能領導的 AI 導入
+            </h3>
+            <p class="text-foreground/70 leading-relaxed">
+              為什麼 95% 的企業 AI 導入會失敗？因為他們把 AI 當工具，不是當同事。
+              一個科技麻瓜的 7 年 AI 新創田野筆記。
+            </p>
+          </div>
+          <div class="border-l-2 border-primary/30 pl-6">
+            <h3 class="font-display text-xl font-medium mb-2">
+              AI 同事方法論：Numbers 案例拆解
+            </h3>
+            <p class="text-foreground/70 leading-relaxed">
+              我們團隊 AI 同事比人類同事多 4.5 倍。
+              Amy、Jordan、Clara、小鳳、阿張、老科——名字、權限、KPI 全公開。
+              砍掉 Slack、Airtable、Asana 那一週的真實血淚。
+            </p>
+          </div>
+          <div class="border-l-2 border-primary/30 pl-6">
+            <h3 class="font-display text-xl font-medium mb-2">
+              內容溯源與 AI 時代的信任戰役
+            </h3>
+            <p class="text-foreground/70 leading-relaxed">
+              當生成式 AI 幾秒就能造一張逼真影像，新聞、創作、IP 怎麼保護？
+              C2PA、ERC-7053、TAEA 框架。Numbers 與 UNICRI / Google News Initiative / 伙影的實戰案例。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Past speaking & credentials -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">過往演講與課程</h2>
+        <div class="grid md:grid-cols-2 gap-x-8 gap-y-3 text-foreground/80 leading-relaxed">
+          <div>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">2024-2026 主題課程 / Keynote</p>
+            <ul class="space-y-2 text-sm">
+              <li>🎯 <strong>「重建 AI 時代的信任：一個可實踐的數位內容來源框架」</strong>（2026）</li>
+              <li>🎤 <strong>"Protecting Creativity in the Age of AI"</strong> — Stage talk（2026）</li>
+              <li>📚 <strong>「職場必備 Vibe Coding 實作課」</strong>—— 企業內訓系列</li>
+              <li>💼 <strong>「AI 賦能顧問業」</strong>—— 課程教材 v3</li>
+              <li>📰 <strong>經理人課程</strong>（Manager Today）</li>
+              <li>🤝 <strong>Gen AI 小聚</strong>「從工具到同事：全面導入 AI 工作流」</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">國際 panel / 媒體</p>
+            <ul class="space-y-2 text-sm">
+              <li>🏆 <strong>SXSW 2023 Pitch</strong>（Metaverse & Web3 冠軍，Numbers 團隊）</li>
+              <li>🎙 <strong>Asia Pacific Journalism Forum 2025</strong> 講者</li>
+              <li>📺 <strong>AAJA Webinar</strong>「Surviving the AI Flood: Trust & Revenue」（主持，2025/06）</li>
+              <li>🌏 <strong>PL Summit 23 | LabWeek23</strong>（Istanbul）</li>
+              <li>🇬🇧 倫敦 2023：AI 於創意產業之變革性技術</li>
+              <li>🇨🇭 日內瓦 2024：如何在 AI 驅動的世界對抗假訊息</li>
+              <li>🌐 <strong>UNICRI</strong>（聯合國 ICJ 研究所）合作</li>
+              <li>📰 <strong>Google News Initiative</strong> 補助獲獎（2025）</li>
+              <li>🎓 <strong>NTU TEC Talk</strong>（台大創創中心 S2EP1）</li>
+              <li>🇹🇼 <strong>伙影通訊社</strong>（與余志偉攝影記者）</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Receipts: real numbers from production -->
+      <section class="space-y-6 bg-card border border-border rounded-xl p-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">真實的 receipts，不是 PPT 數字</h2>
+        <p class="text-sm text-muted-foreground">
+          這些不是 marketing claim，是 Numbers Protocol 內部跑出來的真實成果，可以在演講中拆給你看。
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">Sofia 在 Numbers Protocol 帶領的成果</p>
+            <ul class="space-y-2 text-sm text-foreground/80">
+              <li>📈 Numbers 平台社群 <strong class="text-foreground">1,000 → 130,000</strong> 人（+12,900%）</li>
+              <li>🌏 Numbers 內容驗證平台覆蓋 <strong class="text-foreground">190 個國家</strong> · 月流量 <strong class="text-foreground">60 億</strong></li>
+              <li>🎯 國際媒體報導 Numbers / Sofia 工作：Politico、Meet Global、Tech Company News、ANI</li>
+            </ul>
+          </div>
+          <div class="space-y-2">
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">2025 Q1 全面 AI 導入後（Numbers 內部）</p>
+            <ul class="space-y-2 text-sm text-foreground/80">
+              <li>⚡ 內部 MVP 從需求到完成 <strong class="text-foreground">≤ 24 小時</strong>（原本需要數週）</li>
+              <li>💰 年度 SaaS / Infra 支出 <strong class="text-foreground">-60%</strong></li>
+              <li>👥 全職人類同事剩 <strong class="text-foreground">4 位</strong> · 線上 AI 同事 <strong class="text-foreground">15 位</strong> + 實習 8 位</li>
+              <li>🤝 每位人類同事平均同時跟 <strong class="text-foreground">3 位 AI 同事協作</strong></li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-sm text-muted-foreground italic pt-2">
+          Numbers Protocol 是 C2PA 會員、被 NIST AI Risk Management Framework 引用、
+          共同設計 ERC-7053 和 ERC-7517 標準、與 Adobe / Microsoft / Nikon / Reuters 合作、67M+ 數位資產註冊。
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-8">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">FAQ</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="group border border-border rounded-lg p-5 hover:border-primary/30 transition-colors">
+              <summary class="cursor-pointer font-medium text-foreground flex items-center justify-between">
+                <span>{faq.question}</span>
+                <span class="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="mt-4 text-foreground/70 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- CTA / Contact -->
+      <section class="space-y-6 border-t border-border pt-12">
+        <h2 class="font-display text-2xl md:text-3xl font-medium">邀約方式</h2>
+        <p class="text-foreground/80 leading-relaxed">
+          目前以下列任一方式聯絡，48 小時內回覆：
+        </p>
+        <ul class="space-y-3 text-foreground/80">
+          <li>
+            ✉️ Email：
+            <a href="mailto:sofia@numbersprotocol.io?subject=Speaker Booking — [貴公司]&body=Hi Sofia,%0A%0A公司：%0A邀約日期：%0A形式（keynote / workshop / 全天）：%0A主題傾向：%0A聽眾規模與背景：%0A預算區間：%0A%0A謝謝！"
+               class="text-primary underline hover:no-underline">
+              sofia@numbersprotocol.io
+            </a>
+          </li>
+          <li>
+            💼 LinkedIn DM：
+            <a href="https://tw.linkedin.com/in/sofia-yan-b6318a31"
+               target="_blank" rel="noopener noreferrer"
+               class="text-primary underline hover:no-underline">
+              linkedin.com/in/sofia-yan-b6318a31
+            </a>
+          </li>
+        </ul>
+        <p class="text-sm text-muted-foreground italic pt-4">
+          報價會依形式、地點、規模與客製深度而定。
+          歡迎在 email 裡先描述場景，我們可以快速判斷適合的規格。
+        </p>
+      </section>
+
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

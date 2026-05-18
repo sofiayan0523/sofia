@@ -7,7 +7,10 @@ import type { TranslationKey } from "@/i18n";
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const currentPath = Astro.url.pathname;
-const stripBase = (p: string) => p.replace(/^\/sofia/, "") || "/";
+// Strip Astro base path (e.g. "/" or legacy "/sofia") so isActive() can match clean paths.
+const basePrefix = baseUrl.replace(/\/$/, "");
+const stripBase = (p: string) =>
+  basePrefix && p.startsWith(basePrefix) ? p.slice(basePrefix.length) || "/" : p;
 const here = stripBase(currentPath);
 
 const navItems: { path: string; key: TranslationKey }[] = [

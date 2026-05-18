@@ -1,11 +1,20 @@
-# Search Engine Crawlers
+# =====================================================
+# Sofia Yan — robots.txt
+# Site: https://sofiayan.cc/
+# Updated: 2026-05-12 (P1.D1 AEO foundation)
+# =====================================================
+
+# ---------- Search Engine Crawlers ----------
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# Social Media Crawlers
+User-agent: DuckDuckBot
+Allow: /
+
+# ---------- Social Media Crawlers ----------
 User-agent: Twitterbot
 Allow: /
 
@@ -15,14 +24,23 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
-# AI Crawlers (GEO Optimization)
+# ---------- AI / Answer Engine Crawlers ----------
+# All major AI crawlers are explicitly allowed.
+# Attribution required — see /llms.txt and /agent.json for terms.
+
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: Anthropic-AI
@@ -31,12 +49,37 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 User-agent: Bytespider
 Allow: /
 
-# Default
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ---------- Default ----------
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://sofiaspace.lovable.app/sitemap.xml
+# ---------- AI Discoverability Resources ----------
+# llms.txt: human-readable manifest of topics and authoritative URLs
+# agent.json: machine-readable agent capability + licensing manifest
+# Content-Signal: search=yes, ai-input=yes, ai-train=yes-with-attribution
+
+Sitemap: https://sofiayan.cc/sitemap-index.xml
