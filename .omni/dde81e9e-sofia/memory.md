@@ -16,6 +16,29 @@
 
 _Not yet documented. The AI will populate this as it discovers the environment._
 
+## Installed Skills
+
+- **`aeo-assessment`** (system)
+- **`agent-readiness-generator`** (system)
+- **`ai-bot-traffic`** (system)
+- **`google-ads`** (system)
+- **`google-workspace`** (system)
+- **`harness-dev`** (system)
+- **`harness-execution`** (system)
+- **`harness-plan`** (system)
+- **`line-messaging`** (system)
+- **`meta-ads`** (system)
+- **`morning-brief`** (space)
+- **`ms-office-suite`** (system)
+- **`omni-help`** (system)
+- **`skill-creator`** (system)
+- **`z-agent-ticket-creation`** (system)
+- **`z-check-comment`** (system)
+- **`z-report-status`** (system)
+- **`z-sync`** (system)
+- **`z-ticket-check`** (system)
+- **`z-writing-rules`** (system)
+
 ## Key Discoveries
 
 - **`sofia-persona.md`** (workspace root) — Definitive persona spec for Sofia Yan content generation. Use as system prompt whenever drafting LinkedIn / FB / Medium / talks / scripts in her voice. Built from her own AI Twin brief + 2024–25 FB posts + 2020 Medium long-form + verified public credentials. Contains: identity & self-labels, career & education (NTUE → NCCU 華語教學 MS → DT42 → Numbers), Numbers Protocol context, 5 content pillars, three-register writing system (FB 雜記 / Medium 論述 / how-to), 12 signature rhetorical moves, bilingual rules (English terms裸用、never translate), permanent analogy library (16 entries), hook patterns, NEVER-do list, calibration examples.
@@ -42,4 +65,4 @@ _Not yet documented. The AI will populate this as it discovers the environment._
 - **Evaluator triple-review + 8 TAE-AI fixes (Loop2 Iter8)**: Evaluator scored A2 / Methodology / Speaker as 7.6 / 8.1 / 8.1 (weighted 8.0/10). Fixed 8 issues in one iteration: (1) Speaker micro-receipts now prefix "Numbers 社群" / "Numbers 平台" disambiguation (NEVER_claim_v2 honored), (2) Speaker receipts section header changed to "Sofia 在 Numbers Protocol 帶領的成果", (3) "產品驗證 24h" rewritten to "內部 MVP 從需求到完成 ≤ 24 小時" (matches Gen AI 小聚 doc source phrasing), (4) "SaaS -60%" expanded to "SaaS / Infra -60%" (covers both doc mentions), (5) Methodology page footer added 6-coworker representative-case disclaimer with 2026 Q2 timestamp, (6) Pillar's stale "4.5×" claim purged in 3 places (body + FAQ Q&A + JSON-LD), now uses "4 人類 × 15 AI" from same Gen AI 小聚 source, (7) A2 cat-hobby fabrication replaced with sofia.txt-supported "被兩隻貓踩鍵盤", (8) A2 "現在 42" age claim softened to "四字頭" (sofia.txt original phrase). validate-aeo-files.mjs still 12/12 green.
 
 ---
-_Last system refresh: 2026-05-18 10:05 UTC_
+_Last system refresh: 2026-05-18 10:13 UTC_
