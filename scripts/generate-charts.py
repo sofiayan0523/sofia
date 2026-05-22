@@ -387,8 +387,6 @@ def chart4_taea():
         x0 = pad_x + col * cell_w
         y0 = pad_top + row * cell_h
 
-        # Cell border
-        d.rectangle([(x0, y0), (x0 + cell_w, y0 + cell_h)], outline=BLACK, width=1)
         # Big letter
         d.text((x0 + 24, y0 + 14), q["letter"], font=f(RM_BOLD, 100), fill=q["color"])
         # Name
