@@ -42,6 +42,61 @@ const imageStyle = imgStyle ?? `width: ${width}`;
   </capture-eye>
 </div>
 
+<script is:inline>
+  (() => {
+    if (window["__sofiaCaptureEyeHoverPatch"]) return;
+    window["__sofiaCaptureEyeHoverPatch"] = true;
+
+    const styleId = "sofia-capture-eye-hover-style";
+    const styleText = `
+      .capture-eye-button,
+      .capture-eye-button.full-visibility {
+        opacity: 0.38 !important;
+        pointer-events: none !important;
+        transition: opacity 180ms ease, transform 180ms ease !important;
+      }
+
+      :host(:hover) .capture-eye-button,
+      :host(:focus-within) .capture-eye-button,
+      :host(:hover) .capture-eye-button.full-visibility,
+      :host(:focus-within) .capture-eye-button.full-visibility {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      @media (pointer: coarse) {
+        .capture-eye-button,
+        .capture-eye-button.full-visibility {
+          opacity: 1 !important;
+          pointer-events: auto !important;
+        }
+      }
+    `;
+
+    const patchCaptureEye = (element) => {
+      const root = element.shadowRoot;
+      if (!root || root.getElementById(styleId)) return;
+
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = styleText;
+      root.appendChild(style);
+    };
+
+    const patchAll = () => {
+      document.querySelectorAll("capture-eye").forEach(patchCaptureEye);
+    };
+
+    customElements.whenDefined("capture-eye").then(() => {
+      patchAll();
+      new MutationObserver(patchAll).observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    });
+  })();
+</script>
+
 <style>
   .capture-eye-wrapper {
     display: block;
