@@ -29,4 +29,4 @@
 - **Database Persistence**: Implemented an atomic SQL migration `supabase/migrations/create_post_reactions.sql` creating a `post_reactions` table and a `public.increment_post_reaction` stored procedure (RPC) for atomic counter increments. Designed a robust local client fallback using `localStorage` if the table is not yet created.
 
 ---
-_Last system refresh: 2026-05-22 11:32 UTC_
+_Last system refresh: 2026-05-22 11:52 UTC_
