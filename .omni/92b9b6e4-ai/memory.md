@@ -44,4 +44,4 @@ _Not yet documented. The AI will populate this as it discovers the environment._
 - Omni 平台設計與 Greg Isenberg 的 AI-Native 論述高度對齊：TAEA 框架（Transparent / Auditable / Explainable）對應文章的「agent 需要規則、稽核、證據」；Memory（per-conversation `.omni/memory.md` + Shared Memory 五分類）+ Skills + Subagents + Library RAG 構成「對機器可讀」的組織知識層；Heartbeat（Pulse 4h / Rhythm 24h）+ NREM + Monitor + Loop/Schedule 構成「agent 艦隊 + 人類監督」的多模型編排；Z App agent tickets / Plan Mode / confirmation hooks 構成「何時動手、何時問人」的邊界。Omni 定位是「AI-Native 公司的賣鏟人」— 平台層基礎建設，而非單一產業的 AI-Native 服務公司。
 
 ---
-_Last system refresh: 2026-05-22 04:45 UTC_
+_Last system refresh: 2026-05-22 05:07 UTC_
