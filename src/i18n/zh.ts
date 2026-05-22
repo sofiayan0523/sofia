@@ -49,7 +49,7 @@ export const zh = {
   // categories
   "category.all": "全部文章",
   "category.travel": "旅行手記",
-  "category.ai-tools": "AI 工具",
+  "category.ai-insights": "AI Insights",
   "category.thoughts": "隨想",
 
   // career

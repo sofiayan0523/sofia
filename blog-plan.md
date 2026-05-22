@@ -145,7 +145,7 @@ sofia-s-blog/
     schema: z.object({
       title: z.string(),
       excerpt: z.string().optional(),
-      category: z.enum(["travel", "ai-tools", "thoughts"]),
+      category: z.enum(["travel", "ai-insights", "thoughts"]),
       tags: z.array(z.string()).default([]),
       coverImage: z.string().optional(),
       publishedAt: z.coerce.date(),

@@ -33,7 +33,7 @@ tags: japan, kyoto, travel
 |------|------|------|
 | `title` | ✓ | 文章標題 |
 | `excerpt` | 建議 | 摘要（1-2 句） |
-| `category` | ✓ | `travel` / `ai-tools` / `thoughts` |
+| `category` | ✓ | `travel` / `ai-insights` / `thoughts` |
 | `tags` | 選填 | 逗號分隔 |
 | `slug` | 選填 | URL 路徑，不填我會自動產生 |
 | `publishedAt` | 選填 | 發布日期（不填用今天） |
