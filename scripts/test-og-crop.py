@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "public" / "images" / "posts" / "ai-native-1000-club" / "cover.png"
+SRC = ROOT / "public" / "images" / "posts" / "zero-to-ai-native" / "cover.png"
 DEST_DIR = ROOT / "scripts"
 
 img = Image.open(SRC)

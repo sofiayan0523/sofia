@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 WIDTH, HEIGHT = 1200, 630
 ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_DIR = ROOT / "public" / "images" / "posts" / "ai-native-1000-club"
+OUTPUT_DIR = ROOT / "public" / "images" / "posts" / "zero-to-ai-native"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_PATH = OUTPUT_DIR / "cover.png"
 
