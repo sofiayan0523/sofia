@@ -79,4 +79,18 @@ export const en: Record<TranslationKey, string> = {
 
   // common
   "common.loading": "Loading...",
+
+  // share & react
+  "share.title": "Share This Post",
+  "share.twitter": "Share on X",
+  "share.facebook": "Share on Facebook",
+  "share.linkedin": "Share on LinkedIn",
+  "share.line": "Share on LINE",
+  "share.copy": "Copy Link",
+  "share.copied": "Link copied!",
+  "react.title": "Did you enjoy this post?",
+  "react.claps": "Clap",
+  "react.loves": "Love",
+  "react.insights": "Insightful",
+  "react.amazes": "Amazed",
 };
