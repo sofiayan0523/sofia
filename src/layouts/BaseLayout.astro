@@ -63,6 +63,28 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
       type={type}
       article={article}
     />
+    <!-- Google Analytics (GA4) -->
+    {import.meta.env.PUBLIC_GA_TRACKING_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_TRACKING_ID}`} is:inline></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${import.meta.env.PUBLIC_GA_TRACKING_ID}');
+        `} />
+      </>
+    )}
+
+    <!-- Cloudflare Web Analytics -->
+    {import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN })}
+        is:inline
+      />
+    )}
     <!-- Numbers Protocol Capture Eye web component (pinned version) -->
     <script
       type="module"
