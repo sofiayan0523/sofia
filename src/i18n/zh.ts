@@ -73,6 +73,20 @@ export const zh = {
 
   // common
   "common.loading": "載入中...",
+
+  // share & react
+  "share.title": "分享文章",
+  "share.twitter": "分享到 X",
+  "share.facebook": "分享到 Facebook",
+  "share.linkedin": "分享到 LinkedIn",
+  "share.line": "分享到 LINE",
+  "share.copy": "複製連結",
+  "share.copied": "已複製連結！",
+  "react.title": "這篇文章對你有幫助嗎？",
+  "react.claps": "鼓掌",
+  "react.loves": "溫暖",
+  "react.insights": "啟發",
+  "react.amazes": "驚嘆",
 } as const;
 
 export type TranslationKey = keyof typeof zh;

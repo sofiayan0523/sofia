@@ -6,6 +6,8 @@ import Footer from "@/components/Footer.astro";
 import Comments from "@/components/Comments.astro";
 import CaptureEye from "@/components/CaptureEye.astro";
 import T from "@/components/T.astro";
+import ShareButtons from "@/components/ShareButtons.astro";
+import Reactions from "@/components/Reactions";
 import { getTranslations, DEFAULT_LANG, type TranslationKey } from "@/i18n";
 
 export async function getStaticPaths() {
@@ -112,6 +114,13 @@ const categoryKey = (`category.${post.data.category}` as unknown) as Translation
           </footer>
         )
       }
+
+      <div class="my-12 py-8 border-t border-b border-border grid grid-cols-1 md:grid-cols-2 gap-8" data-pagefind-ignore>
+        <Reactions slug={post.id.replace(/\.mdx?$/, "")} client:only="react" />
+        <div class="md:border-l md:border-border md:pl-8">
+          <ShareButtons title={post.data.title} />
+        </div>
+      </div>
 
       <Comments />
     </article>
