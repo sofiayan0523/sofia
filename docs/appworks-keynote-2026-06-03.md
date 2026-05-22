@@ -5,7 +5,7 @@
 > **Venue**: AppWorks
 > **Audience**: 早期新創 founder / 工程 lead / 投資人
 > **Duration target**: 40 分鐘 keynote + 20 分鐘 Q&A（依現場調整）
-> **Companion blog**: `/posts/ai-native-1000-club/`（QR code 放結尾投影片）
+> **Companion blog**: `/posts/zero-to-ai-native/`（QR code 放結尾投影片）
 
 ---
 
@@ -247,7 +247,7 @@
 ## 物料 checklist
 
 - [ ] 投影片（建議 Keynote 或 Google Slides — 用 Omni Google Workspace 整合可協助）
-- [ ] OG image：`public/images/posts/ai-native-1000-club/cover.jpg`（也可以放投影片 cover）
-- [ ] QR code 指向：`https://sofiayan.com/posts/ai-native-1000-club/`（含 UTM：`utm_source=appworks-keynote&utm_medium=qr&utm_campaign=ai-native-1000-club`）
+- [ ] OG image：`public/images/posts/zero-to-ai-native/cover.jpg`（也可以放投影片 cover）
+- [ ] QR code 指向：`https://sofiayan.com/posts/zero-to-ai-native/`（含 UTM：`utm_source=appworks-keynote&utm_medium=qr&utm_campaign=zero-to-ai-native`）
 - [ ] 備用：印一份 blog 全文 PDF，給想深聊的人會場拿
 - [ ] 演講後 24 小時內：把投影片 PDF 放 sofiayan.com 同篇下載區（社群推文觸發二次流量）
