@@ -55,7 +55,7 @@ export const en: Record<TranslationKey, string> = {
   // categories
   "category.all": "All Posts",
   "category.travel": "Travel",
-  "category.ai-tools": "AI Tools",
+  "category.ai-insights": "AI Insights",
   "category.thoughts": "Thoughts",
 
   // career

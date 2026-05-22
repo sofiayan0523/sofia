@@ -27,4 +27,4 @@ _Not yet documented. The AI will populate this as it discovers the environment._
 - 2026-05-22 v2 修訂（套用 Sofia 5/22 feedback）：三篇 MDX 已直接更新。差異：(1) 8%/92% framework 只留在 ai-anxiety，從 humanities 移除；(2) AI 同事命名段（Amy/Jordan/Clara/小鳳/阿張/老科）只在 why-95-percent 完整保留，humanities 縮成一句帶過；(3) Tammy「喜歡」語錄只留在 ai-anxiety，humanities 改成 cross-link；(4) SaaS 60% 改成「2025 年 4 月開始全面 AI 導入。一年內⋯⋯下降約 60%」；(5) ai-anxiety 結尾換成雨天咖啡店 scene-based callback（其他兩篇保留反思結尾）；(6) 三篇都裁短到 7-8 分鐘，95% 從 5 個現場合併為 4 個（買 seat 併入前段、Google 期待併入「那 5%」段）。v2 Google Doc：`1OUVSmQMTK4-eMZVUcEN6SY_klxew9SRzu7tfmTMabLc`。`npx astro build` 通過。
 
 ---
-_Last system refresh: 2026-05-22 09:10 UTC_
+_Last system refresh: 2026-05-22 09:32 UTC_

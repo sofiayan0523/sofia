@@ -193,7 +193,7 @@ cat > src/content/posts/2026-05-new-post.mdx <<'MDX'
 ---
 title: "新文章標題"
 excerpt: "簡短描述"
-category: travel        # or ai-tools | thoughts
+category: travel        # or ai-insights | thoughts
 tags: [tag1, tag2]
 publishedAt: 2026-05-07
 readTime: "3 min"
