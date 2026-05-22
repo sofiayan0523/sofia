@@ -36,6 +36,8 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+          PUBLIC_GA_TRACKING_ID: ${{ secrets.PUBLIC_GA_TRACKING_ID }}
+          PUBLIC_CLOUDFLARE_BEACON_TOKEN: ${{ secrets.PUBLIC_CLOUDFLARE_BEACON_TOKEN }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
