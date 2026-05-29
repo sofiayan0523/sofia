@@ -42,4 +42,4 @@
 - **Harness Execution Setup (2026-05-29)**: Phase 0 complete. Z minutes record `11deafa9-f5fc-4035-ab63-57c37f822a33` created as daily report destination (title `[Harness] sofia-s-blog 12-week content production, operations and promotion`); config saved to `.omni/harness/config.md`; primary assignee + mention = Sofia (`54d58944-1c93-4711-9a90-0753b42e2b17`); operating timezone Asia/Taipei.
 
 ---
-_Last system refresh: 2026-05-29 10:22 UTC_
+_Last system refresh: 2026-05-29 14:28 UTC_
