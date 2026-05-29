@@ -1,26 +1,95 @@
 #!/usr/bin/env python3
+"""Weekly blog traffic & content report.
+
+Reads credentials from environment variables — refuses to fall back on
+hardcoded secrets. If GA4 / Cloudflare Analytics is not yet wired, the
+report explicitly shows a "pending" state instead of fabricated numbers.
+
+Honest-by-default per harness plan §1.1 Analyst boundary:
+    "不得把 mock data 當真實數據"
+
+Required env vars:
+    Z_GATEWAY_URL       — Z App agent gateway base URL
+    Z_API_KEY           — Z App API key (Bearer token)
+    Z_WORKSPACE_ID      — target workspace UUID
+
+Optional env vars (enable real traffic metrics when set):
+    GA4_PROPERTY_ID                 — Google Analytics 4 property
+    GA4_SERVICE_ACCOUNT_JSON        — path to service account JSON
+    CF_API_TOKEN                    — Cloudflare API token
+    CF_ZONE_TAG                     — Cloudflare zone tag for sofiayan.cc
+
+Fallback:
+    If env vars are missing, the script will also try to load them from
+    `.omni/harness/secrets.env` (key=value lines) relative to the workspace
+    root, then from `.env` in the script directory. This lets the schedule
+    pre_check work without modifying the Omni scheduler host env.
+
+Exit codes:
+    0 — report posted successfully
+    1 — Z gateway returned non-2xx, or network error
+    2 — required env vars missing (refuses to post)
+"""
 import os
 import re
+import sys
 import datetime
 import requests
 
-# Constants from workspace settings
-Z_GATEWAY_URL = "https://cepefvmcgeedrwkbmlnd.supabase.co/functions/v1/agent-gateway"
-Z_API_KEY = "zak_f954d0344064bc20fe034a8431ac1125495252c922bf38e25269092a23d2c33b"
-Z_WORKSPACE_ID = "0dbbc949-55a7-49ba-9923-6f5246c62c53"
+# ---------------------------------------------------------------------------
+# Credential loading (env → workspace secrets.env → script-dir .env)
+# ---------------------------------------------------------------------------
 
-POSTS_DIR = os.path.join(os.path.dirname(__file__), "..", "src", "content", "posts")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
+WORKSPACE_ROOT = os.path.abspath(os.path.join(REPO_ROOT, ".."))
+
+
+def _load_dotenv(path):
+    """Parse `key=value` lines into os.environ if the key is not already set."""
+    if not path or not os.path.isfile(path):
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for raw in f:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, val = line.split("=", 1)
+                key = key.strip()
+                val = val.strip().strip('"').strip("'")
+                if key and key not in os.environ:
+                    os.environ[key] = val
+    except Exception as e:
+        print(f"warn: failed to load env file {path}: {e}", file=sys.stderr)
+
+
+_load_dotenv(os.path.join(WORKSPACE_ROOT, ".omni", "harness", "secrets.env"))
+_load_dotenv(os.path.join(SCRIPT_DIR, ".env"))
+
+Z_GATEWAY_URL = os.environ.get("Z_GATEWAY_URL", "").strip()
+Z_API_KEY = os.environ.get("Z_API_KEY", "").strip()
+Z_WORKSPACE_ID = os.environ.get("Z_WORKSPACE_ID", "").strip()
+
+GA4_PROPERTY_ID = os.environ.get("GA4_PROPERTY_ID", "").strip()
+GA4_SERVICE_ACCOUNT_JSON = os.environ.get("GA4_SERVICE_ACCOUNT_JSON", "").strip()
+CF_API_TOKEN = os.environ.get("CF_API_TOKEN", "").strip()
+CF_ZONE_TAG = os.environ.get("CF_ZONE_TAG", "").strip()
+
+POSTS_DIR = os.path.join(REPO_ROOT, "src", "content", "posts")
+
+# ---------------------------------------------------------------------------
+# Local content stats (no external services required)
+# ---------------------------------------------------------------------------
+
 
 def parse_mdx_frontmatter(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
-        
-        # Extract frontmatter between ---
         match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
         if not match:
             return {}
-        
         frontmatter_text = match.group(1)
         data = {}
         for line in frontmatter_text.split("\n"):
@@ -31,149 +100,253 @@ def parse_mdx_frontmatter(file_path):
                 data[key] = val
         return data
     except Exception as e:
-        print(f"Error parsing {file_path}: {e}")
+        print(f"warn: parse {file_path}: {e}", file=sys.stderr)
         return {}
+
 
 def gather_local_stats():
     if not os.path.exists(POSTS_DIR):
         return {"total_posts": 0, "categories": {}, "latest_posts": []}
-    
+
     posts = []
     categories = {}
-    
     for filename in os.listdir(POSTS_DIR):
-        if filename.endswith(".mdx") or filename.endswith(".md"):
-            path = os.path.join(POSTS_DIR, filename)
-            meta = parse_mdx_frontmatter(path)
-            if meta and meta.get("draft") != "true":
-                pub_at = meta.get("publishedAt", "")
-                cat = meta.get("category", "Uncategorized")
-                categories[cat] = categories.get(cat, 0) + 1
-                posts.append({
-                    "title": meta.get("title", "Untitled"),
-                    "slug": filename.rsplit(".", 1)[0],
-                    "published_at": pub_at,
-                    "category": cat
-                })
-    
-    # Sort by publishedAt descending
+        if not (filename.endswith(".mdx") or filename.endswith(".md")):
+            continue
+        path = os.path.join(POSTS_DIR, filename)
+        meta = parse_mdx_frontmatter(path)
+        if not meta or meta.get("draft") == "true":
+            continue
+        pub_at = meta.get("publishedAt", meta.get("date", ""))
+        cat = meta.get("category", "Uncategorized")
+        categories[cat] = categories.get(cat, 0) + 1
+        posts.append({
+            "title": meta.get("title", "Untitled"),
+            "slug": filename.rsplit(".", 1)[0],
+            "published_at": pub_at,
+            "category": cat,
+        })
+
     posts.sort(key=lambda p: p["published_at"], reverse=True)
     return {
         "total_posts": len(posts),
         "categories": categories,
-        "latest_posts": posts[:3]
+        "latest_posts": posts[:3],
     }
+
+
+# ---------------------------------------------------------------------------
+# Traffic metrics — real numbers OR explicit pending state.
+# Honest reporting per harness plan §1.1 — never fabricate.
+# ---------------------------------------------------------------------------
+
 
 def get_traffic_metrics():
-    # Placeholder/Mock metrics when Cloudflare/GA4 credentials are not provided
-    # Standard values that feel organic and realistic for a personal professional blog
+    ga4_available = bool(GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_JSON)
+    cf_available = bool(CF_API_TOKEN and CF_ZONE_TAG)
+
+    pending = []
+    if not ga4_available:
+        pending.append(
+            "GA4 Data API 尚未串接：需設定 `GA4_PROPERTY_ID` + `GA4_SERVICE_ACCOUNT_JSON`"
+        )
+    if not cf_available:
+        pending.append(
+            "Cloudflare Analytics 尚未串接：需設定 `CF_API_TOKEN` + `CF_ZONE_TAG`"
+        )
+
+    # TODO(Phase 2): wire real GA4 runReport + Cloudflare GraphQL queries when
+    #   credentials become available. Until then, return None for every metric
+    #   so the report renders explicit `_pending_` cells instead of fake values.
+
     return {
-        "dau": 184,
-        "pv": 492,
-        "session_duration": "2m 45s",
-        "bounce_rate": "42.1%",
-        "top_sources": [
-            {"source": "Direct / Bookmarks", "percentage": "41%"},
-            {"source": "Twitter / X", "percentage": "32%"},
-            {"source": "LinkedIn", "percentage": "18%"},
-            {"source": "Google Search", "percentage": "9%"}
-        ],
-        "top_pages": [
-            {"path": "/blog/zero-to-ai-native", "views": 154, "title": "從零開始的 AI 導入 — 我們花了兩年才知道自己在做的事叫 AI-Native"},
-            {"path": "/blog/humanities-ai-expert", "views": 128, "title": "文組人不是 AI 時代的弱勢，只要你能掌握 AI 的『通識課』"},
-            {"path": "/blog/ai-anxiety-survival-guide", "views": 98, "title": "AI 焦慮這件事，我後來比較願意把它看成提醒"}
-        ]
+        "ga4_available": ga4_available,
+        "cf_available": cf_available,
+        "pending_reasons": pending,
+        "dau": None,
+        "pv": None,
+        "session_duration": None,
+        "bounce_rate": None,
+        "top_sources": [],
+        "top_pages": [],
     }
 
+
+# ---------------------------------------------------------------------------
+# Markdown report renderer
+# ---------------------------------------------------------------------------
+
+
+def _cell(value, suffix=""):
+    if value is None or value == "":
+        return "_pending_"
+    return f"{value}{suffix}"
+
+
 def generate_markdown_report(local_stats, traffic):
-    today = datetime.datetime.now()
-    # Format according to Taiwan Time / UTC+8
-    today_str = today.strftime("%Y-%m-%d %H:%M")
-    day_name = today.strftime("%a")
-    
-    cat_summary = ", ".join([f"`{k}` ({v})" for k, v in local_stats["categories"].items()])
-    
-    sources_table = "\n".join([f"| {s['source']} | {s['percentage']} |" for s in traffic["top_sources"]])
-    pages_str = "\n".join([f"{i+1}. **{p['title']}** (`{p['path']}`) — **{p['views']}** PV" for i, p in enumerate(traffic["top_pages"])])
-    
-    latest_str = "\n".join([f"* **{p['title']}** (發佈於 `{p['published_at'][:10]}`)" for p in local_stats["latest_posts"]])
+    tz_tw = datetime.timezone(datetime.timedelta(hours=8))
+    today = datetime.datetime.now(tz=tz_tw)
+    today_str = today.strftime("%Y-%m-%d")
 
-    content = f"""進度更新日期 -- Y2026-05-22 @Sofia
+    cat_summary = ", ".join(
+        [f"`{k}` ({v})" for k, v in local_stats["categories"].items()]
+    ) or "（尚無分類資料）"
 
-### 特別注意事項
-ℹ️ **數據憑證狀態**：GitHub Secrets 憑證已設置完成。自動化部署與網站指標串接流程運作順暢。
+    latest_str = "\n".join([
+        f"- **{p['title']}**（發佈於 `{(p['published_at'][:10] if p.get('published_at') else 'unknown')}`）"
+        for p in local_stats["latest_posts"]
+    ]) or "_（尚無已發佈文章）_"
 
-### 執行摘要
-在過去的一週裡，有些細微的轉變正在悄悄發生。寫作對我而言從來不是一種公式化的輸出，而更像是在日常縫隙中的安靜觀察。本週，我們的溫暖角落迎來了 492 次的停留與閱讀。讀者們大多透過社群的分享或書籤，在這裡尋找一些共鳴。特別是關於《從零開始的 AI 導入》與《文組人的 AI 通識課》這兩篇篇幅較長、偏向反思的文章，獲得了最溫和而深刻的反響。這也印證了在追求快速與公式化的世界裡，安靜而真誠的文字依然有其立足之地。
+    sources_active = bool(traffic["top_sources"])
+    pages_active = bool(traffic["top_pages"])
 
-### 📈 網站核心流量指標 (本週)
-| 指標項目 | 數據值 | 觀察與備註 |
-|:---|:---:|:---|
-| 👥 每日活躍用戶 (DAU) | {traffic["dau"]} 人 | 讀者群體維持平穩造訪 |
-| 📊 單週總瀏覽量 (PV) | {traffic["pv"]} 次 | 互動率與回訪比例優良 |
-| ⏱️ 平均停留時間 | {traffic["session_duration"]} | 深度閱讀比例極高 |
-| 📉 跳出率 | {traffic["bounce_rate"]} | 導流路徑與內容相關性佳 |
+    if sources_active:
+        sources_section = "\n".join(
+            [f"| {s['source']} | {s['percentage']} |" for s in traffic["top_sources"]]
+        )
+    else:
+        sources_section = "| _pending — 待 GA4 / Cloudflare 串接後填入_ | — |"
 
-### 🧭 主要流量來源
-| 流量管道 | 佔比比例 |
-|:---|:---:|
-{sources_table}
+    if pages_active:
+        pages_section = "\n".join(
+            [
+                f"{i+1}. **{p['title']}**（`{p['path']}`）— **{p['views']}** PV"
+                for i, p in enumerate(traffic["top_pages"])
+            ]
+        )
+    else:
+        pages_section = "_pending — 待 GA4 串接後填入_"
 
-### 🏆 熱門文章排行 (本週 Top 3)
-{pages_str}
+    if traffic.get("ga4_available") or traffic.get("cf_available"):
+        active = []
+        if traffic.get("ga4_available"):
+            active.append("GA4")
+        if traffic.get("cf_available"):
+            active.append("Cloudflare Analytics")
+        data_status = "✅ 已串接資料來源：" + "、".join(active)
+    else:
+        reasons = traffic.get("pending_reasons", [])
+        data_status = (
+            "⚠️ **流量資料來源尚未串接**\n\n" + "\n".join([f"- {r}" for r in reasons])
+        )
 
-### ✍️ 部落格內容資產狀態
-* **已發佈文章總數**：{local_stats["total_posts"]} 篇
-* **文章分類分佈**：{cat_summary}
-* **最新發佈的文章**：
+    content = f"""進度更新日期 -- {today_str} @Sofia
+
+### 流量資料來源狀態
+{data_status}
+
+### 部落格內容資產狀態
+- **已發佈文章總數**：{local_stats["total_posts"]} 篇（本地 repo 實測）
+- **文章分類分佈**：{cat_summary}
+- **最新發佈的文章**：
 {latest_str}
 
+### 網站核心流量指標（本週）
+| 指標項目 | 數據值 |
+|:---|:---:|
+| 每日活躍用戶 (DAU) | {_cell(traffic["dau"], " 人")} |
+| 單週總瀏覽量 (PV) | {_cell(traffic["pv"], " 次")} |
+| 平均停留時間 | {_cell(traffic["session_duration"])} |
+| 跳出率 | {_cell(traffic["bounce_rate"])} |
+
+### 主要流量來源
+| 流量管道 | 佔比 |
+|:---|:---:|
+{sources_section}
+
+### 熱門文章排行（本週 Top 3）
+{pages_section}
+
 ---
-此報告由 Omni AI 流量與內容分析機制自動生成，每週一早晨定期發送。
+此報告由 Omni AI 自動產生。流量指標需 GA4 / Cloudflare Analytics 串接後才會顯示真實值；
+未串接時以 `_pending_` 標示，不以模擬數據替代（依 harness plan §1.1 Analyst boundary）。
 """
     return content
 
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+
 def main():
+    missing = [
+        name for name, val in [
+            ("Z_GATEWAY_URL", Z_GATEWAY_URL),
+            ("Z_API_KEY", Z_API_KEY),
+            ("Z_WORKSPACE_ID", Z_WORKSPACE_ID),
+        ] if not val
+    ]
+    if missing:
+        print(
+            "ERROR: missing required env vars: " + ", ".join(missing),
+            file=sys.stderr,
+        )
+        print(
+            "This script refuses to run with hardcoded credentials. "
+            "Set them in the environment, in .omni/harness/secrets.env, "
+            "or in sofia/scripts/.env and retry.",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+
     print("Gathering local statistics...")
     local_stats = gather_local_stats()
     print(f"Total local posts found: {local_stats['total_posts']}")
-    
-    print("Generating traffic metrics...")
+
+    print("Fetching traffic metrics (real or explicit pending state)...")
     traffic = get_traffic_metrics()
-    
+    if not (traffic.get("ga4_available") or traffic.get("cf_available")):
+        print(
+            "note: no analytics source wired; report will show '_pending_' "
+            "for traffic cells (per harness §1.1 honest-by-default).",
+            file=sys.stderr,
+        )
+
     print("Composing markdown report...")
     report_content = generate_markdown_report(local_stats, traffic)
-    
+
     print("Sending report to Z App Gateway...")
-    headers = {
-        "Authorization": f"Bearer {Z_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    
-    # We will insert a post into the 'posts' table
     today_str = datetime.date.today().isoformat()
     body = {
         "action": "insert",
         "payload": {
             "table": "posts",
             "data": {
-                "title": f"📈 部落格流量與內容每週報告 ({today_str})",
+                "title": f"📈 部落格週報（{today_str}）",
                 "content": report_content,
                 "date": today_str,
-                "workspace_id": Z_WORKSPACE_ID
-            }
-        }
+                "workspace_id": Z_WORKSPACE_ID,
+            },
+        },
     }
-    
+    headers = {
+        "Authorization": f"Bearer {Z_API_KEY}",
+        "Content-Type": "application/json",
+    }
+
     try:
-        resp = requests.post(Z_GATEWAY_URL, headers=headers, json=body)
-        if resp.status_code in (200, 201):
-            print(f"Success! Report posted to Z App feed (ID: {resp.json().get('id')})")
-        else:
-            print(f"Failed to post to Z App Gateway (Status: {resp.status_code})")
-            print("Response:", resp.text)
+        resp = requests.post(Z_GATEWAY_URL, headers=headers, json=body, timeout=30)
     except Exception as e:
-        print("Error sending request:", e)
+        print(f"ERROR: network error contacting Z gateway: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    if resp.status_code in (200, 201):
+        posted_id = ""
+        try:
+            posted_id = resp.json().get("id", "")
+        except Exception:
+            pass
+        print(f"Success! Report posted to Z App feed (ID: {posted_id})")
+        sys.exit(0)
+
+    print(
+        f"ERROR: Z gateway returned {resp.status_code}",
+        file=sys.stderr,
+    )
+    print("Response:", resp.text, file=sys.stderr)
+    sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
