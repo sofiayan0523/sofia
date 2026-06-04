@@ -28,6 +28,7 @@
 - Personal-site audit: generated external-link check found two confirmed 404s: `numbersprotocol.github.io/numbers-ama/webinar/2025-12-06` and the Spotify playlist linked from About.
 - `blog-improvement.md` contains the verified 2026-06-04 action list plus brand/content/IA/funnel strategy actions, marked as `[Verified]`, `[Strategy]`, or `[Verified + Strategy]`; current AEO capability discovery has `/agent.json` and `/.well-known/agent.json`, but no MCP server card, agent skills index, or API catalog.
 - 2026-06-04 loop iteration 1 completed P0 fixes in sofia-s-blog: `/posts/...` source links changed to `/blog/.../`, `BaseLayout.astro` now forwards `faq` to `SEO.astro`, confirmed 404 external links were removed/unlinked, and `npm run build` passes with FAQPage JSON-LD on Speaker and AI coworker pages.
+- 2026-06-04 loop iteration 2 completed P1 fixes in sofia-s-blog: generated static `/posts/{slug}/` compatibility pages, added AEO capability discovery files under `public/.well-known/`, added `scripts/check-links.mjs` plus `npm run check:links`, and extended `scripts/validate-aeo-files.mjs`; `npm run check:links` and AEO validation pass.
 
 ---
-_Last system refresh: 2026-06-04 04:38 UTC_
+_Last system refresh: 2026-06-04 05:13 UTC_

@@ -19,6 +19,13 @@ This action list is based on the current repository state and build output, not 
   - Partially completed P2 Action 7 by updating active future-output references in `docs/utm-convention.md`, `docs/appworks-keynote-2026-06-03.md`, `docs/zero-to-ai-native-social-posts.md`, `scripts/generate-qrcode.mjs`, `scripts/generate-branding.mjs`, and `src/pages/rss.xml.ts`.
   - Verified `npm run build` succeeds; precise built-link scan found no `href` links pointing to `/posts/`.
   - Note: the original broad `/posts/` acceptance snippet also matches legitimate image paths such as `/images/posts/...`; use an `href`-targeted scan for route-link validation.
+- 2026-06-04 loop iteration 2:
+  - Completed P1 Action 4 by adding generated static compatibility pages at `/posts/{slug}/`; each page has `noindex, follow`, canonical URL, meta refresh, JS redirect, and fallback link to `/blog/{slug}/`.
+  - Completed P1 Action 5 by adding `public/.well-known/mcp/server-card.json`, `public/.well-known/agent-skills/index.json`, and `public/.well-known/api-catalog`; content is intentionally static-discovery only and does not advertise a live MCP tool server.
+  - Completed P1 Action 6 by adding `scripts/check-links.mjs` and `npm run check:links`.
+  - Extended `scripts/validate-aeo-files.mjs` to validate the new capability discovery files.
+  - Verified `npm run check:links` succeeds; build now generates 25 pages, including 9 `/posts/{slug}/` compatibility pages, and the checker found no broken internal links.
+  - Verified `node scripts/validate-aeo-files.mjs` succeeds and the three new discovery endpoints are present in `dist`.
 
 ## Verification Summary
 

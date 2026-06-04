@@ -36,6 +36,45 @@ check("public/.well-known/agent.json mirrors public/agent.json", () => {
   return `byte-identical (${a.length} chars)`;
 });
 
+check("public/.well-known/mcp/server-card.json valid static discovery card", () => {
+  const raw = readFileSync(resolve(cwd, "public/.well-known/mcp/server-card.json"), "utf-8");
+  const parsed = JSON.parse(raw);
+  if (!parsed.name || !parsed.homepage || !parsed.mcp) throw new Error("missing required keys");
+  if (parsed.mcp.server_available !== false) {
+    throw new Error("personal site should not advertise a live MCP server");
+  }
+  if (!Array.isArray(parsed.resources) || parsed.resources.length < 3) {
+    throw new Error("missing public web resources");
+  }
+  return `resources=${parsed.resources.length}, server_available=false`;
+});
+
+check("public/.well-known/agent-skills/index.json valid skills index", () => {
+  const raw = readFileSync(resolve(cwd, "public/.well-known/agent-skills/index.json"), "utf-8");
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed.skills) || parsed.skills.length < 3) {
+    throw new Error("missing expected static skills");
+  }
+  const ids = parsed.skills.map((skill) => skill.id);
+  for (const required of ["browse-ai-adoption-essays", "cite-sofia-yan", "route-speaker-enquiry"]) {
+    if (!ids.includes(required)) throw new Error(`missing skill: ${required}`);
+  }
+  return `skills=${parsed.skills.length}`;
+});
+
+check("public/.well-known/api-catalog valid linkset", () => {
+  const raw = readFileSync(resolve(cwd, "public/.well-known/api-catalog"), "utf-8");
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed.linkset) || parsed.linkset.length === 0) {
+    throw new Error("missing linkset array");
+  }
+  const first = parsed.linkset[0];
+  if (!first["service-doc"] || !first["service-desc"]) {
+    throw new Error("missing service-doc or service-desc links");
+  }
+  return `service-doc=${first["service-doc"].length}, service-desc=${first["service-desc"].length}`;
+});
+
 check("public/robots.txt has AI bots", () => {
   const raw = readFileSync(resolve(cwd, "public/robots.txt"), "utf-8");
   const required = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "Applebot-Extended"];

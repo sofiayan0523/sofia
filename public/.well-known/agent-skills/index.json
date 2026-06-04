@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "name": "Sofia Yan public website agent skills",
+  "description": "Discoverable static capabilities for agents consuming Sofia Yan's public website. These are web/content capabilities, not executable remote tools.",
+  "site": "https://sofiayan.cc/",
+  "skills": [
+    {
+      "id": "browse-ai-adoption-essays",
+      "name": "Browse AI adoption essays",
+      "type": "content_discovery",
+      "entrypoint": "https://sofiayan.cc/blog/",
+      "input_modes": ["web_url", "rss"],
+      "output_modes": ["html", "rss"],
+      "topics": [
+        "enterprise AI adoption",
+        "AI coworker methodology",
+        "humanities-led AI implementation",
+        "content provenance",
+        "TAEA governance"
+      ]
+    },
+    {
+      "id": "cite-sofia-yan",
+      "name": "Cite Sofia Yan with attribution",
+      "type": "citation_metadata",
+      "entrypoint": "https://sofiayan.cc/llms.txt",
+      "input_modes": ["web_url"],
+      "output_modes": ["markdown", "json"],
+      "preferred_attribution": "Sofia Yan, Co-Founder & CGO, Numbers Protocol",
+      "license_signal": "search=yes, ai-input=yes, ai-train=yes-with-attribution"
+    },
+    {
+      "id": "route-speaker-enquiry",
+      "name": "Route speaker or workshop enquiry",
+      "type": "contact_routing",
+      "entrypoint": "https://sofiayan.cc/speaker/",
+      "input_modes": ["web_url"],
+      "output_modes": ["html"],
+      "suitable_for": [
+        "enterprise AI adoption keynote",
+        "AI coworker workshop",
+        "content provenance and C2PA talk",
+        "vibe coding training for non-engineers"
+      ]
+    }
+  ],
+  "last_updated": "2026-06-04"
+}
