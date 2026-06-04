@@ -34,6 +34,7 @@
 - 2026-06-04 loop iteration 5 strengthened sofia-s-blog Speaker funnel: hero email CTA, best-fit/not-best-fit guide, fit-section email CTA, tracking attributes on speaker enquiry links, event names documented in `docs/utm-convention.md`, and Speaker canonical origin fixed to `https://sofiayan.cc`; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 6 completed sofia-s-blog About narrative hierarchy: About now centers a reflective translation through-line, separates Playground links from compact public receipts, routes dense proof to Career/Speaker, and still preserves AEO credential signals; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 7 completed sofia-s-blog CTA tracking for Action 14: `BaseLayout.astro` dispatches `data-analytics-event` clicks to GA4/Zaraz/custom event, Speaker/AI methodology/blog share CTAs carry event metadata, `npm run check:cta` validates the matrix, and docs use live Numbers funnel URLs; check:cta, check:links, and AEO validation pass.
+- 2026-06-04 loop iteration 8 completed sofia-s-blog editorial roadmap for Action 15: `docs/editorial-roadmap.md` defines 8 scene-led planned essay briefs across AI coworker management, humanities AI adoption, provenance/C2PA, founder notes, and travel-work crossover; `npm run check:roadmap`, check:cta, check:links, and AEO validation pass.
 
 ---
-_Last system refresh: 2026-06-04 08:07 UTC_
+_Last system refresh: 2026-06-04 08:43 UTC_

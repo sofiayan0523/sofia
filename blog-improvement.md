@@ -51,6 +51,11 @@ This action list is based on the current repository state and build output, not 
   - Added `scripts/validate-cta-tracking.mjs` plus `npm run check:cta` to enforce event names, CTA metadata, and UTM conventions.
   - Updated `docs/utm-convention.md` with implemented metadata requirements and replaced confirmed 404 Numbers / Omni example URLs with the live `https://numbersprotocol.io/` funnel URL.
   - Verified `npm run check:cta`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed; built HTML contains `speaker_enquiry_*`, `numbers_omni_outbound_click`, `article_share_click`, and `sofia:cta-click`.
+- 2026-06-04 loop iteration 8:
+  - Completed Action 15 by adding `docs/editorial-roadmap.md` with 8 planned essay briefs that start from a scene / conversation / field moment and each define target reader, internal link target, source/proof requirement, and conversion or relationship goal.
+  - The roadmap covers AI coworker management, humanities-trained AI adoption operators, provenance / trust / C2PA, founder operating notes, and travel-work crossover essays.
+  - Added `scripts/validate-editorial-roadmap.mjs` plus `npm run check:roadmap` to enforce brief count, required planning fields, current route coverage, intentional `thoughts` usage, and banned generic SEO/listicle title patterns.
+  - Verified `npm run check:roadmap`, `npm run check:cta`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed.
 
 ## Verification Summary
 
@@ -66,6 +71,7 @@ This action list is based on the current repository state and build output, not 
 - Current About page is story-led: personal narrative, translation through-line, Playground outbound links, compact public receipts, and contextual links to Career and Speaker.
 - Current Speaker page contains offer formats, topics, proof points, FAQ, and contact CTAs via email and LinkedIn DM.
 - UTM convention exists in `docs/utm-convention.md`; CTA event metadata is implemented for Speaker enquiry, AI methodology Numbers / Omni outbound, and blog share controls, with `npm run check:cta` enforcing the current event matrix.
+- Editorial roadmap exists in `docs/editorial-roadmap.md`; it defines 8 planned scene-led briefs and `npm run check:roadmap` enforces required fields plus anti-template guardrails.
 
 ## Evidence Checked
 
