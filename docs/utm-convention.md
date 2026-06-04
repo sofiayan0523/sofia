@@ -81,6 +81,17 @@ https://www.numbersprotocol.io/omni-waitlist?utm_source=sofia-blog&utm_medium=bl
 | `source=sofia-blog × medium=speaker-page` | Speaker page → 後續行為 | Speaker funnel |
 | `source=sofia-blog × destination=numbers/omni` | Sofia → product flow | **北極星 demo lead 指標** |
 
+## 站內 CTA event names
+
+| Event name | 觸發位置 | 用途 |
+|---|---|---|
+| `speaker_enquiry_email_click` | `/speaker` hero、fit guide、contact section 的 email CTA | 區分演講邀約意圖，不與一般 email link 混在一起 |
+| `speaker_enquiry_linkedin_click` | `/speaker` contact section 的 LinkedIn DM CTA | 區分 warm intro / LinkedIn 私訊邀約 |
+| `numbers_omni_outbound_click` | Speaker / AI methodology / Blog 連到 Numbers 或 Omni 的 CTA | 衡量 Sofia 個人品牌導向 Numbers / Omni 的 product flow |
+| `article_share_click` | Blog post share buttons | 衡量文章擴散，不作為 speaker conversion |
+
+站內 CTA 應在連結上加 `data-analytics-event` 與 `data-cta-location`，讓 GA4 / Cloudflare Zaraz / 之後的輕量 tracking script 可以接同一套命名。
+
 ## 程式化生成（Iteration 3+ 加入）
 
 Helper script `scripts/utm-builder.mjs`（待建）將自動：

@@ -35,6 +35,11 @@ This action list is based on the current repository state and build output, not 
   - Completed Action 9 by tightening homepage first-screen positioning: updated bilingual hero copy, surfaced enterprise AI adoption / content provenance / AI coworker methodology focus tags, and changed first-screen CTAs to Speaker, Blog, and About.
   - Advanced Actions 10 and 17 by adding Speaker to header/footer navigation and adding contextual CTA sections on About and Career.
   - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built HTML contains the homepage focus tags plus Speaker / Blog / About CTAs and About/Career contextual CTA links.
+- 2026-06-04 loop iteration 5:
+  - Completed Action 11 by strengthening the Speaker funnel: added a hero email CTA, a "best fit / not best fit" guide before topic details, a fit-section email CTA, and tracking attributes on email / LinkedIn enquiry links.
+  - Advanced Action 14 by documenting speaker and product-flow CTA event names in `docs/utm-convention.md`.
+  - Fixed Speaker canonical origin from legacy GitHub Pages to `https://sofiayan.cc`.
+  - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built HTML contains the Speaker hero CTA, fit guide, `data-analytics-event` attributes, and `https://sofiayan.cc/speaker` canonical URL.
 
 ## Verification Summary
 
