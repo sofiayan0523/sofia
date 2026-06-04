@@ -30,6 +30,7 @@
 - 2026-06-04 loop iteration 1 completed P0 fixes in sofia-s-blog: `/posts/...` source links changed to `/blog/.../`, `BaseLayout.astro` now forwards `faq` to `SEO.astro`, confirmed 404 external links were removed/unlinked, and `npm run build` passes with FAQPage JSON-LD on Speaker and AI coworker pages.
 - 2026-06-04 loop iteration 2 completed P1 fixes in sofia-s-blog: generated static `/posts/{slug}/` compatibility pages, added AEO capability discovery files under `public/.well-known/`, added `scripts/check-links.mjs` plus `npm run check:links`, and extended `scripts/validate-aeo-files.mjs`; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 3 completed active stale URL cleanup for docs/scripts, hid empty `thoughts` category by deriving blog filters from published posts, added an AI adoption series section on `/blog`, added series previous/next navigation on the four AI posts, and updated `llms.txt` with the `zero-to-ai-native` cluster; `npm run check:links` and AEO validation pass.
+- 2026-06-04 loop iteration 4 updated sofia-s-blog homepage positioning and CTA map: hero now emphasizes enterprise AI adoption, content provenance/C2PA, and AI coworker methodology; first-screen CTAs route to Speaker, Blog, and About; Speaker is in header/footer nav; About and Career have contextual CTA sections; `npm run check:links` and AEO validation pass.
 
 ---
-_Last system refresh: 2026-06-04 05:48 UTC_
+_Last system refresh: 2026-06-04 06:24 UTC_

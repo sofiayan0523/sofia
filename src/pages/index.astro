@@ -40,18 +40,35 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
             <p class="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl whitespace-pre-line">
               <T k="home.description" />
             </p>
+            <div class="flex flex-wrap gap-2 text-sm text-foreground/80">
+              <span class="px-3 py-1 rounded-full bg-secondary">
+                <T k="home.focus.ai" />
+              </span>
+              <span class="px-3 py-1 rounded-full bg-secondary">
+                <T k="home.focus.provenance" />
+              </span>
+              <span class="px-3 py-1 rounded-full bg-secondary">
+                <T k="home.focus.coworker" />
+              </span>
+            </div>
             <div class="flex flex-wrap gap-4 pt-4">
               <a
-                href={`${baseUrl}about`}
+                href={`${baseUrl}speaker`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
               >
-                <T k="home.aboutBtn" /> <span aria-hidden="true">→</span>
+                <T k="home.speakerBtn" /> <span aria-hidden="true">→</span>
               </a>
               <a
                 href={`${baseUrl}blog`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
               >
                 <T k="home.blogBtn" />
+              </a>
+              <a
+                href={`${baseUrl}about`}
+                class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-transparent hover:bg-secondary transition-colors font-medium text-muted-foreground hover:text-foreground"
+              >
+                <T k="home.aboutBtn" />
               </a>
             </div>
           </div>

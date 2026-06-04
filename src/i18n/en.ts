@@ -6,14 +6,19 @@ export const en: Record<TranslationKey, string> = {
   "nav.about": "About",
   "nav.blog": "Blog",
   "nav.career": "Career",
+  "nav.speaker": "Speaking",
 
   // home
-  "home.eyebrow": "Co-founder · Strategist · Writer · Solo Traveler",
+  "home.eyebrow": "Humanities-trained AI operator · Numbers Protocol co-founder",
   "home.greeting": "Hi, I'm Sofia",
   "home.description":
-    "Humanities major turned startup co-founder.\nBuilding digital trust tools — making good tech human.",
-  "home.aboutBtn": "About Me",
-  "home.blogBtn": "Read Blog",
+    "I work between technology, operations, and people — translating enterprise AI adoption, content provenance, and AI coworker methods into language teams can actually use.",
+  "home.focus.ai": "Enterprise AI adoption",
+  "home.focus.provenance": "Content provenance / C2PA",
+  "home.focus.coworker": "AI coworker methodology",
+  "home.speakerBtn": "Invite Sofia",
+  "home.aboutBtn": "About Sofia",
+  "home.blogBtn": "Read essays",
   "home.stat.cities": "Cities Explored",
   "home.stat.tech": "Years in Tech",
   "home.stat.speaking": "Speaking Events",

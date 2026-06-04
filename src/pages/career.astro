@@ -186,6 +186,37 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
           </ul>
         </div>
       </section>
+
+      <section class="mt-16 border-t border-border pt-10 space-y-5">
+        <div class="space-y-2 max-w-2xl">
+          <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+            <span data-l="zh">Speaking</span><span data-l="en">Speaking</span>
+          </p>
+          <h2 class="font-display text-2xl md:text-3xl font-medium">
+            <span data-l="zh">如果這些經驗剛好對你的團隊有用</span>
+            <span data-l="en">If this field experience is useful for your team</span>
+          </h2>
+          <p class="text-muted-foreground leading-relaxed">
+            <span data-l="zh">演講與工作坊會把這些 AI 導入、內容溯源、團隊協作的現場，整理成團隊聽得懂、也能帶回去試的版本。</span>
+            <span data-l="en">Talks and workshops turn these AI adoption, content provenance, and team-operation field notes into something teams can understand and try.</span>
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href={`${baseUrl}speaker`}
+            class="inline-flex items-center gap-1 px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
+          >
+            <span data-l="zh">看演講主題</span><span data-l="en">See speaking topics</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href={`${baseUrl}blog`}
+            class="inline-flex items-center gap-1 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
+          >
+            <span data-l="zh">先讀文章</span><span data-l="en">Read essays first</span>
+          </a>
+        </div>
+      </section>
     </div>
   </main>
   <Footer />

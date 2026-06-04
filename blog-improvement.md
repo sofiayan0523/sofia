@@ -31,6 +31,10 @@ This action list is based on the current repository state and build output, not 
   - Completed Actions 8 and 16 by deriving visible blog categories from published posts; `thoughts` is hidden while it has 0 published posts.
   - Partially completed Action 12 by adding an AI adoption series section to `/blog`, adding series previous/next navigation to the four AI insight posts, and adding the `zero-to-ai-native` cluster link to `public/llms.txt`.
   - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, `/blog/` includes the AI series section, `/blog/` does not emit `data-cat="thoughts"`, and all four AI series posts include series navigation.
+- 2026-06-04 loop iteration 4:
+  - Completed Action 9 by tightening homepage first-screen positioning: updated bilingual hero copy, surfaced enterprise AI adoption / content provenance / AI coworker methodology focus tags, and changed first-screen CTAs to Speaker, Blog, and About.
+  - Advanced Actions 10 and 17 by adding Speaker to header/footer navigation and adding contextual CTA sections on About and Career.
+  - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built HTML contains the homepage focus tags plus Speaker / Blog / About CTAs and About/Career contextual CTA links.
 
 ## Verification Summary
 
