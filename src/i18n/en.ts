@@ -31,20 +31,20 @@ export const en: Record<TranslationKey, string> = {
 
   // about
   "about.eyebrow": "About",
-  "about.headline": "Building trust in the AI era",
+  "about.headline": "I keep returning to translation: making technology something people can trust",
   "about.intro":
-    "Hi, I'm Sofia — cofounder and Chief Growth Officer at Numbers Protocol, where we build blockchain-powered truth tools to protect creativity and build digital trust.",
+    "I started in education and Chinese-language teaching. Then I moved through AI, startups, content provenance, and blockchain - and realized I had not really left the same question: how people learn, trust, and find their place inside unfamiliar systems.",
   "about.background":
-    "I'm a strategist with a creative soul, raised on code and campaigns. I've spent the past decade scaling startups, leading global marketing, and advocating for ethical tech. I believe good technology should be understandable, human-centered, and a little bit rebellious.",
+    "Today I am co-founder and Chief Growth Officer at Numbers Protocol, working on content provenance and digital trust infrastructure. From the outside it looks like technology and market building. Day to day, it is translation: turning engineering language into something people can act on, and turning human hesitation back into product and strategy.",
   "about.hobbies":
-    "Beyond work, I climb walls (literally — I boulder in Taipei), and tinker with every AI tool I can get my hands on. I love solo travel and have explored over 50 cities.",
+    "Outside work, I boulder in Taipei, test new AI tools, travel alone, and keep a trail of links that look unrelated until they do not. They usually circle back to the same thing: how people build a relationship with an unfamiliar world.",
   "about.currentlyTitle": "Currently",
   "about.current1": "Based in Taipei, Taiwan",
   "about.current2": "Available for speaking engagements",
-  "about.current3": "Writing about travel & AI tools",
+  "about.current3": "Writing about enterprise AI adoption, content trust, and travel observations",
   "about.current4": "Bouldering on weekends",
-  "about.playgroundTitle": "Playground",
-  "about.playgroundDescription": "My interests and curated links",
+  "about.playgroundTitle": "Side paths",
+  "about.playgroundDescription": "A few entrances that are less resume, more me",
 
   // blog
   "blog.eyebrow": "Blog",

@@ -40,6 +40,11 @@ This action list is based on the current repository state and build output, not 
   - Advanced Action 14 by documenting speaker and product-flow CTA event names in `docs/utm-convention.md`.
   - Fixed Speaker canonical origin from legacy GitHub Pages to `https://sofiayan.cc`.
   - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built HTML contains the Speaker hero CTA, fit guide, `data-analytics-event` attributes, and `https://sofiayan.cc/speaker` canonical URL.
+- 2026-06-04 loop iteration 6:
+  - Completed Action 13 by restructuring About around a reflective "translation" through-line instead of a dense resume: education/language -> startup field work -> AI coworker and content trust.
+  - Moved playful Playground links into their own section and replaced the long credentials/speaking block with compact public receipts that route archive density to Career and booking intent to Speaker.
+  - Kept About E-E-A-T validation signals in the page source and built output: NCCU / 政大, NTUE / 臺北教育大學, ERC-7053, SXSW 2023 Pitch, and UNICRI.
+  - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built About HTML contains the new narrative hierarchy plus Career/Speaker links without the old dense credentials headings in main content.
 
 ## Verification Summary
 
@@ -52,7 +57,7 @@ This action list is based on the current repository state and build output, not 
 - Existing agent-readiness capabilities are partial: `/agent.json` and `/.well-known/agent.json` exist, but MCP server card, agent skills index, and API catalog files are missing.
 - Current site IA has six main user-facing routes: `/`, `/about`, `/blog`, `/career`, `/speaker`, and `/ai-coworker-methodology`.
 - Current homepage first screen introduces Sofia as "共同創辦人 · 策略長 · 寫作者 · 獨旅人", with primary CTAs to About and Blog.
-- Current About page contains personal narrative, credentials, speaking history, Numbers Protocol context, and "Playground" outbound links.
+- Current About page is story-led: personal narrative, translation through-line, Playground outbound links, compact public receipts, and contextual links to Career and Speaker.
 - Current Speaker page contains offer formats, topics, proof points, FAQ, and contact CTAs via email and LinkedIn DM.
 - UTM convention exists in `docs/utm-convention.md`, but example URLs still use old GitHub Pages `/posts/...` paths.
 

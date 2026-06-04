@@ -28,17 +28,17 @@ export const zh = {
 
   // about
   "about.eyebrow": "關於",
-  "about.headline": "在 AI 時代建立信任",
-  "about.intro": "純種文組人，誤打誤撞闖進科技新創，又陰錯陽差成了 Numbers Protocol 的 co-founder 兼成長策略長。",
-  "about.background": "做區塊鏈驅動的「真相工具」讓創作有憑有據、讓數位信任可被驗證，也讓好的技術更好懂。我相信好的技術應該是可理解、以人為本，並且帶點叛逆精神的。",
-  "about.hobbies": "不設限人生驚喜（嚇）包開箱中。環境友善支持者，貓奴。工作之外在台北抱石，AI 工具能玩就玩，熱愛獨旅，累積走過 50+ 城市。",
+  "about.headline": "我一直在做翻譯：把技術翻成人能相信的東西",
+  "about.intro": "我原本學的是教育與華語文教學。後來一路走進 AI、新創、內容溯源與區塊鏈，才發現自己沒有真的離開原本的事：理解人怎麼學、怎麼相信、怎麼在陌生系統裡找到自己的位置。",
+  "about.background": "現在我在 Numbers Protocol 做共同創辦人與成長策略長，參與建構內容來源與數位信任基礎建設。外面看起來是技術與市場；我實際上每天面對的是翻譯，把工程語言翻成使用者能採取行動的語言，也把人的猶豫翻回產品與策略。",
+  "about.hobbies": "工作之外，我在台北抱石、測試新的 AI 工具、獨旅，也收藏一些看似不務正業的線索。那些路徑最後常常又繞回同一件事：人如何和不熟悉的世界建立關係。",
   "about.currentlyTitle": "目前",
   "about.current1": "定居台北",
   "about.current2": "接受演講邀約中",
-  "about.current3": "撰寫關於旅行和 AI 工具的文章",
+  "about.current3": "寫企業 AI 導入、內容信任與旅行裡的觀察",
   "about.current4": "週末抱石中",
-  "about.playgroundTitle": "探索",
-  "about.playgroundDescription": "我的興趣與連結收藏",
+  "about.playgroundTitle": "旁枝",
+  "about.playgroundDescription": "一些比較不像履歷、但很像我的入口。",
 
   // blog
   "blog.eyebrow": "Blog",

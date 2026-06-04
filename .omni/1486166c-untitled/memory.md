@@ -32,6 +32,7 @@
 - 2026-06-04 loop iteration 3 completed active stale URL cleanup for docs/scripts, hid empty `thoughts` category by deriving blog filters from published posts, added an AI adoption series section on `/blog`, added series previous/next navigation on the four AI posts, and updated `llms.txt` with the `zero-to-ai-native` cluster; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 4 updated sofia-s-blog homepage positioning and CTA map: hero now emphasizes enterprise AI adoption, content provenance/C2PA, and AI coworker methodology; first-screen CTAs route to Speaker, Blog, and About; Speaker is in header/footer nav; About and Career have contextual CTA sections; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 5 strengthened sofia-s-blog Speaker funnel: hero email CTA, best-fit/not-best-fit guide, fit-section email CTA, tracking attributes on speaker enquiry links, event names documented in `docs/utm-convention.md`, and Speaker canonical origin fixed to `https://sofiayan.cc`; `npm run check:links` and AEO validation pass.
+- 2026-06-04 loop iteration 6 completed sofia-s-blog About narrative hierarchy: About now centers a reflective translation through-line, separates Playground links from compact public receipts, routes dense proof to Career/Speaker, and still preserves AEO credential signals; `npm run check:links` and AEO validation pass.
 
 ---
-_Last system refresh: 2026-06-04 06:58 UTC_
+_Last system refresh: 2026-06-04 07:31 UTC_
