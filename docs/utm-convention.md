@@ -3,7 +3,7 @@
 > **目的**：所有從 Sofia 個人品牌觸點 → Numbers / Omni / Speaker 的流量都用一致的 UTM，KPI dashboard 才能正確分流。
 >
 > **owner**: Omni (Executor agent)
-> **last updated**: 2026-05-12 / Iteration 2
+> **last updated**: 2026-06-04 / loop iteration 7
 
 ## 三個強制必帶參數
 
@@ -56,12 +56,12 @@ https://sofiayan.cc/speaker?utm_source=sofia-blog&utm_medium=x&utm_campaign=spea
 
 ### 3. Speaker page 引導到 Numbers / Omni demo
 ```
-https://www.numbersprotocol.io/products/omni?utm_source=sofia-blog&utm_medium=speaker-page&utm_campaign=numbers-omni-demo&utm_content=speaker-cta-bottom
+https://numbersprotocol.io/?utm_source=sofia-blog&utm_medium=speaker-page&utm_campaign=numbers-omni-demo&utm_content=speaker-cta-bottom
 ```
 
-### 4. Blog Cluster B1 連到 Omni waitlist
+### 4. AI methodology page 連到 Numbers / Omni
 ```
-https://www.numbersprotocol.io/omni-waitlist?utm_source=sofia-blog&utm_medium=blog-internal&utm_campaign=numbers-omni-demo&utm_content=cluster-b1-ai-coworkers
+https://numbersprotocol.io/?utm_source=sofia-blog&utm_medium=blog-internal&utm_campaign=numbers-omni-demo&utm_content=ai-coworker-methodology-cta-omni
 ```
 
 ## 規則（不可違反）
@@ -91,6 +91,23 @@ https://www.numbersprotocol.io/omni-waitlist?utm_source=sofia-blog&utm_medium=bl
 | `article_share_click` | Blog post share buttons | 衡量文章擴散，不作為 speaker conversion |
 
 站內 CTA 應在連結上加 `data-analytics-event` 與 `data-cta-location`，讓 GA4 / Cloudflare Zaraz / 之後的輕量 tracking script 可以接同一套命名。
+
+已實作的 CTA metadata：
+
+| Event name | Required metadata | 目前實作 |
+|---|---|---|
+| `speaker_enquiry_email_click` | `data-cta-location`, `data-cta-destination="email"`, `data-cta-content` | `/speaker` hero、fit guide、contact section |
+| `speaker_enquiry_linkedin_click` | `data-cta-location`, `data-cta-destination="linkedin"`, `data-cta-content` | `/speaker` contact section |
+| `numbers_omni_outbound_click` | UTM + `data-cta-location`, `data-cta-destination`, `data-cta-content` | `/ai-coworker-methodology` next steps CTA |
+| `article_share_click` | `data-cta-location="blog-post-share"`, `data-cta-destination`, `data-cta-content` | Blog post X / Facebook / LinkedIn / LINE / copy share controls |
+
+`BaseLayout.astro` 會捕捉所有帶 `data-analytics-event` 的 click，並在可用時送出 GA4 `gtag`、Cloudflare Zaraz `track`，同時發出 `sofia:cta-click` browser event。
+
+本地檢查：
+
+```bash
+npm run check:cta
+```
 
 ## 程式化生成（Iteration 3+ 加入）
 

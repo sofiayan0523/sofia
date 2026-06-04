@@ -9,6 +9,7 @@
     "start": "astro dev",
     "build": "astro build",
     "check:links": "npm run build && node scripts/check-links.mjs",
+    "check:cta": "node scripts/validate-cta-tracking.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "postbuild": "pagefind --site dist"

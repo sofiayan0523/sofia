@@ -45,6 +45,12 @@ This action list is based on the current repository state and build output, not 
   - Moved playful Playground links into their own section and replaced the long credentials/speaking block with compact public receipts that route archive density to Career and booking intent to Speaker.
   - Kept About E-E-A-T validation signals in the page source and built output: NCCU / 政大, NTUE / 臺北教育大學, ERC-7053, SXSW 2023 Pitch, and UNICRI.
   - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, and built About HTML contains the new narrative hierarchy plus Career/Speaker links without the old dense credentials headings in main content.
+- 2026-06-04 loop iteration 7:
+  - Completed Action 14 by wiring a lightweight CTA click dispatcher in `BaseLayout.astro` for `data-analytics-event` links; it supports GA4 `gtag`, Cloudflare Zaraz `track`, and a `sofia:cta-click` browser event.
+  - Added event metadata for Speaker enquiry CTAs, the AI methodology Numbers / Omni outbound CTA, and all blog post share controls.
+  - Added `scripts/validate-cta-tracking.mjs` plus `npm run check:cta` to enforce event names, CTA metadata, and UTM conventions.
+  - Updated `docs/utm-convention.md` with implemented metadata requirements and replaced confirmed 404 Numbers / Omni example URLs with the live `https://numbersprotocol.io/` funnel URL.
+  - Verified `npm run check:cta`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed; built HTML contains `speaker_enquiry_*`, `numbers_omni_outbound_click`, `article_share_click`, and `sofia:cta-click`.
 
 ## Verification Summary
 
@@ -59,7 +65,7 @@ This action list is based on the current repository state and build output, not 
 - Current homepage first screen introduces Sofia as "共同創辦人 · 策略長 · 寫作者 · 獨旅人", with primary CTAs to About and Blog.
 - Current About page is story-led: personal narrative, translation through-line, Playground outbound links, compact public receipts, and contextual links to Career and Speaker.
 - Current Speaker page contains offer formats, topics, proof points, FAQ, and contact CTAs via email and LinkedIn DM.
-- UTM convention exists in `docs/utm-convention.md`, but example URLs still use old GitHub Pages `/posts/...` paths.
+- UTM convention exists in `docs/utm-convention.md`; CTA event metadata is implemented for Speaker enquiry, AI methodology Numbers / Omni outbound, and blog share controls, with `npm run check:cta` enforcing the current event matrix.
 
 ## Evidence Checked
 
