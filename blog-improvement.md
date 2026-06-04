@@ -62,49 +62,69 @@ This action list is based on the current repository state and build output, not 
   - Added `scripts/validate-brand-guardrails.mjs` plus `npm run check:brand` to enforce top-level CTA map, category-aware blog CTAs, high-risk metric placement, and generic consultant phrase avoidance.
   - Adjusted `ai-coworker-methodology.astro` and `speaker.astro` copy to remove a proof metric from methodology hero context and replace a generic "賦能" course phrase.
   - Verified `npm run check:brand`, `npm run check:cta`, `npm run check:roadmap`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed; built HTML confirms AI/travel post CTA routing.
+- 2026-06-04 loop iteration 10:
+  - Added `npm run check:all` as the final local verification command: brand guardrails, roadmap guardrails, CTA tracking, AEO validation, build, Pagefind, and internal link validation.
+  - Refreshed this file's Verification Summary and Evidence Checked sections to remove stale early-audit statements and reflect the current 25-page build, `/posts/{slug}/` compatibility pages, FAQPage JSON-LD, AEO capability endpoints, CTA tracking, roadmap, and brand guardrails.
+  - Added Final Action Audit and confirmed Actions 1-18 are complete from repository-local implementation and validation perspective.
+  - Verified `npm run check:all` succeeds and final built HTML spot checks pass for FAQPage JSON-LD plus AI/travel contextual CTA routing.
 
 ## Verification Summary
 
 - Stack: Astro 5 static site with MDX content, React islands, Tailwind, RSS, sitemap, and Pagefind post-build search.
-- Build command verified: `npm run build` completed successfully and generated 16 pages.
+- Build command verified: `npm run check:all` completed successfully; its final `npm run check:links` step runs `npm run build`, Pagefind, and internal link validation.
+- Current build generates 25 pages: six top-level pages / files, nine `/blog/{slug}/` posts, nine `/posts/{slug}/` compatibility redirect pages, and RSS.
 - Published blog routes verified from build output: 9 posts under `/blog/{slug}/`.
-- No `/posts/{slug}` route is generated. Any `/posts/...` link is broken unless a redirect is added.
-- AEO foundation files exist and validate: `public/llms.txt`, `public/agent.json`, `public/.well-known/agent.json`, `public/robots.txt`, and sitemap output.
-- `SEO.astro` supports `FAQPage`, but `BaseLayout.astro` does not pass `faq` through to `SEO.astro`; page-level FAQ data on `speaker` and `ai-coworker-methodology` is therefore not emitted in built HTML.
-- Existing agent-readiness capabilities are partial: `/agent.json` and `/.well-known/agent.json` exist, but MCP server card, agent skills index, and API catalog files are missing.
+- `/posts/{slug}/` compatibility pages are generated with noindex redirect/fallback behavior for all 9 published posts; canonical URLs remain under `/blog/{slug}/`.
+- AEO foundation and capability files exist and validate: `public/llms.txt`, `public/agent.json`, `public/.well-known/agent.json`, `public/.well-known/mcp/server-card.json`, `public/.well-known/agent-skills/index.json`, `public/.well-known/api-catalog`, `public/robots.txt`, and sitemap output.
+- FAQPage JSON-LD is emitted for `speaker` and `ai-coworker-methodology` through `BaseLayout.astro` -> `SEO.astro`.
 - Current site IA has six main user-facing routes: `/`, `/about`, `/blog`, `/career`, `/speaker`, and `/ai-coworker-methodology`.
-- Current homepage first screen introduces Sofia as "共同創辦人 · 策略長 · 寫作者 · 獨旅人", with primary CTAs to About and Blog.
+- Current homepage first screen positions Sofia around enterprise AI adoption, content provenance / C2PA, and AI coworker methodology, with CTAs to Speaker, Blog, and About.
 - Current About page is story-led: personal narrative, translation through-line, Playground outbound links, compact public receipts, and contextual links to Career and Speaker.
 - Current Speaker page contains offer formats, topics, proof points, FAQ, and contact CTAs via email and LinkedIn DM.
+- Current Blog index hides empty categories, exposes the AI adoption series, and keeps travel essays visible in the general post grid.
+- Current Blog post template renders category-aware contextual CTAs: AI insight posts route to AI coworker methodology / Speaker; travel posts route to About / Blog.
 - UTM convention exists in `docs/utm-convention.md`; CTA event metadata is implemented for Speaker enquiry, AI methodology Numbers / Omni outbound, and blog share controls, with `npm run check:cta` enforcing the current event matrix.
 - Editorial roadmap exists in `docs/editorial-roadmap.md`; it defines 8 planned scene-led briefs and `npm run check:roadmap` enforces required fields plus anti-template guardrails.
 - Site CTA and authority guardrails exist in `docs/site-guardrails.md`; `npm run check:brand` enforces the top-level CTA map, category-aware blog post CTAs, high-risk metric placement, and generic consultant phrase avoidance.
 
 ## Evidence Checked
 
-- `npm run build`
-  - Generated routes include `/blog/2022-life-in-oslo/`, `/blog/2024-bologna/`, `/blog/2024-florence/`, `/blog/2024-rome/`, `/blog/2024-venice/`, `/blog/ai-anxiety-survival-guide/`, `/blog/humanities-ai-expert/`, `/blog/why-95-percent-ai-adoption-fails/`, and `/blog/zero-to-ai-native/`.
+- `npm run check:all`
+  - Runs `check:brand`, `check:roadmap`, `check:cta`, `validate-aeo-files.mjs`, and `check:links`.
+  - Final build generated 25 pages.
   - Pagefind indexed 9 pages.
-- Internal link scan on `dist/**/*.html`
-  - Found 6 broken internal references.
-  - 5 are real `/posts/...` route bugs.
-  - 1 is `404.html` canonicalizing to `/404/`, which is lower priority because it is the 404 page itself.
-- JSON-LD scan on built pages
-  - `dist/speaker/index.html`: `Person`, `Organization`, `WebSite`; no `FAQPage`.
-  - `dist/ai-coworker-methodology/index.html`: `Person`, `Organization`, `WebSite`; no `FAQPage`.
-  - `dist/blog/humanities-ai-expert/index.html`: includes `Article` and inline MDX `FAQPage`.
-- External link spot check with `curl -L`
+  - Internal link checker scanned 25 HTML files and found no broken internal links.
+- `node scripts/validate-aeo-files.mjs`
+  - Validates llms.txt, agent.json mirror, MCP server-card, agent-skills index, API catalog, robots AI bot rules, schema support, Speaker FAQ, About E-E-A-T signals, UTM convention, and Numbers registration script structure.
+- `npm run check:brand`
+  - Validates top-level CTA map, category-aware Blog post CTAs, travel posts not promoting Speaker by default, high-risk proof metrics staying out of hero / narrative pages, and generic consultant phrase avoidance.
+- `npm run check:roadmap`
+  - Validates 8 planned briefs, required fields, current route coverage, intentional `thoughts` usage, and banned SEO/listicle title patterns.
+- `npm run check:cta`
+  - Validates GA4/Zaraz/custom CTA dispatcher, Speaker enquiry CTA metadata, AI methodology Numbers / Omni UTM/event metadata, Blog share events, and UTM docs.
+- Built HTML spot checks
+  - `dist/speaker/index.html` and `dist/ai-coworker-methodology/index.html` include `"@type":"FAQPage"`.
+  - `dist/blog/humanities-ai-expert/index.html` includes `data-contextual-cta="blog-context-ai"` plus `/ai-coworker-methodology` and `/speaker` links.
+  - `dist/blog/2024-venice/index.html` includes `data-contextual-cta="blog-context-travel"` plus `/about` and `/blog` links; the travel contextual CTA section does not link to `/speaker`.
+- Historical external link spot checks that drove fixes
   - `https://numbersprotocol.github.io/numbers-ama/webinar/2025-12-06` returns 404.
   - `https://open.spotify.com/playlist/37i9dQZF1DWVidGk00tysG?si=b6b00b9e03b24a59` returns 404.
   - `https://open.spotify.com/episode/6hqxuFpmGLKAecJUuzfeqW` returns 200.
   - `https://open.spotify.com/episode/1RJPvMew8eqiwjKBurVnQW` returns 200.
   - `https://sofiayan.cc/posts/humanities-ai-expert` returns 404.
   - `https://sofiayan.cc/blog/humanities-ai-expert/` returns 200.
-- Source page review
-  - `src/pages/index.astro` has two first-screen CTAs: About and Blog.
-  - `src/pages/about.astro` includes credentials, speaking history, Numbers Protocol context, and Playground cards.
-  - `src/pages/speaker.astro` includes three offer formats, topic blocks, proof points, FAQ, and email / LinkedIn CTAs.
-  - `docs/utm-convention.md` defines source/medium/campaign/content rules and funnel categories.
+
+## Final Action Audit
+
+- Actions 1-3: completed in iteration 1.
+- Actions 4-6: completed in iteration 2.
+- Actions 7, 8, 12, and 16: completed in iteration 3; Action 12 was later reinforced by category-aware post CTAs in iteration 9.
+- Actions 9, 10, and 17 foundation: advanced in iteration 4; Action 17 completed in iteration 9.
+- Actions 11 and 14 foundation: advanced in iteration 5; Action 14 completed in iteration 7.
+- Action 13: completed in iteration 6.
+- Action 15: completed in iteration 8.
+- Action 18: completed in iteration 9.
+- No open action item remains in this file after iteration 10 local verification.
 
 ## P0 Actions
 
