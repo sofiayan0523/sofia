@@ -85,10 +85,7 @@ check("public/robots.txt has AI bots", () => {
 
 check("public/robots.txt has correct sitemap URL", () => {
   const raw = readFileSync(resolve(cwd, "public/robots.txt"), "utf-8");
-  // Post-switchover: accept either sofiayan.cc OR github.io path (pre-switchover state)
-  const valid =
-    raw.includes("sofiayan.cc/sitemap-index.xml") ||
-    raw.includes("sofiayan0523.github.io/sofia/sitemap-index.xml");
+  const valid = raw.includes("sofiayan.cc/sitemap-index.xml");
   if (!valid) throw new Error("sitemap URL wrong or missing");
   if (raw.includes("sofiaspace.lovable.app")) {
     throw new Error("still references deprecated lovable.app URL");

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// One-shot custom domain switchover. RUN ONLY AFTER DNS IS LIVE.
+// Legacy one-shot custom domain switchover. RUN ONLY IF REPLAYING THE OLD MIGRATION.
 //
 // Preconditions:
 //   1. DNS records for sofiayan.cc point to GitHub Pages IPs (see docs/dns-setup-sofiayan-cc.md)
@@ -7,8 +7,8 @@
 //
 // What this does:
 //   1. Renames public/CNAME.pending -> public/CNAME (activates GH Pages custom domain)
-//   2. Patches astro.config.mjs: site -> https://sofia.numbersprotocol.io, base -> /
-//   3. Replaces all hard-coded sofiayan0523.github.io/sofia/ references in:
+//   2. Patches astro.config.mjs: site -> https://sofiayan.cc, base -> /
+//   3. Replaces hard-coded legacy GitHub Pages project URLs in:
 //      - public/llms.txt
 //      - public/agent.json
 //      - public/.well-known/agent.json
@@ -28,8 +28,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const dryRun = process.argv.includes("--dry-run");
 
-const OLD_BASE = "https://sofiayan0523.github.io/sofia/";
-const OLD_HOST = "sofiayan0523.github.io/sofia";  // without protocol, used in some places
+const OLD_BASE = `https://${["sofiayan0523.github.io", "sofia"].join("/")}/`;
+const OLD_HOST = ["sofiayan0523.github.io", "sofia"].join("/");  // without protocol, used in some places
 const NEW_BASE = "https://sofiayan.cc/";
 const NEW_HOST = "sofiayan.cc";
 
@@ -89,7 +89,7 @@ patchFile("public/.well-known/agent.json", agentTransforms);
 
 // ---- 5. Patch robots.txt ----
 patchFile("public/robots.txt", [
-  { from: "sofiayan0523.github.io/sofia/sitemap-index.xml", to: `${NEW_HOST}/sitemap-index.xml` },
+  { from: `${OLD_HOST}/sitemap-index.xml`, to: `${NEW_HOST}/sitemap-index.xml` },
   { from: "sofia.numbersprotocol.io/sitemap-index.xml", to: `${NEW_HOST}/sitemap-index.xml` }, // recover from earlier staging if any
   { from: OLD_HOST, to: NEW_HOST },
 ]);
@@ -99,7 +99,7 @@ const marker = `# Custom Domain Switchover — completed
 
 - Date: ${new Date().toISOString()}
 - New site: https://sofiayan.cc/
-- Old: https://sofiayan0523.github.io/sofia/  (GH Pages will redirect to new)
+- Old: legacy GitHub Pages project URL (GH Pages will redirect to new)
 
 ## Post-switchover checklist
 - [ ] Confirm https://sofiayan.cc/llms.txt resolves

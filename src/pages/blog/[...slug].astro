@@ -22,6 +22,51 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const t = getTranslations(DEFAULT_LANG);
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const currentSlug = post.id.replace(/\.mdx?$/, "");
+
+const seriesDefinitions = [
+  {
+    slug: "humanities-ai-expert",
+    roleZh: "Pillar",
+    roleEn: "Pillar",
+    noteZh: "文組人在企業 AI 導入裡的位置。",
+    noteEn: "Humanities-led AI adoption.",
+  },
+  {
+    slug: "ai-anxiety-survival-guide",
+    roleZh: "Cluster A2",
+    roleEn: "Cluster A2",
+    noteZh: "AI 焦慮與 8% / 92% 框架。",
+    noteEn: "AI anxiety and the 8% / 92% frame.",
+  },
+  {
+    slug: "why-95-percent-ai-adoption-fails",
+    roleZh: "Cluster A1",
+    roleEn: "Cluster A1",
+    noteZh: "企業 AI pilot 為什麼沒有進入日常流程。",
+    noteEn: "Why AI pilots fail to become daily work.",
+  },
+  {
+    slug: "zero-to-ai-native",
+    roleZh: "Cluster B1",
+    roleEn: "Cluster B1",
+    noteZh: "公司如何重新長成 AI-Native。",
+    noteEn: "How a company becomes AI-native.",
+  },
+] as const;
+
+const allPublishedPosts = await getCollection("posts", ({ data }) => !data.draft);
+const postBySlug = new Map(allPublishedPosts.map((entry) => [entry.id.replace(/\.mdx?$/, ""), entry]));
+const aiSeries = seriesDefinitions
+  .map((item) => ({ ...item, post: postBySlug.get(item.slug) }))
+  .filter((item) => item.post);
+const currentSeriesIndex = aiSeries.findIndex((item) => item.slug === currentSlug);
+const currentSeries = currentSeriesIndex >= 0 ? aiSeries[currentSeriesIndex] : null;
+const previousSeries = currentSeriesIndex > 0 ? aiSeries[currentSeriesIndex - 1] : null;
+const nextSeries =
+  currentSeriesIndex >= 0 && currentSeriesIndex < aiSeries.length - 1
+    ? aiSeries[currentSeriesIndex + 1]
+    : null;
 
 const formatDate = (d: Date) =>
   d.toLocaleDateString("zh-TW", { year: "numeric", month: "long", day: "numeric" });
@@ -115,8 +160,75 @@ const categoryKey = (`category.${post.data.category}` as unknown) as Translation
         )
       }
 
+      {
+        currentSeries && (
+          <section class="mt-12 border-y border-border py-8 space-y-5" data-pagefind-ignore>
+            <div class="space-y-2">
+              <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+                <span data-l="zh">AI adoption series</span>
+                <span data-l="en">AI adoption series</span>
+              </p>
+              <h2 class="font-display text-2xl font-medium">
+                <span data-l="zh">這篇在系列裡的位置</span>
+                <span data-l="en">Where this essay sits in the series</span>
+              </h2>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                <span data-l="zh">這組文章從個人焦慮、文組翻譯能力，一路走到企業 AI 導入與 AI-Native 組織設計。</span>
+                <span data-l="en">This series moves from individual anxiety and humanities translation into enterprise AI adoption and AI-native operating design.</span>
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              {previousSeries && (
+                <a
+                  href={`${baseUrl}blog/${previousSeries.slug}/`}
+                  class="group rounded-lg border border-border/60 bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
+                >
+                  <p class="text-xs text-muted-foreground mb-2">
+                    <span data-l="zh">上一篇</span>
+                    <span data-l="en">Previous</span>
+                    <span> · </span>
+                    <span data-l="zh">{previousSeries.roleZh}</span>
+                    <span data-l="en">{previousSeries.roleEn}</span>
+                  </p>
+                  <h3 class="font-display text-lg font-medium leading-snug group-hover:text-primary transition-colors">
+                    {previousSeries.post?.data.title}
+                  </h3>
+                  <p class="mt-3 text-sm text-muted-foreground">
+                    <span data-l="zh">{previousSeries.noteZh}</span>
+                    <span data-l="en">{previousSeries.noteEn}</span>
+                  </p>
+                </a>
+              )}
+
+              {nextSeries && (
+                <a
+                  href={`${baseUrl}blog/${nextSeries.slug}/`}
+                  class="group rounded-lg border border-border/60 bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
+                >
+                  <p class="text-xs text-muted-foreground mb-2">
+                    <span data-l="zh">下一篇</span>
+                    <span data-l="en">Next</span>
+                    <span> · </span>
+                    <span data-l="zh">{nextSeries.roleZh}</span>
+                    <span data-l="en">{nextSeries.roleEn}</span>
+                  </p>
+                  <h3 class="font-display text-lg font-medium leading-snug group-hover:text-primary transition-colors">
+                    {nextSeries.post?.data.title}
+                  </h3>
+                  <p class="mt-3 text-sm text-muted-foreground">
+                    <span data-l="zh">{nextSeries.noteZh}</span>
+                    <span data-l="en">{nextSeries.noteEn}</span>
+                  </p>
+                </a>
+              )}
+            </div>
+          </section>
+        )
+      }
+
       <div class="my-12 py-8 border-t border-b border-border grid grid-cols-1 md:grid-cols-2 gap-8" data-pagefind-ignore>
-        <Reactions slug={post.id.replace(/\.mdx?$/, "")} client:only="react" />
+        <Reactions slug={currentSlug} client:only="react" />
         <div class="md:border-l md:border-border md:pl-8">
           <ShareButtons title={post.data.title} />
         </div>

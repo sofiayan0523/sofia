@@ -12,8 +12,8 @@ Migration scope: **Vite + React + Supabase → Astro + Markdown + GitHub Pages**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  GitHub Pages (project page)                 │
-│             https://sofiayan0523.github.io/sofia/            │
+│              GitHub Pages with custom domain                  │
+│                       https://sofiayan.cc/                    │
 └─────────────────────────────────────────────────────────────┘
                               ▲
                               │ deploy via Actions
@@ -41,7 +41,7 @@ Migration scope: **Vite + React + Supabase → Astro + Markdown + GitHub Pages**
 │  │   ├ download-images.mjs                                   │
 │  │   ├ migrate-posts.mjs                                     │
 │  │   └ compress-images.mjs                                   │
-│  └ astro.config.mjs (site + base="/sofia")                   │
+│  └ astro.config.mjs (site="https://sofiayan.cc", base="/")   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -102,7 +102,7 @@ Migration scope: **Vite + React + Supabase → Astro + Markdown + GitHub Pages**
 
 ### Configuration
 
-- `astro.config.mjs` — `site` + `base: "/sofia"` for project page deployment
+- `astro.config.mjs` — `site: "https://sofiayan.cc"` + `base: "/"` for custom-domain deployment
 - `tailwind.config.mjs` — color tokens (HSL custom properties), font, animations, typography plugin
 - `tsconfig.json` — extends `astro/tsconfigs/strict`, includes `@/*` path alias
 - `.gitignore` — adds `.env`, `dist/`, `.astro/`
@@ -116,10 +116,10 @@ Migration scope: **Vite + React + Supabase → Astro + Markdown + GitHub Pages**
 
 ## Key bugs caught and fixed during the build
 
-1. **BASE_URL trailing slash** — `import.meta.env.BASE_URL` is `/sofia` (no trailing slash); template `${baseUrl}favicon.ico` produced `/sofiafavicon.ico`. Fix: normalize to `/sofia/` everywhere via `.replace(/\/?$/, "/")`.
+1. **BASE_URL trailing slash** — when the site used a project-page base path, `import.meta.env.BASE_URL` had no trailing slash; template `${baseUrl}favicon.ico` produced a broken URL. Fix: normalize with `.replace(/\/?$/, "/")`.
 2. **MDX-special characters in post body** — `<-` and `->` in plain text broke the MDX parser. Fix: 3-step transform in `migrate-posts.mjs` — extract capture-eye → escape `<>{}\` → restore.
 3. **Astro 5 `post.id` includes file extension** — `post.id === "2024-rome.mdx"`, producing URLs like `/blog/2024-rome.mdx/`. Fix: `post.id.replace(/\.mdx?$/, "")` in route's `getStaticPaths`.
-4. **RSS feed missing `/sofia/` prefix** — `context.site` is the bare origin; RSS `<link>` was `https://sofiayan0523.github.io/blog/...`. Fix: combine `context.site` with `import.meta.env.BASE_URL` to produce correct project-page URLs.
+4. **RSS feed root handling** — `context.site` is the bare origin; RSS links need to combine `context.site` with `import.meta.env.BASE_URL` so custom-domain and base-path deployments both resolve correctly.
 
 ---
 
@@ -146,7 +146,7 @@ Migration scope: **Vite + React + Supabase → Astro + Markdown + GitHub Pages**
 
 ## Going live
 
-The site is **fully built and ready to deploy**. To go live:
+The site is **fully built and ready to deploy** at the current custom domain.
 
 ### One-time user action (required)
 
@@ -154,7 +154,7 @@ The site is **fully built and ready to deploy**. To go live:
 2. Under "Build and deployment" → "Source", select **GitHub Actions**
 3. Save
 
-That's it. From this point on, every push to `main` (after it's auto-merged from the working branch) will trigger the workflow and deploy to `https://sofiayan0523.github.io/sofia/`.
+That's it. From this point on, every push to `main` (after it's auto-merged from the working branch) will trigger the workflow and deploy to `https://sofiayan.cc/`.
 
 ### Verifying after first deploy
 
@@ -163,10 +163,10 @@ That's it. From this point on, every push to `main` (after it's auto-merged from
 gh run list --repo sofiayan0523/sofia --limit 5
 
 # Spot-check key URLs:
-curl -sI https://sofiayan0523.github.io/sofia/                   # 200
-curl -sI https://sofiayan0523.github.io/sofia/blog/              # 200
-curl -sI https://sofiayan0523.github.io/sofia/blog/2024-rome/    # 200
-curl -sI https://sofiayan0523.github.io/sofia/rss.xml            # 200, content-type: application/xml
+curl -sI https://sofiayan.cc/                   # 200
+curl -sI https://sofiayan.cc/blog/              # 200
+curl -sI https://sofiayan.cc/blog/2024-rome/    # 200
+curl -sI https://sofiayan.cc/rss.xml            # 200, content-type: application/xml
 ```
 
 ---
@@ -198,14 +198,14 @@ tags: [tag1, tag2]
 publishedAt: 2026-05-07
 readTime: "3 min"
 draft: false
-coverImage: /sofia/images/posts/2026-05-new-post/cover.jpg
+coverImage: /images/posts/2026-05-new-post/cover.jpg
 ---
 
 import CaptureEye from "@/components/CaptureEye.astro";
 
 文章內容...
 
-<CaptureEye nid="bafy..." src="/sofia/images/posts/2026-05-new-post/01.jpg" alt="..." />
+<CaptureEye nid="bafy..." src="/images/posts/2026-05-new-post/01.jpg" alt="..." />
 
 更多文字...
 MDX
@@ -237,7 +237,7 @@ GitHub Actions takes ~1 minute to rebuild and redeploy.
 
 - **Astro 5 collection IDs include the file extension** — always strip with `.replace(/\.mdx?$/, "")` when constructing URLs
 - **MDX is strict about `<` and `{`** — bare characters need escaping; safest pipeline is extract→escape→restore
-- **GitHub Pages project page needs `base` set in Astro config** — and template literals using `BASE_URL` need trailing-slash normalization
+- **GitHub Pages project page needs `base` set in Astro config** — custom-domain deployment uses `base: "/"`, but template literals using `BASE_URL` still need trailing-slash normalization
 - **`context.site` excludes `base`** — combine the two when generating absolute URLs (RSS, OG, canonical)
 - **React Islands are paid only when used** — having `@astrojs/react` installed adds nothing to bundle; only pages that include `client:load` components ship the React runtime
 - **Pagefind plays well with content collections** — wrap the post body with `<article data-pagefind-body>` to make search index article-only

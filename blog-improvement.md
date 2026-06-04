@@ -26,6 +26,11 @@ This action list is based on the current repository state and build output, not 
   - Extended `scripts/validate-aeo-files.mjs` to validate the new capability discovery files.
   - Verified `npm run check:links` succeeds; build now generates 25 pages, including 9 `/posts/{slug}/` compatibility pages, and the checker found no broken internal links.
   - Verified `node scripts/validate-aeo-files.mjs` succeeds and the three new discovery endpoints are present in `dist`.
+- 2026-06-04 loop iteration 3:
+  - Completed P2 Action 7 for active stale deployment references by updating `RELEASE-NOTES.md`, `scripts/validate-aeo-files.mjs`, and `scripts/switchover-domain.mjs`; exact scan for `sofiayan0523.github.io/sofia`, `sofiayan.com`, and route-style `/posts/` references in docs/scripts/release notes returns no matches.
+  - Completed Actions 8 and 16 by deriving visible blog categories from published posts; `thoughts` is hidden while it has 0 published posts.
+  - Partially completed Action 12 by adding an AI adoption series section to `/blog`, adding series previous/next navigation to the four AI insight posts, and adding the `zero-to-ai-native` cluster link to `public/llms.txt`.
+  - Verified `npm run check:links` succeeds, `node scripts/validate-aeo-files.mjs` succeeds, `/blog/` includes the AI series section, `/blog/` does not emit `data-cat="thoughts"`, and all four AI series posts include series navigation.
 
 ## Verification Summary
 
