@@ -72,6 +72,44 @@ const formatDate = (d: Date) =>
   d.toLocaleDateString("zh-TW", { year: "numeric", month: "long", day: "numeric" });
 
 const categoryKey = (`category.${post.data.category}` as unknown) as TranslationKey;
+const contextualCta =
+  post.data.category === "ai-insights"
+    ? {
+        eyebrowZh: "Next",
+        eyebrowEn: "Next",
+        titleZh: "如果你想把這篇帶回團隊討論",
+        titleEn: "If you want to bring this essay back to your team",
+        descriptionZh:
+          "這組 AI 文章不是工具清單，比較像幾個企業現場留下來的問題。下一步可以先看完整方法論，或直接討論適合團隊的演講 / workshop。",
+        descriptionEn:
+          "These AI essays are not tool lists. They are field notes from enterprise adoption work. Continue with the methodology, or discuss a talk / workshop for your team.",
+        primaryHref: `${baseUrl}ai-coworker-methodology`,
+        primaryZh: "看 AI 同事方法論",
+        primaryEn: "Read the AI coworker methodology",
+        secondaryHref: `${baseUrl}speaker`,
+        secondaryZh: "邀請演講或工作坊",
+        secondaryEn: "Invite a talk or workshop",
+        marker: "blog-context-ai",
+      }
+    : post.data.category === "travel"
+      ? {
+          eyebrowZh: "Next",
+          eyebrowEn: "Next",
+          titleZh: "如果你是從旅行文字認識我",
+          titleEn: "If you found me through the travel notes",
+          descriptionZh:
+            "旅行對我來說一直不是攻略，比較像練習觀察陌生系統。你可以接著看 About 裡的那條主線，或回到 Blog 繼續讀其他城市。",
+          descriptionEn:
+            "Travel, for me, is less itinerary and more practice in noticing unfamiliar systems. Continue with About, or return to the Blog for more city notes.",
+          primaryHref: `${baseUrl}about`,
+          primaryZh: "了解 Sofia 的主線",
+          primaryEn: "Read Sofia's through-line",
+          secondaryHref: `${baseUrl}blog`,
+          secondaryZh: "回到所有文章",
+          secondaryEn: "Back to all essays",
+          marker: "blog-context-travel",
+        }
+      : null;
 ---
 
 <BaseLayout
@@ -222,6 +260,51 @@ const categoryKey = (`category.${post.data.category}` as unknown) as Translation
                   </p>
                 </a>
               )}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        contextualCta && (
+          <section
+            class="mt-12 border-y border-border py-8 space-y-5"
+            data-pagefind-ignore
+            data-contextual-cta={contextualCta.marker}
+          >
+            <div class="space-y-2">
+              <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+                <span data-l="zh">{contextualCta.eyebrowZh}</span>
+                <span data-l="en">{contextualCta.eyebrowEn}</span>
+              </p>
+              <h2 class="font-display text-2xl font-medium">
+                <span data-l="zh">{contextualCta.titleZh}</span>
+                <span data-l="en">{contextualCta.titleEn}</span>
+              </h2>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                <span data-l="zh">{contextualCta.descriptionZh}</span>
+                <span data-l="en">{contextualCta.descriptionEn}</span>
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <a
+                href={contextualCta.primaryHref}
+                class="inline-flex items-center gap-1 px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
+                data-cta-role={`${contextualCta.marker}-primary`}
+              >
+                <span data-l="zh">{contextualCta.primaryZh}</span>
+                <span data-l="en">{contextualCta.primaryEn}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <a
+                href={contextualCta.secondaryHref}
+                class="inline-flex items-center gap-1 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
+                data-cta-role={`${contextualCta.marker}-secondary`}
+              >
+                <span data-l="zh">{contextualCta.secondaryZh}</span>
+                <span data-l="en">{contextualCta.secondaryEn}</span>
+              </a>
             </div>
           </section>
         )

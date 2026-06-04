@@ -11,6 +11,7 @@
     "check:links": "npm run build && node scripts/check-links.mjs",
     "check:cta": "node scripts/validate-cta-tracking.mjs",
     "check:roadmap": "node scripts/validate-editorial-roadmap.mjs",
+    "check:brand": "node scripts/validate-brand-guardrails.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "postbuild": "pagefind --site dist"

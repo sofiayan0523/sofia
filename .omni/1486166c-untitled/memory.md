@@ -35,6 +35,7 @@
 - 2026-06-04 loop iteration 6 completed sofia-s-blog About narrative hierarchy: About now centers a reflective translation through-line, separates Playground links from compact public receipts, routes dense proof to Career/Speaker, and still preserves AEO credential signals; `npm run check:links` and AEO validation pass.
 - 2026-06-04 loop iteration 7 completed sofia-s-blog CTA tracking for Action 14: `BaseLayout.astro` dispatches `data-analytics-event` clicks to GA4/Zaraz/custom event, Speaker/AI methodology/blog share CTAs carry event metadata, `npm run check:cta` validates the matrix, and docs use live Numbers funnel URLs; check:cta, check:links, and AEO validation pass.
 - 2026-06-04 loop iteration 8 completed sofia-s-blog editorial roadmap for Action 15: `docs/editorial-roadmap.md` defines 8 scene-led planned essay briefs across AI coworker management, humanities AI adoption, provenance/C2PA, founder notes, and travel-work crossover; `npm run check:roadmap`, check:cta, check:links, and AEO validation pass.
+- 2026-06-04 loop iteration 9 completed sofia-s-blog Action 17/18 guardrails: blog posts now render category-aware contextual CTAs (AI -> methodology/Speaker, travel -> About/Blog), `docs/site-guardrails.md` documents CTA/authority rules, `npm run check:brand` validates CTA map, metric placement, and generic phrase avoidance; all checks pass.
 
 ---
-_Last system refresh: 2026-06-04 08:43 UTC_
+_Last system refresh: 2026-06-04 09:18 UTC_

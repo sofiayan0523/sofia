@@ -56,6 +56,12 @@ This action list is based on the current repository state and build output, not 
   - The roadmap covers AI coworker management, humanities-trained AI adoption operators, provenance / trust / C2PA, founder operating notes, and travel-work crossover essays.
   - Added `scripts/validate-editorial-roadmap.mjs` plus `npm run check:roadmap` to enforce brief count, required planning fields, current route coverage, intentional `thoughts` usage, and banned generic SEO/listicle title patterns.
   - Verified `npm run check:roadmap`, `npm run check:cta`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed.
+- 2026-06-04 loop iteration 9:
+  - Completed Action 17 by adding category-aware contextual CTAs to `src/pages/blog/[...slug].astro`: AI insight posts now route to AI coworker methodology and Speaker, while travel posts route to About and Blog without default Speaker promotion.
+  - Completed Action 18 by adding `docs/site-guardrails.md` with page roles, blog CTA rules, authority-signal rules, and voice guardrails.
+  - Added `scripts/validate-brand-guardrails.mjs` plus `npm run check:brand` to enforce top-level CTA map, category-aware blog CTAs, high-risk metric placement, and generic consultant phrase avoidance.
+  - Adjusted `ai-coworker-methodology.astro` and `speaker.astro` copy to remove a proof metric from methodology hero context and replace a generic "賦能" course phrase.
+  - Verified `npm run check:brand`, `npm run check:cta`, `npm run check:roadmap`, `node scripts/validate-aeo-files.mjs`, and `npm run check:links` succeed; built HTML confirms AI/travel post CTA routing.
 
 ## Verification Summary
 
@@ -72,6 +78,7 @@ This action list is based on the current repository state and build output, not 
 - Current Speaker page contains offer formats, topics, proof points, FAQ, and contact CTAs via email and LinkedIn DM.
 - UTM convention exists in `docs/utm-convention.md`; CTA event metadata is implemented for Speaker enquiry, AI methodology Numbers / Omni outbound, and blog share controls, with `npm run check:cta` enforcing the current event matrix.
 - Editorial roadmap exists in `docs/editorial-roadmap.md`; it defines 8 planned scene-led briefs and `npm run check:roadmap` enforces required fields plus anti-template guardrails.
+- Site CTA and authority guardrails exist in `docs/site-guardrails.md`; `npm run check:brand` enforces the top-level CTA map, category-aware blog post CTAs, high-risk metric placement, and generic consultant phrase avoidance.
 
 ## Evidence Checked
 
