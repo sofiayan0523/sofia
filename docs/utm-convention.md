@@ -46,12 +46,12 @@ utm_content  = {post-slug}       // 個別文章/貼文 slug
 
 ### 1. LinkedIn 旗艦文連到 Pillar blog
 ```
-https://sofiayan0523.github.io/sofia/posts/humanities-ai-expert/?utm_source=sofia-blog&utm_medium=linkedin-lf&utm_campaign=pillar-humanities-ai-expert&utm_content=2026-05-12-pillar
+https://sofiayan.cc/blog/humanities-ai-expert/?utm_source=sofia-blog&utm_medium=linkedin-lf&utm_campaign=pillar-humanities-ai-expert&utm_content=2026-05-12-pillar
 ```
 
 ### 2. X tweet 連到 Speaker page
 ```
-https://sofiayan0523.github.io/sofia/speaker?utm_source=sofia-blog&utm_medium=x&utm_campaign=speaker-q2-2026&utm_content=2026-05-13-tweet-001
+https://sofiayan.cc/speaker?utm_source=sofia-blog&utm_medium=x&utm_campaign=speaker-q2-2026&utm_content=2026-05-13-tweet-001
 ```
 
 ### 3. Speaker page 引導到 Numbers / Omni demo

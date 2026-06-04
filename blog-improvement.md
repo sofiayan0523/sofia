@@ -10,6 +10,16 @@ This action list is based on the current repository state and build output, not 
 - `[Strategy]`: recommendation based on positioning, content strategy, information architecture, or funnel judgment. It should be reviewed by Sofia before implementation.
 - `[Verified + Strategy]`: the current state is verified, but the proposed solution involves editorial/product judgment.
 
+## Implementation Progress
+
+- 2026-06-04 loop iteration 1:
+  - Completed P0 Action 1 source fixes for broken `/posts/...` article URLs in `public/llms.txt`, `src/pages/ai-coworker-methodology.astro`, `src/content/posts/humanities-ai-expert.mdx`, and the listed docs.
+  - Completed P0 Action 2 by passing `faq` from `BaseLayout.astro` to `SEO.astro`; verified `FAQPage` appears in `dist/speaker/index.html` and `dist/ai-coworker-methodology/index.html`.
+  - Completed P0 Action 3 by removing the confirmed 404 Spotify playlist card and rendering the confirmed 404 Numbers AMA speaking item as plain text without a link.
+  - Partially completed P2 Action 7 by updating active future-output references in `docs/utm-convention.md`, `docs/appworks-keynote-2026-06-03.md`, `docs/zero-to-ai-native-social-posts.md`, `scripts/generate-qrcode.mjs`, `scripts/generate-branding.mjs`, and `src/pages/rss.xml.ts`.
+  - Verified `npm run build` succeeds; precise built-link scan found no `href` links pointing to `/posts/`.
+  - Note: the original broad `/posts/` acceptance snippet also matches legitimate image paths such as `/images/posts/...`; use an `href`-targeted scan for route-link validation.
+
 ## Verification Summary
 
 - Stack: Astro 5 static site with MDX content, React islands, Tailwind, RSS, sitemap, and Pagefind post-build search.

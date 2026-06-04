@@ -27,6 +27,7 @@
 - Personal-site audit: `speaker.astro` and `ai-coworker-methodology.astro` pass `faq={faqs}`, but `BaseLayout.astro` does not forward `faq` to `SEO.astro`, so FAQPage JSON-LD is not emitted.
 - Personal-site audit: generated external-link check found two confirmed 404s: `numbersprotocol.github.io/numbers-ama/webinar/2025-12-06` and the Spotify playlist linked from About.
 - `blog-improvement.md` contains the verified 2026-06-04 action list plus brand/content/IA/funnel strategy actions, marked as `[Verified]`, `[Strategy]`, or `[Verified + Strategy]`; current AEO capability discovery has `/agent.json` and `/.well-known/agent.json`, but no MCP server card, agent skills index, or API catalog.
+- 2026-06-04 loop iteration 1 completed P0 fixes in sofia-s-blog: `/posts/...` source links changed to `/blog/.../`, `BaseLayout.astro` now forwards `faq` to `SEO.astro`, confirmed 404 external links were removed/unlinked, and `npm run build` passes with FAQPage JSON-LD on Speaker and AI coworker pages.
 
 ---
-_Last system refresh: 2026-06-04 04:20 UTC_
+_Last system refresh: 2026-06-04 04:38 UTC_

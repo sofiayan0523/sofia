@@ -13,9 +13,10 @@ interface Props {
     author?: string;
     tags?: string[];
   };
+  faq?: Array<{ question: string; answer: string }>;
 }
 
-const { title, description, image, type, article } = Astro.props;
+const { title, description, image, type, article, faq } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 
@@ -62,6 +63,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
       image={image}
       type={type}
       article={article}
+      faq={faq}
     />
     <!-- Google Analytics (GA4) -->
     {import.meta.env.PUBLIC_GA_TRACKING_ID && (

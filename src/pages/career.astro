@@ -97,15 +97,22 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
               {
                 speakingItems.map((item) => (
                   <li>
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="group flex items-start gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
-                    >
-                      <span class="text-muted-foreground mt-1">•</span>
-                      <span class="flex-1">{item.title}</span>
-                    </a>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group flex items-start gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+                      >
+                        <span class="text-muted-foreground mt-1">•</span>
+                        <span class="flex-1">{item.title}</span>
+                      </a>
+                    ) : (
+                      <span class="flex items-start gap-2 text-sm text-foreground/80">
+                        <span class="text-muted-foreground mt-1">•</span>
+                        <span class="flex-1">{item.title}</span>
+                      </span>
+                    )}
                   </li>
                 ))
               }

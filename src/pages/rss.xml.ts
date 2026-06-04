@@ -7,11 +7,11 @@ export const GET: APIRoute = async (context) => {
     (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
   );
 
-  // Astro `context.site` is the bare site (e.g. https://sofiayan0523.github.io)
+  // Astro `context.site` is the bare site (e.g. https://sofiayan.cc)
   // We need to combine it with `import.meta.env.BASE_URL` so the feed reflects
-  // the actual deployed root (https://sofiayan0523.github.io/sofia).
+  // the actual deployed root (https://sofiayan.cc/).
   const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
-  const origin = (context.site?.toString() ?? "https://sofiayan0523.github.io").replace(/\/$/, "");
+  const origin = (context.site?.toString() ?? "https://sofiayan.cc").replace(/\/$/, "");
   const siteRoot = `${origin}${base}`;
 
   return rss({
