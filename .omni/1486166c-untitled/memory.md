@@ -7,6 +7,8 @@
 
 ## Repositories
 
+- **`personal-auto/`** — Branch: `omni/1486166c/personal-auto`, Remote: `sofiayan0523/personal-auto`
+
 - **`sofia-s-blog/`** — Branch: `omni/1486166c/sofia-s-blog`, Remote: `sofiayan0523/sofia-s-blog`
   - **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
@@ -24,7 +26,7 @@
 - Personal-site audit: `/posts/{slug}` links in `public/llms.txt`, `src/pages/ai-coworker-methodology.astro`, and some posts are broken; actual post route is `/blog/{slug}`.
 - Personal-site audit: `speaker.astro` and `ai-coworker-methodology.astro` pass `faq={faqs}`, but `BaseLayout.astro` does not forward `faq` to `SEO.astro`, so FAQPage JSON-LD is not emitted.
 - Personal-site audit: generated external-link check found two confirmed 404s: `numbersprotocol.github.io/numbers-ama/webinar/2025-12-06` and the Spotify playlist linked from About.
-- `blog-improvement.md` contains the verified 2026-06-04 action list; current AEO capability discovery has `/agent.json` and `/.well-known/agent.json`, but no MCP server card, agent skills index, or API catalog.
+- `blog-improvement.md` contains the verified 2026-06-04 action list plus brand/content/IA/funnel strategy actions, marked as `[Verified]`, `[Strategy]`, or `[Verified + Strategy]`; current AEO capability discovery has `/agent.json` and `/.well-known/agent.json`, but no MCP server card, agent skills index, or API catalog.
 
 ---
-_Last system refresh: 2026-06-04 04:04 UTC_
+_Last system refresh: 2026-06-04 04:20 UTC_
