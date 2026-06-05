@@ -15,6 +15,35 @@ const allPosts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
 );
 const featured = allPosts.slice(0, 6);
 
+// Guided AI adoption reading path — a "start here" entry for first-time visitors.
+const seriesDefinitions = [
+  {
+    slug: "humanities-ai-expert",
+    noteZh: "先從文組人在企業 AI 導入裡的位置讀起。",
+    noteEn: "Start with the humanities-led AI adoption frame.",
+  },
+  {
+    slug: "ai-anxiety-survival-guide",
+    noteZh: "接著回到個人焦慮：哪些價值值得留下。",
+    noteEn: "Then move into individual AI anxiety and what's worth keeping.",
+  },
+  {
+    slug: "why-95-percent-ai-adoption-fails",
+    noteZh: "再看企業現場：為什麼 pilot 常常沒有進到日常流程。",
+    noteEn: "Then look at why enterprise AI pilots fail to become daily work.",
+  },
+  {
+    slug: "zero-to-ai-native",
+    noteZh: "最後走到 AI-Native：公司如何重新長成讓 agent 能工作的樣子。",
+    noteEn: "End with the AI-native operating model.",
+  },
+] as const;
+
+const postBySlug = new Map(allPosts.map((post) => [post.id.replace(/\.mdx?$/, ""), post]));
+const aiSeries = seriesDefinitions
+  .map((item) => ({ ...item, post: postBySlug.get(item.slug) }))
+  .filter((item): item is typeof item & { post: NonNullable<typeof item.post> } => Boolean(item.post));
+
 const stats: { value: string; labelKey: TranslationKey }[] = [
   { value: "50+", labelKey: "home.stat.cities" },
   { value: "10+", labelKey: "home.stat.tech" },
@@ -108,6 +137,55 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
         </div>
       </div>
     </section>
+
+    <!-- Start here: guided AI adoption reading path -->
+    {
+      aiSeries.length > 0 && (
+        <section class="py-20 px-6 border-b border-border/50" aria-labelledby="start-here-heading">
+          <div class="container max-w-5xl mx-auto space-y-8">
+            <div class="max-w-2xl space-y-2">
+              <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+                <span data-l="zh">第一次來？從這裡開始</span>
+                <span data-l="en">First time here? Start here</span>
+              </p>
+              <h2 id="start-here-heading" class="font-display text-3xl md:text-4xl font-medium">
+                <span data-l="zh">AI 導入系列：從焦慮、翻譯，到公司真的長出 AI 同事</span>
+                <span data-l="en">AI adoption series: from anxiety and translation to AI coworkers</span>
+              </h2>
+              <p class="text-muted-foreground">
+                <span data-l="zh">四篇一條線，建議照順序讀。</span>
+                <span data-l="en">Four essays, one throughline — best read in order.</span>
+              </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              {aiSeries.map((item, i) => {
+                const slug = item.post.id.replace(/\.mdx?$/, "");
+                return (
+                  <a
+                    href={`${baseUrl}blog/${slug}/`}
+                    class="group block rounded-lg border border-border/60 bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
+                  >
+                    <div class="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+                      <span class="flex h-6 w-6 items-center justify-center rounded-full bg-secondary text-secondary-foreground font-medium">
+                        {i + 1}
+                      </span>
+                      <span>{item.post.data.readTime}</span>
+                    </div>
+                    <h3 class="font-display text-lg font-medium leading-snug group-hover:text-primary transition-colors">
+                      {item.post.data.title}
+                    </h3>
+                    <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
+                      <span data-l="zh">{item.noteZh}</span>
+                      <span data-l="en">{item.noteEn}</span>
+                    </p>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )
+    }
 
     <!-- Featured posts -->
     <section class="py-20 px-6">
