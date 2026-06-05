@@ -63,10 +63,10 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
             <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
               <T k="home.eyebrow" />
             </p>
-            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight">
+            <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-[1.1] tracking-tight">
               <T k="home.greeting" />
             </h1>
-            <p class="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl whitespace-pre-line">
+            <p class="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl whitespace-pre-line">
               <T k="home.description" />
             </p>
             <div class="flex flex-wrap gap-2 text-sm text-foreground/80">
@@ -127,7 +127,7 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
                 class="animate-fade-up"
                 style={`animation-delay: ${i * 100 + 200}ms`}
               >
-                <p class="font-display text-2xl md:text-3xl font-medium">{stat.value}</p>
+                <p class="font-display text-xl md:text-2xl font-medium">{stat.value}</p>
                 <p class="text-muted-foreground text-sm mt-1">
                   <T k={stat.labelKey} />
                 </p>
@@ -148,7 +148,7 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
                 <span data-l="zh">第一次來？從這裡開始</span>
                 <span data-l="en">First time here? Start here</span>
               </p>
-              <h2 id="start-here-heading" class="font-display text-2xl md:text-3xl font-medium">
+              <h2 id="start-here-heading" class="font-display text-xl md:text-2xl font-medium">
                 <span data-l="zh">AI 導入系列：從焦慮、翻譯，到公司真的長出 AI 同事</span>
                 <span data-l="en">AI adoption series: from anxiety and translation to AI coworkers</span>
               </h2>
@@ -195,7 +195,7 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
             <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-2">
               <T k="home.latestEyebrow" />
             </p>
-            <h2 class="font-display text-2xl md:text-3xl font-medium">
+            <h2 class="font-display text-xl md:text-2xl font-medium">
               <T k="home.latestTitle" />
             </h2>
           </div>

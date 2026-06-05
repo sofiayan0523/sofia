@@ -47,11 +47,19 @@
     line-height: 1.7;
   }
 
-  /* Display headings: tighten tracking; serif optical sizing */
+  /* Display headings: tighten tracking; balance line lengths so a heading
+     never wraps to leave one or two orphan characters on the last line. */
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  /* Body paragraphs: avoid single-word/character orphans on the last line. */
+  p {
+    text-wrap: pretty;
   }
 
   /* Eyebrows / kicker labels render in mono for an intentional, editorial feel.
