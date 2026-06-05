@@ -18,6 +18,38 @@
 - Build workflow: `npm ci` then `npm run build`; GitHub Pages deploy workflow uses Node 20 and publishes `dist/`.
 - Production domain: `https://sofiayan.cc` via `public/CNAME`; Astro `site` is also `https://sofiayan.cc`.
 
+## Installed Skills
+
+- **`aeo-assessment`** (system)
+- **`agent-readiness-generator`** (system)
+- **`ai-bot-traffic`** (system)
+- **`doc-coauthoring`** (system)
+- **`frontend-design`** (system)
+- **`google-ads`** (system)
+- **`google-workspace`** (system)
+- **`gov-projects-search`** (space)
+- **`harness-dev`** (system)
+- **`harness-execution`** (system)
+- **`harness-plan`** (system)
+- **`image-generation`** (system)
+- **`internal-comms`** (system)
+- **`line-messaging`** (system)
+- **`meta-ads`** (system)
+- **`morning-brief`** (space)
+- **`ms-office-suite`** (system)
+- **`omni-help`** (system)
+- **`pdf`** (system)
+- **`short-video`** (system)
+- **`skill-creator`** (system)
+- **`theme-factory`** (system)
+- **`webapp-testing`** (system)
+- **`z-agent-ticket-creation`** (system)
+- **`z-check-comment`** (system)
+- **`z-report-status`** (system)
+- **`z-sync`** (system)
+- **`z-ticket-check`** (system)
+- **`z-writing-rules`** (system)
+
 ## Key Discoveries
 
 - Routes are `/`, `/about`, `/blog`, `/career`, `/speaker`, `/ai-coworker-methodology`, `/blog/{slug}`, and `/posts/{slug}` compatibility redirect pages for all published posts.
@@ -38,7 +70,8 @@
 - 2026-06-04 loop iteration 9 completed sofia-s-blog Action 17/18 guardrails: blog posts now render category-aware contextual CTAs (AI -> methodology/Speaker, travel -> About/Blog), `docs/site-guardrails.md` documents CTA/authority rules, `npm run check:brand` validates CTA map, metric placement, and generic phrase avoidance; all checks pass.
 - 2026-06-04 loop iteration 10 completed final local audit for sofia-s-blog blog improvements: `npm run check:all` now runs brand, roadmap, CTA, AEO, build/Pagefind/link checks; `blog-improvement.md` final audit says Actions 1-18 are complete, and built HTML spot checks pass for FAQPage plus AI/travel contextual CTAs.
 - 2026-06-05 typography system (sofia-s-blog): 先前全站無載入任何 web font（標題 fallback、中文交給 OS）。改為混血方案——`tailwind.config.mjs` 設 `display`=Newsreader+Noto Serif TC（思源宋體，標題）、`sans`=Inter+Noto Sans TC（思源黑體，內文）、`mono`=IBM Plex Mono（小標）。`BaseLayout.astro` head 用 Google Fonts 載入這 5 個家族（preconnect + display=swap）。`global.css` 加：body line-height 1.7、h1-3 letter-spacing -0.012em、`.uppercase.tracking-widest` 小標改 mono+0.14em、prose 標題用 serif、prose 內文 line-height 1.85。`npm run check:all` 通過。
+- 2026-06-05 type scale 收斂（sofia-s-blog，承上字體系統）：原標題偏大（首頁 hero text-7xl=72px、內頁主標 4xl/5xl）換襯線後顯笨重，整體下調一階——首頁 hero `text-4xl md:text-5xl lg:text-6xl`、各內頁 h1（about/blog/speaker/methodology/career/blog post）`text-3xl md:text-4xl`、首頁 section h2 `text-2xl md:text-3xl`、404 `text-5xl md:text-6xl`。section h2（2xl/3xl）維持不變。`npm run check:all` 30 項通過。
 - 2026-06-05 reader-facing UX pass (sofia-s-blog): About "Public receipts" 區塊改為讀者語言（標題「想更了解我，或想找我合作？」+ 卡片「完整經歷與公開紀錄」「邀我演講或工作坊」），移除解釋網站 IA 的 meta 文案。AI 導入導讀系列從 `/blog` 移到首頁（stats 與最新文章之間，標題「第一次來？從這裡開始」，卡片改用 1-4 編號取代 Pillar/Cluster 術語）。Blog 重排為「標題→分類篩選→文章網格→搜尋（次要、置底）」，`blog.headline` zh 改為「故事與觀察」。`npm run check:all` 通過。
 
 ---
-_Last system refresh: 2026-06-05 07:01 UTC_
+_Last system refresh: 2026-06-05 07:49 UTC_
