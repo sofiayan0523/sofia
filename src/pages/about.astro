@@ -9,7 +9,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const playgroundItems = [
   {
-    emoji: "🐾",
+    emoji: "",
     titleZh: "Cat Reviews",
     titleEn: "Cat Reviews",
     descZh: "從鮪魚到 Twitter 討論串——來自這對貓咪的聲音。",
@@ -17,7 +17,7 @@ const playgroundItems = [
     link: "https://x.com/sofia_numbers",
   },
   {
-    emoji: "📚",
+    emoji: "",
     titleZh: "Book Stack",
     titleEn: "Book Stack",
     descZh: "從 AI 倫理到 zine 設計",
@@ -25,7 +25,7 @@ const playgroundItems = [
     link: "https://wecollect.fun/home/pP5lSFvUzlHHo1oBkbF9",
   },
   {
-    emoji: "🧗",
+    emoji: "",
     titleZh: "Climbing Log",
     titleEn: "Climbing Log",
     descZh: "台北岩館 + 我最新的路線",
@@ -33,7 +33,7 @@ const playgroundItems = [
     link: "https://www.instagram.com/shiji_zapie/reels/",
   },
   {
-    emoji: "🌍",
+    emoji: "",
     titleZh: "City List",
     titleEn: "City List",
     descZh: "我獨自探索過的 70+ 個城市——還在增加中",
@@ -137,10 +137,10 @@ const proofItems = [
           </h2>
 
           <ul class="space-y-2">
-            <li>🏠 <T k="about.current1" /></li>
-            <li>🎤 <T k="about.current2" /></li>
-            <li>✍️ <T k="about.current3" /></li>
-            <li>🧗‍♀️ <T k="about.current4" /></li>
+            <li><T k="about.current1" /></li>
+            <li><T k="about.current2" /></li>
+            <li><T k="about.current3" /></li>
+            <li><T k="about.current4" /></li>
           </ul>
         </div>
       </div>
@@ -193,19 +193,11 @@ const proofItems = [
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group p-6 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                class="group p-6 rounded-lg border border-border/60 hover:border-primary/40 transition-colors duration-300"
               >
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-3xl">{item.emoji}</span>
-                  <span
-                    class="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </span>
-                </div>
-                <h3 class="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
-                  <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
+                <h3 class="font-display text-lg font-medium mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                  <span><span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span></span>
+                  <span class="text-muted-foreground text-sm" aria-hidden="true">↗</span>
                 </h3>
                 <p class="text-sm text-muted-foreground">
                   <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
