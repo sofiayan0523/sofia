@@ -18,6 +18,38 @@
 - Build workflow: `npm ci` then `npm run build`; GitHub Pages deploy workflow uses Node 20 and publishes `dist/`.
 - Production domain: `https://sofiayan.cc` via `public/CNAME`; Astro `site` is also `https://sofiayan.cc`.
 
+## Installed Skills
+
+- **`aeo-assessment`** (system)
+- **`agent-readiness-generator`** (system)
+- **`ai-bot-traffic`** (system)
+- **`doc-coauthoring`** (system)
+- **`frontend-design`** (system)
+- **`google-ads`** (system)
+- **`google-workspace`** (system)
+- **`gov-projects-search`** (space)
+- **`harness-dev`** (system)
+- **`harness-execution`** (system)
+- **`harness-plan`** (system)
+- **`image-generation`** (system)
+- **`internal-comms`** (system)
+- **`line-messaging`** (system)
+- **`meta-ads`** (system)
+- **`morning-brief`** (space)
+- **`ms-office-suite`** (system)
+- **`omni-help`** (system)
+- **`pdf`** (system)
+- **`short-video`** (system)
+- **`skill-creator`** (system)
+- **`theme-factory`** (system)
+- **`webapp-testing`** (system)
+- **`z-agent-ticket-creation`** (system)
+- **`z-check-comment`** (system)
+- **`z-report-status`** (system)
+- **`z-sync`** (system)
+- **`z-ticket-check`** (system)
+- **`z-writing-rules`** (system)
+
 ## Key Discoveries
 
 - Routes are `/`, `/about`, `/blog`, `/career`, `/speaker`, `/ai-coworker-methodology`, `/blog/{slug}`, and `/posts/{slug}` compatibility redirect pages for all published posts.
@@ -37,6 +69,7 @@
 - 2026-06-04 loop iteration 8 completed sofia-s-blog editorial roadmap for Action 15: `docs/editorial-roadmap.md` defines 8 scene-led planned essay briefs across AI coworker management, humanities AI adoption, provenance/C2PA, founder notes, and travel-work crossover; `npm run check:roadmap`, check:cta, check:links, and AEO validation pass.
 - 2026-06-04 loop iteration 9 completed sofia-s-blog Action 17/18 guardrails: blog posts now render category-aware contextual CTAs (AI -> methodology/Speaker, travel -> About/Blog), `docs/site-guardrails.md` documents CTA/authority rules, `npm run check:brand` validates CTA map, metric placement, and generic phrase avoidance; all checks pass.
 - 2026-06-04 loop iteration 10 completed final local audit for sofia-s-blog blog improvements: `npm run check:all` now runs brand, roadmap, CTA, AEO, build/Pagefind/link checks; `blog-improvement.md` final audit says Actions 1-18 are complete, and built HTML spot checks pass for FAQPage plus AI/travel contextual CTAs.
+- 2026-06-05 reader-facing UX pass (sofia-s-blog): About "Public receipts" 區塊改為讀者語言（標題「想更了解我，或想找我合作？」+ 卡片「完整經歷與公開紀錄」「邀我演講或工作坊」），移除解釋網站 IA 的 meta 文案。AI 導入導讀系列從 `/blog` 移到首頁（stats 與最新文章之間，標題「第一次來？從這裡開始」，卡片改用 1-4 編號取代 Pillar/Cluster 術語）。Blog 重排為「標題→分類篩選→文章網格→搜尋（次要、置底）」，`blog.headline` zh 改為「故事與觀察」。`npm run check:all` 通過。
 
 ---
-_Last system refresh: 2026-06-04 09:54 UTC_
+_Last system refresh: 2026-06-05 06:37 UTC_

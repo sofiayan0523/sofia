@@ -42,7 +42,7 @@ export const zh = {
 
   // blog
   "blog.eyebrow": "Blog",
-  "blog.headline": "Stories & Insights",
+  "blog.headline": "故事與觀察",
   "blog.description": "旅行手記、AI 工具探索，以及生活中的隨想。",
   "blog.searchPlaceholder": "搜尋文章...",
   "blog.empty": "目前沒有這個分類的文章。",
