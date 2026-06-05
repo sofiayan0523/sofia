@@ -48,6 +48,10 @@ export const workItems = [
 
 export const speakingItems = [
   {
+    title: "「職場必備 Vibe Coding 實作課」（經理人 Manager Today 線上課程）",
+    link: "https://portaly.cc/managertoday/product/arm5k8AXa3H4hfp5OlcF",
+  },
+  {
     title: "如何辨識有價值的資訊及重建新聞信任 / Identifying Valuable Information & Rebuilding Trust in News",
     link: "https://feja.org.tw/78920/",
   },
@@ -68,6 +72,14 @@ export const speakingItems = [
     link: "https://protectingcreativity.numbersprotocol.io/",
   },
   { title: "AI Meets Blockchain (moderator)", link: "https://www.youtube.com/watch?v=yN3nfFk2UJk" },
+  {
+    title: "DIGITIMES D Forum 2020 雲端大數據論壇（DT42 時期）",
+    link: "https://www.digitimes.com.tw/seminar/DForum_20200709/",
+  },
+  {
+    title: "「誰說 AI 與你無關」（2020 ACCUPASS 活動，DT42 時期）",
+    link: "https://www.accupass.com/event/2006291300158388164110",
+  },
 ];
 
 export const mediaItems = [
@@ -90,6 +102,16 @@ export const mediaItems = [
     source: "田間 Tian Jian",
     title: "為何要保存資料檔案？",
     link: "https://tianjiancmp.substack.com/p/427",
+  },
+  {
+    source: "Meet 創業小聚",
+    title: "嚴世紀觀點：當海水退潮後，NFT 是泡沫還是創新？",
+    link: "https://meet.bnext.com.tw/articles/view/47610",
+  },
+  {
+    source: "MakerPRO",
+    title: "【OpenVINO】Edge AI 應用落地與開發實務論壇報導（DT42 時期）",
+    link: "https://makerpro.cc/2019/11/applications-and-development-for-edge-ai/",
   },
 ];
 
