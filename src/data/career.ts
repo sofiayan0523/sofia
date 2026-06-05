@@ -53,7 +53,6 @@ export const speakingItems = [
   },
   {
     title: "Surviving the AI Flood: A Fireside Chat on Trust & Revenue",
-    link: "https://numbersprotocol.github.io/numbers-ama/webinar/2025-12-06",
   },
   {
     title: "RightsCon 2025 (side event host + speaker)",

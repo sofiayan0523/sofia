@@ -17,14 +17,6 @@ const playgroundItems = [
     link: "https://x.com/sofia_numbers",
   },
   {
-    emoji: "🎵",
-    titleZh: "Coding Playlist",
-    titleEn: "Coding Playlist",
-    descZh: "我工作時聽的音樂",
-    descEn: "Music I build to",
-    link: "https://open.spotify.com/playlist/37i9dQZF1DWVidGk00tysG?si=b6b00b9e03b24a59",
-  },
-  {
     emoji: "📚",
     titleZh: "Book Stack",
     titleEn: "Book Stack",
@@ -47,6 +39,64 @@ const playgroundItems = [
     descZh: "我獨自探索過的 70+ 個城市——還在增加中",
     descEn: "70+ cities I've solo-explored — and counting",
     link: "https://www.tripadvisor.com.tw/TravelMap-a_uid.62D80D5A0D26371C51F8738A6E080B84",
+  },
+];
+
+const throughLineItems = [
+  {
+    labelZh: "教育與語言",
+    labelEn: "Education & language",
+    titleZh: "我先學會的不是賣技術，而是看人怎麼理解。",
+    titleEn: "Before selling technology, I learned to watch how people understand.",
+    descZh:
+      "政大華語文教學碩士、臺北教育大學教育學士的背景，讓我很早就習慣把複雜的系統拆成人能進入的節奏。",
+    descEn:
+      "With an MA in Teaching Chinese as a Second Language from NCCU and a BA in Education from NTUE, I learned early to turn complex systems into rhythms people can enter.",
+  },
+  {
+    labelZh: "新創現場",
+    labelEn: "Startup field work",
+    titleZh: "後來我把這種翻譯能力，帶進 AI、新創與內容信任。",
+    titleEn: "Later, I carried that translation work into AI, startups, and content trust.",
+    descZh:
+      "從 AI / deep learning 新創、IP 估價，到 Numbers Protocol 的成長與國際合作，我看見同一個問題反覆出現：技術要被採用，得先被真正理解。",
+    descEn:
+      "Across AI and deep learning startups, IP valuation, and global growth at Numbers Protocol, the same question kept returning: technology needs to be understood before it can be adopted.",
+  },
+  {
+    labelZh: "現在的題目",
+    labelEn: "Current thesis",
+    titleZh: "AI 不只是工具清單，而是組織要重新學會協作的對象。",
+    titleEn: "AI is not just a tool list. It changes how organizations learn to work.",
+    descZh:
+      "我現在寫 AI coworker methodology，也談內容溯源與 C2PA，因為這些題目最後都回到信任：我們怎麼知道自己在和什麼合作、引用什麼、相信什麼。",
+    descEn:
+      "I now write about AI coworker methodology, content provenance, and C2PA because they return to trust: how we know what we are working with, citing, and believing.",
+  },
+];
+
+const proofItems = [
+  {
+    titleZh: "可信任的時間線",
+    titleEn: "A verifiable timeline",
+    descZh:
+      "完整工作、演講、媒體與 Podcast 歷程集中在 Career，讓 About 保持敘事，而不是變成履歷表。",
+    descEn:
+      "The full work, speaking, media, and podcast timeline lives on Career, so About can stay narrative instead of becoming a resume.",
+    href: `${baseUrl}career`,
+    linkZh: "看職涯與公開紀錄",
+    linkEn: "See career archive",
+  },
+  {
+    titleZh: "演講與工作坊",
+    titleEn: "Speaking and workshops",
+    descZh:
+      "Speaker page 收斂適合的邀約情境、主題與聯絡方式，包含企業 AI 導入、AI coworker 與內容溯源。",
+    descEn:
+      "The Speaker page gathers fit, topics, and enquiry paths for enterprise AI adoption, AI coworker methods, and content provenance.",
+    href: `${baseUrl}speaker`,
+    linkZh: "看演講邀約",
+    linkEn: "See speaking page",
   },
 ];
 ---
@@ -92,154 +142,158 @@ const playgroundItems = [
             <li>✍️ <T k="about.current3" /></li>
             <li>🧗‍♀️ <T k="about.current4" /></li>
           </ul>
-
-          <h2 class="font-display text-2xl font-medium text-foreground pt-8">
-            <T k="about.playgroundTitle" />
-          </h2>
-          <p class="text-muted-foreground"><T k="about.playgroundDescription" /></p>
         </div>
       </div>
 
-      <!-- Credentials & Speaking (E-E-A-T strengthening) -->
-      <section class="mt-16 space-y-10 border-t border-border pt-12">
+      <section class="mt-16 space-y-8 border-t border-border pt-12">
         <div class="space-y-3">
           <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
-            <span data-l="zh">學經歷與認證</span><span data-l="en">Credentials</span>
+            <span data-l="zh">Through-line</span><span data-l="en">Through-line</span>
           </p>
           <h2 class="font-display text-2xl md:text-3xl font-medium">
-            <span data-l="zh">為什麼是我</span><span data-l="en">Why me</span>
+            <span data-l="zh">我看 AI 的方式，從來不只來自 AI。</span>
+            <span data-l="en">The way I see AI never came only from AI.</span>
           </h2>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 text-foreground/80 leading-relaxed">
-          <div class="space-y-3">
-            <h3 class="font-display text-lg font-medium text-foreground">
-              <span data-l="zh">學歷</span><span data-l="en">Education</span>
-            </h3>
-            <ul class="space-y-2 text-sm">
-              <li>🎓 <strong>國立政治大學</strong>（NCCU）<span data-l="zh"> · 華語文教學碩士</span><span data-l="en"> · MA, Teaching Chinese as a Second Language</span></li>
-              <li>🎓 <strong>國立臺北教育大學</strong>（NTUE）<span data-l="zh"> · 教育學士</span><span data-l="en"> · BA, Education</span></li>
-              <li>📜 <span data-l="zh">對外華語教學能力證書</span><span data-l="en">Certified Teacher of Chinese as a Foreign Language</span></li>
-              <li>📜 <span data-l="zh">國小教師證</span><span data-l="en">Elementary School Teaching License</span></li>
-              <li>📜 <span data-l="zh">Anthropic "Building with the Claude API"（2026）</span><span data-l="en">Anthropic "Building with the Claude API" (2026)</span></li>
-            </ul>
-          </div>
-
-          <div class="space-y-3">
-            <h3 class="font-display text-lg font-medium text-foreground">
-              <span data-l="zh">職涯</span><span data-l="en">Career</span>
-            </h3>
-            <ul class="space-y-2 text-sm">
-              <li>🚀 <strong>Numbers Protocol</strong>
-                <span data-l="zh"> · Co-Founder & CGO（2019–）</span>
-                <span data-l="en"> · Co-Founder & Chief Growth Officer (2019–present)</span>
-              </li>
-              <li>📸 <strong>Capture</strong>
-                <span data-l="zh"> · 行銷長（Numbers Protocol 旗下內容溯源產品線）</span>
-                <span data-l="en"> · Head of Marketing (Numbers Protocol's content provenance product line)</span>
-              </li>
-              <li>🧠 <strong>WebBrain AI</strong>
-                <span data-l="zh"> · 行銷長</span>
-                <span data-l="en"> · Head of Marketing</span>
-              </li>
-              <li>🎬 <strong>科科 AI Shorts</strong>
-                <span data-l="zh"> · YouTube 頻道負責人（AI 工具實測、Vibe Coding 入門）</span>
-                <span data-l="en"> · YouTube channel lead (AI tools, vibe coding for non-engineers)</span>
-              </li>
-              <li>🤖 <strong>DT42</strong>
-                <span data-l="zh"> · BD Director（AI / deep learning startup）</span>
-                <span data-l="en"> · Director of BD (AI / deep learning)</span>
-              </li>
-              <li>⚖️ <strong>成大智權科技 Chengda IP Tech</strong>
-                <span data-l="zh"> · IP 估價 BD Manager</span>
-                <span data-l="en"> · BD Manager / IP valuation</span>
-              </li>
-              <li>📣
-                <span data-l="zh">10+ 年 BD / sales / marketing 跨 AI 新創與 IP 估價</span>
-                <span data-l="en">10+ years across BD / sales / marketing in AI startups and IP valuation</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="font-display text-lg font-medium text-foreground">
-            <span data-l="zh">演講足跡（節錄）</span><span data-l="en">Speaking history (selected)</span>
-          </h3>
-          <ul class="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-foreground/80">
-            <li>🏆 SXSW 2023 Pitch <span data-l="zh">（Metaverse & Web3 冠軍，Numbers 團隊）</span><span data-l="en">(Metaverse & Web3 winner, team)</span></li>
-            <li>🎙 Asia Pacific Journalism Forum 2025</li>
-            <li>🌏 UNICRI <span data-l="zh">（聯合國跨區域犯罪暨司法研究所）</span><span data-l="en">(UN Interregional Crime & Justice Research Institute)</span></li>
-            <li>📰 Google News Initiative <span data-l="zh">補助計畫獲獎人（2025）</span><span data-l="en">grant recipient (2025)</span></li>
-            <li>📺 AAJA-Asia <span data-l="zh">假訊息議題座談</span><span data-l="en">misinformation panels</span></li>
-            <li>🎓 NTU TEC Talk S2EP1 <span data-l="zh">（台大創創中心）</span><span data-l="en">(NTU Entrepreneurship Centre)</span></li>
-            <li>🇹🇼 伙影通訊社 <span data-l="zh">共同合作（與余志偉）</span><span data-l="en">co-founder partnership (with photographer Yu Chih-wei)</span></li>
-          </ul>
-          <p class="text-sm text-muted-foreground pt-2">
-            <span data-l="zh">→ 想邀請演講？</span><span data-l="en">→ Want to invite Sofia to speak?</span>
-            <a href={`${baseUrl}speaker`} class="text-primary underline hover:no-underline ml-1">
-              <span data-l="zh">看 Speaker page</span><span data-l="en">See speaker page</span>
-            </a>
-          </p>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="font-display text-lg font-medium text-foreground">
-            <span data-l="zh">Numbers Protocol 背景</span><span data-l="en">Numbers Protocol context</span>
-          </h3>
-          <p class="text-sm text-foreground/80 leading-relaxed">
-            <span data-l="zh">
-              Numbers Protocol（主張數據股份有限公司，2019 創立）為 AI agentic economy 建構內容溯源基礎建設。
-              C2PA 會員、被 NIST AI Risk Management Framework 引用、共同設計 ERC-7053 與 ERC-7517 標準、
-              67M+ 數位資產註冊量、與 Adobe / Microsoft / Nikon / Reuters 等合作。
-              Tagline：「Human Truth, Machine Proof」。
-            </span>
-            <span data-l="en">
-              Numbers Protocol (founded 2019) builds provenance infrastructure for the AI agentic economy.
-              C2PA member; cited by NIST AI Risk Management Framework; co-designed ERC-7053 and ERC-7517 Ethereum standards;
-              67M+ digital asset registrations; partners include Adobe, Microsoft, Nikon, Reuters.
-              Tagline: "Human Truth, Machine Proof".
-            </span>
-          </p>
-        </div>
-
-        <div class="text-xs text-muted-foreground border-t border-border pt-6">
-          <span data-l="zh">已公開可查證來源：</span><span data-l="en">Publicly verifiable sources: </span>
-          <a href="https://tw.linkedin.com/in/sofia-yan-b6318a31" class="underline hover:no-underline">LinkedIn</a> ·
-          <a href="https://www.crunchbase.com/person/sofia-yan" class="underline hover:no-underline">Crunchbase</a> ·
-          <a href="https://theorg.com/org/numbers-protocol/org-chart/sofia-yan" class="underline hover:no-underline">TheOrg</a> ·
-          <a href="https://www.numbersprotocol.io" class="underline hover:no-underline">Numbers Protocol</a>
+        <div class="space-y-5">
+          {
+            throughLineItems.map((item) => (
+              <article class="border-l border-border pl-5 py-1">
+                <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium mb-2">
+                  <span data-l="zh">{item.labelZh}</span><span data-l="en">{item.labelEn}</span>
+                </p>
+                <h3 class="font-display text-xl font-medium text-foreground mb-2">
+                  <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
+                </h3>
+                <p class="text-foreground/75 leading-relaxed">
+                  <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
+                </p>
+              </article>
+            ))
+          }
         </div>
       </section>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {
-          playgroundItems.map((item) => (
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
-            >
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-3xl">{item.emoji}</span>
-                <span
-                  class="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </div>
-              <h3 class="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
-                <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
-              </h3>
-              <p class="text-sm text-muted-foreground">
-                <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
-              </p>
-            </a>
-          ))
-        }
-      </div>
+      <section class="mt-16 space-y-6 border-t border-border pt-12">
+        <div class="space-y-3">
+          <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+            <span data-l="zh">Playground</span><span data-l="en">Playground</span>
+          </p>
+          <h2 class="font-display text-2xl md:text-3xl font-medium">
+            <T k="about.playgroundTitle" />
+          </h2>
+          <p class="text-muted-foreground max-w-2xl"><T k="about.playgroundDescription" /></p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            playgroundItems.map((item) => (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group p-6 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300"
+              >
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-3xl">{item.emoji}</span>
+                  <span
+                    class="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
+                </div>
+                <h3 class="font-display text-lg font-medium mb-2 group-hover:text-primary transition-colors">
+                  <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
+                </p>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Compact E-E-A-T receipts; dense chronology lives on Career and Speaker. -->
+      <section class="mt-16 space-y-8 border-t border-border pt-12">
+        <div class="space-y-3">
+          <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+            <span data-l="zh">Public receipts</span><span data-l="en">Public receipts</span>
+          </p>
+          <h2 class="font-display text-2xl md:text-3xl font-medium">
+            <span data-l="zh">證據可以查，故事不用都擠在同一頁。</span>
+            <span data-l="en">The proof can be checked without crowding the story.</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {
+            proofItems.map((item) => (
+              <article class="p-6 rounded-lg border border-border bg-secondary/30">
+                <h3 class="font-display text-lg font-medium mb-2">
+                  <span data-l="zh">{item.titleZh}</span><span data-l="en">{item.titleEn}</span>
+                </h3>
+                <p class="text-sm text-foreground/75 leading-relaxed mb-4">
+                  <span data-l="zh">{item.descZh}</span><span data-l="en">{item.descEn}</span>
+                </p>
+                <a href={item.href} class="text-sm text-primary underline hover:no-underline">
+                  <span data-l="zh">{item.linkZh}</span><span data-l="en">{item.linkEn}</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="space-y-4 text-sm text-foreground/75 leading-relaxed">
+          <p>
+            <span data-l="zh">
+              Numbers Protocol 為 AI agentic economy 建構內容溯源基礎建設；團隊為 C2PA 會員，曾共同設計 ERC-7053 / ERC-7517，
+              也出現在 SXSW 2023 Pitch、UNICRI、Google News Initiative 等公開場域。
+            </span>
+            <span data-l="en">
+              Numbers Protocol builds content provenance infrastructure for the AI agentic economy; the team is a C2PA member,
+              co-designed ERC-7053 / ERC-7517, and has appeared in public venues including SXSW 2023 Pitch, UNICRI, and Google News Initiative.
+            </span>
+          </p>
+
+          <p class="text-xs text-muted-foreground border-t border-border pt-4">
+            <span data-l="zh">已公開可查證來源：</span><span data-l="en">Publicly verifiable sources: </span>
+            <a href="https://tw.linkedin.com/in/sofia-yan-b6318a31" class="underline hover:no-underline">LinkedIn</a> ·
+            <a href="https://www.crunchbase.com/person/sofia-yan" class="underline hover:no-underline">Crunchbase</a> ·
+            <a href="https://theorg.com/org/numbers-protocol/org-chart/sofia-yan" class="underline hover:no-underline">TheOrg</a> ·
+            <a href="https://www.numbersprotocol.io" class="underline hover:no-underline">Numbers Protocol</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="mt-16 border-t border-border pt-10 space-y-5">
+        <div class="space-y-2">
+          <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+            <span data-l="zh">Next</span><span data-l="en">Next</span>
+          </p>
+          <h2 class="font-display text-2xl md:text-3xl font-medium">
+            <span data-l="zh">如果你想接著看我怎麼想 AI 與工作</span>
+            <span data-l="en">If you want to keep following how I think about AI and work</span>
+          </h2>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href={`${baseUrl}blog`}
+            class="inline-flex items-center gap-1 px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
+          >
+            <span data-l="zh">閱讀文章</span><span data-l="en">Read essays</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href={`${baseUrl}speaker`}
+            class="inline-flex items-center gap-1 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
+          >
+            <span data-l="zh">邀請演講或工作坊</span><span data-l="en">Invite a talk or workshop</span>
+          </a>
+        </div>
+      </section>
     </div>
   </main>
   <Footer />

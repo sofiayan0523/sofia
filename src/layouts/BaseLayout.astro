@@ -13,9 +13,10 @@ interface Props {
     author?: string;
     tags?: string[];
   };
+  faq?: Array<{ question: string; answer: string }>;
 }
 
-const { title, description, image, type, article } = Astro.props;
+const { title, description, image, type, article, faq } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 
@@ -62,6 +63,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
       image={image}
       type={type}
       article={article}
+      faq={faq}
     />
     <!-- Google Analytics (GA4) -->
     {import.meta.env.PUBLIC_GA_TRACKING_ID && (
@@ -93,5 +95,42 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
   </head>
   <body class="min-h-screen bg-background text-foreground antialiased">
     <slot />
+    <script is:inline>
+      (function () {
+        function buildPayload(target) {
+          return {
+            cta_location: target.getAttribute("data-cta-location") || "",
+            cta_destination: target.getAttribute("data-cta-destination") || "",
+            cta_content: target.getAttribute("data-cta-content") || "",
+            link_url: target.href || "",
+          };
+        }
+
+        document.addEventListener(
+          "click",
+          function (event) {
+            var target = event.target && event.target.closest
+              ? event.target.closest("[data-analytics-event]")
+              : null;
+            if (!target) return;
+
+            var eventName = target.getAttribute("data-analytics-event");
+            if (!eventName) return;
+
+            var payload = buildPayload(target);
+            if (typeof window.gtag === "function") {
+              window.gtag("event", eventName, payload);
+            }
+            if (window.zaraz && typeof window.zaraz.track === "function") {
+              window.zaraz.track(eventName, payload);
+            }
+            window.dispatchEvent(new CustomEvent("sofia:cta-click", {
+              detail: { event: eventName, payload: payload },
+            }));
+          },
+          { capture: true },
+        );
+      })();
+    </script>
   </body>
 </html>

@@ -5,7 +5,7 @@
 > **Venue**: AppWorks
 > **Audience**: 早期新創 founder / 工程 lead / 投資人
 > **Duration target**: 40 分鐘 keynote + 20 分鐘 Q&A（依現場調整）
-> **Companion blog**: `/posts/zero-to-ai-native/`（QR code 放結尾投影片）
+> **Companion blog**: `/blog/zero-to-ai-native/`（QR code 放結尾投影片）
 
 ---
 
@@ -116,7 +116,7 @@
 **S16 ｜Step 3 — 結構化知識**
 - Agent 需要 X → 把 X 明確化
 - 大字：「**這不是文件。這是基礎建設**。」
-- 引用我自己的 [TAEA framework](https://sofiayan.com/ai-coworker-methodology) 的 A
+- 引用我自己的 [TAEA framework](https://sofiayan.cc/ai-coworker-methodology) 的 A
 
 **S17 ｜Step 3 案例：我們的 SOP 結構**
 - 截圖（脫敏）：我們的「客戶分類 SOP」長什麼樣
@@ -188,7 +188,7 @@
 - 「謝謝 AppWorks。謝謝今天願意花時間的你們。」
 - QR Code → 這篇 blog（含完整 Playbook、FAQ、Greg 原文連結）
 - 三個延伸連結：
-  - sofiayan.com（演講邀約 / workshop）
+  - sofiayan.cc（演講邀約 / workshop）
   - numbersprotocol.io（Omni 平台）
   - LinkedIn: @sofiayan
 
@@ -248,6 +248,6 @@
 
 - [ ] 投影片（建議 Keynote 或 Google Slides — 用 Omni Google Workspace 整合可協助）
 - [ ] OG image：`public/images/posts/zero-to-ai-native/cover.jpg`（也可以放投影片 cover）
-- [ ] QR code 指向：`https://sofiayan.com/posts/zero-to-ai-native/`（含 UTM：`utm_source=appworks-keynote&utm_medium=qr&utm_campaign=zero-to-ai-native`）
+- [ ] QR code 指向：`https://sofiayan.cc/blog/zero-to-ai-native/`（含 UTM：`utm_source=appworks-keynote&utm_medium=qr&utm_campaign=zero-to-ai-native`）
 - [ ] 備用：印一份 blog 全文 PDF，給想深聊的人會場拿
-- [ ] 演講後 24 小時內：把投影片 PDF 放 sofiayan.com 同篇下載區（社群推文觸發二次流量）
+- [ ] 演講後 24 小時內：把投影片 PDF 放 sofiayan.cc 同篇下載區（社群推文觸發二次流量）

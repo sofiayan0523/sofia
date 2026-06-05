@@ -8,6 +8,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "check:links": "npm run build && node scripts/check-links.mjs",
+    "check:cta": "node scripts/validate-cta-tracking.mjs",
+    "check:roadmap": "node scripts/validate-editorial-roadmap.mjs",
+    "check:brand": "node scripts/validate-brand-guardrails.mjs",
+    "check:all": "npm run check:brand && npm run check:roadmap && npm run check:cta && node scripts/validate-aeo-files.mjs && npm run check:links",
     "preview": "astro preview",
     "astro": "astro",
     "postbuild": "pagefind --site dist"

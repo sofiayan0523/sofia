@@ -12,7 +12,7 @@ import sharp from "sharp";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const URL = "https://sofiayan0523.github.io/sofia/";
+const URL = "https://sofiayan.cc/";
 const OUT_DIR = resolve(ROOT, "public/images/qrcode");
 const PROFILE_PATH = resolve(ROOT, "public/images/profile/sofia.png");
 

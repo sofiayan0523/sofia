@@ -97,7 +97,7 @@ async function main() {
           Tech &amp; Travel · 50+ cities · Bouldering · AI tools
         </text>
         <text x="540" y="540" font-size="22" font-weight="500" fill="#0a0a0a">
-          sofiayan0523.github.io/sofia
+          sofiayan.cc
         </text>
       </g>
     </svg>`,

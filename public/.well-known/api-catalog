@@ -1,0 +1,41 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://sofiayan.cc/",
+      "service-doc": [
+        {
+          "href": "https://sofiayan.cc/llms.txt",
+          "type": "text/markdown",
+          "title": "LLM-readable site guide"
+        },
+        {
+          "href": "https://sofiayan.cc/agent.json",
+          "type": "application/json",
+          "title": "Agent capability manifest"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://sofiayan.cc/.well-known/mcp/server-card.json",
+          "type": "application/json",
+          "title": "Static MCP server card"
+        },
+        {
+          "href": "https://sofiayan.cc/.well-known/agent-skills/index.json",
+          "type": "application/json",
+          "title": "Agent skills index"
+        },
+        {
+          "href": "https://sofiayan.cc/rss.xml",
+          "type": "application/rss+xml",
+          "title": "RSS feed"
+        },
+        {
+          "href": "https://sofiayan.cc/sitemap-index.xml",
+          "type": "application/xml",
+          "title": "Sitemap index"
+        }
+      ]
+    }
+  ]
+}

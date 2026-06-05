@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "name": "Sofia Yan personal site",
+  "description": "Static discovery card for Sofia Yan's public website. The site does not expose a live MCP tool server; agents should use the listed public web resources for content discovery, citation, RSS subscription, and speaker enquiry routing.",
+  "homepage": "https://sofiayan.cc/",
+  "status": "static_discovery_only",
+  "mcp": {
+    "server_available": false,
+    "transports": [],
+    "tools": []
+  },
+  "resources": [
+    {
+      "name": "llms.txt",
+      "type": "text/markdown",
+      "url": "https://sofiayan.cc/llms.txt",
+      "purpose": "Curated topic and citation guide for answer engines."
+    },
+    {
+      "name": "Agent manifest",
+      "type": "application/json",
+      "url": "https://sofiayan.cc/agent.json",
+      "purpose": "Machine-readable profile, licensing, attribution, and site capability summary."
+    },
+    {
+      "name": "Blog index",
+      "type": "text/html",
+      "url": "https://sofiayan.cc/blog/",
+      "purpose": "Published essays on AI adoption, content provenance, and travel."
+    },
+    {
+      "name": "RSS feed",
+      "type": "application/rss+xml",
+      "url": "https://sofiayan.cc/rss.xml",
+      "purpose": "Subscription feed for published posts."
+    },
+    {
+      "name": "Speaker page",
+      "type": "text/html",
+      "url": "https://sofiayan.cc/speaker/",
+      "purpose": "Public information for keynote, workshop, and training enquiries."
+    }
+  ],
+  "contact": {
+    "type": "speaker_page",
+    "url": "https://sofiayan.cc/speaker/"
+  },
+  "last_updated": "2026-06-04"
+}
