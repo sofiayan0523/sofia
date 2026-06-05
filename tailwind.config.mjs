@@ -12,14 +12,26 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: [
+        // Headings: literary serif (Latin) + 思源宋體 (CJK)
+        display: ["Newsreader", "Noto Serif TC", "Georgia", "serif"],
+        // Body: humanist sans (Latin) + 思源黑體 (CJK)
+        sans: [
           "Inter",
+          "Noto Sans TC",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
           "Roboto",
           "sans-serif",
+        ],
+        // Eyebrows / labels / metadata
+        mono: [
+          "IBM Plex Mono",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
         ],
       },
       colors: {
