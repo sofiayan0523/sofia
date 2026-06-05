@@ -43,6 +43,32 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* Roomier default line-height for Traditional Chinese reading comfort */
+    line-height: 1.7;
+  }
+
+  /* Display headings: tighten tracking; serif optical sizing */
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.012em;
+  }
+
+  /* Eyebrows / kicker labels render in mono for an intentional, editorial feel.
+     These consistently combine `uppercase` + `tracking-widest` across the site. */
+  .uppercase.tracking-widest {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+  }
+
+  /* Article body (prose): serif headings to match page titles, comfortable CJK leading */
+  .prose :is(h1, h2, h3, h4) {
+    font-family: "Newsreader", "Noto Serif TC", Georgia, serif;
+    letter-spacing: -0.012em;
+  }
+  .prose :is(p, li) {
+    line-height: 1.85;
   }
 
   /* i18n dual-render: hide inactive language (default = zh) */

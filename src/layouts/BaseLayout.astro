@@ -25,6 +25,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Typography: Newsreader + Noto Serif TC (display), Inter + Noto Sans TC (body), IBM Plex Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+    />
     <!-- Favicon: SVG for modern browsers, PNG fallback, apple-touch-icon for iOS -->
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <link rel="icon" type="image/png" sizes="32x32" href={`${baseUrl}favicon-32.png`} />
