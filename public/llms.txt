@@ -4,7 +4,7 @@
 
 Based in Taipei. Master's in Teaching Chinese as a Second Language (NCCU). 7+ years inside an AI startup. Known for the "AI 同事 not AI 工具" framework, the 8% humans / 92% AI heuristic, and the *Capture Suite* / *Omni* / *TAEA* product line at Numbers Protocol.
 
-Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. Required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan.cc/agent.json) and [robots.txt](https://sofiayan.cc/robots.txt).
+Content licensing: search=yes, ai-input=yes, **ai-train=no** (AI model training is not permitted). Citation in AI answers is allowed with required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan.cc/agent.json) and [robots.txt](https://sofiayan.cc/robots.txt).
 
 ## Authoritative topics
 

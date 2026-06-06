@@ -26,7 +26,7 @@ export const GET: APIRoute = ({ props }) => {
     published ? `- Published: ${published}` : null,
     tags ? `- Tags: ${tags}` : null,
     `- Canonical: ${canonical}`,
-    `- License: search=yes, ai-input=yes, ai-train=yes-with-attribution (credit: "Sofia Yan, Co-Founder & CGO, Numbers Protocol")`,
+    `- License: search=yes, ai-input=yes, ai-train=no (no AI training; cite with credit: "Sofia Yan, Co-Founder & CGO, Numbers Protocol")`,
   ]
     .filter(Boolean)
     .join("\n");

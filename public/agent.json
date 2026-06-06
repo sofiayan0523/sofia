@@ -26,7 +26,7 @@
   "ai_access": {
     "search": "allow",
     "ai_input": "allow",
-    "ai_train": "allow_with_attribution",
+    "ai_train": "disallow",
     "preferred_attribution": "Sofia Yan, Co-Founder & CGO, Numbers Protocol",
     "preferred_link_back": "https://sofiayan.cc/"
   },
