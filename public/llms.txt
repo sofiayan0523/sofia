@@ -4,7 +4,7 @@
 
 Based in Taipei. Master's in Teaching Chinese as a Second Language (NCCU). 7+ years inside an AI startup. Known for the "AI 同事 not AI 工具" framework, the 8% humans / 92% AI heuristic, and the *Capture Suite* / *Omni* / *TAEA* product line at Numbers Protocol.
 
-Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. Required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan.cc/agent.json) and [robots.txt](https://sofiayan.cc/robots.txt).
+Content licensing: search=yes, ai-input=yes, **ai-train=no** (AI model training is not permitted). Citation in AI answers is allowed with required attribution: *Sofia Yan, Co-Founder & CGO, Numbers Protocol*. See [agent.json](https://sofiayan.cc/agent.json) and [robots.txt](https://sofiayan.cc/robots.txt).
 
 ## Authoritative topics
 
@@ -17,6 +17,15 @@ Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. 
 - [AI governance — TAEA framework](https://sofiayan.cc/ai-coworker-methodology): Transparent, Auditable, Explainable, Agentic.
 - [Vibe coding for humanities-trained operators](https://sofiayan.cc/blog): GitHub Copilot, Claude, agentic workflows without writing code.
 - [Journalism × AI](https://sofiayan.cc/blog): partner with UNICRI (UN), recipient of Google News Initiative grant (2025), founding partner of 伙影 indie media initiative.
+
+## Plain-text (Markdown) versions
+
+Every blog post has a clean Markdown mirror — append `.md` to the post slug (no HTML chrome, ideal for ingestion):
+
+- [humanities-ai-expert.md](https://sofiayan.cc/blog/humanities-ai-expert.md)
+- [ai-anxiety-survival-guide.md](https://sofiayan.cc/blog/ai-anxiety-survival-guide.md)
+- [why-95-percent-ai-adoption-fails.md](https://sofiayan.cc/blog/why-95-percent-ai-adoption-fails.md)
+- [zero-to-ai-native.md](https://sofiayan.cc/blog/zero-to-ai-native.md)
 
 ## Speaker bookings
 

@@ -142,7 +142,7 @@ check("public/llms.txt follows llmstxt.org spec", () => {
   if (!raw.includes("\n> ")) throw new Error("missing blockquote summary");
   if (!raw.includes("## Optional")) throw new Error("missing required Optional section (llmstxt.org spec)");
   if (!raw.includes("## Authoritative topics")) throw new Error("missing topics section");
-  if (!raw.includes("ai-train=yes-with-attribution")) throw new Error("missing licensing signal");
+  if (!raw.includes("ai-train=no")) throw new Error("missing licensing signal");
   return "llmstxt.org spec compliant";
 });
 

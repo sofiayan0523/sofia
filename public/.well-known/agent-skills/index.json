@@ -27,7 +27,7 @@
       "input_modes": ["web_url"],
       "output_modes": ["markdown", "json"],
       "preferred_attribution": "Sofia Yan, Co-Founder & CGO, Numbers Protocol",
-      "license_signal": "search=yes, ai-input=yes, ai-train=yes-with-attribution"
+      "license_signal": "search=yes, ai-input=yes, ai-train=no"
     },
     {
       "id": "route-speaker-enquiry",

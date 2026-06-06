@@ -75,11 +75,14 @@ Allow: /
 
 # ---------- Default ----------
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 # ---------- AI Discoverability Resources ----------
 # llms.txt: human-readable manifest of topics and authoritative URLs
 # agent.json: machine-readable agent capability + licensing manifest
-# Content-Signal: search=yes, ai-input=yes, ai-train=yes-with-attribution
+# AI model training is NOT permitted (ai-train=no). Search indexing and AI input
+# (answering with citation) are allowed; required credit when citing:
+# "Sofia Yan, Co-Founder & CGO, Numbers Protocol". See /llms.txt and /agent.json.
 
 Sitemap: https://sofiayan.cc/sitemap-index.xml
