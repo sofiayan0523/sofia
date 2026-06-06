@@ -5,37 +5,56 @@ import Footer from "@/components/Footer.astro";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
-// FAQ data (also injected as Schema.org FAQPage via SEO component)
+// FAQ data. `question` / `answer` (zh) are also injected as Schema.org FAQPage
+// via the SEO component; `_en` fields drive the bilingual on-page display.
 const faqs = [
   {
     question: "Sofia 通常用什麼語言演講？",
     answer:
       "中英文皆可。台灣企業內訓多以中文進行；國際場合（國外總部、跨國團隊）用英文。雙語場合也常見，視聽眾組成決定。",
+    question_en: "What language does Sofia present in?",
+    answer_en:
+      "Both Chinese and English. Corporate training in Taiwan is usually in Chinese; international settings (overseas HQs, cross-border teams) in English. Bilingual sessions are common too, depending on the audience.",
   },
   {
     question: "演講主題有哪些？可以客製嗎？",
     answer:
       "三大主軸：(1) 文組人也能領導的 AI 導入，(2) AI 同事方法論（Numbers 案例拆解），(3) 內容溯源與 AI 時代的信任戰役。可依貴公司產業、團隊規模、AI 成熟度客製。",
+    question_en: "What topics are available? Can they be customised?",
+    answer_en:
+      "Three pillars: (1) AI adoption a humanities person can lead, (2) the AI coworker methodology (a Numbers teardown), (3) content provenance and the trust war of the AI era. Each can be tailored to your industry, team size, and AI maturity.",
   },
   {
     question: "Sofia 接受怎樣的演講邀約？",
     answer:
       "企業內訓 (in-house corporate training)、產業論壇 keynote、公開研討會、podcast / 媒體訪談。不接 KOL 業配、不開公開線上課。",
+    question_en: "What kinds of bookings does Sofia take?",
+    answer_en:
+      "In-house corporate training, industry-forum keynotes, public seminars, and podcast / media interviews. No influencer promotions and no public online courses.",
   },
   {
     question: "費用怎麼算？",
     answer:
       "依場次形式、地點、規模、客製深度而定。請透過下方邀約方式聯絡，我們在 48 小時內回覆報價區間。",
+    question_en: "How is the fee determined?",
+    answer_en:
+      "It depends on format, location, scale, and customisation depth. Reach out via the options below and we'll reply with a price range within 48 hours.",
   },
   {
     question: "海外活動可以嗎？",
     answer:
       "可以。Sofia 過去曾在 SXSW (Austin)、AAJA-Asia、UNICRI 等國際場合演講，能處理跨國時差與旅程。",
+    question_en: "Are overseas events possible?",
+    answer_en:
+      "Yes. Sofia has spoken at SXSW (Austin), AAJA-Asia, UNICRI and other international venues, and is comfortable with cross-border travel and time zones.",
   },
   {
     question: "為什麼是 Sofia？",
     answer:
       "她是少數同時具備「政大華語教學碩士背景」與「7+ 年 AI 新創 Co-Founder 實戰」的講者。能用文組人聽得懂的語言講透 C2PA / agentic workflow / AI 治理，而不是把工程師概念照搬。",
+    question_en: "Why Sofia?",
+    answer_en:
+      "She's one of the few speakers who pairs an MA in Teaching Chinese as a Second Language (NCCU) with 7+ years of hands-on AI-startup co-founding. She explains C2PA / agentic workflows / AI governance in language non-technical people understand, instead of just copying engineer concepts.",
   },
 ];
 
@@ -58,29 +77,60 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
       <!-- Hero -->
       <section class="space-y-6 animate-fade-up">
         <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
-          Speaker Booking · 演講邀約
+          <span data-l="zh">Speaker Booking · 演講邀約</span>
+          <span data-l="en">Speaker Booking</span>
         </p>
         <h1 class="font-display text-2xl md:text-3xl font-medium leading-tight">
-          邀請一個真的活在企業 AI 現場<br class="hidden md:block" />
-          <span class="text-muted-foreground">（也就是還在踩雷）的人</span><br />
-          講給你的團隊聽。
+          <span data-l="zh">
+            邀請一個真的活在企業 AI 現場<br class="hidden md:block" />
+            <span class="text-muted-foreground">（也就是還在踩雷）的人</span><br />
+            講給你的團隊聽。
+          </span>
+          <span data-l="en">
+            Bring in someone who actually lives inside enterprise AI<br class="hidden md:block" />
+            <span class="text-muted-foreground">— and is still stepping on landmines —</span><br />
+            to talk to your team.
+          </span>
         </h1>
         <p class="text-lg text-foreground/80 leading-relaxed max-w-2xl">
-          不是 AI 顧問，也不是 AI 工程師，<br />
-          而是「被 AI 同事 carry、又得負責教 AI 怎麼當同事」的那一個。
+          <span data-l="zh">
+            不是 AI 顧問，也不是 AI 工程師，<br />
+            而是「被 AI 同事 carry、又得負責教 AI 怎麼當同事」的那一個。
+          </span>
+          <span data-l="en">
+            Not an AI consultant, not an AI engineer —<br />
+            the person who gets carried by her AI coworkers, and is also responsible for teaching AI how to be a coworker.
+          </span>
         </p>
         <p class="text-base text-foreground/70 leading-relaxed max-w-2xl">
-          Sofia Yan (嚴世紀)，Numbers Protocol 共同創辦人 & CGO、文組 AI 專家。
-          政大華語教學碩士、7+ 年 AI 新創 Co-Founder。
-          專長把企業 AI 導入、內容溯源、AI 治理講給文組人也聽得懂
-          <span class="text-muted-foreground">（主辦方說我可以講人話，這點我可以保證 XD）</span>。
+          <span data-l="zh">
+            Sofia Yan (嚴世紀)，Numbers Protocol 共同創辦人 & CGO、文組 AI 專家。
+            政大華語教學碩士、7+ 年 AI 新創 Co-Founder。
+            專長把企業 AI 導入、內容溯源、AI 治理講給文組人也聽得懂
+            <span class="text-muted-foreground">（主辦方說我可以講人話，這點我可以保證 XD）</span>。
+          </span>
+          <span data-l="en">
+            Sofia Yan, Co-Founder & CGO of Numbers Protocol, a humanities-trained AI expert.
+            MA in Teaching Chinese as a Second Language (NCCU), 7+ years as an AI-startup co-founder.
+            I specialise in explaining enterprise AI adoption, content provenance, and AI governance so non-technical people actually get it
+            <span class="text-muted-foreground">(organisers say I speak human — that part I can guarantee)</span>.
+          </span>
         </p>
         <!-- Micro-receipts strip — every number traced to source docs -->
         <div class="flex flex-wrap gap-x-6 gap-y-2 pt-4 text-sm text-muted-foreground">
-          <span>Numbers 社群 <strong class="text-foreground">1K → 13萬</strong> (+12,900%, Sofia 帶領)</span>
-          <span>Numbers 平台 <strong class="text-foreground">190</strong> 國 · 月流量 <strong class="text-foreground">60億</strong></span>
-          <span><strong class="text-foreground">7+</strong> 年新創 Co-Founder</span>
-          <span>SXSW · UNICRI · GNI · AAJA · APJF · 經理人</span>
+          <span>
+            <span data-l="zh">Numbers 社群 <strong class="text-foreground">1K → 13萬</strong> (+12,900%, Sofia 帶領)</span>
+            <span data-l="en">Numbers community <strong class="text-foreground">1K → 130K</strong> (+12,900%, led by Sofia)</span>
+          </span>
+          <span>
+            <span data-l="zh">Numbers 平台 <strong class="text-foreground">190</strong> 國 · 月流量 <strong class="text-foreground">60億</strong></span>
+            <span data-l="en">Numbers platform <strong class="text-foreground">190</strong> countries · <strong class="text-foreground">6B</strong> monthly views</span>
+          </span>
+          <span>
+            <span data-l="zh"><strong class="text-foreground">7+</strong> 年新創 Co-Founder</span>
+            <span data-l="en"><strong class="text-foreground">7+</strong> years startup co-founder</span>
+          </span>
+          <span>SXSW · UNICRI · GNI · AAJA · APJF · <span data-l="zh">經理人</span><span data-l="en">Manager Today</span></span>
         </div>
         <div class="flex flex-wrap gap-4 pt-4">
           <a
@@ -91,40 +141,51 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
             data-cta-content="speaker-booking-mailto"
             class="inline-flex items-center gap-1 px-6 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
           >
-            先寄邀約需求 <span aria-hidden="true">→</span>
+            <span data-l="zh">先寄邀約需求</span><span data-l="en">Send an enquiry</span> <span aria-hidden="true">→</span>
           </a>
           <a
             href="#speaker-fit"
             class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
           >
-            先看適不適合
+            <span data-l="zh">先看適不適合</span><span data-l="en">See if we're a fit</span>
           </a>
         </div>
       </section>
 
       <!-- Three formats -->
       <section class="space-y-8">
-        <h2 class="font-display text-xl md:text-2xl font-medium">三種演講規格</h2>
+        <h2 class="font-display text-xl md:text-2xl font-medium">
+          <span data-l="zh">三種演講規格</span><span data-l="en">Three formats</span>
+        </h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="p-6 rounded-xl bg-card border border-border">
             <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format A</p>
-            <h3 class="font-display text-xl font-medium mb-3">90 分鐘 Keynote</h3>
+            <h3 class="font-display text-xl font-medium mb-3">
+              <span data-l="zh">90 分鐘 Keynote</span><span data-l="en">90-min keynote</span>
+            </h3>
             <p class="text-sm text-foreground/70 leading-relaxed">
-              產業論壇、公司全員大會、研討會主題演講。聚焦一個議題深講。Q&A 30 分鐘。
+              <span data-l="zh">產業論壇、公司全員大會、研討會主題演講。聚焦一個議題深講。Q&A 30 分鐘。</span>
+              <span data-l="en">Industry forums, all-hands, conference keynotes. One topic, in depth. 30-min Q&A.</span>
             </p>
           </div>
           <div class="p-6 rounded-xl bg-card border border-border">
             <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format B</p>
-            <h3 class="font-display text-xl font-medium mb-3">半天 Workshop</h3>
+            <h3 class="font-display text-xl font-medium mb-3">
+              <span data-l="zh">半天 Workshop</span><span data-l="en">Half-day workshop</span>
+            </h3>
             <p class="text-sm text-foreground/70 leading-relaxed">
-              4 小時、20-50 人。Keynote + 案例拆解 + 小組工作坊。適合主管團隊 AI 認知對齊。
+              <span data-l="zh">4 小時、20-50 人。Keynote + 案例拆解 + 小組工作坊。適合主管團隊 AI 認知對齊。</span>
+              <span data-l="en">4 hours, 20–50 people. Keynote + case teardown + group workshop. Best for aligning a leadership team's AI mindset.</span>
             </p>
           </div>
           <div class="p-6 rounded-xl bg-card border border-border">
             <p class="text-xs text-muted-foreground uppercase tracking-wider mb-2">Format C</p>
-            <h3 class="font-display text-xl font-medium mb-3">全天深度導入</h3>
+            <h3 class="font-display text-xl font-medium mb-3">
+              <span data-l="zh">全天深度導入</span><span data-l="en">Full-day deep adoption</span>
+            </h3>
             <p class="text-sm text-foreground/70 leading-relaxed">
-              7 小時、10-30 人。從現況診斷到 90 天 roadmap。團隊帶實際工作流來，當場改造。
+              <span data-l="zh">7 小時、10-30 人。從現況診斷到 90 天 roadmap。團隊帶實際工作流來，當場改造。</span>
+              <span data-l="en">7 hours, 10–30 people. From current-state diagnosis to a 90-day roadmap. Bring real workflows; we rebuild them on the spot.</span>
             </p>
           </div>
         </div>
@@ -136,29 +197,59 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
             Best fit
           </p>
-          <h2 class="font-display text-xl md:text-2xl font-medium">什麼場合最適合？</h2>
+          <h2 class="font-display text-xl md:text-2xl font-medium">
+            <span data-l="zh">什麼場合最適合？</span><span data-l="en">When is it the best fit?</span>
+          </h2>
           <p class="text-foreground/70 leading-relaxed">
-            我最能發揮的場景，是聽眾已經知道 AI 重要，但還卡在「怎麼讓團隊真的開始用」。
-            如果你要的是工具清單或一小時速成課，可能會有更適合的人。
+            <span data-l="zh">我最能發揮的場景，是聽眾已經知道 AI 重要，但還卡在「怎麼讓團隊真的開始用」。如果你要的是工具清單或一小時速成課，可能會有更適合的人。</span>
+            <span data-l="en">I'm at my best when the audience already knows AI matters but is stuck on "how do we get the team to actually use it." If you want a tool list or a one-hour crash course, someone else may fit better.</span>
           </p>
         </div>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="rounded-xl border border-border bg-card p-6 space-y-4">
-            <h3 class="font-display text-xl font-medium">適合</h3>
+            <h3 class="font-display text-xl font-medium">
+              <span data-l="zh">適合</span><span data-l="en">A good fit</span>
+            </h3>
             <ul class="space-y-3 text-sm text-foreground/80 leading-relaxed">
-              <li>企業主管 offsite：需要對齊 AI 導入方向與團隊語言。</li>
-              <li>AI adoption workshop：想從一個真實 workflow 開始改。</li>
-              <li>媒體、內容、創作者社群：需要理解內容溯源與 C2PA 為什麼重要。</li>
-              <li>非工程背景團隊：想知道自己在 AI 時代可以站在哪裡。</li>
+              <li>
+                <span data-l="zh">企業主管 offsite：需要對齊 AI 導入方向與團隊語言。</span>
+                <span data-l="en">Leadership offsites: aligning on AI direction and a shared team vocabulary.</span>
+              </li>
+              <li>
+                <span data-l="zh">AI adoption workshop：想從一個真實 workflow 開始改。</span>
+                <span data-l="en">AI adoption workshops: starting from one real workflow.</span>
+              </li>
+              <li>
+                <span data-l="zh">媒體、內容、創作者社群：需要理解內容溯源與 C2PA 為什麼重要。</span>
+                <span data-l="en">Media, content, and creator communities: understanding why content provenance and C2PA matter.</span>
+              </li>
+              <li>
+                <span data-l="zh">非工程背景團隊：想知道自己在 AI 時代可以站在哪裡。</span>
+                <span data-l="en">Non-engineering teams: figuring out where they stand in the AI era.</span>
+              </li>
             </ul>
           </div>
           <div class="rounded-xl border border-border bg-card p-6 space-y-4">
-            <h3 class="font-display text-xl font-medium">不太適合</h3>
+            <h3 class="font-display text-xl font-medium">
+              <span data-l="zh">不太適合</span><span data-l="en">Not a fit</span>
+            </h3>
             <ul class="space-y-3 text-sm text-foreground/80 leading-relaxed">
-              <li>只想要一串最新 AI 工具教學，沒有組織情境或導入目標。</li>
-              <li>單純 KOL 業配或產品背書。</li>
-              <li>期待一次演講直接取代內部流程設計與後續 owner。</li>
-              <li>需要純工程細節、模型調參或 infra implementation 深潛。</li>
+              <li>
+                <span data-l="zh">只想要一串最新 AI 工具教學，沒有組織情境或導入目標。</span>
+                <span data-l="en">Just want a list of the latest AI tools, with no organisational context or adoption goal.</span>
+              </li>
+              <li>
+                <span data-l="zh">單純 KOL 業配或產品背書。</span>
+                <span data-l="en">Pure influencer promotion or product endorsement.</span>
+              </li>
+              <li>
+                <span data-l="zh">期待一次演講直接取代內部流程設計與後續 owner。</span>
+                <span data-l="en">Expecting one talk to replace internal process design and an ongoing owner.</span>
+              </li>
+              <li>
+                <span data-l="zh">需要純工程細節、模型調參或 infra implementation 深潛。</span>
+                <span data-l="en">Need pure engineering detail, model tuning, or an infra-implementation deep dive.</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -171,47 +262,51 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
             data-cta-content="speaker-booking-mailto"
             class="inline-flex items-center gap-1 px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
           >
-            描述你的場景 <span aria-hidden="true">→</span>
+            <span data-l="zh">描述你的場景</span><span data-l="en">Describe your scenario</span> <span aria-hidden="true">→</span>
           </a>
           <a
             href={`${baseUrl}ai-coworker-methodology`}
             class="inline-flex items-center gap-1 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
           >
-            先看 AI 同事方法論
+            <span data-l="zh">先看 AI 同事方法論</span><span data-l="en">Read the AI coworker methodology</span>
           </a>
         </div>
       </section>
 
       <!-- Topics -->
       <section class="space-y-8">
-        <h2 class="font-display text-xl md:text-2xl font-medium">主打主題</h2>
+        <h2 class="font-display text-xl md:text-2xl font-medium">
+          <span data-l="zh">主打主題</span><span data-l="en">Signature topics</span>
+        </h2>
         <div class="space-y-6">
           <div class="border-l-2 border-primary/30 pl-6">
             <h3 class="font-display text-xl font-medium mb-2">
-              文組人也能領導的 AI 導入
+              <span data-l="zh">文組人也能領導的 AI 導入</span>
+              <span data-l="en">AI adoption a humanities person can lead</span>
             </h3>
             <p class="text-foreground/70 leading-relaxed">
-              為什麼 95% 的企業 AI 導入會失敗？因為他們把 AI 當工具，不是當同事。
-              一個科技麻瓜的 7 年 AI 新創田野筆記。
+              <span data-l="zh">為什麼 95% 的企業 AI 導入會失敗？因為他們把 AI 當工具，不是當同事。一個科技麻瓜的 7 年 AI 新創田野筆記。</span>
+              <span data-l="en">Why do 95% of enterprise AI rollouts fail? Because they treat AI as a tool, not a coworker. Seven years of field notes from a self-confessed tech muggle inside an AI startup.</span>
             </p>
           </div>
           <div class="border-l-2 border-primary/30 pl-6">
             <h3 class="font-display text-xl font-medium mb-2">
-              AI 同事方法論：Numbers 案例拆解
+              <span data-l="zh">AI 同事方法論：Numbers 案例拆解</span>
+              <span data-l="en">The AI coworker methodology: a Numbers teardown</span>
             </h3>
             <p class="text-foreground/70 leading-relaxed">
-              我們團隊 AI 同事比人類同事多 4.5 倍。
-              Amy、Jordan、Clara、小鳳、阿張、老科，名字、權限、KPI 全公開。
-              砍掉 Slack、Airtable、Asana 那一週的真實血淚。
+              <span data-l="zh">我們團隊 AI 同事比人類同事多 4.5 倍。Amy、Jordan、Clara、小鳳、阿張、老科，名字、權限、KPI 全公開。砍掉 Slack、Airtable、Asana 那一週的真實血淚。</span>
+              <span data-l="en">Our team has 4.5× more AI coworkers than human ones. Amy, Jordan, Clara, Xiao-Feng, A-Zhang, Lao-Ke — names, permissions, and KPIs all public. Plus the real pain of the week we cut Slack, Airtable, and Asana.</span>
             </p>
           </div>
           <div class="border-l-2 border-primary/30 pl-6">
             <h3 class="font-display text-xl font-medium mb-2">
-              內容溯源與 AI 時代的信任戰役
+              <span data-l="zh">內容溯源與 AI 時代的信任戰役</span>
+              <span data-l="en">Content provenance and the trust war of the AI era</span>
             </h3>
             <p class="text-foreground/70 leading-relaxed">
-              當生成式 AI 幾秒就能造一張逼真影像，新聞、創作、IP 怎麼保護？
-              C2PA、ERC-7053、TAEA 框架。Numbers 與 UNICRI / Google News Initiative / 伙影的實戰案例。
+              <span data-l="zh">當生成式 AI 幾秒就能造一張逼真影像，新聞、創作、IP 怎麼保護？C2PA、ERC-7053、TAEA 框架。Numbers 與 UNICRI / Google News Initiative / 伙影的實戰案例。</span>
+              <span data-l="en">When generative AI can fake a photorealistic image in seconds, how do we protect news, creative work, and IP? C2PA, ERC-7053, the TAEA framework — with real cases from Numbers' work with UNICRI, the Google News Initiative, and 伙影.</span>
             </p>
           </div>
         </div>
@@ -219,32 +314,80 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
 
       <!-- Past speaking & credentials -->
       <section class="space-y-8">
-        <h2 class="font-display text-xl md:text-2xl font-medium">過往演講與課程</h2>
+        <h2 class="font-display text-xl md:text-2xl font-medium">
+          <span data-l="zh">過往演講與課程</span><span data-l="en">Past talks & courses</span>
+        </h2>
         <div class="grid md:grid-cols-2 gap-x-8 gap-y-3 text-foreground/80 leading-relaxed">
           <div>
-            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">2024-2026 主題課程 / Keynote</p>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">
+              <span data-l="zh">2024-2026 主題課程 / Keynote</span>
+              <span data-l="en">2024–2026 courses / keynotes</span>
+            </p>
             <ul class="space-y-2 text-sm">
-              <li><strong>「重建 AI 時代的信任：一個可實踐的數位內容來源框架」</strong>（2026）</li>
-              <li><strong>"Protecting Creativity in the Age of AI"</strong> — Stage talk（2026）</li>
-              <li><strong>「職場必備 Vibe Coding 實作課」</strong>， 企業內訓系列</li>
-              <li><strong>「顧問業的 AI 協作方法」</strong>， 課程教材 v3</li>
-              <li><strong>經理人課程</strong>（Manager Today）</li>
-              <li><strong>Gen AI 小聚</strong>「從工具到同事：全面導入 AI 工作流」</li>
+              <li>
+                <span data-l="zh"><strong>「重建 AI 時代的信任：一個可實踐的數位內容來源框架」</strong>（2026）</span>
+                <span data-l="en"><strong>"Rebuilding Trust in the AI Era: A Practical Framework for Digital Content Provenance"</strong> (2026)</span>
+              </li>
+              <li>
+                <strong>"Protecting Creativity in the Age of AI"</strong> <span data-l="zh">— Stage talk（2026）</span><span data-l="en">— stage talk (2026)</span>
+              </li>
+              <li>
+                <span data-l="zh"><strong>「職場必備 Vibe Coding 實作課」</strong>， 企業內訓系列</span>
+                <span data-l="en"><strong>"Workplace Vibe Coding hands-on course"</strong>, corporate training series</span>
+              </li>
+              <li>
+                <span data-l="zh"><strong>「顧問業的 AI 協作方法」</strong>， 課程教材 v3</span>
+                <span data-l="en"><strong>"AI collaboration methods for consulting"</strong>, courseware v3</span>
+              </li>
+              <li>
+                <span data-l="zh"><strong>經理人課程</strong>（Manager Today）</span>
+                <span data-l="en"><strong>Manager Today</strong> course</span>
+              </li>
+              <li>
+                <span data-l="zh"><strong>Gen AI 小聚</strong>「從工具到同事：全面導入 AI 工作流」</span>
+                <span data-l="en"><strong>Gen AI Meetup</strong>: "From Tool to Coworker — Adopting AI Workflows End to End"</span>
+              </li>
             </ul>
           </div>
           <div>
-            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">國際 panel / 媒體</p>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-3">
+              <span data-l="zh">國際 panel / 媒體</span><span data-l="en">International panels / media</span>
+            </p>
             <ul class="space-y-2 text-sm">
-              <li><strong>SXSW 2023 Pitch</strong>（Metaverse & Web3 冠軍，Numbers 團隊）</li>
-              <li><strong>Asia Pacific Journalism Forum 2025</strong> 講者</li>
-              <li><strong>AAJA Webinar</strong>「Surviving the AI Flood: Trust & Revenue」（主持，2025/06）</li>
-              <li><strong>PL Summit 23 | LabWeek23</strong>（Istanbul）</li>
-              <li>倫敦 2023：AI 於創意產業之變革性技術</li>
-              <li>日內瓦 2024：如何在 AI 驅動的世界對抗假訊息</li>
-              <li><strong>UNICRI</strong>（聯合國 ICJ 研究所）合作</li>
-              <li><strong>Google News Initiative</strong> 補助獲獎（2025）</li>
-              <li><strong>NTU TEC Talk</strong>（台大創創中心 S2EP1）</li>
-              <li><strong>伙影通訊社</strong>（與余志偉攝影記者）</li>
+              <li>
+                <span data-l="zh"><strong>SXSW 2023 Pitch</strong>（Metaverse & Web3 冠軍，Numbers 團隊）</span>
+                <span data-l="en"><strong>SXSW 2023 Pitch</strong> (Metaverse & Web3 winner, Numbers team)</span>
+              </li>
+              <li>
+                <strong>Asia Pacific Journalism Forum 2025</strong> <span data-l="zh">講者</span><span data-l="en">(speaker)</span>
+              </li>
+              <li>
+                <strong>AAJA Webinar</strong> <span data-l="zh">「Surviving the AI Flood: Trust & Revenue」（主持，2025/06）</span><span data-l="en">"Surviving the AI Flood: Trust & Revenue" (host, 2025/06)</span>
+              </li>
+              <li>
+                <strong>PL Summit 23 | LabWeek23</strong> (Istanbul)
+              </li>
+              <li>
+                <span data-l="zh">倫敦 2023：AI 於創意產業之變革性技術</span>
+                <span data-l="en">London 2023: Transformative tech for the creative industries</span>
+              </li>
+              <li>
+                <span data-l="zh">日內瓦 2024：如何在 AI 驅動的世界對抗假訊息</span>
+                <span data-l="en">Geneva 2024: Fighting disinformation in an AI-driven world</span>
+              </li>
+              <li>
+                <strong>UNICRI</strong> <span data-l="zh">（聯合國 ICJ 研究所）合作</span><span data-l="en">(UN interregional crime & justice institute) collaboration</span>
+              </li>
+              <li>
+                <strong>Google News Initiative</strong> <span data-l="zh">補助獲獎（2025）</span><span data-l="en">grant recipient (2025)</span>
+              </li>
+              <li>
+                <strong>NTU TEC Talk</strong> <span data-l="zh">（台大創創中心 S2EP1）</span><span data-l="en">(NTU entrepreneurship center, S2EP1)</span>
+              </li>
+              <li>
+                <span data-l="zh"><strong>伙影通訊社</strong>（與余志偉攝影記者）</span>
+                <span data-l="en"><strong>伙影 news agency</strong> (with photojournalist Yu Zhi-Wei)</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -252,32 +395,63 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
 
       <!-- Receipts: real numbers from production -->
       <section class="space-y-6 bg-card border border-border rounded-xl p-8">
-        <h2 class="font-display text-xl md:text-2xl font-medium">真實的 receipts，不是 PPT 數字</h2>
+        <h2 class="font-display text-xl md:text-2xl font-medium">
+          <span data-l="zh">真實的 receipts，不是 PPT 數字</span>
+          <span data-l="en">Real receipts, not slideware numbers</span>
+        </h2>
         <p class="text-sm text-muted-foreground">
-          這些不是 marketing claim，是 Numbers Protocol 內部跑出來的真實成果，可以在演講中拆給你看。
+          <span data-l="zh">這些不是 marketing claim，是 Numbers Protocol 內部跑出來的真實成果，可以在演講中拆給你看。</span>
+          <span data-l="en">These aren't marketing claims — they're real results from inside Numbers Protocol, and I can break them down live in a talk.</span>
         </p>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">Sofia 在 Numbers Protocol 帶領的成果</p>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+              <span data-l="zh">Sofia 在 Numbers Protocol 帶領的成果</span>
+              <span data-l="en">Results Sofia led at Numbers Protocol</span>
+            </p>
             <ul class="space-y-2 text-sm text-foreground/80">
-              <li>Numbers 平台社群 <strong class="text-foreground">1,000 → 130,000</strong> 人（+12,900%）</li>
-              <li>Numbers 內容驗證平台覆蓋 <strong class="text-foreground">190 個國家</strong> · 月流量 <strong class="text-foreground">60 億</strong></li>
-              <li>國際媒體報導 Numbers / Sofia 工作：Politico、Meet Global、Tech Company News、ANI</li>
+              <li>
+                <span data-l="zh">Numbers 平台社群 <strong class="text-foreground">1,000 → 130,000</strong> 人（+12,900%）</span>
+                <span data-l="en">Numbers community <strong class="text-foreground">1,000 → 130,000</strong> (+12,900%)</span>
+              </li>
+              <li>
+                <span data-l="zh">Numbers 內容驗證平台覆蓋 <strong class="text-foreground">190 個國家</strong> · 月流量 <strong class="text-foreground">60 億</strong></span>
+                <span data-l="en">Numbers content-verification platform: <strong class="text-foreground">190 countries</strong> · <strong class="text-foreground">6B</strong> monthly views</span>
+              </li>
+              <li>
+                <span data-l="zh">國際媒體報導 Numbers / Sofia 工作：Politico、Meet Global、Tech Company News、ANI</span>
+                <span data-l="en">International coverage of Numbers / Sofia: Politico, Meet Global, Tech Company News, ANI</span>
+              </li>
             </ul>
           </div>
           <div class="space-y-2">
-            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">2025 年 4 月全面 AI 導入後（Numbers 內部）</p>
+            <p class="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+              <span data-l="zh">2025 年 4 月全面 AI 導入後（Numbers 內部）</span>
+              <span data-l="en">After full AI adoption in April 2025 (Numbers internal)</span>
+            </p>
             <ul class="space-y-2 text-sm text-foreground/80">
-              <li>內部 MVP 從需求到完成 <strong class="text-foreground">≤ 24 小時</strong>（原本需要數週）</li>
-              <li>年度 SaaS / Infra 支出 <strong class="text-foreground">-60%</strong></li>
-              <li>全職人類同事剩 <strong class="text-foreground">4 位</strong> · 線上 AI 同事 <strong class="text-foreground">15 位</strong> + 實習 8 位</li>
-              <li>每位人類同事平均同時跟 <strong class="text-foreground">3 位 AI 同事協作</strong></li>
+              <li>
+                <span data-l="zh">內部 MVP 從需求到完成 <strong class="text-foreground">≤ 24 小時</strong>（原本需要數週）</span>
+                <span data-l="en">Internal MVP from request to done in <strong class="text-foreground">≤ 24 hours</strong> (previously weeks)</span>
+              </li>
+              <li>
+                <span data-l="zh">年度 SaaS / Infra 支出 <strong class="text-foreground">-60%</strong></span>
+                <span data-l="en">Annual SaaS / infra spend <strong class="text-foreground">−60%</strong></span>
+              </li>
+              <li>
+                <span data-l="zh">全職人類同事剩 <strong class="text-foreground">4 位</strong> · 線上 AI 同事 <strong class="text-foreground">15 位</strong> + 實習 8 位</span>
+                <span data-l="en"><strong class="text-foreground">4</strong> full-time human coworkers · <strong class="text-foreground">15</strong> online AI coworkers + 8 interns</span>
+              </li>
+              <li>
+                <span data-l="zh">每位人類同事平均同時跟 <strong class="text-foreground">3 位 AI 同事協作</strong></span>
+                <span data-l="en">Each human works with <strong class="text-foreground">~3 AI coworkers</strong> at once</span>
+              </li>
             </ul>
           </div>
         </div>
         <p class="text-sm text-muted-foreground italic pt-2">
-          Numbers Protocol 是 C2PA 會員、被 NIST AI Risk Management Framework 引用、
-          共同設計 ERC-7053 和 ERC-7517 標準、與 Adobe / Microsoft / Nikon / Reuters 合作、67M+ 數位資產註冊。
+          <span data-l="zh">Numbers Protocol 是 C2PA 會員、被 NIST AI Risk Management Framework 引用、共同設計 ERC-7053 和 ERC-7517 標準、與 Adobe / Microsoft / Nikon / Reuters 合作、67M+ 數位資產註冊。</span>
+          <span data-l="en">Numbers Protocol is a C2PA member, cited by the NIST AI Risk Management Framework, co-designed the ERC-7053 and ERC-7517 standards, works with Adobe / Microsoft / Nikon / Reuters, and has 67M+ digital assets registered.</span>
         </p>
       </section>
 
@@ -288,10 +462,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           {faqs.map((faq) => (
             <details class="group border border-border rounded-lg p-5 hover:border-primary/30 transition-colors">
               <summary class="cursor-pointer font-medium text-foreground flex items-center justify-between">
-                <span>{faq.question}</span>
+                <span>
+                  <span data-l="zh">{faq.question}</span>
+                  <span data-l="en">{faq.question_en}</span>
+                </span>
                 <span class="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p class="mt-4 text-foreground/70 leading-relaxed">{faq.answer}</p>
+              <p class="mt-4 text-foreground/70 leading-relaxed">
+                <span data-l="zh">{faq.answer}</span>
+                <span data-l="en">{faq.answer_en}</span>
+              </p>
             </details>
           ))}
         </div>
@@ -299,13 +479,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
 
       <!-- CTA / Contact -->
       <section class="space-y-6 border-t border-border pt-12">
-        <h2 class="font-display text-xl md:text-2xl font-medium">邀約方式</h2>
+        <h2 class="font-display text-xl md:text-2xl font-medium">
+          <span data-l="zh">邀約方式</span><span data-l="en">How to book</span>
+        </h2>
         <p class="text-foreground/80 leading-relaxed">
-          目前以下列任一方式聯絡，48 小時內回覆：
+          <span data-l="zh">目前以下列任一方式聯絡，48 小時內回覆：</span>
+          <span data-l="en">Reach out through any of the following — reply within 48 hours:</span>
         </p>
         <ul class="space-y-3 text-foreground/80">
           <li>
-            Email：
+            <span data-l="zh">Email：</span><span data-l="en">Email: </span>
             <a href={speakerEmailHref}
                data-analytics-event="speaker_enquiry_email_click"
                data-cta-location="speaker-contact"
@@ -316,7 +499,7 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
             </a>
           </li>
           <li>
-            LinkedIn DM：
+            <span data-l="zh">LinkedIn DM：</span><span data-l="en">LinkedIn DM: </span>
             <a href={speakerLinkedinHref}
                target="_blank" rel="noopener noreferrer"
                data-analytics-event="speaker_enquiry_linkedin_click"
@@ -329,8 +512,8 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           </li>
         </ul>
         <p class="text-sm text-muted-foreground italic pt-4">
-          報價會依形式、地點、規模與客製深度而定。
-          歡迎在 email 裡先描述場景，我們可以快速判斷適合的規格。
+          <span data-l="zh">報價會依形式、地點、規模與客製深度而定。歡迎在 email 裡先描述場景，我們可以快速判斷適合的規格。</span>
+          <span data-l="en">Pricing depends on format, location, scale, and customisation. Describe your scenario in the email and we can quickly suggest the right format.</span>
         </p>
       </section>
 
