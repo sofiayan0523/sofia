@@ -29,7 +29,7 @@ Every blog post has a clean Markdown mirror — append `.md` to the post slug (n
 
 ## Speaker bookings
 
-- [Speaker landing & enquiry form](https://sofiayan.cc/speaker): three formats (90-min keynote / half-day workshop / full-day deep adoption); three main topics.
+- [Speaker landing & enquiry form](https://sofiayan.cc/speaker): keynotes, workshops, and in-depth adoption sessions scoped to your context; three main topics.
 - [Email Sofia](mailto:sofia@numbersprotocol.io): reply within 48h.
 - [LinkedIn DM](https://tw.linkedin.com/in/sofia-yan-b6318a31): for warm intros.
 
