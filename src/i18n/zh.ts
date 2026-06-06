@@ -9,7 +9,7 @@ export const zh = {
   // home
   "home.eyebrow": "文組 AI 導入者 · Numbers Protocol 共同創辦人",
   "home.greeting": "嗨，我是 Sofia",
-  "home.description": "我常坐在技術、營運和人之間，把企業 AI 導入、內容溯源與 AI 同事方法論，翻成團隊真的用得起來的日常語言。",
+  "home.description": "我常坐在技術、營運和人之間，把企業 AI 導入、內容溯源與 AI 同事方法論，翻成團隊真的用得起來的日常語言。簡單說，我是一種新型態的「AI 管理師」：帶人類同事，也帶一整排 AI 同事。",
   "home.focus.ai": "企業 AI 導入",
   "home.focus.provenance": "內容溯源 / C2PA",
   "home.focus.coworker": "AI 同事方法論",
@@ -30,7 +30,7 @@ export const zh = {
   "about.eyebrow": "關於",
   "about.headline": "我一直在做翻譯：把技術翻成人能相信的東西",
   "about.intro": "我原本學的是教育與華語文教學。後來一路走進 AI、新創、內容溯源與區塊鏈，才發現自己沒有真的離開原本的事：理解人怎麼學、怎麼相信、怎麼在陌生系統裡找到自己的位置。",
-  "about.background": "現在我在 Numbers Protocol 做共同創辦人與成長策略長，參與建構內容來源與數位信任基礎建設。外面看起來是技術與市場；我實際上每天面對的是翻譯，把工程語言翻成使用者能採取行動的語言，也把人的猶豫翻回產品與策略。",
+  "about.background": "現在我在 Numbers Protocol 做共同創辦人與成長策略長，參與建構內容來源與數位信任基礎建設。外面看起來是技術與市場；我實際上每天面對的是翻譯，把工程語言翻成使用者能採取行動的語言，也把人的猶豫翻回產品與策略。也因為這樣，我把自己定位成一種新型態的「AI 管理師」：同時帶人類同事，也帶一整排 AI 同事。",
   "about.hobbies": "工作之外，我在台北抱石、測試新的 AI 工具、獨旅，也收藏一些看似不務正業的線索。那些路徑最後常常又繞回同一件事：人如何和不熟悉的世界建立關係。",
   "about.currentlyTitle": "目前",
   "about.current1": "定居台北",
