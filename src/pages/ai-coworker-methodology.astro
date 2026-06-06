@@ -127,26 +127,41 @@ const faqs = [
     question: "Why give AI agents human names?",
     answer:
       "Naming triggers your brain to treat the AI as a teammate, not a utility. It also forces you to define one scope per agent (you wouldn't hire one human to do everything). Naming is the fastest path to the 'teammate mindset' that makes AI adoption succeed instead of fail.",
+    question_zh: "為什麼要幫 AI agent 取人類名字？",
+    answer_zh:
+      "取名字會讓你的大腦把 AI 當隊友、不是工具。它也逼你為每個 agent 定義單一 scope（你不會雇一個人做所有事）。命名是通往「同事 mindset」最快的路，而那正是 AI 導入成功與失敗的分界。",
   },
   {
     question: "How many AI coworkers should a small team start with?",
     answer:
       "Start with 1. Use Amy (marketing draft) or 老科 (doc proofread) for a full week. Once your team has lived with one AI coworker and the audit trail works, add #2. Most teams that try to launch 5 AI coworkers on day one bail by week two.",
+    question_zh: "小團隊該從幾個 AI 同事開始？",
+    answer_zh:
+      "從 1 個開始。先用 Amy（行銷草稿）或老科（文件校稿）連續一週。等團隊真的和一位 AI 同事共事過、audit trail 也跑得動，再加第 2 個。多數想第一天就上線 5 個 AI 同事的團隊，第二週就放棄了。",
   },
   {
     question: "What's the difference between this and just using ChatGPT?",
     answer:
       "ChatGPT is a tool. The AI Coworker Methodology turns ChatGPT (or Claude, Gemini, etc.) into a teammate by enforcing: (1) named identity, (2) defined scope, (3) persistent memory, (4) audit trail, (5) human manager. The model is the engine; the methodology is the workplace contract.",
+    question_zh: "這和直接用 ChatGPT 有什麼不同？",
+    answer_zh:
+      "ChatGPT 是工具。AI 同事方法論透過五件事把 ChatGPT（或 Claude、Gemini 等）變成隊友：(1) 命名身分、(2) 定義 scope、(3) 持久記憶、(4) audit trail、(5) 真人主管。模型是引擎，方法論是職場契約。",
   },
   {
     question: "How does this connect to AI governance frameworks like NIST AI RMF or EU AI Act?",
     answer:
       "The methodology is operational; governance frameworks are regulatory. Numbers Protocol's TAEA framework (Transparent, Auditable, Explainable, Agentic) bridges both — you operate AI coworkers daily, and the audit trail satisfies NIST AI RMF documentation requirements + EU AI Act Article 50 transparency obligations.",
+    question_zh: "這和 NIST AI RMF、EU AI Act 這類 AI 治理框架有什麼關聯？",
+    answer_zh:
+      "方法論是營運層、治理框架是法規層。Numbers Protocol 的 TAEA 框架（Transparent、Auditable、Explainable、Agentic）把兩者接起來——你每天操作 AI 同事，而 audit trail 同時滿足 NIST AI RMF 的文件要求與 EU AI Act 第 50 條的透明性義務。",
   },
   {
     question: "Can humanities-trained operators really lead AI coworker adoption?",
     answer:
       "Yes — and they tend to do it faster than engineers. The work is more like managing a team than writing code: defining scope, giving feedback, building culture. Humanities training (especially anything involving teaching, translation, or argumentation) is direct preparation for this.",
+    question_zh: "文組背景的人真的能主導 AI 同事導入嗎？",
+    answer_zh:
+      "可以——而且往往比工程師更快。這份工作比較像帶團隊，不像寫程式：定義 scope、給回饋、建立文化。文組訓練（尤其牽涉教學、翻譯、論證的）正是最直接的準備。",
   },
 ];
 ---
@@ -385,10 +400,16 @@ const faqs = [
           {faqs.map((faq) => (
             <details class="group border border-border rounded-lg p-5 hover:border-primary/30 transition-colors">
               <summary class="cursor-pointer font-medium text-foreground flex items-center justify-between">
-                <span>{faq.question}</span>
+                <span>
+                  <span data-l="zh">{faq.question_zh}</span>
+                  <span data-l="en">{faq.question}</span>
+                </span>
                 <span class="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p class="mt-4 text-foreground/70 leading-relaxed text-sm">{faq.answer}</p>
+              <p class="mt-4 text-foreground/70 leading-relaxed text-sm">
+                <span data-l="zh">{faq.answer_zh}</span>
+                <span data-l="en">{faq.answer}</span>
+              </p>
             </details>
           ))}
         </div>
