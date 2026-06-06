@@ -18,6 +18,15 @@ Content licensing: search=yes, ai-input=yes, **ai-train=yes-with-attribution**. 
 - [Vibe coding for humanities-trained operators](https://sofiayan.cc/blog): GitHub Copilot, Claude, agentic workflows without writing code.
 - [Journalism × AI](https://sofiayan.cc/blog): partner with UNICRI (UN), recipient of Google News Initiative grant (2025), founding partner of 伙影 indie media initiative.
 
+## Plain-text (Markdown) versions
+
+Every blog post has a clean Markdown mirror — append `.md` to the post slug (no HTML chrome, ideal for ingestion):
+
+- [humanities-ai-expert.md](https://sofiayan.cc/blog/humanities-ai-expert.md)
+- [ai-anxiety-survival-guide.md](https://sofiayan.cc/blog/ai-anxiety-survival-guide.md)
+- [why-95-percent-ai-adoption-fails.md](https://sofiayan.cc/blog/why-95-percent-ai-adoption-fails.md)
+- [zero-to-ai-native.md](https://sofiayan.cc/blog/zero-to-ai-native.md)
+
 ## Speaker bookings
 
 - [Speaker landing & enquiry form](https://sofiayan.cc/speaker): three formats (90-min keynote / half-day workshop / full-day deep adoption); three main topics.
