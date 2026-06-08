@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { trackPostReaction, type ReactionType } from "@/lib/analytics";
 
 interface ReactionsProps {
   slug: string;
@@ -108,6 +109,13 @@ export default function Reactions({ slug, lang = "zh" }: ReactionsProps) {
       [key]: currentReactionCount + 1,
     };
     setUserReactions(updatedUserReactions);
+    trackPostReaction({
+      reactionType: key as ReactionType,
+      slug,
+      lang,
+      reactionCount: updatedUserReactions[key],
+      persistenceMode: hasSupabase ? "supabase" : "local",
+    });
 
     try {
       localStorage.setItem(storageKey, JSON.stringify(updatedUserReactions));

@@ -4,9 +4,11 @@ import { getTranslations, DEFAULT_LANG } from "@/i18n";
 
 interface Props {
   title: string;
+  slug: string;
+  lang?: "zh" | "en";
 }
 
-const { title } = Astro.props;
+const { title, slug, lang = DEFAULT_LANG } = Astro.props;
 const t = getTranslations(DEFAULT_LANG);
 ---
 
@@ -14,7 +16,13 @@ const t = getTranslations(DEFAULT_LANG);
   <p class="text-xs uppercase tracking-wider text-muted-foreground font-display font-medium">
     <T k="share.title" />
   </p>
-  <div class="flex items-center gap-2 flex-wrap" id="share-buttons-container">
+  <div
+    class="flex items-center gap-2 flex-wrap"
+    id="share-buttons-container"
+    data-post-slug={slug}
+    data-post-title={title}
+    data-lang={lang}
+  >
     {/* X (Twitter) */}
     <a
       href=""
@@ -28,6 +36,7 @@ const t = getTranslations(DEFAULT_LANG);
       data-cta-location="blog-post-share"
       data-cta-destination="x"
       data-cta-content="share-x"
+      data-share-channel="x"
     >
       <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -46,6 +55,7 @@ const t = getTranslations(DEFAULT_LANG);
       data-cta-location="blog-post-share"
       data-cta-destination="facebook"
       data-cta-content="share-facebook"
+      data-share-channel="facebook"
     >
       <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
@@ -64,6 +74,7 @@ const t = getTranslations(DEFAULT_LANG);
       data-cta-location="blog-post-share"
       data-cta-destination="linkedin"
       data-cta-content="share-linkedin"
+      data-share-channel="linkedin"
     >
       <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -82,6 +93,7 @@ const t = getTranslations(DEFAULT_LANG);
       data-cta-location="blog-post-share"
       data-cta-destination="line"
       data-cta-content="share-line"
+      data-share-channel="line"
     >
       {/* Custom LINE icon SVG */}
       <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -110,33 +122,54 @@ const t = getTranslations(DEFAULT_LANG);
   </div>
 </div>
 
-<script is:inline>
+<script>
+  import { trackLinkCopied, trackShareClick, type ShareChannel } from "@/lib/analytics";
+
   // Dynamically set share URLs using the current page's URL
   function setupShareUrls() {
     const currentUrl = encodeURIComponent(window.location.href);
     const container = document.getElementById("share-buttons-container");
     if (!container) return;
 
+    const postSlug = container.dataset.postSlug || "";
+    const postTitle = container.dataset.postTitle || "";
+    const lang = container.dataset.lang === "en" ? "en" : "zh";
+
     const btnX = container.querySelector("#share-x");
     if (btnX) {
       const postTitle = encodeURIComponent(btnX.getAttribute("data-title") || "");
-      btnX.href = `https://twitter.com/intent/tweet?text=${postTitle}&url=${currentUrl}`;
+      btnX.setAttribute("href", `https://twitter.com/intent/tweet?text=${postTitle}&url=${currentUrl}`);
     }
 
     const btnFb = container.querySelector("#share-fb");
     if (btnFb) {
-      btnFb.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+      btnFb.setAttribute("href", `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`);
     }
 
     const btnLinkedin = container.querySelector("#share-linkedin");
     if (btnLinkedin) {
-      btnLinkedin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+      btnLinkedin.setAttribute("href", `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`);
     }
 
     const btnLine = container.querySelector("#share-line");
     if (btnLine) {
-      btnLine.href = `https://social-plugins.line.me/lineit/share?url=${currentUrl}`;
+      btnLine.setAttribute("href", `https://social-plugins.line.me/lineit/share?url=${currentUrl}`);
     }
+
+    container.querySelectorAll("[data-share-channel]").forEach((button) => {
+      if (button instanceof HTMLAnchorElement && button.dataset.analyticsBound !== "true") {
+        button.dataset.analyticsBound = "true";
+        button.addEventListener("pointerdown", () => {
+          trackShareClick({
+            channel: button.dataset.shareChannel as ShareChannel,
+            slug: postSlug,
+            title: postTitle,
+            lang,
+            targetUrl: button.href,
+          });
+        });
+      }
+    });
 
     const btnCopy = container.querySelector("#copy-link-btn");
     if (btnCopy) {
@@ -145,10 +178,23 @@ const t = getTranslations(DEFAULT_LANG);
       const originalText = btnCopy.getAttribute("data-original-text");
       let isCopying = false;
 
+      if (btnCopy instanceof HTMLButtonElement && btnCopy.dataset.analyticsBound === "true") {
+        return;
+      }
+      if (btnCopy instanceof HTMLButtonElement) {
+        btnCopy.dataset.analyticsBound = "true";
+      }
+
       btnCopy.addEventListener("click", async () => {
         if (isCopying) return;
         try {
           await navigator.clipboard.writeText(window.location.href);
+          trackLinkCopied({
+            slug: postSlug,
+            title: postTitle,
+            lang,
+            outcome: "success",
+          });
           isCopying = true;
           if (copyTextEl) copyTextEl.textContent = copiedText;
           btnCopy.classList.remove("border-border", "text-foreground");
@@ -161,6 +207,12 @@ const t = getTranslations(DEFAULT_LANG);
             isCopying = false;
           }, 2000);
         } catch (err) {
+          trackLinkCopied({
+            slug: postSlug,
+            title: postTitle,
+            lang,
+            outcome: "clipboard_error",
+          });
           console.error("Failed to copy link:", err);
         }
       });
