@@ -313,7 +313,7 @@ const contextualCta =
       <div class="my-12 py-8 border-t border-b border-border grid grid-cols-1 md:grid-cols-2 gap-8" data-pagefind-ignore>
         <Reactions slug={currentSlug} client:only="react" />
         <div class="md:border-l md:border-border md:pl-8">
-          <ShareButtons title={post.data.title} />
+          <ShareButtons title={post.data.title} slug={post.id.replace(/\.mdx?$/, "")} />
         </div>
       </div>
 
