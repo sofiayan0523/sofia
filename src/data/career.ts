@@ -60,6 +60,11 @@ export const workItems = [
 
 export const speakingItems = [
   {
+    title: "台灣雲協「AI × 生態保育 × ESG」：分享 AI 石虎路殺預警系統（2026）",
+    title_en: "Taiwan Cloud & IoT Association \"AI × Conservation × ESG\": the AI leopard-cat roadkill warning system (2026)",
+    link: "http://www.twcloud.org.tw/xmdoc/cont?xsmsid=0I249594489957008833&sid=0Q148741233150745798",
+  },
+  {
     title: "「職場必備 Vibe Coding 實作課」（經理人 Manager Today 線上課程）",
     title_en: "\"Workplace Vibe Coding hands-on course\" (Manager Today online course)",
     link: "https://portaly.cc/managertoday/product/arm5k8AXa3H4hfp5OlcF",

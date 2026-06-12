@@ -23,6 +23,7 @@
 - **`aeo-assessment`** (system)
 - **`agent-readiness-generator`** (system)
 - **`ai-bot-traffic`** (system)
+- **`dev-monitor`** (system)
 - **`doc-coauthoring`** (system)
 - **`frontend-design`** (system)
 - **`google-ads`** (system)
@@ -76,7 +77,8 @@
 - 2026-06-05 i18n 英文補齊（sofia-s-blog）：i18n 機制是「同頁 render zh/en 用 CSS data-l 切換」，`<T>` 走 zh.ts/en.ts（73 鍵對齊）。本輪補三頁硬寫內容的英文：(1) `speaker.astro` 原本 100% 中文 → 全頁改 data-l 雙語、FAQ 加 question_en/answer_en（FAQPage schema 仍用 zh question/answer）；(2) `career.ts` 加 description_en/title_en，`career.astro` 的 work 描述、speaking/media/podcast 標題改 data-l 雙語（公司名與 source 維持原樣）；(3) `ai-coworker-methodology.astro` 內文「本來就已雙語」（先前 audit 誤判，中文在多行 data-l=zh 區塊內），只缺 FAQ → faqs 加 question_zh/answer_zh 並改雙語渲染。部落格文章（MDX 散文）依使用者決定單獨處理、暫維持中文。`npm run check:all` 30 項通過。
 - 2026-06-05 Speaker 精簡（sofia-s-blog）：移除「三種演講規格 / Three formats」整個 section（Format A/B/C 卡片），並從 faqs 移除「費用怎麼算 / How is the fee」一題（FAQ 6→5），保留洽談彈性。同步把 `public/llms.txt` 的 speaker 描述從「three formats (90-min/half-day/full-day)」改成彈性措辭「keynotes, workshops, and in-depth adoption sessions scoped to your context」。`npm run check:all` 30 項通過。
 - 2026-06-05 Speaker/Methodology 文案微調（sofia-s-blog）：(1) Methodology「下一步」的演講格式行也改彈性措辭「依你的團隊情境彈性安排：keynote、workshop 或深度導入工作坊 / Flexible to your team's context...」與 Speaker 一致；(2) Speaker hero 副標結尾從「…的那一個。」改為「…的新型態「AI 管理師」。」（英文同步：a new kind of role: the "AI manager"…）。signature-moves 驗證（不是/也不是/而是、踩雷、XD、Micro-receipts）仍通過。`npm run check:all` 30 項通過。
-- 2026-06-05「AI 管理師」個人標籤（sofia-s-blog）：把 Speaker 新增的「AI 管理師」定位延伸到首頁與 About 各一句。`home.description`（zh/en）末尾加「簡單說，我是一種新型態的『AI 管理師』：帶人類同事，也帶一整排 AI 同事。」；`about.background`（zh/en）末尾加「也因為這樣，我把自己定位成一種新型態的『AI 管理師』…」。透過 i18n（zh.ts/en.ts）所以雙語自動切換。`npm run check:all` 30 項通過。注意：本 workspace auto-commit 到分支並開 PR，須 merge 進 main 後 GitHub Pages 才會重新部署（有時差），線上看不到新版多半是還沒部署或瀏覽器快取。
+- 2026-06-05「AI 管理師」個人標籤（sofia-s-blog）：把 Speaker 新增的「AI 管理師」定位延伸到首頁與 About 各一句。`home.description`（zh/en）末尾加「簡單說，我是一種新型態的『AI 管理師』：帶人類同事，也帶一整排 AI 同事。」；`about.background`（zh/en）末尾加「也因為這樣，我把自己定位成一種新型態的『AI 管理師』…」。透過 i18n（zh.ts/en.ts）所以雙語自動切換。`npm run check:all` 30 項通過。
+- 2026-06-05 Career 新增台灣雲協演講（sofia-s-blog）：speakingItems 列表最上方加「台灣雲協『AI × 生態保育 × ESG』：分享 AI 石虎路殺預警系統（2026）」+ 英文版，連結 twcloud.org.tw 活動報導頁。已用 curl 驗證頁面（HTTP 200）：報導稱 Sofia 為「灼灼科技（DT42 中文名）商務開發總監」，分享邊緣 AI 野保應用（Jetson TX2、Detection→Intervention、2019-05 部署後該路段無石虎路殺）；報導日期 2026-05-27/28。`npm run check:all` 30 項通過。注意：本 workspace auto-commit 到分支並開 PR，須 merge 進 main 後 GitHub Pages 才會重新部署（有時差），線上看不到新版多半是還沒部署或瀏覽器快取。
 - 2026-06-05 editorial-minimal 改版 v1（sofia-s-blog）：注入單一重點色赭紅（深一階確保 AA）——`global.css` 把 `--primary` light 設 `14 78% 42%`、dark `16 82% 64%`，`--ring` 同步；因 `text-primary`/`bg-primary` 僅用於連結/hover/CTA 按鈕，故一次套用到整個互動層。新增 `.prose a` 用重點色、`a` underline-offset 0.2em。移除「AI 範本」破綻：以 `de-template.sh`（已刪）sed 掉全站 `hover:-translate-y-*` 與 `hover:shadow-lg/md/xl`（4 檔）。`npm run check:all` 30 項通過。
 - 2026-06-05 editorial-minimal v2（sofia-s-blog）：重點色改為淡雅橄欖綠（`--primary` light `112 20% 40%`、dark `110 26% 66%`，`--ring` 同步；偏深一階確保 AA）。結構改造：Career 四區塊移除 emoji 色塊圖示，改為「mono 編號 01-04 + 頂部 hairline + 襯線標題」；Speaking/Media/Podcast 從 `rounded-xl bg-card border` 盒子改成 `divide-y divide-border/60` 細線清單，來源標籤改 mono；Work logo 卡片改輕量 hairline、移除 hover ↗。首頁 stats 改 mono label + `md:divide-x` 細線分隔、數字 serif text-2xl。About「延伸了解」proof 從 bg-secondary 盒子改 `border-t` hairline 行。`npm run check:all` 30 項通過。
 - 2026-06-05 全站去 emoji（sofia-s-blog，editorial v3）：用 perl 腳本（已刪 strip-emoji.sh）移除 speaker/about/ai-coworker-methodology 的裝飾 emoji，範圍 `[\x{1F000}-\x{1FAFF}\x{2300}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE0F}\x{200D}\x{2640}\x{2642}]`，刻意保留方向箭頭（→ ← ↔，U+2190-21FF）。speaker 的 micro-receipts strip、過往演講/receipts 清單、聯絡方式前綴 emoji 全清；about「目前」清單與 playground emoji 清除，playground 卡片移除 emoji/↗ 列改成標題內小 ↗、輕量 hairline 邊框；methodology 的 stat strip emoji 清。注意：career.ts 媒體標題的 `│`(U+2502 box-drawing) 與 methodology 的 ↔ 是正常內容非 emoji。Reactions.tsx/Comments.astro 反應 emoji 屬功能性保留。`npm run check:all` 30 項通過。
@@ -86,4 +88,4 @@
 - 2026-06-05 reader-facing UX pass (sofia-s-blog): About "Public receipts" 區塊改為讀者語言（標題「想更了解我，或想找我合作？」+ 卡片「完整經歷與公開紀錄」「邀我演講或工作坊」），移除解釋網站 IA 的 meta 文案。AI 導入導讀系列從 `/blog` 移到首頁（stats 與最新文章之間，標題「第一次來？從這裡開始」，卡片改用 1-4 編號取代 Pillar/Cluster 術語）。Blog 重排為「標題→分類篩選→文章網格→搜尋（次要、置底）」，`blog.headline` zh 改為「故事與觀察」。`npm run check:all` 通過。
 
 ---
-_Last system refresh: 2026-06-06 03:58 UTC_
+_Last system refresh: 2026-06-12 15:49 UTC_
