@@ -60,8 +60,8 @@ export const workItems = [
 
 export const speakingItems = [
   {
-    title: "台灣雲協「AI × 生態保育 × ESG」：分享 AI 石虎路殺預警系統（2026）",
-    title_en: "Taiwan Cloud & IoT Association \"AI × Conservation × ESG\": the AI leopard-cat roadkill warning system (2026)",
+    title: "台灣雲協「AI × 生態保育 × ESG」：分享 AI 石虎路殺預警系統（以灼灼科技 DT42 商務開發總監身分，2026）",
+    title_en: "Taiwan Cloud & IoT Association \"AI × Conservation × ESG\": the AI leopard-cat roadkill warning system (as BD Director, DT42, 2026)",
     link: "http://www.twcloud.org.tw/xmdoc/cont?xsmsid=0I249594489957008833&sid=0Q148741233150745798",
   },
   {

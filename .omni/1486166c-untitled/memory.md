@@ -88,4 +88,4 @@
 - 2026-06-05 reader-facing UX pass (sofia-s-blog): About "Public receipts" 區塊改為讀者語言（標題「想更了解我，或想找我合作？」+ 卡片「完整經歷與公開紀錄」「邀我演講或工作坊」），移除解釋網站 IA 的 meta 文案。AI 導入導讀系列從 `/blog` 移到首頁（stats 與最新文章之間，標題「第一次來？從這裡開始」，卡片改用 1-4 編號取代 Pillar/Cluster 術語）。Blog 重排為「標題→分類篩選→文章網格→搜尋（次要、置底）」，`blog.headline` zh 改為「故事與觀察」。`npm run check:all` 通過。
 
 ---
-_Last system refresh: 2026-06-12 15:49 UTC_
+_Last system refresh: 2026-06-12 15:54 UTC_
