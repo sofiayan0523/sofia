@@ -67,7 +67,7 @@ export const zh = {
 
   // footer
   "footer.tagline": "Built with purpose, powered by trust.",
-  "footer.navigate": "導航",
+  "footer.navigate": "網站導覽",
   "footer.connect": "連結",
   "footer.copyright": "© {year} Sofia Yan. Built with purpose, powered by trust.",
 

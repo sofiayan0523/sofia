@@ -5,7 +5,7 @@ export const workItems = [
   {
     title: "Capture App",
     description:
-      "Capture 讓任何人都能創建和分享可驗證的數位媒體。它正在為選舉、新聞和 AI 生成內容提供溯源支持。",
+      "Capture 讓任何人都能建立和分享可驗證的數位媒體，目前已應用在選舉、新聞與 AI 生成內容的溯源上。",
     description_en:
       "Capture lets anyone create and share verifiable digital media — powering provenance for elections, journalism, and AI-generated content.",
     link: "https://captureapp.xyz/",
@@ -14,7 +14,7 @@ export const workItems = [
   {
     title: "Numbers Protocol",
     description:
-      "一個區塊鏈解決方案，使數位內容可追溯、可信賴，並準備好進入合乎倫理的 AI 生態系統。我負責其全球成長和社群。",
+      "一個區塊鏈解決方案，讓數位內容可追溯、可信賴，為合乎倫理的 AI 生態系統做好準備。我負責全球成長與社群經營。",
     description_en:
       "A blockchain solution that makes digital content traceable and trustworthy, ready for an ethical AI ecosystem. I lead its global growth and community.",
     link: "https://numbersprotocol.io/",
@@ -23,7 +23,7 @@ export const workItems = [
   {
     title: "Creative Origin Alliance",
     description:
-      "一個由創作者、技術專家和平台組成的網絡，從根本上建構負責任的 AI。我是創始成員和驕傲的麻煩製造者。",
+      "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我是創始成員和驕傲的麻煩製造者。",
     description_en:
       "A network of creators, technologists, and platforms building responsible AI from the ground up. I'm a founding member and a proud troublemaker.",
     link: "https://creativeorigin.ai/",
@@ -32,7 +32,7 @@ export const workItems = [
   {
     title: "DT42",
     description:
-      "一家建構智慧邊緣解決方案的 AI 新創。我參與業務開發和策略成長，幫助塑造其在 AI 硬體領域的敘事。",
+      "一家做智慧邊緣運算方案的 AI 新創。我參與業務開發與策略成長，協助建立它在 AI 硬體市場的定位與故事。",
     description_en:
       "An AI startup building smart edge solutions. I worked on business development and strategic growth, helping shape its narrative in AI hardware.",
     link: "https://dt42.io/",
@@ -41,16 +41,16 @@ export const workItems = [
   {
     title: "AIKEA",
     description:
-      "一個成功的 Kickstarter 項目，將私密 AI 驅動相機帶入家庭。我領導了產品發布和行銷活動，幫助達成募資目標。",
+      "一個成功的 Kickstarter 專案，把主打隱私的 AI 相機帶進一般家庭。我負責產品上市與行銷活動，協助達成募資目標。",
     description_en:
       "A successful Kickstarter bringing a private, AI-powered camera into homes. I led the product launch and marketing campaign that hit the funding goal.",
     link: "https://www.kickstarter.com/projects/aikea5/aikea-your-private-camera-at-home/description",
     logo: "aikea-logo.png",
   },
   {
-    title: "Keke AI Shorts",
+    title: "科科 AI Shorts（Keke AI Shorts）",
     description:
-      "共同創建一個 YouTube 頻道，以簡短易懂的影片分享 AI 知識。讓 AI 對每個人都易於理解。",
+      "共同創辦的 YouTube 頻道，用簡短易懂的影片分享 AI 知識，讓每個人都看得懂 AI。",
     description_en:
       "Co-created a YouTube channel sharing AI knowledge in short, accessible videos — making AI understandable for everyone.",
     link: "https://www.youtube.com/@kekeAIShorts",
