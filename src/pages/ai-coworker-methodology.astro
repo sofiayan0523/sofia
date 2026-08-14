@@ -30,7 +30,7 @@ const coworkers = [
     role: "Community",
     role_zh: "社群經營",
     scope: "Discord / Telegram / Slack daily ops, FAQ replies, light moderation",
-    scope_zh: "Discord / Telegram / Slack 日常運營、FAQ 回應、輕度 moderation",
+    scope_zh: "Discord / Telegram / Slack 日常營運、FAQ 回應、輕度 moderation",
     not_allowed: "Crisis communication (escalates to humans on tone red flags)",
     not_allowed_zh: "危機溝通（偵測到負面 tone 自動 escalate 給真人）",
   },
@@ -41,7 +41,7 @@ const coworkers = [
     scope: "Spreadsheet normalization, deduplication, lead enrichment, CRM hygiene",
     scope_zh: "試算表正規化、去重、lead 增補、CRM 資料整理",
     not_allowed: "Writes to production DB (read-only by design)",
-    not_allowed_zh: "寫入正式 DB（設計上只讀）",
+    not_allowed_zh: "寫入正式 DB（設計上唯讀）",
   },
   {
     name: "阿張",
@@ -106,19 +106,19 @@ const failureModes = [
     title_en: "Failure 1: Treating AI as 'autocomplete on steroids'",
     title_zh: "失敗模式 1：把 AI 當「強化版 autocomplete」",
     fix_en: "Symptom: every output starts from scratch, no memory, no character. Fix: install persistent memory (Claude's Dreaming, GPT memories, custom RAG) before scaling.",
-    fix_zh: "症狀：每次產出都從零開始，沒有記憶、沒有人格。修法：先裝 persistent memory（Claude Dreaming、GPT memories、自家 RAG）再 scale。",
+    fix_zh: "症狀：每次產出都從零開始，沒有記憶、沒有人格。解法：先裝 persistent memory（Claude Dreaming、GPT memories、自家 RAG）再 scale。",
   },
   {
     title_en: "Failure 2: One 'AI Agent' that does everything",
     title_zh: "失敗模式 2：一個「AI Agent」做所有事",
     fix_en: "Symptom: prompts get longer and longer, output quality drops. Fix: split into 3-5 named agents with single-responsibility, like microservices for humans.",
-    fix_zh: "症狀：prompt 越來越長，產出品質下滑。修法：拆成 3-5 個單一職責命名 agent，類似真人版 microservices。",
+    fix_zh: "症狀：prompt 越來越長，產出品質下滑。解法：拆成 3～5 個各有名字、單一職責的 agent，類似真人版 microservices。",
   },
   {
     title_en: "Failure 3: No audit trail, no onboarding pathway",
     title_zh: "失敗模式 3：沒有 audit trail、沒有 onboarding 路徑",
     fix_en: "Symptom: only one person knows how the AI works; if they leave, everything breaks. Fix: every AI coworker has a documented scope, prompt template, and output sample log.",
-    fix_zh: "症狀：只有一個人懂 AI 怎麼運作；他離職全部崩潰。修法：每個 AI 同事都要有書面化 scope + prompt template + 產出樣本 log。",
+    fix_zh: "症狀：只有一個人懂 AI 怎麼運作；他離職全部崩潰。解法：每個 AI 同事都要有書面化 scope + prompt template + 產出樣本 log。",
   },
 ];
 
