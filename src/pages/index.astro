@@ -82,16 +82,22 @@ const stats: { value: string; labelKey: TranslationKey }[] = [
             </div>
             <div class="flex flex-wrap gap-4 pt-4">
               <a
-                href={`${baseUrl}speaker`}
+                href={`${baseUrl}ai-coworker-methodology`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
               >
-                <T k="home.speakerBtn" /> <span aria-hidden="true">→</span>
+                <T k="home.methodologyBtn" /> <span aria-hidden="true">→</span>
               </a>
               <a
                 href={`${baseUrl}blog`}
                 class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
               >
                 <T k="home.blogBtn" />
+              </a>
+              <a
+                href={`${baseUrl}speaker`}
+                class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-transparent hover:bg-secondary transition-colors font-medium text-muted-foreground hover:text-foreground"
+              >
+                <T k="home.speakerBtn" />
               </a>
               <a
                 href={`${baseUrl}about`}

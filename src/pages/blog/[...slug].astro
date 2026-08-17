@@ -134,6 +134,11 @@ const contextualCta =
         <span aria-hidden="true">←</span> <T k="blog.back" />
       </a>
 
+      <!-- English Language Notification for Blog Post Content -->
+      <div data-l="en" class="p-4 mb-8 rounded-lg bg-secondary/50 border border-border text-sm text-muted-foreground leading-relaxed">
+        💡 <strong>Note:</strong> This article is published in Traditional Chinese only. You can use your browser's translation feature or read a summary.
+      </div>
+
       <header class="space-y-4 mb-8">
         <div class="flex items-center gap-4 text-sm flex-wrap">
           <span class="px-3 py-1 bg-secondary rounded-full text-secondary-foreground font-medium">
@@ -155,6 +160,36 @@ const contextualCta =
           )
         }
       </header>
+
+      {
+        currentSeries && (
+          <div class="p-4 mb-8 rounded-lg bg-secondary/30 border border-border/50 text-sm space-y-2" data-pagefind-ignore>
+            <p class="text-xs text-muted-foreground uppercase tracking-widest font-medium">
+              <span data-l="zh">📖 這是「AI-Native 工作現場」系列文章（共 4 篇）</span>
+              <span data-l="en">📖 Part of "AI-Native Operating Field" Series (4 Articles)</span>
+            </p>
+            <ol class="list-decimal pl-4 space-y-1 text-muted-foreground">
+              {aiSeries.map((item, index) => {
+                const isSelf = item.slug === currentSlug;
+                return (
+                  <li class={isSelf ? "text-foreground font-medium list-inside" : "list-inside"}>
+                    {isSelf ? (
+                      <span>
+                        <span data-l="zh">{item.post?.data.title}（本篇）</span>
+                        <span data-l="en">{item.post?.data.title} (Current)</span>
+                      </span>
+                    ) : (
+                      <a href={`${baseUrl}blog/${item.slug}/`} class="hover:text-foreground hover:underline transition-colors">
+                        {item.post?.data.title}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        )
+      }
 
       {
         post.data.coverImage && (
@@ -185,6 +220,17 @@ const contextualCta =
       >
         <Content />
       </div>
+
+      {
+        post.data.coverNid && (
+          <div class="mt-8 p-4 rounded-lg bg-stone/20 border border-border/50 text-xs text-muted-foreground leading-relaxed" data-pagefind-ignore>
+            <p>
+              <span data-l="zh">🔒 <strong>數位溯源安全提示：</strong>本篇封面影像已註冊至 Numbers Protocol 數位溯源網路。懸停或點擊影像上的「溯源之眼」圖示，即可即時驗證影像的拍攝源頭、創作者與真實性資訊。</span>
+              <span data-l="en">🔒 <strong>Content Provenance Alert:</strong> The cover image of this article has been registered with Numbers Protocol. Hover over or click on the "CaptureEye" icon on the image to verify its origin, creator, and authenticity.</span>
+            </p>
+          </div>
+        )
+      }
 
       {
         post.data.tags && post.data.tags.length > 0 && (

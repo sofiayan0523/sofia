@@ -5,6 +5,7 @@ export const zh = {
   "nav.blog": "部落格",
   "nav.career": "職涯",
   "nav.speaker": "演講",
+  "nav.methodology": "AI 同事方法論",
 
   // home
   "home.eyebrow": "文組 AI 導入者 · Numbers Protocol 共同創辦人",
@@ -16,6 +17,7 @@ export const zh = {
   "home.speakerBtn": "邀請演講",
   "home.aboutBtn": "了解 Sofia",
   "home.blogBtn": "閱讀文章",
+  "home.methodologyBtn": "了解 AI 同事方法論",
   "home.stat.cities": "城市探索",
   "home.stat.tech": "科技年資",
   "home.stat.speaking": "演講活動",
