@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import CaptureEye from "@/components/CaptureEye.astro";
-import { workItems, speakingItems, mediaItems, podcastItems } from "@/data/career";
+import { workItems, consultingItems, speakingItems, mediaItems, podcastItems } from "@/data/career";
 import T from "@/components/T.astro";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
@@ -42,33 +42,76 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
           {
-            workItems.map((item) => (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group relative rounded-lg border border-border/60 transition-colors duration-300 hover:border-primary/40"
-              >
-                <div class="relative p-5 flex flex-col">
-                  <div class="h-12 mb-4 flex items-center">
-                    <img
-                      src={logoUrl(item.logo)}
-                      alt={item.title}
-                      loading="lazy"
-                      class="max-h-10 max-w-full object-contain filter dark:brightness-0 dark:invert opacity-70 group-hover:opacity-100 transition-opacity"
-                    />
+            workItems.map((item) => item.link ? (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group relative rounded-lg border border-border/60 transition-colors duration-300 hover:border-primary/40"
+                >
+                  <div class="relative p-5 flex flex-col">
+                    <div class="h-12 mb-4 flex items-center">
+                      {item.logo ? (
+                        <img
+                          src={logoUrl(item.logo)}
+                          alt={item.title}
+                          loading="lazy"
+                          class="max-h-10 max-w-full object-contain filter dark:brightness-0 dark:invert opacity-70 group-hover:opacity-100 transition-opacity"
+                        />
+                      ) : (
+                        <span class="font-mono text-xs uppercase tracking-wider text-muted-foreground">AI Product</span>
+                      )}
+                    </div>
+                    <div>
+                      <h3 class="font-display text-base font-medium mb-2 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h3>
+                      <p class="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+                        <span data-l="zh">{item.description}</span>
+                        <span data-l="en">{item.description_en}</span>
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 class="font-display text-base font-medium mb-2 group-hover:text-primary transition-colors">
-                      {item.title}
-                    </h3>
-                    <p class="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
-                      <span data-l="zh">{item.description}</span>
-                      <span data-l="en">{item.description_en}</span>
-                    </p>
+                </a>
+              ) : (
+                <div class="relative rounded-lg border border-border/60">
+                  <div class="relative p-5 flex flex-col">
+                    <div class="h-12 mb-4 flex items-center">
+                      <span class="font-mono text-xs uppercase tracking-wider text-muted-foreground">AI Product</span>
+                    </div>
+                    <div>
+                      <h3 class="font-display text-base font-medium mb-2">
+                        {item.title}
+                      </h3>
+                      <p class="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+                        <span data-l="zh">{item.description}</span>
+                        <span data-l="en">{item.description_en}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </a>
+              ))
+          }
+        </div>
+      </section>
+
+      <!-- AI Consulting & Training -->
+      <section class="mb-16">
+        <div class="flex items-baseline gap-4 border-t border-border pt-4 mb-8">
+          <span class="font-mono text-xs text-muted-foreground">02</span>
+          <h2 class="font-display text-xl font-medium"><T k="career.consulting" /></h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          {
+            consultingItems.map((item) => (
+              <article class="rounded-lg border border-border/60 p-5">
+                <h3 class="font-display text-base font-medium mb-2">
+                  <span data-l="zh">{item.title}</span><span data-l="en">{item.title_en}</span>
+                </h3>
+                <p class="text-sm text-muted-foreground leading-relaxed">
+                  <span data-l="zh">{item.description}</span><span data-l="en">{item.description_en}</span>
+                </p>
+              </article>
             ))
           }
         </div>
@@ -78,7 +121,7 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
         <!-- Speaking -->
         <section class="h-full flex flex-col">
           <div class="flex items-baseline gap-4 border-t border-border pt-4 mb-4">
-            <span class="font-mono text-xs text-muted-foreground">02</span>
+            <span class="font-mono text-xs text-muted-foreground">03</span>
             <h2 class="font-display text-xl font-medium"><T k="career.speaking" /></h2>
           </div>
           <ul class="divide-y divide-border/60">
@@ -106,7 +149,7 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
         <!-- Media -->
         <section class="h-full flex flex-col">
           <div class="flex items-baseline gap-4 border-t border-border pt-4 mb-4">
-            <span class="font-mono text-xs text-muted-foreground">03</span>
+            <span class="font-mono text-xs text-muted-foreground">04</span>
             <h2 class="font-display text-xl font-medium"><T k="career.media" /></h2>
           </div>
           <ul class="divide-y divide-border/60">
@@ -137,7 +180,7 @@ const logoUrl = (filename: string) => `${baseUrl}images/logos/${filename}`;
       <!-- Podcast -->
       <section class="mt-6">
         <div class="flex items-baseline gap-4 border-t border-border pt-4 mb-4">
-          <span class="font-mono text-xs text-muted-foreground">04</span>
+          <span class="font-mono text-xs text-muted-foreground">05</span>
           <h2 class="font-display text-xl font-medium"><T k="career.podcast" /></h2>
         </div>
         <ul class="grid md:grid-cols-2 gap-x-10 gap-y-0">

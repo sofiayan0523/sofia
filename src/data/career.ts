@@ -5,9 +5,9 @@ export const workItems = [
   {
     title: "Capture App",
     description:
-      "Capture 讓任何人都能建立和分享可驗證的數位媒體，目前已應用在選舉、新聞與 AI 生成內容的溯源上。",
+      "Capture 讓任何人都能建立和分享可驗證的數位媒體，目前已應用在選舉、新聞與 AI 生成內容的溯源上。我曾擔任 Capture & AIKEA 群募專案行銷總監，負責產品上市與市場溝通。",
     description_en:
-      "Capture lets anyone create and share verifiable digital media — powering provenance for elections, journalism, and AI-generated content.",
+      "Capture lets anyone create and share verifiable digital media — powering provenance for elections, journalism, and AI-generated content. I served as marketing director for the Capture & AIKEA crowdfunding projects, leading launch and market communication.",
     link: "https://captureapp.xyz/",
     logo: "capture-logo.png",
   },
@@ -23,11 +23,20 @@ export const workItems = [
   {
     title: "Creative Origin Alliance",
     description:
-      "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我是創始成員和驕傲的麻煩製造者。",
+      "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我曾任 Creative Origin 行銷創意總監，也是 Creative Origin Alliance 創始成員。",
     description_en:
-      "A network of creators, technologists, and platforms building responsible AI from the ground up. I'm a founding member and a proud troublemaker.",
+      "A network of creators, technologists, and platforms building responsible AI from the ground up. I served as Marketing Creative Director at Creative Origin and am a founding member of the Creative Origin Alliance.",
     link: "https://creativeorigin.ai/",
     logo: "coa-logo.png",
+  },
+  {
+    title: "WebBrain AI",
+    description:
+      "曾任行銷長，負責 AI 產品定位、內容策略與市場落地，把技術能力翻成企業客戶能理解的採用情境。",
+    description_en:
+      "Former Chief Marketing Officer, responsible for AI product positioning, content strategy, and go-to-market translation for enterprise adoption.",
+    link: undefined,
+    logo: undefined,
   },
   {
     title: "DT42",
@@ -41,9 +50,9 @@ export const workItems = [
   {
     title: "AIKEA",
     description:
-      "一個成功的 Kickstarter 專案，把主打隱私的 AI 相機帶進一般家庭。我負責產品上市與行銷活動，協助達成募資目標。",
+      "一個成功的 Kickstarter 專案，把主打隱私的 AI 相機帶進一般家庭。我以 Capture & AIKEA 群募專案行銷總監身分負責產品上市與行銷活動，協助達成募資目標。",
     description_en:
-      "A successful Kickstarter bringing a private, AI-powered camera into homes. I led the product launch and marketing campaign that hit the funding goal.",
+      "A successful Kickstarter bringing a private, AI-powered camera into homes. As marketing director for the Capture & AIKEA crowdfunding projects, I led the launch and campaign that hit the funding goal.",
     link: "https://www.kickstarter.com/projects/aikea5/aikea-your-private-camera-at-home/description",
     logo: "aikea-logo.png",
   },
@@ -68,6 +77,10 @@ export const speakingItems = [
     title: "「職場必備 Vibe Coding 實作課」（經理人 Manager Today 線上課程）",
     title_en: "\"Workplace Vibe Coding hands-on course\" (Manager Today online course)",
     link: "https://portaly.cc/managertoday/product/arm5k8AXa3H4hfp5OlcF",
+  },
+  {
+    title: "MyVideo 企業內訓：AI 導入與 Vibe Coding 實作",
+    title_en: "MyVideo corporate training: AI adoption and vibe-coding practice",
   },
   {
     title: "如何辨識有價值的資訊及重建新聞信任 / Identifying Valuable Information & Rebuilding Trust in News",
@@ -112,6 +125,49 @@ export const speakingItems = [
     title: "「誰說 AI 與你無關」（2020 ACCUPASS 活動，DT42 時期）",
     title_en: "\"Who Says AI Has Nothing to Do with You\" (2020 ACCUPASS event, DT42 era)",
     link: "https://www.accupass.com/event/2006291300158388164110",
+  },
+];
+
+export const consultingItems = [
+  {
+    title: "企業 AI 需求盤點",
+    title_en: "Enterprise AI needs mapping",
+    description:
+      "分析客服、營運、內容生產與知識管理流程，找出值得優先導入 AI 的場景。",
+    description_en:
+      "Map customer-service, operations, content-production, and knowledge-management workflows to identify the best AI starting points.",
+  },
+  {
+    title: "AI Agent 工作流程設計",
+    title_en: "AI Agent workflow design",
+    description:
+      "定義 agent 的角色、權限、交接、稽核紀錄與人類 review 點，讓 AI 工作能進到日常。",
+    description_en:
+      "Define agent roles, permissions, handoffs, audit trails, and human review points so AI work can enter daily operations.",
+  },
+  {
+    title: "AI 工具與廠商評估",
+    title_en: "AI tool and vendor evaluation",
+    description:
+      "協助團隊比較 AI 解決方案的能力、限制、資料風險、整合成本與治理需求。",
+    description_en:
+      "Help teams compare AI solutions by capability, constraints, data risk, integration cost, and governance needs.",
+  },
+  {
+    title: "AI 治理與 TAEA 導入",
+    title_en: "AI governance and TAEA adoption",
+    description:
+      "把 Transparent、Auditable、Explainable、Agentic 四個原則轉成可追蹤的工作流程。",
+    description_en:
+      "Turn Transparent, Auditable, Explainable, and Agentic principles into trackable operating workflows.",
+  },
+  {
+    title: "Vibe Coding 工作坊",
+    title_en: "Vibe-coding workshops",
+    description:
+      "訓練非工程團隊用 AI 快速做出可運作原型，曾帶領團隊落地 100+ 個微自動化流程。",
+    description_en:
+      "Train non-engineering teams to build working prototypes with AI; past adoption work has shipped 100+ micro-automation workflows.",
   },
 ];
 

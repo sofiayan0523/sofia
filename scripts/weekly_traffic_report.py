@@ -1,179 +1,295 @@
 #!/usr/bin/env python3
+"""
+週報生成器 — GENERATE-ONLY 版本
+用法:
+  python3 weekly_traffic_report.py --emit [--metrics-file FILE ...]
+  python3 weekly_traffic_report.py --json  [--metrics-file FILE ...]
+
+不連網、不碰憑證；由外部 MCP 呼叫者（mcp__z_app__z_insert）負責發布。
+"""
 import os
 import re
+import sys
+import json
+import argparse
 import datetime
-import requests
-
-# Constants from workspace settings
-Z_GATEWAY_URL = "https://cepefvmcgeedrwkbmlnd.supabase.co/functions/v1/agent-gateway"
-Z_API_KEY = "zak_f954d0344064bc20fe034a8431ac1125495252c922bf38e25269092a23d2c33b"
-Z_WORKSPACE_ID = "0dbbc949-55a7-49ba-9923-6f5246c62c53"
+from dataclasses import dataclass, field
+from typing import Optional
 
 POSTS_DIR = os.path.join(os.path.dirname(__file__), "..", "src", "content", "posts")
+
+# ── local repo scan ──────────────────────────────────────────────────────────
 
 def parse_mdx_frontmatter(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
-        
-        # Extract frontmatter between ---
         match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
         if not match:
             return {}
-        
-        frontmatter_text = match.group(1)
         data = {}
-        for line in frontmatter_text.split("\n"):
+        for line in match.group(1).split("\n"):
             if ":" in line:
-                parts = line.split(":", 1)
-                key = parts[0].strip().strip("\"'")
-                val = parts[1].strip().strip("\"'")
-                data[key] = val
+                k, v = line.split(":", 1)
+                data[k.strip().strip("\"'")] = v.strip().strip("\"'")
         return data
-    except Exception as e:
-        print(f"Error parsing {file_path}: {e}")
+    except Exception:
         return {}
+
 
 def gather_local_stats():
     if not os.path.exists(POSTS_DIR):
         return {"total_posts": 0, "categories": {}, "latest_posts": []}
-    
-    posts = []
-    categories = {}
-    
+    posts, categories = [], {}
     for filename in os.listdir(POSTS_DIR):
-        if filename.endswith(".mdx") or filename.endswith(".md"):
-            path = os.path.join(POSTS_DIR, filename)
-            meta = parse_mdx_frontmatter(path)
-            if meta and meta.get("draft") != "true":
-                pub_at = meta.get("publishedAt", "")
-                cat = meta.get("category", "Uncategorized")
-                categories[cat] = categories.get(cat, 0) + 1
-                posts.append({
-                    "title": meta.get("title", "Untitled"),
-                    "slug": filename.rsplit(".", 1)[0],
-                    "published_at": pub_at,
-                    "category": cat
-                })
-    
-    # Sort by publishedAt descending
+        if not (filename.endswith(".mdx") or filename.endswith(".md")):
+            continue
+        meta = parse_mdx_frontmatter(os.path.join(POSTS_DIR, filename))
+        if meta and meta.get("draft") != "true":
+            cat = meta.get("category", "Uncategorized")
+            categories[cat] = categories.get(cat, 0) + 1
+            posts.append({
+                "title": meta.get("title", "Untitled"),
+                "slug": filename.rsplit(".", 1)[0],
+                "published_at": meta.get("publishedAt", ""),
+                "category": cat,
+            })
     posts.sort(key=lambda p: p["published_at"], reverse=True)
-    return {
-        "total_posts": len(posts),
-        "categories": categories,
-        "latest_posts": posts[:3]
-    }
+    return {"total_posts": len(posts), "categories": categories, "latest_posts": posts[:3]}
 
-def get_traffic_metrics():
-    # Placeholder/Mock metrics when Cloudflare/GA4 credentials are not provided
-    # Standard values that feel organic and realistic for a personal professional blog
-    return {
-        "dau": 184,
-        "pv": 492,
-        "session_duration": "2m 45s",
-        "bounce_rate": "42.1%",
-        "top_sources": [
-            {"source": "Direct / Bookmarks", "percentage": "41%"},
-            {"source": "Twitter / X", "percentage": "32%"},
-            {"source": "LinkedIn", "percentage": "18%"},
-            {"source": "Google Search", "percentage": "9%"}
-        ],
-        "top_pages": [
-            {"path": "/blog/zero-to-ai-native", "views": 154, "title": "從零開始的 AI 導入 — 我們花了兩年才知道自己在做的事叫 AI-Native"},
-            {"path": "/blog/humanities-ai-expert", "views": 128, "title": "文組人不是 AI 時代的弱勢，只要你能掌握 AI 的『通識課』"},
-            {"path": "/blog/ai-anxiety-survival-guide", "views": 98, "title": "AI 焦慮這件事，我後來比較願意把它看成提醒"}
-        ]
-    }
+# ── metrics loading ──────────────────────────────────────────────────────────
 
-def generate_markdown_report(local_stats, traffic):
-    today = datetime.datetime.now()
-    # Format according to Taiwan Time / UTC+8
-    today_str = today.strftime("%Y-%m-%d %H:%M")
-    day_name = today.strftime("%a")
-    
-    cat_summary = ", ".join([f"`{k}` ({v})" for k, v in local_stats["categories"].items()])
-    
-    sources_table = "\n".join([f"| {s['source']} | {s['percentage']} |" for s in traffic["top_sources"]])
-    pages_str = "\n".join([f"{i+1}. **{p['title']}** (`{p['path']}`) — **{p['views']}** PV" for i, p in enumerate(traffic["top_pages"])])
-    
-    latest_str = "\n".join([f"* **{p['title']}** (發佈於 `{p['published_at'][:10]}`)" for p in local_stats["latest_posts"]])
+@dataclass
+class TrafficBlock:
+    status: str = "_pending_"
+    queried_at: str = ""
+    active_users_7d: Optional[int] = None
+    page_views_7d: Optional[int] = None
+    sessions_7d: Optional[int] = None
+    active_users_30d: Optional[int] = None
+    top_sources: list = field(default_factory=list)
+    top_pages: list = field(default_factory=list)
 
-    content = f"""進度更新日期 -- Y2026-05-22 @Sofia
 
-### 特別注意事項
-ℹ️ **數據憑證狀態**：GitHub Secrets 憑證已設置完成。自動化部署與網站指標串接流程運作順暢。
+@dataclass
+class InteractionsBlock:
+    status: str = "_pending_"
+    queried_at: str = ""
+    share_clicks: Optional[int] = None
+    copy_link: Optional[int] = None
+    post_reactions: Optional[int] = None
 
-### 執行摘要
-在過去的一週裡，有些細微的轉變正在悄悄發生。寫作對我而言從來不是一種公式化的輸出，而更像是在日常縫隙中的安靜觀察。本週，我們的溫暖角落迎來了 492 次的停留與閱讀。讀者們大多透過社群的分享或書籤，在這裡尋找一些共鳴。特別是關於《從零開始的 AI 導入》與《文組人的 AI 通識課》這兩篇篇幅較長、偏向反思的文章，獲得了最溫和而深刻的反響。這也印證了在追求快速與公式化的世界裡，安靜而真誠的文字依然有其立足之地。
 
-### 📈 網站核心流量指標 (本週)
-| 指標項目 | 數據值 | 觀察與備註 |
-|:---|:---:|:---|
-| 👥 每日活躍用戶 (DAU) | {traffic["dau"]} 人 | 讀者群體維持平穩造訪 |
-| 📊 單週總瀏覽量 (PV) | {traffic["pv"]} 次 | 互動率與回訪比例優良 |
-| ⏱️ 平均停留時間 | {traffic["session_duration"]} | 深度閱讀比例極高 |
-| 📉 跳出率 | {traffic["bounce_rate"]} | 導流路徑與內容相關性佳 |
+@dataclass
+class BotBlock:
+    status: str = "_pending_"
+    queried_at: str = ""
+    counts: list = field(default_factory=list)
+    total: int = 0
 
-### 🧭 主要流量來源
-| 流量管道 | 佔比比例 |
-|:---|:---:|
-{sources_table}
 
-### 🏆 熱門文章排行 (本週 Top 3)
-{pages_str}
+def load_metrics(files):
+    traffic = TrafficBlock()
+    interactions = InteractionsBlock()
+    bots = BotBlock()
+    for path in files:
+        try:
+            with open(path) as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"Warning: cannot read {path}: {e}", file=sys.stderr)
+            continue
+        if "traffic" in data:
+            t = data["traffic"]
+            traffic = TrafficBlock(
+                status=t.get("status", "_pending_"),
+                queried_at=t.get("queried_at", ""),
+                active_users_7d=t.get("active_users_7d"),
+                page_views_7d=t.get("page_views_7d"),
+                sessions_7d=t.get("sessions_7d"),
+                active_users_30d=t.get("active_users_30d"),
+                top_sources=t.get("top_sources", []),
+                top_pages=t.get("top_pages", []),
+            )
+        if "interactions" in data:
+            i = data["interactions"]
+            interactions = InteractionsBlock(
+                status=i.get("status", "_pending_"),
+                queried_at=i.get("queried_at", ""),
+                share_clicks=i.get("share_clicks"),
+                copy_link=i.get("copy_link"),
+                post_reactions=i.get("post_reactions"),
+            )
+        if "ai_bots" in data:
+            b = data["ai_bots"]
+            bots = BotBlock(
+                status=b.get("status", "_pending_"),
+                queried_at=b.get("queried_at", ""),
+                counts=b.get("counts", []),
+                total=b.get("total", 0),
+            )
+    return traffic, interactions, bots
 
-### ✍️ 部落格內容資產狀態
-* **已發佈文章總數**：{local_stats["total_posts"]} 篇
-* **文章分類分佈**：{cat_summary}
-* **最新發佈的文章**：
-{latest_str}
+# ── pending_metrics (Data Provenance) ────────────────────────────────────────
 
----
-此報告由 Omni AI 流量與內容分析機制自動生成，每週一早晨定期發送。
-"""
-    return content
+@dataclass
+class MetricBlock:
+    name: str
+    status: str           # measured / manual_required / _pending_
+    source: str
+    reason: str = ""      # only shown when status is not measured
+
+
+def pending_metrics(traffic, bots):
+    """Returns the provenance table rows."""
+    rows = [
+        MetricBlock("GA4 流量 + 互動", traffic.status, "Google Analytics 4 Data API"),
+        MetricBlock("AI bot 計數", bots.status, "Cloudflare Worker + Analytics Engine"),
+        MetricBlock("LinkedIn 成長", "manual_required", "LinkedIn Analytics",
+                    reason="LinkedIn API 不開放第三方讀取"),
+    ]
+    return rows
+
+# ── rendering ────────────────────────────────────────────────────────────────
+
+def fmt(v, unit="", fallback="_pending_"):
+    if v is None:
+        return fallback
+    return f"{v}{unit}"
+
+
+def render_traffic(traffic):
+    if traffic.status == "_pending_":
+        return "流量資料：_pending_（GA4 查詢失敗或憑證未設定）\n"
+    lines = []
+    lines.append("### 網站流量")
+    lines.append(f"_資料時間：{traffic.queried_at}_\n")
+    lines.append("| 指標 | 本週 |")
+    lines.append("|---|---|")
+    lines.append(f"| 活躍使用者（7日）| {fmt(traffic.active_users_7d)} 人 |")
+    lines.append(f"| 月活躍使用者（30日 MAU）| {fmt(traffic.active_users_30d)} 人 |")
+    lines.append(f"| 瀏覽量（7日 PV）| {fmt(traffic.page_views_7d)} 次 |")
+    lines.append(f"| 工作階段（7日）| {fmt(traffic.sessions_7d)} 次 |")
+    lines.append("")
+    if traffic.top_sources:
+        lines.append("**主要流量來源：**")
+        for s in traffic.top_sources:
+            lines.append(f"- {s['source']}：{s['sessions']} sessions")
+        lines.append("")
+    if traffic.top_pages:
+        lines.append("**熱門頁面（本週）：**")
+        for p in traffic.top_pages:
+            lines.append(f"- `{p['path']}`：{p['views']} 次瀏覽")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def render_interactions(interactions):
+    if interactions.status == "_pending_":
+        return "### 讀者互動\n_pending_（GA4 Data API 未接通）\n"
+    lines = []
+    lines.append("### 讀者互動")
+    lines.append(f"_資料時間：{interactions.queried_at}_\n")
+
+    share = fmt(interactions.share_clicks, " 次")
+    copy = fmt(interactions.copy_link, " 次")
+    react = fmt(interactions.post_reactions, " 次")
+
+    lines.append("| 行為 | 次數 | 說明 |")
+    lines.append("|---|---|---|")
+    lines.append(f"| 分享點擊 | {share} | Facebook / X / LINE / LinkedIn |")
+    lines.append(f"| 複製連結 | {copy} | Copy Link 按鈕 |")
+    lines.append(f"| Post reactions | {react} | 如果 GA4 Data API 未接通此欄為 0 |")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def render_bots(bots):
+    if bots.status == "_pending_":
+        return "### AI Bot 流量（Cloudflare）\n_pending_（Analytics Engine 查詢失敗或憑證未設定）\n"
+    lines = []
+    lines.append("### AI Bot 流量（Cloudflare）")
+    lines.append(f"_資料時間：{bots.queried_at}　｜　7 日合計：{bots.total} 次_\n")
+    lines.append("| Bot | 本週請求數 |")
+    lines.append("|---|---|")
+    for entry in bots.counts:
+        lines.append(f"| {entry['bot']} | {entry['requests']} |")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def render_provenance(rows):
+    lines = []
+    lines.append("### Data Provenance")
+    lines.append("| 資料項目 | 狀態 | 來源 |")
+    lines.append("|---|---|---|")
+    for r in rows:
+        if r.status == "measured":
+            label = "✅ measured"
+        elif r.status == "manual_required":
+            label = "📋 manual_required"
+        else:
+            label = "_pending_"
+        src = r.source
+        if r.reason:
+            src += f"（{r.reason}）"
+        lines.append(f"| {r.name} | {label} | {src} |")
+    return "\n".join(lines)
+
+
+def compose_report(local_stats, traffic, interactions, bots):
+    today = datetime.date.today()
+    week_num = today.isocalendar()[1]
+
+    sections = []
+    sections.append(f"## 部落格週報 W{week_num}（{today}）\n")
+
+    # Summary
+    sections.append("### 摘要")
+    sections.append(f"- 已發佈文章：{local_stats['total_posts']} 篇")
+    if local_stats["latest_posts"]:
+        latest = local_stats["latest_posts"][0]
+        sections.append(f"- 最新文章：《{latest['title']}》（{latest['published_at'][:10]}）")
+    sections.append("")
+
+    sections.append(render_traffic(traffic))
+    sections.append(render_interactions(interactions))
+    sections.append(render_bots(bots))
+
+    prov = pending_metrics(traffic, bots)
+    sections.append(render_provenance(prov))
+    sections.append("")
+    sections.append("— Century")
+
+    return "\n".join(sections)
+
+# ── main ─────────────────────────────────────────────────────────────────────
 
 def main():
-    print("Gathering local statistics...")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--emit", action="store_true", help="Print markdown to stdout")
+    parser.add_argument("--json", action="store_true", help="Print JSON to stdout")
+    parser.add_argument("--metrics-file", dest="metrics_files", action="append", default=[])
+    args = parser.parse_args()
+
+    print("Gathering local statistics...", file=sys.stderr)
     local_stats = gather_local_stats()
-    print(f"Total local posts found: {local_stats['total_posts']}")
-    
-    print("Generating traffic metrics...")
-    traffic = get_traffic_metrics()
-    
-    print("Composing markdown report...")
-    report_content = generate_markdown_report(local_stats, traffic)
-    
-    print("Sending report to Z App Gateway...")
-    headers = {
-        "Authorization": f"Bearer {Z_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    
-    # We will insert a post into the 'posts' table
-    today_str = datetime.date.today().isoformat()
-    body = {
-        "action": "insert",
-        "payload": {
-            "table": "posts",
-            "data": {
-                "title": f"📈 部落格流量與內容每週報告 ({today_str})",
-                "content": report_content,
-                "date": today_str,
-                "workspace_id": Z_WORKSPACE_ID
-            }
-        }
-    }
-    
-    try:
-        resp = requests.post(Z_GATEWAY_URL, headers=headers, json=body)
-        if resp.status_code in (200, 201):
-            print(f"Success! Report posted to Z App feed (ID: {resp.json().get('id')})")
-        else:
-            print(f"Failed to post to Z App Gateway (Status: {resp.status_code})")
-            print("Response:", resp.text)
-    except Exception as e:
-        print("Error sending request:", e)
+    print(f"Total local posts found: {local_stats['total_posts']}", file=sys.stderr)
+
+    traffic, interactions, bots = load_metrics(args.metrics_files)
+
+    report_md = compose_report(local_stats, traffic, interactions, bots)
+
+    if args.json:
+        print(json.dumps({
+            "report": report_md,
+            "posts": local_stats["total_posts"],
+        }, ensure_ascii=False, indent=2))
+    elif args.emit:
+        print(report_md)
+    else:
+        print("Use --emit to print the report or --json for JSON output.", file=sys.stderr)
+
 
 if __name__ == "__main__":
     main()

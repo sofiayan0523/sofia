@@ -35,7 +35,7 @@ export const en: Record<TranslationKey, string> = {
   "about.intro":
     "I started in education and Chinese-language teaching. Then I moved through AI, startups, content provenance, and blockchain - and realized I had not really left the same question: how people learn, trust, and find their place inside unfamiliar systems.",
   "about.background":
-    "Today I am co-founder and Chief Growth Officer at Numbers Protocol, working on content provenance and digital trust infrastructure. From the outside it looks like technology and market building. Day to day, it is translation: turning engineering language into something people can act on, and turning human hesitation back into product and strategy. That's also why I think of myself as a new kind of \"AI manager\": leading human teammates and a whole row of AI coworkers at the same time.",
+    "Today I am co-founder and Chief Growth Officer at Numbers Protocol, working on content provenance and digital trust infrastructure. From the outside it looks like technology and market building. Day to day, it is translation: turning engineering language into something people can act on, and turning human hesitation back into product and strategy. In the past few years, I have also brought that translation work into enterprise AI consulting and training: not handing teams a tool list, but helping them make AI Agent roles, boundaries, and audit trails part of daily work. That's also why I think of myself as a new kind of \"AI manager\": leading human teammates and a whole row of AI coworkers at the same time.",
   "about.hobbies":
     "Outside work, I boulder in Taipei, test new AI tools, travel alone, and keep a trail of links that look unrelated until they do not. They usually circle back to the same thing: how people build a relationship with an unfamiliar world.",
   "about.currentlyTitle": "Currently",
@@ -67,6 +67,7 @@ export const en: Record<TranslationKey, string> = {
   "career.title": "Career",
   "career.description": "My work, speaking engagements, and media coverage",
   "career.work": "Work",
+  "career.consulting": "AI Consulting & Training",
   "career.speaking": "Speaking",
   "career.media": "Media",
   "career.podcast": "Podcast",
