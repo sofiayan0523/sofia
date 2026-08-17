@@ -7,6 +7,7 @@ export const en: Record<TranslationKey, string> = {
   "nav.blog": "Blog",
   "nav.career": "Career",
   "nav.speaker": "Speaking",
+  "nav.methodology": "AI Coworker",
 
   // home
   "home.eyebrow": "Humanities-trained AI operator · Numbers Protocol co-founder",
@@ -19,6 +20,7 @@ export const en: Record<TranslationKey, string> = {
   "home.speakerBtn": "Invite Sofia",
   "home.aboutBtn": "About Sofia",
   "home.blogBtn": "Read essays",
+  "home.methodologyBtn": "Explore Methodology",
   "home.stat.cities": "Cities Explored",
   "home.stat.tech": "Years in Tech",
   "home.stat.speaking": "Speaking Events",

@@ -37,6 +37,19 @@ const categories = ["all", ...categoryOrder.filter((cat) => publishedCategories.
           <p class="text-muted-foreground mt-4 text-lg"><T k="blog.description" /></p>
         </div>
 
+        <!-- English Language Notification for Blog Posts -->
+        <div data-l="en" class="p-4 rounded-lg bg-secondary/50 border border-border text-sm text-muted-foreground leading-relaxed">
+          💡 <strong>Note:</strong> My blog essays are currently published in Traditional Chinese only. You can use your browser's translation feature or read a brief English summary.
+        </div>
+
+        <!-- Search (Pagefind UI mounts here) — prominent placement for easy finding -->
+        <div class="max-w-md pt-4 pb-2">
+          <p class="text-sm text-muted-foreground mb-2">
+            <span data-l="zh">想找特定主題？</span><span data-l="en">Looking for a specific topic?</span>
+          </p>
+          <div id="search" class="text-sm"></div>
+        </div>
+
         <!-- Category filter (client-side, progressive enhancement) -->
         <div class="flex flex-wrap gap-2" data-category-filter>
           {
@@ -71,14 +84,6 @@ const categories = ["all", ...categoryOrder.filter((cat) => publishedCategories.
         >
           <T k="blog.empty" />
         </p>
-
-        <!-- Search (Pagefind UI mounts here) — secondary, for readers who know what they want -->
-        <div class="max-w-md pt-8 mt-4 border-t border-border">
-          <p class="text-sm text-muted-foreground mb-3">
-            <span data-l="zh">想找特定主題？</span><span data-l="en">Looking for a specific topic?</span>
-          </p>
-          <div id="search"></div>
-        </div>
       </div>
     </div>
   </main>
@@ -120,7 +125,7 @@ const categories = ["all", ...categoryOrder.filter((cat) => publishedCategories.
     }
   });
 
-  // Category filter (vanilla JS)
+  // Category filter (vanilla JS with URL Query Persistence)
   document.addEventListener("DOMContentLoaded", () => {
     const filterContainer = document.querySelector("[data-category-filter]");
     if (!filterContainer) return;
@@ -128,26 +133,46 @@ const categories = ["all", ...categoryOrder.filter((cat) => publishedCategories.
     const posts = document.querySelectorAll("#posts-grid [data-post]");
     const noResults = document.querySelector("#no-results");
 
+    function setCategory(target) {
+      buttons.forEach((b) => {
+        const isActive = b.dataset.cat === target;
+        b.classList.toggle("bg-primary", isActive);
+        b.classList.toggle("text-primary-foreground", isActive);
+        b.classList.toggle("border-primary", isActive);
+        b.classList.toggle("border-border", !isActive);
+        b.classList.toggle("hover:bg-secondary", !isActive);
+      });
+      let visible = 0;
+      posts.forEach((p) => {
+        const cat = p.dataset.cat;
+        const show = target === "all" || cat === target;
+        p.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (noResults) noResults.classList.toggle("hidden", visible !== 0);
+
+      // Update URL query parameter
+      const url = new URL(window.location.href);
+      if (target === "all") {
+        url.searchParams.delete("category");
+      } else {
+        url.searchParams.set("category", target);
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const target = btn.dataset.cat;
-        buttons.forEach((b) => {
-          const isActive = b === btn;
-          b.classList.toggle("bg-primary", isActive);
-          b.classList.toggle("text-primary-foreground", isActive);
-          b.classList.toggle("border-primary", isActive);
-          b.classList.toggle("border-border", !isActive);
-          b.classList.toggle("hover:bg-secondary", !isActive);
-        });
-        let visible = 0;
-        posts.forEach((p) => {
-          const cat = p.dataset.cat;
-          const show = target === "all" || cat === target;
-          p.style.display = show ? "" : "none";
-          if (show) visible++;
-        });
-        if (noResults) noResults.classList.toggle("hidden", visible !== 0);
+        setCategory(btn.dataset.cat);
       });
     });
+
+    // On initial load, check URL for category query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCat = urlParams.get("category") || "all";
+    const validCats = Array.from(buttons).map((b) => b.dataset.cat);
+    if (validCats.includes(initialCat)) {
+      setCategory(initialCat);
+    }
   });
 </script>

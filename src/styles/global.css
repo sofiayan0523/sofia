@@ -93,12 +93,17 @@
 
   /* i18n dual-render: hide inactive language (default = zh) */
   [data-l="en"] {
-    display: none;
+    display: none !important;
   }
   :root[data-lang="en"] [data-l="zh"] {
-    display: none;
+    display: none !important;
   }
   :root[data-lang="en"] [data-l="en"] {
     display: inline;
+  }
+  :root[data-lang="en"] div[data-l="en"],
+  :root[data-lang="en"] p[data-l="en"],
+  :root[data-lang="en"] section[data-l="en"] {
+    display: block !important;
   }
 }

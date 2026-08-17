@@ -135,6 +135,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           >
             <span data-l="zh">先寄邀約需求</span><span data-l="en">Send an enquiry</span> <span aria-hidden="true">→</span>
           </a>
+          <button
+            type="button"
+            data-copy-email="sofia@numbersprotocol.io"
+            class="inline-flex items-center gap-1.5 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium text-muted-foreground hover:text-foreground"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon hidden"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span data-l="zh" class="copy-text">複製 Email</span>
+            <span data-l="en" class="copy-text">Copy Email</span>
+          </button>
           <a
             href="#speaker-fit"
             class="inline-flex items-center gap-1 px-6 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
@@ -217,6 +227,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           >
             <span data-l="zh">描述你的場景</span><span data-l="en">Describe your scenario</span> <span aria-hidden="true">→</span>
           </a>
+          <button
+            type="button"
+            data-copy-email="sofia@numbersprotocol.io"
+            class="inline-flex items-center gap-1.5 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium text-muted-foreground hover:text-foreground"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon hidden"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span data-l="zh" class="copy-text">複製 Email</span>
+            <span data-l="en" class="copy-text">Copy Email</span>
+          </button>
           <a
             href={`${baseUrl}ai-coworker-methodology`}
             class="inline-flex items-center gap-1 px-5 py-3 rounded-md border border-border hover:bg-secondary transition-colors font-medium"
@@ -518,9 +538,19 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
                data-cta-location="speaker-contact"
                data-cta-destination="email"
                data-cta-content="speaker-booking-mailto"
-               class="text-primary underline hover:no-underline">
+               class="text-primary underline hover:no-underline mr-2">
               sofia@numbersprotocol.io
             </a>
+            <button
+              type="button"
+              data-copy-email="sofia@numbersprotocol.io"
+              class="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-border hover:bg-secondary transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon hidden"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-l="zh" class="copy-text">複製</span>
+              <span data-l="en" class="copy-text">Copy</span>
+            </button>
           </li>
           <li>
             <span data-l="zh">LinkedIn DM：</span><span data-l="en">LinkedIn DM: </span>
@@ -545,3 +575,34 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
   </main>
   <Footer />
 </BaseLayout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-copy-email]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const email = btn.getAttribute("data-copy-email");
+        navigator.clipboard.writeText(email).then(() => {
+          const copyIcon = btn.querySelector(".copy-icon");
+          const checkIcon = btn.querySelector(".check-icon");
+          const copyTexts = btn.querySelectorAll(".copy-text");
+
+          if (copyIcon) copyIcon.classList.add("hidden");
+          if (checkIcon) checkIcon.classList.remove("hidden");
+
+          copyTexts.forEach((textSpan) => {
+            const originalText = textSpan.textContent;
+            const isZh = textSpan.getAttribute("data-l") === "zh";
+            textSpan.textContent = isZh ? "已複製！" : "Copied!";
+            setTimeout(() => {
+              textSpan.textContent = originalText;
+              if (copyIcon) copyIcon.classList.remove("hidden");
+              if (checkIcon) checkIcon.classList.add("hidden");
+            }, 2000);
+          });
+        }).catch((err) => {
+          console.error("Could not copy text: ", err);
+        });
+      });
+    });
+  });
+</script>
