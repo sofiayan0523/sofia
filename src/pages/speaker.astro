@@ -19,10 +19,10 @@ const faqs = [
   {
     question: "演講主題有哪些？可以客製嗎？",
     answer:
-      "三大主軸：（1）文組人也能領導的 AI 導入，（2）AI 同事方法論（Numbers 案例拆解），（3）內容溯源與 AI 時代的信任戰役。可依貴公司產業、團隊規模、AI 成熟度客製。",
+      "四大主軸：（1）文組人也能領導的 AI 導入，（2）AI 同事方法論（Numbers 案例拆解），（3）Code with Vibe：新創團隊的 AI 開發避險課，（4）內容溯源與 AI 時代的信任戰役。可依貴公司產業、團隊規模、AI 成熟度客製。",
     question_en: "What topics are available? Can they be customised?",
     answer_en:
-      "Three pillars: (1) AI adoption a humanities person can lead, (2) the AI coworker methodology (a Numbers teardown), (3) content provenance and the trust war of the AI era. Each can be tailored to your industry, team size, and AI maturity.",
+      "Four pillars: (1) AI adoption a humanities person can lead, (2) the AI coworker methodology (a Numbers teardown), (3) Code with Vibe: AI development risk management for startup teams, (4) content provenance and the trust war of the AI era. Each can be tailored to your industry, team size, and AI maturity.",
   },
   {
     question: "Sofia 接受怎樣的演講邀約？",
@@ -52,6 +52,7 @@ const faqs = [
 
 const speakerEmailHref = "mailto:sofia@numbersprotocol.io?subject=Speaker Booking — [貴公司]&body=Hi Sofia,%0A%0A公司：%0A邀約日期：%0A形式（keynote / workshop / 全天）：%0A主題傾向：%0A聽眾規模與背景：%0A預算區間：%0A%0A謝謝！";
 const speakerLinkedinHref = "https://tw.linkedin.com/in/sofia-yan-b6318a31";
+const startupTaipeiTalkHref = "https://www.startup.taipei/index.php?action=news_detail&id=1566&typeid=1";
 
 const SITE_ORIGIN = "https://sofiayan.cc";
 const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
@@ -122,7 +123,7 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
             <span data-l="zh"><strong class="text-foreground">7+</strong> 年新創 Co-Founder</span>
             <span data-l="en"><strong class="text-foreground">7+</strong> years startup co-founder</span>
           </span>
-          <span>SXSW · UNICRI · GNI · AAJA · APJF · <span data-l="zh">經理人</span><span data-l="en">Manager Today</span></span>
+          <span>SXSW · UNICRI · GNI · AAJA · APJF · Startup@Taipei · <span data-l="zh">經理人</span><span data-l="en">Manager Today</span></span>
         </div>
         <div class="flex flex-wrap gap-4 pt-4">
           <a
@@ -181,6 +182,10 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
               <li>
                 <span data-l="zh">AI adoption workshop：想從一個真實 workflow 開始改。</span>
                 <span data-l="en">AI adoption workshops: starting from one real workflow.</span>
+              </li>
+              <li>
+                <span data-l="zh">新創 / 產品團隊：想用 AI 加速雛形與內部工具，但需要知道風險邊界。</span>
+                <span data-l="en">Startup and product teams: using AI to move prototypes and internal tools faster, while knowing the risk boundaries.</span>
               </li>
               <li>
                 <span data-l="zh">媒體、內容、創作者社群：需要理解內容溯源與 C2PA 為什麼重要。</span>
@@ -294,6 +299,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           </div>
           <div class="rounded-lg border border-border/60 p-5 space-y-2">
             <h3 class="font-display text-lg font-medium">
+              <span data-l="zh">AI 開發避險與技術檢核</span>
+              <span data-l="en">AI development risk review</span>
+            </h3>
+            <p class="text-sm text-foreground/70 leading-relaxed">
+              <span data-l="zh">幫新創與產品團隊拆哪些原型可以放心用 AI 快速試錯，哪些牽涉金流、資安、資料品質或長期維護時一定要工程檢核。</span>
+              <span data-l="en">Help startup and product teams separate safe AI-assisted experiments from work that needs engineering review because of payments, security, data quality, or long-term maintenance.</span>
+            </p>
+          </div>
+          <div class="rounded-lg border border-border/60 p-5 space-y-2">
+            <h3 class="font-display text-lg font-medium">
               <span data-l="zh">AI 治理與 Vibe Coding 實作</span>
               <span data-l="en">AI governance and vibe-coding practice</span>
             </h3>
@@ -333,6 +348,16 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           </div>
           <div class="border-l-2 border-primary/30 pl-6">
             <h3 class="font-display text-xl font-medium mb-2">
+              <span data-l="zh">Code with Vibe：新創團隊的 AI 開發避險課</span>
+              <span data-l="en">Code with Vibe: AI development risk management for startup teams</span>
+            </h3>
+            <p class="text-foreground/70 leading-relaxed">
+              <span data-l="zh">AI 能讓非工程團隊快速做出產品雛形和內部工具，但金流、資安、資料品質和長期維護不能靠「看起來可以跑」就過關。這個主題會拆什麼情境可以用 AI 快速試錯，什麼時候必須請工程師把關。</span>
+              <span data-l="en">AI can help non-engineering teams build prototypes and internal tools quickly, but payments, security, data quality, and long-term maintenance cannot pass just because a demo runs. This topic separates safe rapid experiments from work that needs engineering review.</span>
+            </p>
+          </div>
+          <div class="border-l-2 border-primary/30 pl-6">
+            <h3 class="font-display text-xl font-medium mb-2">
               <span data-l="zh">內容溯源與 AI 時代的信任戰役</span>
               <span data-l="en">Content provenance and the trust war of the AI era</span>
             </h3>
@@ -356,6 +381,12 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
               <span data-l="en">2024–2026 courses / keynotes</span>
             </p>
             <ul class="space-y-2 text-sm">
+              <li>
+                <a href={startupTaipeiTalkHref} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+                  <span data-l="zh"><strong>Startup@Taipei「CODE WITH VIBE：新創團隊的 AI 開發避險課」</strong>，臺北市政府產業發展局（2026/08/19）</span>
+                  <span data-l="en"><strong>Startup@Taipei "CODE WITH VIBE: AI development risk management for startup teams"</strong>, Taipei City Government Department of Economic Development (2026/08/19)</span>
+                </a>
+              </li>
               <li>
                 <span data-l="zh"><strong>「重建 AI 時代的信任：一個可實踐的數位內容來源框架」</strong>（2026）</span>
                 <span data-l="en"><strong>"Rebuilding Trust in the AI Era: A Practical Framework for Digital Content Provenance"</strong> (2026)</span>

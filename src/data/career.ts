@@ -69,6 +69,11 @@ export const workItems = [
 
 export const speakingItems = [
   {
+    title: "Startup@Taipei「CODE WITH VIBE：新創團隊的 AI 開發避險課」（臺北市政府產業發展局，2026）",
+    title_en: "Startup@Taipei \"CODE WITH VIBE: AI development risk management for startup teams\" (Taipei City Government Department of Economic Development, 2026)",
+    link: "https://www.startup.taipei/index.php?action=news_detail&id=1566&typeid=1",
+  },
+  {
     title: "台灣雲協「AI × 生態保育 × ESG」：分享 AI 石虎路殺預警系統（以灼灼科技 DT42 商務開發總監身分，2026）",
     title_en: "Taiwan Cloud & IoT Association \"AI × Conservation × ESG\": the AI leopard-cat roadkill warning system (as BD Director, DT42, 2026)",
     link: "http://www.twcloud.org.tw/xmdoc/cont?xsmsid=0I249594489957008833&sid=0Q148741233150745798",
@@ -152,6 +157,14 @@ export const consultingItems = [
       "協助團隊比較 AI 解決方案的能力、限制、資料風險、整合成本與治理需求。",
     description_en:
       "Help teams compare AI solutions by capability, constraints, data risk, integration cost, and governance needs.",
+  },
+  {
+    title: "AI 開發避險與技術檢核",
+    title_en: "AI development risk review",
+    description:
+      "協助新創與產品團隊判斷哪些情境適合用 Vibe Coding 快速試錯，哪些牽涉金流、資安、資料品質或長期維護時必須交由工程檢核。",
+    description_en:
+      "Help startup and product teams decide when vibe coding is safe for rapid experiments, and when payments, security, data quality, or long-term maintenance require engineering review.",
   },
   {
     title: "AI 治理與 TAEA 導入",
