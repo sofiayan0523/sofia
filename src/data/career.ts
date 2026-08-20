@@ -39,15 +39,6 @@ export const workItems = [
     logo: "coa-logo.png",
   },
   {
-    title: "WebBrain AI",
-    description:
-      "曾任行銷長，負責 AI 產品定位、內容策略與市場落地，把技術能力翻成企業客戶能理解的採用情境。",
-    description_en:
-      "Former Chief Marketing Officer, responsible for AI product positioning, content strategy, and go-to-market translation for enterprise adoption.",
-    link: undefined,
-    logo: "webbrain-ai-logo.png",
-  },
-  {
     title: "DT42",
     description:
       "一家做智慧邊緣運算方案的 AI 新創。我參與業務開發與策略成長，協助建立它在 AI 硬體市場的定位與故事。",
