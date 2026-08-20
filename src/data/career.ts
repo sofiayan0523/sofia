@@ -27,7 +27,7 @@ export const workItems = [
     description_en:
       "Omni Care starts with one stuck workflow, then helps teams diagnose, design, build, and maintain working software and AI automation. I help turn Numbers' internal AI adoption and engineering-governance practice into a service other teams can use.",
     link: "https://care.omniai.one/",
-    logo: undefined,
+    logo: "omni-logo.png",
   },
   {
     title: "Creative Origin Alliance",
