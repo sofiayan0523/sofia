@@ -21,6 +21,15 @@ export const workItems = [
     logo: "numbers-logo.png",
   },
   {
+    title: "Omni Care",
+    description:
+      "Omni Care 從一個最卡住的流程開始，協助團隊診斷、設計、建置並長期維護真正能運作的軟體與 AI 自動化。我參與把 Numbers 內部 AI 導入與工程治理經驗，整理成外部團隊也能採用的服務。",
+    description_en:
+      "Omni Care starts with one stuck workflow, then helps teams diagnose, design, build, and maintain working software and AI automation. I help turn Numbers' internal AI adoption and engineering-governance practice into a service other teams can use.",
+    link: "https://care.omniai.one/",
+    logo: undefined,
+  },
+  {
     title: "Creative Origin Alliance",
     description:
       "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我曾任 Creative Origin 行銷創意總監，也是 Creative Origin Alliance 創始成員。",
@@ -36,7 +45,7 @@ export const workItems = [
     description_en:
       "Former Chief Marketing Officer, responsible for AI product positioning, content strategy, and go-to-market translation for enterprise adoption.",
     link: undefined,
-    logo: undefined,
+    logo: "webbrain-ai-logo.png",
   },
   {
     title: "DT42",
@@ -68,6 +77,11 @@ export const workItems = [
 ];
 
 export const speakingItems = [
+  {
+    title: "Startup@Taipei「CODE WITH VIBE：新創團隊的 AI 開發避險課」（臺北市政府產業發展局，2026）",
+    title_en: "Startup@Taipei \"CODE WITH VIBE: AI development risk management for startup teams\" (Taipei City Government Department of Economic Development, 2026)",
+    link: "https://www.startup.taipei/index.php?action=news_detail&id=1566&typeid=1",
+  },
   {
     title: "台灣雲協「AI × 生態保育 × ESG」：分享 AI 石虎路殺預警系統（以灼灼科技 DT42 商務開發總監身分，2026）",
     title_en: "Taiwan Cloud & IoT Association \"AI × Conservation × ESG\": the AI leopard-cat roadkill warning system (as BD Director, DT42, 2026)",
@@ -152,6 +166,14 @@ export const consultingItems = [
       "協助團隊比較 AI 解決方案的能力、限制、資料風險、整合成本與治理需求。",
     description_en:
       "Help teams compare AI solutions by capability, constraints, data risk, integration cost, and governance needs.",
+  },
+  {
+    title: "AI 開發避險與技術檢核",
+    title_en: "AI development risk review",
+    description:
+      "協助新創與產品團隊判斷哪些情境適合用 Vibe Coding 快速試錯，哪些牽涉金流、資安、資料品質或長期維護時必須交由工程檢核。",
+    description_en:
+      "Help startup and product teams decide when vibe coding is safe for rapid experiments, and when payments, security, data quality, or long-term maintenance require engineering review.",
   },
   {
     title: "AI 治理與 TAEA 導入",
