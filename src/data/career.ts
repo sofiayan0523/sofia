@@ -21,6 +21,15 @@ export const workItems = [
     logo: "numbers-logo.png",
   },
   {
+    title: "Omni Care",
+    description:
+      "Omni Care 從一個最卡住的流程開始，協助團隊診斷、設計、建置並長期維護真正能運作的軟體與 AI 自動化。我參與把 Numbers 內部 AI 導入與工程治理經驗，整理成外部團隊也能採用的服務。",
+    description_en:
+      "Omni Care starts with one stuck workflow, then helps teams diagnose, design, build, and maintain working software and AI automation. I help turn Numbers' internal AI adoption and engineering-governance practice into a service other teams can use.",
+    link: "https://care.omniai.one/",
+    logo: undefined,
+  },
+  {
     title: "Creative Origin Alliance",
     description:
       "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我曾任 Creative Origin 行銷創意總監，也是 Creative Origin Alliance 創始成員。",
