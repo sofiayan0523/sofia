@@ -27,7 +27,7 @@ export const workItems = [
     description_en:
       "Omni Care starts with one stuck workflow, then helps teams diagnose, design, build, and maintain working software and AI automation. I help turn Numbers' internal AI adoption and engineering-governance practice into a service other teams can use.",
     link: "https://care.omniai.one/",
-    logo: undefined,
+    logo: "omni-logo.png",
   },
   {
     title: "Creative Origin Alliance",
@@ -37,15 +37,6 @@ export const workItems = [
       "A network of creators, technologists, and platforms building responsible AI from the ground up. I served as Marketing Creative Director at Creative Origin and am a founding member of the Creative Origin Alliance.",
     link: "https://creativeorigin.ai/",
     logo: "coa-logo.png",
-  },
-  {
-    title: "WebBrain AI",
-    description:
-      "曾任行銷長，負責 AI 產品定位、內容策略與市場落地，把技術能力翻成企業客戶能理解的採用情境。",
-    description_en:
-      "Former Chief Marketing Officer, responsible for AI product positioning, content strategy, and go-to-market translation for enterprise adoption.",
-    link: undefined,
-    logo: "webbrain-ai-logo.png",
   },
   {
     title: "DT42",
