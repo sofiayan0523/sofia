@@ -45,7 +45,7 @@ export const workItems = [
     description_en:
       "Former Chief Marketing Officer, responsible for AI product positioning, content strategy, and go-to-market translation for enterprise adoption.",
     link: undefined,
-    logo: undefined,
+    logo: "webbrain-ai-logo.png",
   },
   {
     title: "DT42",
