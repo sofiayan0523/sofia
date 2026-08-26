@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import CaptureEye from "@/components/CaptureEye.astro";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
@@ -53,6 +54,37 @@ const faqs = [
 const speakerEmailHref = "mailto:sofia@numbersprotocol.io?subject=Speaker Booking — [貴公司]&body=Hi Sofia,%0A%0A公司：%0A邀約日期：%0A形式（keynote / workshop / 全天）：%0A主題傾向：%0A聽眾規模與背景：%0A預算區間：%0A%0A謝謝！";
 const speakerLinkedinHref = "https://tw.linkedin.com/in/sofia-yan-b6318a31";
 const startupTaipeiTalkHref = "https://www.startup.taipei/index.php?action=news_detail&id=1566&typeid=1";
+
+const speakerPhotos = [
+  {
+    nid: "bafkreidbd2rapakt4c374bwpg4m4mpgde6ploqmmeksxtrjjrd5gpkghdy",
+    src: `${baseUrl}images/speaker/code-with-vibe-talk.jpg`,
+    alt: "Sofia Yan speaking beside a Code with Vibe slide about guardrails for startup AI development",
+    captionZh: "Startup@Taipei：Code with Vibe，新創團隊的 AI 開發避險課",
+    captionEn: "Startup@Taipei: Code with Vibe, AI development risk management for startup teams",
+  },
+  {
+    nid: "bafkreifsid5eabm3bavk7nb64h7mbsuwt353b72ncsrm7j5fchj5trlifu",
+    src: `${baseUrl}images/speaker/startup-taipei-panel.jpg`,
+    alt: "Sofia Yan speaking into a microphone during a Startup Taipei session",
+    captionZh: "把 AI 開發速度和風險邊界放在同一張桌上講",
+    captionEn: "Putting AI development speed and risk boundaries on the same table",
+  },
+  {
+    nid: "bafkreibo6i73qxpvizibamw3oic4jmi6x6ko64vvdom64mq6zw3ncucbuq",
+    src: `${baseUrl}images/speaker/community-night-talk.jpg`,
+    alt: "Sofia Yan holding a microphone during an evening community talk",
+    captionZh: "社群現場：用日常語言拆 AI 導入與團隊協作",
+    captionEn: "Community session: unpacking AI adoption and teamwork in plain language",
+  },
+  {
+    nid: "bafkreiatznqymgb73xkl76rwoosrxdjqtjtzpj6jh3k72r22cis7ebc2bq",
+    src: `${baseUrl}images/speaker/digitimes-stage.jpg`,
+    alt: "Sofia Yan presenting on a DIGITIMES stage",
+    captionZh: "DIGITIMES 舞台：把技術趨勢翻成團隊聽得懂的判斷",
+    captionEn: "DIGITIMES stage: translating technical trends into team-level decisions",
+  },
+];
 
 const SITE_ORIGIN = "https://sofiayan.cc";
 const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
@@ -248,6 +280,42 @@ const CANONICAL = `${SITE_ORIGIN}${baseUrl}speaker`;
           >
             <span data-l="zh">先看 AI 同事方法論</span><span data-l="en">Read the AI coworker methodology</span>
           </a>
+        </div>
+      </section>
+
+      <!-- In-room proof -->
+      <section class="space-y-8">
+        <div class="space-y-3">
+          <p class="text-muted-foreground uppercase tracking-widest text-xs font-medium">
+            <span data-l="zh">現場照片</span><span data-l="en">In the room</span>
+          </p>
+          <h2 class="font-display text-xl md:text-2xl font-medium">
+            <span data-l="zh">不是只存在於簡報裡的 AI 導入</span>
+            <span data-l="en">AI adoption beyond the slide deck</span>
+          </h2>
+          <p class="text-foreground/70 leading-relaxed">
+            <span data-l="zh">我比較常做的事，是把企業、媒體、新創和非工程團隊卡住的 AI 問題，放回真實工作現場裡拆。</span>
+            <span data-l="en">Most of my work happens by taking AI problems from enterprises, media teams, startups, and non-engineering teams back into the room where work actually happens.</span>
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {
+            speakerPhotos.map((photo) => (
+              <figure class="group overflow-hidden rounded-lg border border-border/60 bg-card">
+                <CaptureEye
+                  nid={photo.nid}
+                  src={photo.src}
+                  alt={photo.alt}
+                  mediaClass="block aspect-[4/3] overflow-hidden bg-secondary"
+                  imgClass="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <figcaption class="p-4 text-sm text-foreground/70 leading-relaxed">
+                  <span data-l="zh">{photo.captionZh}</span>
+                  <span data-l="en">{photo.captionEn}</span>
+                </figcaption>
+              </figure>
+            ))
+          }
         </div>
       </section>
 
