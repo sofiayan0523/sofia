@@ -99,7 +99,7 @@
     display: none !important;
   }
   :root[data-lang="en"] [data-l="en"] {
-    display: inline;
+    display: inline !important;
   }
   :root[data-lang="en"] div[data-l="en"],
   :root[data-lang="en"] p[data-l="en"],

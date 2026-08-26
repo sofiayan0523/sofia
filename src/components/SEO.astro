@@ -36,6 +36,12 @@ const {
 
 const fullTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
 
+// Social crawlers (Facebook / LinkedIn) require absolute og:image URLs;
+// post pages pass relative coverImage paths, so normalize here.
+const ogImage = /^https?:\/\//.test(image)
+  ? image
+  : `${siteOrigin}${image.startsWith("/") ? "" : "/"}${image}`;
+
 // ===== Schema.org JSON-LD =====
 // Person schema — Sofia Yan (site-wide; helps Google Knowledge Graph + LLMs)
 const personSchema = {
@@ -146,7 +152,7 @@ const articleSchema = type === "article" && article
       "@type": "Article",
       headline: title ?? DEFAULT_TITLE,
       description,
-      image: [image],
+      image: [ogImage],
       datePublished: article.publishedTime,
       dateModified: article.modifiedTime ?? article.publishedTime,
       author: {
@@ -196,7 +202,7 @@ const faqSchema = faq && faq.length > 0
 
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
+<meta property="og:image" content={ogImage} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE_NAME} />
@@ -206,7 +212,7 @@ const faqSchema = faq && faq.length > 0
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={ogImage} />
 <meta name="twitter:creator" content={TWITTER_HANDLE} />
 
 <!-- ===== AI / Agent / Content-Signal meta ===== -->
