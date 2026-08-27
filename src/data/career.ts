@@ -5,63 +5,63 @@ export const workItems = [
   {
     title: "Capture App",
     description:
-      "Capture 讓任何人都能建立和分享可驗證的數位媒體，目前已應用在選舉、新聞與 AI 生成內容的溯源上。我曾擔任 Capture & AIKEA 群募專案行銷總監，負責產品上市與市場溝通。",
+      "Capture 是 Numbers Protocol 旗下的內容溯源工具，讓影像與數位媒體可以留下可查驗的來源脈絡。我曾擔任 Capture & AIKEA 群募專案行銷總監，負責把產品定位、上市節奏與市場溝通串起來。",
     description_en:
-      "Capture lets anyone create and share verifiable digital media — powering provenance for elections, journalism, and AI-generated content. I served as marketing director for the Capture & AIKEA crowdfunding projects, leading launch and market communication.",
+      "Capture is Numbers Protocol's provenance tool for keeping verifiable context around images and digital media. I served as marketing director for the Capture & AIKEA crowdfunding projects, connecting product positioning, launch planning, and market communication.",
     link: "https://captureapp.xyz/",
     logo: "capture-logo.png",
   },
   {
     title: "Numbers Protocol",
     description:
-      "一個區塊鏈解決方案，讓數位內容可追溯、可信賴，為合乎倫理的 AI 生態系統做好準備。我負責全球成長與社群經營。",
+      "Numbers Protocol 建構數位內容來源與驗證基礎建設，讓影像、創作與 AI 時代的內容可以保留來源紀錄。我負責全球成長、社群經營，以及把技術能力轉成不同產業能理解的敘事。",
     description_en:
-      "A blockchain solution that makes digital content traceable and trustworthy, ready for an ethical AI ecosystem. I lead its global growth and community.",
+      "Numbers Protocol builds provenance and verification infrastructure for digital content, preserving source records for images, creative work, and AI-era media. I lead global growth, community, and the translation of technical capability into narratives different industries can use.",
     link: "https://numbersprotocol.io/",
     logo: "numbers-logo.png",
   },
   {
     title: "Omni Care",
     description:
-      "Omni Care 從一個最卡住的流程開始，協助團隊診斷、設計、建置並長期維護真正能運作的軟體與 AI 自動化。我參與把 Numbers 內部 AI 導入與工程治理經驗，整理成外部團隊也能採用的服務。",
+      "Omni Care 從團隊最卡住的一個流程開始，協助釐清需求、設計工作流、建置軟體或 AI 自動化，並把維護責任說清楚。我參與把 Numbers 內部 AI 導入與工程治理經驗，整理成外部團隊也能採用的合作方式。",
     description_en:
-      "Omni Care starts with one stuck workflow, then helps teams diagnose, design, build, and maintain working software and AI automation. I help turn Numbers' internal AI adoption and engineering-governance practice into a service other teams can use.",
+      "Omni Care starts with one stuck workflow, then helps teams clarify needs, design operations, build software or AI automation, and define maintenance ownership. I help turn Numbers' internal AI adoption and engineering-governance practice into a collaboration model other teams can use.",
     link: "https://care.omniai.one/",
     logo: "omni-logo.png",
   },
   {
     title: "Creative Origin Alliance",
     description:
-      "一個由創作者、技術專家和平台組成的網路，從根本上建構負責任的 AI。我曾任 Creative Origin 行銷創意總監，也是 Creative Origin Alliance 創始成員。",
+      "Creative Origin Alliance 連結創作者、技術團隊與平台，討論創作內容在 AI 訓練、生成與授權環境中的來源與權利問題。我曾任 Creative Origin 行銷創意總監，也是 Creative Origin Alliance 創始成員。",
     description_en:
-      "A network of creators, technologists, and platforms building responsible AI from the ground up. I served as Marketing Creative Director at Creative Origin and am a founding member of the Creative Origin Alliance.",
+      "Creative Origin Alliance connects creators, technologists, and platforms around provenance and rights questions in AI training, generation, and licensing. I served as Marketing Creative Director at Creative Origin and am a founding member of the Creative Origin Alliance.",
     link: "https://creativeorigin.ai/",
     logo: "coa-logo.png",
   },
   {
     title: "DT42",
     description:
-      "一家做智慧邊緣運算方案的 AI 新創。我參與業務開發與策略成長，協助建立它在 AI 硬體市場的定位與故事。",
+      "DT42 是我早期參與的 AI 新創，聚焦智慧邊緣運算與硬體場景。我參與業務開發與策略成長，協助團隊把技術能力整理成市場可以理解的定位與故事。",
     description_en:
-      "An AI startup building smart edge solutions. I worked on business development and strategic growth, helping shape its narrative in AI hardware.",
+      "DT42 was an early AI startup I worked with, focused on smart edge computing and hardware scenarios. I worked on business development and strategic growth, helping turn technical capability into market positioning and narrative.",
     link: "https://dt42.io/",
     logo: "dt42-logo.png",
   },
   {
     title: "AIKEA",
     description:
-      "一個成功的 Kickstarter 專案，把主打隱私的 AI 相機帶進一般家庭。我以 Capture & AIKEA 群募專案行銷總監身分負責產品上市與行銷活動，協助達成募資目標。",
+      "AIKEA 是一個 Kickstarter 群募專案，嘗試把主打隱私的 AI 相機帶進家庭場景。我以 Capture & AIKEA 群募專案行銷總監身分負責產品上市與行銷活動，協助把技術產品轉成一般消費者能理解的使用情境。",
     description_en:
-      "A successful Kickstarter bringing a private, AI-powered camera into homes. As marketing director for the Capture & AIKEA crowdfunding projects, I led the launch and campaign that hit the funding goal.",
+      "AIKEA was a Kickstarter campaign exploring privacy-focused AI cameras for home scenarios. As marketing director for the Capture & AIKEA crowdfunding projects, I led launch and campaign work that translated a technical product into consumer use cases.",
     link: "https://www.kickstarter.com/projects/aikea5/aikea-your-private-camera-at-home/description",
     logo: "aikea-logo.png",
   },
   {
     title: "科科 AI Shorts（Keke AI Shorts）",
     description:
-      "共同創辦的 YouTube 頻道，用簡短易懂的影片分享 AI 知識，讓每個人都看得懂 AI。",
+      "共同創辦的 YouTube 頻道，用短影片把 AI 概念、工具觀察和使用情境講成比較容易進入的版本。",
     description_en:
-      "Co-created a YouTube channel sharing AI knowledge in short, accessible videos — making AI understandable for everyone.",
+      "Co-created a YouTube channel that explains AI concepts, tool observations, and use cases through short, accessible videos.",
     link: "https://www.youtube.com/@kekeAIShorts",
     logo: "keke-ai-shorts.png",
   },
@@ -138,49 +138,49 @@ export const consultingItems = [
     title: "企業 AI 需求盤點",
     title_en: "Enterprise AI needs mapping",
     description:
-      "分析客服、營運、內容生產與知識管理流程，找出值得優先導入 AI 的場景。",
+      "和團隊一起看客服、營運、內容生產與知識管理流程，先找出痛點、資料條件和 owner，再決定哪個場景值得優先導入 AI。",
     description_en:
-      "Map customer-service, operations, content-production, and knowledge-management workflows to identify the best AI starting points.",
+      "Review customer-service, operations, content-production, and knowledge-management workflows with the team, then identify pain points, data conditions, owners, and practical AI starting points.",
   },
   {
     title: "AI Agent 工作流程設計",
     title_en: "AI Agent workflow design",
     description:
-      "定義 agent 的角色、權限、交接、稽核紀錄與人類 review 點，讓 AI 工作能進到日常。",
+      "把 agent 的角色、權限、交接、稽核紀錄與人類 review 點寫清楚，讓 AI 工作不是一次性 demo，而是能被日常接住的流程。",
     description_en:
-      "Define agent roles, permissions, handoffs, audit trails, and human review points so AI work can enter daily operations.",
+      "Define agent roles, permissions, handoffs, audit trails, and human review points so AI work is not a one-off demo, but a workflow daily operations can absorb.",
   },
   {
     title: "AI 工具與廠商評估",
     title_en: "AI tool and vendor evaluation",
     description:
-      "協助團隊比較 AI 解決方案的能力、限制、資料風險、整合成本與治理需求。",
+      "協助團隊把 AI 解決方案放回自己的資料、流程、權限與預算條件裡比較，避免只看 demo 效果就做採購決策。",
     description_en:
-      "Help teams compare AI solutions by capability, constraints, data risk, integration cost, and governance needs.",
+      "Help teams compare AI solutions against their own data, workflows, permission model, and budget conditions, instead of buying from the demo alone.",
   },
   {
     title: "AI 開發避險與技術檢核",
     title_en: "AI development risk review",
     description:
-      "協助新創與產品團隊判斷哪些情境適合用 Vibe Coding 快速試錯，哪些牽涉金流、資安、資料品質或長期維護時必須交由工程檢核。",
+      "協助新創與產品團隊判斷哪些情境適合用 Vibe Coding 快速試錯，哪些只要牽涉金流、資安、資料品質或長期維護，就必須設下工程檢核點。",
     description_en:
-      "Help startup and product teams decide when vibe coding is safe for rapid experiments, and when payments, security, data quality, or long-term maintenance require engineering review.",
+      "Help startup and product teams decide where vibe coding is useful for rapid experiments, and where payments, security, data quality, or long-term maintenance require explicit engineering review points.",
   },
   {
     title: "AI 治理與 TAEA 導入",
     title_en: "AI governance and TAEA adoption",
     description:
-      "把 Transparent、Auditable、Explainable、Agentic 四個原則轉成可追蹤的工作流程。",
+      "把 Transparent、Auditable、Explainable、Agentic 四個原則，轉成角色分工、紀錄格式、升級規則與定期 review 節奏。",
     description_en:
-      "Turn Transparent, Auditable, Explainable, and Agentic principles into trackable operating workflows.",
+      "Turn Transparent, Auditable, Explainable, and Agentic principles into role design, record formats, escalation rules, and regular review cadence.",
   },
   {
     title: "Vibe Coding 工作坊",
     title_en: "Vibe-coding workshops",
     description:
-      "訓練非工程團隊用 AI 快速做出可運作原型，曾帶領團隊落地 100+ 個微自動化流程。",
+      "帶非工程團隊用 AI 做出小型可運作原型，同時練習怎麼描述需求、檢查輸出、判斷風險與交接給工程或營運 owner。",
     description_en:
-      "Train non-engineering teams to build working prototypes with AI; past adoption work has shipped 100+ micro-automation workflows.",
+      "Guide non-engineering teams to build small working prototypes with AI while practicing requirements, output review, risk judgment, and handoff to engineering or operations owners.",
   },
 ];
 

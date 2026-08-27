@@ -80,9 +80,9 @@ const contextualCta =
         titleZh: "如果你想把這篇帶回團隊討論",
         titleEn: "If you want to bring this essay back to your team",
         descriptionZh:
-          "這組 AI 文章不是工具清單，比較像幾個企業現場留下來的問題。下一步可以先看完整方法論，或直接討論適合團隊的演講 / workshop。",
+          "這組 AI 文章整理的是企業導入現場的問題與方法。下一步可以先看完整方法論，或討論適合團隊的演講 / workshop。",
         descriptionEn:
-          "These AI essays are not tool lists. They are field notes from enterprise adoption work. Continue with the methodology, or discuss a talk / workshop for your team.",
+          "These AI essays collect questions and methods from enterprise adoption work. Continue with the methodology, or discuss a talk / workshop for your team.",
         primaryHref: `${baseUrl}ai-coworker-methodology`,
         primaryZh: "看 AI 同事方法論",
         primaryEn: "Read the AI coworker methodology",
@@ -136,7 +136,7 @@ const contextualCta =
 
       <!-- English Language Notification for Blog Post Content -->
       <div data-l="en" class="p-4 mb-8 rounded-lg bg-secondary/50 border border-border text-sm text-muted-foreground leading-relaxed">
-        💡 <strong>Note:</strong> This article is published in Traditional Chinese only. You can use your browser's translation feature or read a summary.
+        <strong>Note:</strong> This article is published in Traditional Chinese only. You can use your browser's translation feature or read a summary.
       </div>
 
       <header class="space-y-4 mb-8">
@@ -165,8 +165,8 @@ const contextualCta =
         currentSeries && (
           <div class="p-4 mb-8 rounded-lg bg-secondary/30 border border-border/50 text-sm space-y-2" data-pagefind-ignore>
             <p class="text-xs text-muted-foreground uppercase tracking-widest font-medium">
-              <span data-l="zh">📖 這是「AI-Native 工作現場」系列文章（共 4 篇）</span>
-              <span data-l="en">📖 Part of "AI-Native Operating Field" Series (4 Articles)</span>
+              <span data-l="zh">這是「AI-Native 工作現場」系列文章（共 4 篇）</span>
+              <span data-l="en">Part of "AI-Native Operating Field" Series (4 Articles)</span>
             </p>
             <ol class="list-decimal pl-4 space-y-1 text-muted-foreground">
               {aiSeries.map((item, index) => {
@@ -225,8 +225,8 @@ const contextualCta =
         post.data.coverNid && (
           <div class="mt-8 p-4 rounded-lg bg-stone/20 border border-border/50 text-xs text-muted-foreground leading-relaxed" data-pagefind-ignore>
             <p>
-              <span data-l="zh">🔒 <strong>數位溯源安全提示：</strong>本篇封面影像已註冊至 Numbers Protocol 數位溯源網路。懸停或點擊影像上的「溯源之眼」圖示，即可即時驗證影像的拍攝源頭、創作者與真實性資訊。</span>
-              <span data-l="en">🔒 <strong>Content Provenance Alert:</strong> The cover image of this article has been registered with Numbers Protocol. Hover over or click on the "CaptureEye" icon on the image to verify its origin, creator, and authenticity.</span>
+              <span data-l="zh"><strong>關於封面影像的來源紀錄：</strong>本篇封面影像已註冊至 Numbers Protocol。若影像上顯示 Capture Eye 圖示，可懸停或點擊查看影像的來源、創作者與註冊資訊。</span>
+              <span data-l="en"><strong>About the cover image provenance record:</strong> The cover image for this article is registered with Numbers Protocol. If a Capture Eye icon appears on the image, hover over or click it to view source, creator, and registration details.</span>
             </p>
           </div>
         )
