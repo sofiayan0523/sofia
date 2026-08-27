@@ -111,16 +111,18 @@ check("src/pages/speaker.astro exists with FAQ", () => {
   return "speaker page complete";
 });
 
-check("src/pages/speaker.astro hero has Sofia signature moves", () => {
+check("src/pages/speaker.astro hero has stable Sofia positioning", () => {
   const raw = readFileSync(resolve(cwd, "src/pages/speaker.astro"), "utf-8");
-  // Iteration 2 fix: hero must include (踩雷) + A vs B vs C structure
-  if (!raw.includes("踩雷")) throw new Error("missing bracket-snark trope");
-  if (!raw.includes("不是") || !raw.includes("也不是") || !raw.includes("而是")) {
-    throw new Error("missing A vs B vs C trichotomy");
+  if (raw.includes("踩雷") || raw.includes("XD")) {
+    throw new Error("hero should avoid high-exposure snark");
   }
-  if (!raw.includes("XD")) throw new Error("missing Sofia XD aside");
+  if (!raw.includes("長期在企業 AI 導入現場工作")) throw new Error("missing field-operator positioning");
+  if (!raw.includes("不從工具清單開始")) throw new Error("missing non-tool-list framing");
+  if (!raw.includes("AI Agent 的角色、界線和稽核紀錄")) {
+    throw new Error("missing AI workflow scope framing");
+  }
   if (!raw.includes("Micro-receipts")) throw new Error("missing micro-receipts strip");
-  return "all 4 signature moves present";
+  return "stable hero positioning present without high-exposure snark";
 });
 
 check("src/pages/about.astro has credentials section", () => {

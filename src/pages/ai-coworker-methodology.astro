@@ -95,9 +95,9 @@ const playbook = [
   {
     n: 5,
     title_en: "Promote humans to 'AI coworker managers'",
-    title_zh: "把人類同事「升任」為「AI 同事的主管」",
-    body_en: "Your humans don't get replaced. They become managers of AI teammates — designing scope, reviewing output, training new behaviors. This is the most underrated career move of 2026.",
-    body_zh: "你的真人同事不會被取代。他們升任 AI 同事的主管，設計 scope、review 產出、訓練新行為。這是 2026 年最被低估的職涯升級。",
+    title_zh: "讓人類同事成為 AI 同事的管理者",
+    body_en: "Your humans don't get replaced. They manage AI teammates by designing scope, reviewing output, and training new behaviors. The work shifts from doing every task manually to managing the conditions for good AI-assisted work.",
+    body_zh: "你的真人同事不會被取代。他們開始管理 AI 同事：設計 scope、review 產出、訓練新行為。工作重心會從手動完成每件事，轉向管理 AI 協作能穩定產出的條件。",
   },
 ];
 
@@ -150,10 +150,10 @@ const faqs = [
   {
     question: "How does this connect to AI governance frameworks like NIST AI RMF or EU AI Act?",
     answer:
-      "The methodology is operational; governance frameworks are regulatory. Numbers Protocol's TAEA framework (Transparent, Auditable, Explainable, Agentic) bridges both — you operate AI coworkers daily, and the audit trail satisfies NIST AI RMF documentation requirements + EU AI Act Article 50 transparency obligations.",
+      "The methodology is operational; governance frameworks define the risk language around it. Numbers Protocol's TAEA principles (Transparent, Auditable, Explainable, Agentic) help teams turn daily AI coworker work into records, review points, and escalation paths that can support documentation and transparency needs.",
     question_zh: "這和 NIST AI RMF、EU AI Act 這類 AI 治理框架有什麼關聯？",
     answer_zh:
-      "方法論是營運層、治理框架是法規層。Numbers Protocol 的 TAEA 框架（Transparent、Auditable、Explainable、Agentic）把兩者接起來——你每天操作 AI 同事，而 audit trail 同時滿足 NIST AI RMF 的文件要求與 EU AI Act 第 50 條的透明性義務。",
+      "方法論是營運層，治理框架提供風險語言。Numbers Protocol 的 TAEA 原則（Transparent、Auditable、Explainable、Agentic）協助團隊把每天的 AI 同事工作轉成紀錄、review 點與升級路徑，作為未來文件化與透明性需求的準備材料。",
   },
   {
     question: "Can humanities-trained operators really lead AI coworker adoption?",
@@ -327,40 +327,40 @@ const faqs = [
       <!-- TAEA Connection -->
       <section class="space-y-6 bg-card border border-border rounded-xl p-8">
         <h2 class="font-display text-xl md:text-2xl font-medium">
-          <span data-l="zh">為什麼這套會 work：TAEA 治理 + Z App / Omni</span>
-          <span data-l="en">Why this works: TAEA governance + Z App / Omni</span>
+          <span data-l="zh">TAEA、Z App 與 Omni 怎麼接到日常工作</span>
+          <span data-l="en">How TAEA, Z App, and Omni connect to daily work</span>
         </h2>
         <p class="text-foreground/80 leading-relaxed">
           <span data-l="zh">
-            AI 同事方法論不是 vibe，是治理。Numbers Protocol 的 TAEA framework
+            AI 同事方法論不只是在幫 agent 取名字；真正關鍵的是把每一次交辦、輸出、review 和修正留下脈絡。Numbers Protocol 的 TAEA 原則
             ，<strong>Transparent</strong>、<strong>Auditable</strong>、<strong>Explainable</strong>、<strong>Agentic</strong>
-            ，是這套 playbook 的工程地基。這不是只停在方法論；Numbers 團隊已經把它做進 Z App 與 Omni 兩個企業平台。
+            ，在這裡比較像日常檢查清單：人要知道 AI 在做什麼、留下什麼紀錄、為什麼這樣判斷，以及什麼時候需要升級給真人。
           </span>
           <span data-l="en">
-            The AI Coworker Methodology isn't a vibe — it's governance. The TAEA framework from Numbers Protocol
+            The AI Coworker Methodology is not only about giving agents names. The real work is keeping context around every request, output, review, and correction. Numbers Protocol's TAEA principles
             (<strong>Transparent</strong>, <strong>Auditable</strong>, <strong>Explainable</strong>, <strong>Agentic</strong>)
-            is the engineering foundation underneath. This is not just a theory; the Numbers team has built it into two enterprise platforms: Z App and Omni.
+            act like an operating checklist: people should know what AI is doing, what record it leaves, why it made a judgment, and when the work should escalate to a human.
           </span>
         </p>
         <div class="grid md:grid-cols-2 gap-4">
           <div class="rounded-lg border border-border/60 p-5 space-y-2">
             <h3 class="font-display text-lg font-medium">Z App</h3>
             <p class="text-sm text-foreground/70 leading-relaxed">
-              <span data-l="zh">AI 原生企業營運平台，把任務、決策、審核、紀錄和跨部門交接整理成 agent 可以參與的資料流。</span>
-              <span data-l="en">An AI-native enterprise operating platform that turns tasks, decisions, approvals, records, and cross-team handoffs into data flows agents can participate in.</span>
+              <span data-l="zh">用來把任務、決策、審核、紀錄和跨部門交接整理成可追蹤的資料流，讓 AI 可以在有權限與上下文的地方參與，而不是只停在聊天視窗。</span>
+              <span data-l="en">Used to organize tasks, decisions, approvals, records, and cross-team handoffs into traceable data flows, so AI can participate with permissions and context instead of staying inside a chat window.</span>
             </p>
           </div>
           <div class="rounded-lg border border-border/60 p-5 space-y-2">
             <h3 class="font-display text-lg font-medium">Omni</h3>
             <p class="text-sm text-foreground/70 leading-relaxed">
-              <span data-l="zh">基於 TAEA 治理框架的企業 AI DevOps 平台，把 memory、heartbeat、audit trail 和人類介入點做成可維運的 AI 工作流。</span>
-              <span data-l="en">An enterprise AI DevOps platform based on the TAEA governance framework, turning memory, heartbeat, audit trails, and human intervention points into maintainable AI workflows.</span>
+              <span data-l="zh">用來維運 AI 工作流的記憶、週期檢查、audit trail 和 human-in-the-loop 節點，讓 AI 同事的工作可以被追蹤、交接與修正。</span>
+              <span data-l="en">Used to maintain AI workflow memory, recurring checks, audit trails, and human-in-the-loop points, so AI coworker work can be traced, handed off, and corrected.</span>
             </p>
           </div>
         </div>
         <p class="text-sm text-muted-foreground">
-          <span data-l="zh">同時為 EU AI Act Article 50（8 月上路）與 NIST AI RMF 提供 audit-ready 紀錄。</span>
-          <span data-l="en">Audit-ready by design for EU AI Act Article 50 (Aug 2026 enforcement) and NIST AI RMF.</span>
+          <span data-l="zh">當團隊需要對齊 NIST AI RMF、EU AI Act 等治理框架時，這些紀錄可以作為透明性、文件化與責任分工的基礎材料。</span>
+          <span data-l="en">When a team needs to align with governance frameworks such as NIST AI RMF or the EU AI Act, these records provide starting material for transparency, documentation, and responsibility mapping.</span>
         </p>
       </section>
 
@@ -383,8 +383,8 @@ const faqs = [
           </li>
           <li>
             <strong>→ <a href={`${baseUrl}blog/humanities-ai-expert/`} class="text-primary underline hover:no-underline">
-              <span data-l="zh">讀 Pillar 長文：文組人才是 AI 導入最該被重視的角色？科技麻瓜的 AI 導入田野筆記</span>
-              <span data-l="en">Read the Pillar essay: Humanities-trained operators are the most overlooked AI implementation role</span>
+              <span data-l="zh">讀 Pillar 長文：文組人不是 AI 時代的弱勢，是企業 AI 導入裡常被漏看的角色</span>
+              <span data-l="en">Read the Pillar essay: why humanities-trained operators are often overlooked in enterprise AI adoption</span>
             </a></strong>
           </li>
           <li>
@@ -402,8 +402,8 @@ const faqs = [
               data-cta-content="ai-coworker-methodology-cta-omni"
               class="text-primary underline hover:no-underline"
             >
-              <span data-l="zh">Numbers Protocol & Omni：AI 同事化平台基礎建設</span>
-              <span data-l="en">Numbers Protocol & Omni: the infrastructure underneath</span>
+              <span data-l="zh">Numbers Protocol & Omni：AI 工作流與內容信任基礎</span>
+              <span data-l="en">Numbers Protocol & Omni: AI workflows and content trust</span>
             </a></strong>
           </li>
         </ul>
